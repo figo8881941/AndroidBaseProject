@@ -1,7 +1,9 @@
-package com.duoduo.androidbaseproject;
+package com.duoduo.main.main;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.duoduo.main.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/commonbase" />
             <option value="$PROJECT_DIR$/commonbusiness" />
+            <option value="$PROJECT_DIR$/main" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
