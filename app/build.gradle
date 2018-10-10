@@ -4,10 +4,22 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.duoduo.androidbaseproject"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+
+        //Enabling multidex support. 65535
+        multiDexEnabled true
+        //keep specific classes using proguard syntax
+        multiDexKeepProguard file('multiDex.pro')
+        //keep specific classes，分dex后，指定保留在MainDex里的类
+        multiDexKeepFile file('multiDexKeep.txt')
+
+        //添加dexOptions（防止编译的时候oom、GC）
+        dexOptions {
+            javaMaxHeapSize "4g"
+        }
     }
     buildTypes {
         release {
