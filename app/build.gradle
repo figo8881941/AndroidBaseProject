@@ -9,6 +9,11 @@ android {
         versionCode 1
         versionName "1.0"
 
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters "armeabi", "armeabi-v7a", "x86_64" //, 'x86',  'arm64-v8a'
+        }
+
         //Enabling multidex support. 65535
         multiDexEnabled true
         //keep specific classes using proguard syntax
@@ -20,11 +25,58 @@ android {
         dexOptions {
             javaMaxHeapSize "4g"
         }
+
+        //buildconfig
+        //配置BuildConfig.IS_DEBUG_MODE
+        buildConfigField("boolean", "IS_DEBUG_MODE", "false");
     }
-    buildTypes {
+
+    //签名配置
+    signingConfigs {
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file("figo8881941.keystore")
+            keyAlias "figo8881941"
+            keyPassword "1987411c3301"
+            storePassword "1987411c3301"
+            v2SigningEnabled false
+        }
+
+        debug {
+            storeFile file("figo8881941.keystore")
+            keyAlias "figo8881941"
+            keyPassword "1987411c3301"
+            storePassword "1987411c3301"
+            v2SigningEnabled false
+        }
+    }
+
+    buildTypes {
+        //release版本的配置
+        release {
+            //是否进行混淆
+            minifyEnabled true
+            //指定混淆配置文件
+            proguardFiles 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+            //压缩优化
+            zipAlignEnabled true
+            //去掉无用资源
+            shrinkResources true
+
+            //buildconfig
+            //配置BuildConfig.IS_DEBUG_MODE
+            buildConfigField("boolean", "IS_DEBUG_MODE", "false");
+        }
+
+        debug {
+            //签名配置
+            signingConfig signingConfigs.debug
+
+            //buildconfig
+            //配置BuildConfig.IS_DEBUG_MODE
+            buildConfigField("boolean", "IS_DEBUG_MODE", "true");
         }
     }
 }
