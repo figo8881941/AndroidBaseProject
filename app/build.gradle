@@ -29,6 +29,18 @@ android {
         //buildconfig
         //配置BuildConfig.IS_DEBUG_MODE
         buildConfigField("boolean", "IS_DEBUG_MODE", "false");
+        //SD卡主文件夹名字
+        buildConfigField("String", "SDCARD_FOLDER_NAME", '"DuoduoBaseProject"');
+        //正式业务服务器地址
+        buildConfigField("String", "NORMAL_SERVER_HOST", '"http://vipgift.gmilesquan.com/"');//https://vipgift.gmilesquan.com/
+        //测试服务器地址
+        buildConfigField("String", "TEST_SERVER_HOST", '"http://test.vipgift.gmilesquan.com/"');
+        //默认渠道号
+        buildConfigField("Integer", "DEFAULT_CHANNEL", "91000");
+        //服务器协议版本号
+        buildConfigField("Integer", "PVERSON", "33");
+        //产品ID
+        buildConfigField("String", "PRODUCT_ID", '"14000"');
     }
 
     //签名配置

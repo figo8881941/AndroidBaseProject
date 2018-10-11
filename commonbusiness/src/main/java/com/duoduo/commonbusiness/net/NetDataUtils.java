@@ -7,6 +7,7 @@ import com.duoduo.commonbase.utils.AppUtils;
 import com.duoduo.commonbase.utils.DeviceUtils;
 import com.duoduo.commonbase.utils.TimeUtils;
 import com.duoduo.commonbusiness.channel.ChannelUtils;
+import com.duoduo.commonbusiness.config.GlobalBuildConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +16,17 @@ import org.json.JSONObject;
  * 网络请求数据工具类
  */
 public class NetDataUtils {
+
+    /**
+     * 功能简述:获取URL地址
+     * 根据GlobalBuildConfig的值
+     *
+     * @return
+     */
+    public static String getUrlWithGlobalBuildConfig(int funId, String servername) {
+        GlobalBuildConfig config = GlobalBuildConfig.getInstance();
+        return getUrl(funId, servername, getHostFromGlobalBuildConfig(), config.isDebugMode());
+    }
 
     /**
      * 功能简述:获取URL地址
@@ -39,6 +51,33 @@ public class NetDataUtils {
     }
 
     /**
+     * 根据GlobalBuildConfig的配置
+     * 获取host值
+     *
+     * @return
+     */
+    public static String getHostFromGlobalBuildConfig() {
+        GlobalBuildConfig config = GlobalBuildConfig.getInstance();
+        String host = config.getNormalServerHost();
+        if (config.isDebugMode()) {
+            host = config.getTestServerHost();
+        }
+        return host;
+    }
+
+    /**
+     * 获取phead的json结构
+     * 根据GlobalBuildConfig的值
+     *
+     * @param context
+     * @return
+     */
+    public static JSONObject getPheadJsonWithGlobalBuildConfig(Context context) {
+        GlobalBuildConfig config = GlobalBuildConfig.getInstance();
+        return getPheadJson(context, config.getPVersion(), config.getDefaultChannel(), config.getPrdid());
+    }
+
+    /**
      * 获取phead的json结构
      *
      * @param context
@@ -47,7 +86,7 @@ public class NetDataUtils {
      * @param prdid
      * @return
      */
-    public static JSONObject getPheadJson(Context context, int pversion, String defaultChannel, String prdid) {
+    public static JSONObject getPheadJson(Context context, int pversion, int defaultChannel, String prdid) {
         JSONObject pheadJson = new JSONObject();
         if (context != null) {
             try {
@@ -85,6 +124,18 @@ public class NetDataUtils {
 
     /**
      * 包装完整请求数据结构
+     * 根据GlobalBuildConfig的值
+     *
+     * @param data
+     * @return
+     */
+    public static JSONObject getParamJsonObjectWithGlobalBuildConfig(JSONObject data) {
+        GlobalBuildConfig config = GlobalBuildConfig.getInstance();
+        return getParamJsonObject(data, config.isDebugMode());
+    }
+
+    /**
+     * 包装完整请求数据结构
      *
      * @param data
      * @param isDebug
@@ -105,6 +156,19 @@ public class NetDataUtils {
 
     /**
      * 获取data结构
+     * 根据GlobalBuildConfig的值
+     *
+     * @param context
+     * @return
+     */
+    public static JSONObject getPostDataWithPheadFromGlobalBuildConfig(Context context) {
+        GlobalBuildConfig config = GlobalBuildConfig.getInstance();
+        return getPostDataWithPhead(context, config.getPVersion(), config.getDefaultChannel(), config.getPrdid());
+    }
+
+
+    /**
+     * 获取data结构
      *
      * @param context
      * @param pversion
@@ -112,7 +176,7 @@ public class NetDataUtils {
      * @param prdid
      * @return
      */
-    public static JSONObject getPostDataWithPhead(Context context, int pversion, String defaultChannel, String prdid) {
+    public static JSONObject getPostDataWithPhead(Context context, int pversion, int defaultChannel, String prdid) {
         JSONObject data = new JSONObject();
         try {
             data.put("phead", getPheadJson(context, pversion, defaultChannel, prdid));

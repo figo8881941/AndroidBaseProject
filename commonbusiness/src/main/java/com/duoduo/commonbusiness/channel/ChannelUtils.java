@@ -26,7 +26,7 @@ public class ChannelUtils {
      * @param context
      * @return
      */
-    public static String getChannelFromApk(Context context, String defaultChannel) {
+    public static String getChannelFromApk(Context context, int defaultChannel) {
         if (sRawChannelString == null) {
             init(context);
         }
@@ -37,7 +37,7 @@ public class ChannelUtils {
             channel = split[1];
         }
         if (TextUtils.isEmpty(channel)) {
-            channel = defaultChannel;
+            channel = String.valueOf(defaultChannel);
         }
         return channel;
     }
