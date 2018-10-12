@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">commonbusiness</string>
+
+    <string name="main_no_permission_tips">拒绝授权将无法正常使用App</string>
+</resources>

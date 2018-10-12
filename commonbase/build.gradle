@@ -37,4 +37,6 @@ dependencies {
     api 'com.android.volley:volley:1.1.0'
     //Tencent MMKV，基于 mmap 内存映射的 key-value 组件
     api 'com.tencent:mmkv:1.0.10'
+    //AndPermission, 权限申请
+    api 'com.yanzhenjie:permission:2.0.0-rc12'
 }
