@@ -25,7 +25,7 @@ public class NetDataUtils {
      */
     public static String getUrlWithGlobalBuildConfig(int funId, String servername) {
         GlobalBuildConfig config = GlobalBuildConfig.getInstance();
-        return getUrl(funId, servername, getHostFromGlobalBuildConfig(), config.isDebugMode());
+        return getUrl(funId, servername, getHostFromGlobalBuildConfig());
     }
 
     /**
@@ -34,7 +34,7 @@ public class NetDataUtils {
      *
      * @return
      */
-    public static String getUrl(int funId, String servername, String host, boolean isDebug) {
+    public static String getUrl(int funId, String servername, String host) {
         StringBuilder buffer = new StringBuilder();
         buffer.append(host);
         buffer.append(servername);
@@ -42,7 +42,7 @@ public class NetDataUtils {
         buffer.append("funid=");
         buffer.append(funId);
         buffer.append("&shandle=");
-        buffer.append(isDebug ? 0 : 1);
+        buffer.append(0);
         buffer.append("&handle=");
         buffer.append(0);
         buffer.append("&rd=");
@@ -124,28 +124,15 @@ public class NetDataUtils {
 
     /**
      * 包装完整请求数据结构
-     * 根据GlobalBuildConfig的值
      *
      * @param data
      * @return
      */
-    public static JSONObject getParamJsonObjectWithGlobalBuildConfig(JSONObject data) {
-        GlobalBuildConfig config = GlobalBuildConfig.getInstance();
-        return getParamJsonObject(data, config.isDebugMode());
-    }
-
-    /**
-     * 包装完整请求数据结构
-     *
-     * @param data
-     * @param isDebug
-     * @return
-     */
-    public static JSONObject getParamJsonObject(JSONObject data, boolean isDebug) {
+    public static JSONObject getParamJsonObject(JSONObject data) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("handle", 0);
-            jsonObject.put("shandle", isDebug ? 0 : 1);
+            jsonObject.put("shandle", 0);
             jsonObject.put("data", data);
         } catch (Exception e) {
             e.printStackTrace();

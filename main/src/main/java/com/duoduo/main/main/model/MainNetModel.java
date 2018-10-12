@@ -26,7 +26,7 @@ public class MainNetModel extends BaseNetModel {
         String url = NetDataUtils.getUrlWithGlobalBuildConfig(30000, "quMall");
         JSONObject postData = NetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
-                NetDataUtils.getParamJsonObjectWithGlobalBuildConfig(postData),
+                NetDataUtils.getParamJsonObject(postData),
                 listener, errorListener);
         requestQueue.add(request);
     }
