@@ -6,10 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
-import com.duoduo.commonbusiness.permission.ICheckAndRequestPermissionListener;
 import com.duoduo.commonbusiness.permission.PermissionUtils;
 import com.duoduo.main.R;
-import com.yanzhenjie.permission.RequestExecutor;
+import com.duoduo.main.main.controller.MainController;
 
 /**
  * 主activity

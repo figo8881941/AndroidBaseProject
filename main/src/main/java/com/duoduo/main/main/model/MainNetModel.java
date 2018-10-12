@@ -1,4 +1,4 @@
-package com.duoduo.main.main;
+package com.duoduo.main.main.model;
 
 import android.content.Context;
 

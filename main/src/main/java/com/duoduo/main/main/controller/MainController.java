@@ -1,9 +1,10 @@
-package com.duoduo.main.main;
+package com.duoduo.main.main.controller;
 
 import android.content.Context;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.duoduo.main.main.model.MainNetModel;
 
 import org.json.JSONObject;
 
