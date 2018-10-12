@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private void handleMainTabRequest(MainTabRequestEvent event) {
+    public void handleMainTabRequest(MainTabRequestEvent event) {
         MainTabDataBean mainTabDataBean = event.getArg3();
     }
 
