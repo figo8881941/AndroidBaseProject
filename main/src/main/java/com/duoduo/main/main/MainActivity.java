@@ -9,6 +9,12 @@ import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbusiness.permission.PermissionUtils;
 import com.duoduo.main.R;
 import com.duoduo.main.main.controller.MainController;
+import com.duoduo.main.main.data.MainTabDataBean;
+import com.duoduo.main.main.event.MainTabRequestEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * 主activity
@@ -21,9 +27,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        EventBus.getDefault().register(this);
+
         mainController = new MainController(getApplicationContext());
+
         // 检查必须的权限
         checkShouldGetPermission();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    private void handleMainTabRequest(MainTabRequestEvent event) {
+        MainTabDataBean mainTabDataBean = event.getArg3();
     }
 
     /**
@@ -45,5 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.main_no_permission_tips, Toast.LENGTH_LONG).show();
             }
         }, Manifest.permission.READ_PHONE_STATE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        EventBus.getDefault().unregister(this);
     }
 }

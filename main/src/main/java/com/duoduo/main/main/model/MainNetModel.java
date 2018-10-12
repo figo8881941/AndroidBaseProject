@@ -19,6 +19,9 @@ public class MainNetModel extends BaseNetModel {
         super(context);
     }
 
+    /**
+     * 请求首页Tab数据的方法
+     */
     public void requestTabData(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
         String url = NetDataUtils.getUrlWithGlobalBuildConfig(30000, "quMall");
         JSONObject postData = NetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
