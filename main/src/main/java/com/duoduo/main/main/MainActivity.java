@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.duoduo.commonbusiness.activity.BaseActivity;
+import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbusiness.permission.PermissionUtils;
 import com.duoduo.main.R;
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_main_main_activity);
 
         EventBus.getDefault().register(this);
 
@@ -78,7 +79,8 @@ public class MainActivity extends BaseActivity {
             }
             break;
             case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR : {
-
+                Exception exception = event.getArg4();
+                CommonNetErrorHandler.handleNetError(getApplicationContext(), exception);
             }
             break;
         }
