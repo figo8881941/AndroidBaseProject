@@ -15,7 +15,7 @@ import org.json.JSONObject;
 /**
  * 网络请求数据工具类
  */
-public class NetDataUtils {
+public class CommonNetDataUtils {
 
     /**
      * 功能简述:获取URL地址

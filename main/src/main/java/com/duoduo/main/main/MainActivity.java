@@ -2,9 +2,9 @@ package com.duoduo.main.main;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbusiness.permission.PermissionUtils;
 import com.duoduo.main.R;
@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 主activity
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private MainController mainController;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDeniedPermission(String... permissions) {
                 //授权失败，提示
-                Toast.makeText(getApplicationContext(), R.string.main_no_permission_tips, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.main_main_no_permission_tips, Toast.LENGTH_LONG).show();
             }
         }, Manifest.permission.READ_PHONE_STATE);
     }
@@ -63,7 +63,25 @@ public class MainActivity extends AppCompatActivity {
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleMainTabRequest(MainTabRequestEvent event) {
-        MainTabDataBean mainTabDataBean = event.getArg3();
+        if (isDestroy || event == null) {
+            return;
+        }
+        int what = event.getWhat();
+        switch (what) {
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_START : {
+
+            }
+            break;
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH : {
+                MainTabDataBean mainTabDataBean = event.getArg3();
+
+            }
+            break;
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR : {
+
+            }
+            break;
+        }
     }
 
     @Override
