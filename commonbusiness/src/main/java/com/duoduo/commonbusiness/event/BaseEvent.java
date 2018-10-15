@@ -8,9 +8,9 @@ import java.util.HashMap;
 public abstract class BaseEvent<T, K> {
 
     /**
-     * 事件名称
+     * 事件标识
      */
-    protected String eventName;
+    protected int what;
 
     protected int arg1;
 
@@ -22,12 +22,12 @@ public abstract class BaseEvent<T, K> {
 
     protected HashMap<String, Object> args;
 
-    public String getEventName() {
-        return eventName;
+    public int getWhat() {
+        return what;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setWhat(int what) {
+        this.what = what;
     }
 
     public int getArg1() {

@@ -34,7 +34,7 @@ public class MainController {
         final MainTabRequestEvent event = new MainTabRequestEvent();
 
         //通知开始
-        event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_START);
+        event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_START);
         eventBus.post(event);
 
         try {
@@ -42,7 +42,7 @@ public class MainController {
                 @Override
                 public void onResponse(JSONObject response) {
                     //通知请求完成
-                    event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH);
+                    event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH);
                     MainTabDataBean mainTabDataBean = JSON.parseObject(response.toString(), MainTabDataBean.class);
                     event.setArg3(mainTabDataBean);
                     eventBus.post(event);
@@ -51,7 +51,7 @@ public class MainController {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //通知出错
-                    event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
+                    event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
                     event.setArg4(error);
                     eventBus.post(event);
                 }
@@ -59,7 +59,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
             //通知出错
-            event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
+            event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
             event.setArg4(e);
             eventBus.post(event);
         }
