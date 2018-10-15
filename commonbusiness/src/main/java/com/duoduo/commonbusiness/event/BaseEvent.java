@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * 基础事件类
  */
-public abstract class BaseEvent<T> {
+public abstract class BaseEvent<T, K> {
 
     /**
      * 事件名称
@@ -17,6 +17,8 @@ public abstract class BaseEvent<T> {
     protected int arg2;
 
     protected T arg3;
+
+    protected K arg4;
 
     protected HashMap<String, Object> args;
 
@@ -50,6 +52,14 @@ public abstract class BaseEvent<T> {
 
     public void setArg3(T arg3) {
         this.arg3 = arg3;
+    }
+
+    public K getArg4() {
+        return arg4;
+    }
+
+    public void setArg4(K arg4) {
+        this.arg4 = arg4;
     }
 
     public HashMap<String, Object> getArgs() {

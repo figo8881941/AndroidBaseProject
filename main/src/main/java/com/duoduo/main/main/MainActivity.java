@@ -36,11 +36,6 @@ public class MainActivity extends AppCompatActivity {
         checkShouldGetPermission();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleMainTabRequest(MainTabRequestEvent event) {
-        MainTabDataBean mainTabDataBean = event.getArg3();
-    }
-
     /**
      * 检查必须权限的方法
      */
@@ -60,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.main_no_permission_tips, Toast.LENGTH_LONG).show();
             }
         }, Manifest.permission.READ_PHONE_STATE);
+    }
+
+    /**
+     * 处理请求tab数据返回
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleMainTabRequest(MainTabRequestEvent event) {
+        MainTabDataBean mainTabDataBean = event.getArg3();
     }
 
     @Override

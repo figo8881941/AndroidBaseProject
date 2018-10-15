@@ -22,7 +22,7 @@ public class MainController {
     private MainNetModel mainNetModel;
 
     public MainController(Context context) {
-        context = context.getApplicationContext();
+        this.context = context.getApplicationContext();
         mainNetModel = new MainNetModel(context);
     }
 
@@ -32,19 +32,37 @@ public class MainController {
     public void requestTabData() {
         final EventBus eventBus = EventBus.getDefault();
         final MainTabRequestEvent event = new MainTabRequestEvent();
-                mainNetModel.requestTabData(new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                MainTabDataBean mainTabDataBean = JSON.parseObject(response.toString(), MainTabDataBean.class);
-                event.setArg3(mainTabDataBean);
-                eventBus.post(event);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
-            }
-        });
+        //通知开始
+        event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_START);
+        eventBus.post(event);
+
+        try {
+            mainNetModel.requestTabData(new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    //通知请求完成
+                    event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH);
+                    MainTabDataBean mainTabDataBean = JSON.parseObject(response.toString(), MainTabDataBean.class);
+                    event.setArg3(mainTabDataBean);
+                    eventBus.post(event);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //通知出错
+                    event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
+                    event.setArg4(error);
+                    eventBus.post(event);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            //通知出错
+            event.setEventName(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
+            event.setArg4(e);
+            eventBus.post(event);
+        }
     }
 
 }
