@@ -6,8 +6,8 @@ android {
         applicationId "com.duoduo.androidbaseproject"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 42
+        versionName "1.28"
 
         ndk {
             // 设置支持的SO库架构
@@ -88,7 +88,7 @@ android {
 
             //buildconfig
             //配置BuildConfig.IS_DEBUG_MODE
-            buildConfigField("boolean", "IS_DEBUG_MODE", "true");
+            buildConfigField("boolean", "IS_DEBUG_MODE", "false");
         }
     }
 }
