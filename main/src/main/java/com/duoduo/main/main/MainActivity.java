@@ -2,10 +2,13 @@ package com.duoduo.main.main;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
 import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbusiness.activity.BaseActivity;
+import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbusiness.permission.PermissionUtils;
@@ -13,10 +16,14 @@ import com.duoduo.main.R;
 import com.duoduo.main.main.controller.MainController;
 import com.duoduo.main.main.data.MainTabDataBean;
 import com.duoduo.main.main.event.MainTabRequestEvent;
+import com.duoduo.main.main.view.MainFragmentFactory;
+import com.duoduo.main.main.view.MainFragmentPagerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 /**
  * 主activity
@@ -24,6 +31,15 @@ import org.greenrobot.eventbus.ThreadMode;
 public class MainActivity extends BaseActivity {
 
     private MainController mainController;
+
+    //Viewpager、Fragment
+    private ViewPager mainViewPager;
+    private MainFragmentPagerAdapter mainFragmentPagerAdapter;
+
+    private ArrayList<BaseFragment> mainFragmentList;
+
+    //Tab
+    private TabLayout mainTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +52,24 @@ public class MainActivity extends BaseActivity {
 
         EventBus.getDefault().register(this);
 
+        //初始化界面
+        initView();
+
         mainController = new MainController(getApplicationContext());
 
         // 检查必须的权限
         checkShouldGetPermission();
+    }
+
+    /**
+     * 初始化界面
+     */
+    private void initView() {
+        mainViewPager = (ViewPager) findViewById(R.id.main_viewpager);
+        mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
+        mainViewPager.setAdapter(mainFragmentPagerAdapter);
+        mainTabLayout = (TabLayout) findViewById(R.id.main_tablayout);
+        mainTabLayout.setupWithViewPager(mainViewPager);
     }
 
     /**
@@ -65,6 +95,7 @@ public class MainActivity extends BaseActivity {
 
     /**
      * 处理请求tab数据返回
+     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -74,21 +105,36 @@ public class MainActivity extends BaseActivity {
         }
         int what = event.getWhat();
         switch (what) {
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_START : {
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_START: {
 
             }
             break;
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH : {
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH: {
+                //tab数据返回，更新界面
                 MainTabDataBean mainTabDataBean = event.getArg3();
-
+                updateViewByMainTabData(mainTabDataBean);
             }
             break;
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR : {
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR: {
                 Exception exception = event.getArg4();
                 CommonNetErrorHandler.handleNetError(getApplicationContext(), exception);
             }
             break;
         }
+    }
+
+    /**
+     * 根据tab数据更新界面的方法
+     *
+     * @param mainTabDataBean
+     */
+    private void updateViewByMainTabData(MainTabDataBean mainTabDataBean) {
+        if (mainTabDataBean == null) {
+            return;
+        }
+        mainFragmentList = MainFragmentFactory.createMainFragmentList(mainTabDataBean);
+        mainFragmentPagerAdapter.setFragments(mainFragmentList);
+        mainFragmentPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
