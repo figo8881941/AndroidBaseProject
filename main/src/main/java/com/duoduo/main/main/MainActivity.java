@@ -4,6 +4,7 @@ import android.Manifest;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
@@ -29,6 +30,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_main_main_activity);
+
+        //白色风格透明状态栏
+        ActivityUtils.changeStatusBarTran(this, true);
 
         EventBus.getDefault().register(this);
 
