@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabDataBean;
 
@@ -37,6 +38,7 @@ public class MainTabFactory {
                 TabLayout.Tab tab = tabLayout.newTab();
                 ViewGroup customView = (ViewGroup) inflater.inflate(R.layout.main_main_tabitem_layout, null);
                 ImageView itemIcon = (ImageView) customView.findViewById(R.id.item_icon);
+                Glide.with(itemIcon).load(entity.getTabImg()).into(itemIcon);
                 TextView itemName = (TextView) customView.findViewById(R.id.item_name);
                 itemName.setText(entity.getTabName());
                 tab.setCustomView(customView);
