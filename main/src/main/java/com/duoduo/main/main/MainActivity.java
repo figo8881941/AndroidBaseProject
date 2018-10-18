@@ -4,6 +4,10 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duoduo.commonbase.utils.ActivityUtils;
@@ -18,12 +22,14 @@ import com.duoduo.main.main.data.MainTabDataBean;
 import com.duoduo.main.main.event.MainTabRequestEvent;
 import com.duoduo.main.main.view.MainFragmentFactory;
 import com.duoduo.main.main.view.MainFragmentPagerAdapter;
+import com.duoduo.main.main.view.MainTabFactory;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 主activity
@@ -132,9 +138,15 @@ public class MainActivity extends BaseActivity {
         if (mainTabDataBean == null) {
             return;
         }
+
+
+        //初始化Fragment
         mainFragmentList = MainFragmentFactory.createMainFragmentList(mainTabDataBean);
         mainFragmentPagerAdapter.setFragments(mainFragmentList);
         mainFragmentPagerAdapter.notifyDataSetChanged();
+
+        //初始化Tab
+        MainTabFactory.createTabByData(mainTabLayout, mainTabDataBean);
     }
 
     @Override
