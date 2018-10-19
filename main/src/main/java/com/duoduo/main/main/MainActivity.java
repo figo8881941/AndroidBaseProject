@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity {
     private MainFragmentPagerAdapter mainFragmentPagerAdapter;
 
     private ArrayList<BaseFragment> mainFragmentList;
+    //当前Fragment
+    private BaseFragment curFragment;
 
     //Tab
     private TabLayout mainTabLayout;
@@ -71,6 +73,36 @@ public class MainActivity extends BaseActivity {
         mainViewPager = (ViewPager) findViewById(R.id.main_viewpager);
         mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         mainViewPager.setAdapter(mainFragmentPagerAdapter);
+        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (curFragment != null) {
+                    curFragment.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //Fragment切换
+                BaseFragment fragment = getFragmentByPosition(position);
+                if (fragment != null) {
+                    if (fragment != curFragment) {
+                        fragment.onSelected();
+                        if (curFragment != null) {
+                            curFragment.onUnSelected();
+                        }
+                        curFragment = fragment;
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (curFragment != null) {
+                    curFragment.onPageScrollStateChanged(state);
+                }
+            }
+        });
 
         //Tab
         mainTabLayout = (TabLayout) findViewById(R.id.main_tablayout);
@@ -162,9 +194,40 @@ public class MainActivity extends BaseActivity {
         mainFragmentList = MainFragmentFactory.createMainFragmentList(mainTabDataBean);
         mainFragmentPagerAdapter.setFragments(mainFragmentList);
         mainFragmentPagerAdapter.notifyDataSetChanged();
+        //默认选中第一个Framgnet
+        curFragment = getCurFragment();
+        if (curFragment != null) {
+            curFragment.onSelected();
+        }
 
         //初始化Tab
         MainTabFactory.createTabByData(mainTabLayout, mainTabDataBean);
+    }
+
+    /**
+     * 获取当前Fragment
+     *
+     * @return
+     */
+    private BaseFragment getCurFragment() {
+        if (mainViewPager == null) {
+            return null;
+        }
+        int curPosition = mainViewPager.getCurrentItem();
+        return getFragmentByPosition(curPosition);
+    }
+
+    /**
+     * 通过position获取Fragment
+     *
+     * @param position
+     * @return
+     */
+    private BaseFragment getFragmentByPosition(int position) {
+        if (mainFragmentList == null) {
+            return null;
+        }
+        return mainFragmentList.get(position);
     }
 
     @Override
