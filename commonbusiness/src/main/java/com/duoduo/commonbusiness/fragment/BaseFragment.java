@@ -7,19 +7,28 @@ import android.support.v4.app.Fragment;
  */
 public abstract class BaseFragment extends Fragment {
 
-    //是否选中
+    /**
+     * 是否选中的标志
+     */
     protected boolean isSelected;
+
+    /**
+     * 是否被销毁的标志
+     */
+    protected boolean isDestroy;
 
     /**
      * 选中的回调
      */
     public void onSelected() {
+        isSelected = true;
     }
 
     /**
      * 失去选中的回掉
      */
     public void onUnSelected() {
+        isSelected = false;
     }
 
     /**
@@ -46,5 +55,11 @@ public abstract class BaseFragment extends Fragment {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    @Override
+    public void onDestroy() {
+        isDestroy = true;
+        super.onDestroy();
     }
 }
