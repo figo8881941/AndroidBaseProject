@@ -62,6 +62,7 @@ public class MainActivity extends BaseActivity {
 
         // 检查必须的权限
         checkShouldGetPermission();
+
     }
 
     /**

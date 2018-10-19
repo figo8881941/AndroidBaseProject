@@ -1,9 +1,12 @@
 package com.duoduo.androidbaseproject.application;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
 import com.duoduo.androidbaseproject.BuildConfig;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 
 /**
@@ -20,6 +23,14 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
     public void onCreate() {
         // 初始化全局配置
         initGlobalBuildConfig();
+        // 初始化Logger日志框架
+        Logger.addLogAdapter(new AndroidLogAdapter() {
+            @Override
+            public boolean isLoggable(int priority, @Nullable String tag) {
+                //return GlobalBuildConfig.getInstance().isDebugMode();
+                return true;
+            }
+        });
     }
 
     /**
