@@ -5,16 +5,18 @@
 
     <ImageView
         android:id="@+id/item_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/main_main_main_tab_item_icon_size"
+        android:layout_height="@dimen/main_main_main_tab_item_icon_size"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/main_main_main_tab_item_name_height"
         android:layout_below="@+id/item_icon"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/main_main_main_tab_item_text_unselected_color"
+        android:textSize="@dimen/main_main_main_tab_item_name_textsize" />
 
 </RelativeLayout>

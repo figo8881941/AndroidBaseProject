@@ -4,10 +4,6 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duoduo.commonbase.utils.ActivityUtils;
@@ -29,7 +25,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 主activity
@@ -71,10 +66,33 @@ public class MainActivity extends BaseActivity {
      * 初始化界面
      */
     private void initView() {
+
+        //ViewPager、Fragment
         mainViewPager = (ViewPager) findViewById(R.id.main_viewpager);
         mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         mainViewPager.setAdapter(mainFragmentPagerAdapter);
+
+        //Tab
         mainTabLayout = (TabLayout) findViewById(R.id.main_tablayout);
+        mainTabLayout.setSelectedTabIndicatorHeight(0);
+        mainTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //切换Tab样式
+                MainTabFactory.changeTabToSelectedStyle(tab);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                //切换Tab样式
+                MainTabFactory.changeTabToUnSelectedStyle(tab);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         mainTabLayout.setupWithViewPager(mainViewPager);
     }
 

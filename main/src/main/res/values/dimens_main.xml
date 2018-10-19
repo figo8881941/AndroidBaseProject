@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="main_main_main_tab_layout_height">79dp</dimen>
+
+    <!-- 首页Tab -->
+    <dimen name="main_main_main_tab_layout_height">58dp</dimen>
+    <dimen name="main_main_main_tab_item_name_textsize">11sp</dimen>
+    <dimen name="main_main_main_tab_item_name_height">15dp</dimen>
+    <dimen name="main_main_main_tab_item_icon_size">36dp</dimen>
 
 </resources>
