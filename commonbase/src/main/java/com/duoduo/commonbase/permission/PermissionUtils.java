@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.permission;
+package com.duoduo.commonbase.permission;
 
 import android.content.Context;
 

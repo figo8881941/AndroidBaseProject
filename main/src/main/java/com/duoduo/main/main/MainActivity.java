@@ -7,12 +7,12 @@ import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
 import com.duoduo.commonbase.component.NoScrollViewPager;
+import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
+import com.duoduo.commonbase.permission.PermissionUtils;
 import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
-import com.duoduo.commonbusiness.permission.DefaultCheckRequestListener;
-import com.duoduo.commonbusiness.permission.PermissionUtils;
 import com.duoduo.main.R;
 import com.duoduo.main.main.controller.MainController;
 import com.duoduo.main.main.data.MainTabDataBean;
