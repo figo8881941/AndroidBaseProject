@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.duoduo.commonbase.component.NoScrollViewPager;
 import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity {
     private MainController mainController;
 
     //Viewpager、Fragment
-    private ViewPager mainViewPager;
+    private NoScrollViewPager mainViewPager;
     private MainFragmentPagerAdapter mainFragmentPagerAdapter;
 
     private ArrayList<BaseFragment> mainFragmentList;
@@ -71,7 +72,8 @@ public class MainActivity extends BaseActivity {
     private void initView() {
 
         //ViewPager、Fragment
-        mainViewPager = (ViewPager) findViewById(R.id.main_viewpager);
+        mainViewPager = (NoScrollViewPager) findViewById(R.id.main_viewpager);
+        mainViewPager.canScrollHorizontally(0);
         mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         mainViewPager.setAdapter(mainFragmentPagerAdapter);
         mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

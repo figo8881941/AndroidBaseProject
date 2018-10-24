@@ -8,7 +8,7 @@ public interface IMainConsts {
     /**
      * 主界面特定tab id常量值
      */
-    public interface MainTabIdValue{
+    public interface MainTabIdValue {
         public int HOME_TAB = 1000;
         public int SHOP_TAB = 1001;
         //我的Tab
@@ -29,10 +29,20 @@ public interface IMainConsts {
     /**
      * 主界面特定tab类型常量值
      */
-    public interface MainTabTypeValue{
+    public interface MainTabTypeValue {
         //H5类型
         public int TYPE_H5 = 2;
         //分类类型
         public int TYPE_CLASSIFY = 4;
+    }
+
+    /**
+     * 服务器接口Funid
+     */
+    public interface FunId {
+        //首页Tab
+        public int MAIN_PAGE_TAB = 30000;
+        //首页数据
+        public int MAIN_PAGE_DATA = 30001;
     }
 }
