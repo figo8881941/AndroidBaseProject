@@ -41,7 +41,7 @@ public interface IMainConsts {
      */
     public interface FunId {
         //首页Tab
-        public int MAIN_PAGE_TAB = 30000;
+        public int MAIN_TAB = 30000;
         //首页数据
         public int MAIN_PAGE_DATA = 30001;
     }
