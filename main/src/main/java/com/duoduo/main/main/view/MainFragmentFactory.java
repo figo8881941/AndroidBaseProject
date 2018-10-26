@@ -100,6 +100,10 @@ public class MainFragmentFactory {
             }
         }
 
+        if (fragment != null) {
+            fragment.setData(entity);
+        }
+
         return fragment;
     }
 }

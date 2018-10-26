@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 /**
  * Fragment基类
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T> extends Fragment {
 
     /**
      * 是否选中的标志
@@ -16,6 +16,11 @@ public abstract class BaseFragment extends Fragment {
      * 是否被销毁的标志
      */
     protected boolean isDestroy;
+
+    /**
+     * 范型数据
+     */
+    protected T data;
 
     /**
      * 选中的回调
@@ -55,6 +60,14 @@ public abstract class BaseFragment extends Fragment {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
     @Override
