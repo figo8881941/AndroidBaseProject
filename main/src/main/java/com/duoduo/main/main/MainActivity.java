@@ -238,5 +238,34 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
 
         EventBus.getDefault().unregister(this);
+
+        mainController = null;
+
+        if (mainViewPager != null) {
+            mainViewPager.setAdapter(null);
+            mainViewPager = null;
+        }
+
+        if (mainFragmentPagerAdapter != null) {
+            mainFragmentPagerAdapter.destory();
+            mainFragmentPagerAdapter = null;
+        }
+
+        curFragment = null;
+
+        if (mainFragmentList != null) {
+            for (BaseFragment fragment : mainFragmentList) {
+                fragment.onDestroy();
+            }
+            mainFragmentList.clear();
+            mainFragmentList = null;
+        }
+
+        if (mainTabLayout != null) {
+            mainTabLayout.setupWithViewPager(null);
+            mainTabLayout.removeAllTabs();
+            mainTabLayout = null;
+
+        }
     }
 }

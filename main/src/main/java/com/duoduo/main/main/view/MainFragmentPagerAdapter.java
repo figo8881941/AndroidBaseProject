@@ -38,4 +38,11 @@ public class MainFragmentPagerAdapter extends FragmentStatePagerAdapter {
     public void setFragments(ArrayList<BaseFragment> fragments) {
         this.fragments = fragments;
     }
+
+    public void destory() {
+        if (fragments != null) {
+            fragments.clear();
+            fragments = null;
+        }
+    }
 }
