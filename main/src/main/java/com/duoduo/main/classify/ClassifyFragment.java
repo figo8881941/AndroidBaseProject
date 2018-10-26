@@ -12,6 +12,7 @@ import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.event.ClassifyHomeDataRequestEvent;
 import com.duoduo.main.classify.event.ClassifyTabDataRequestEvent;
+import com.duoduo.main.main.data.MainTabDataBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,7 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 分类Fragment
  */
-public class ClassifyFragment extends BaseFragment {
+public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity> {
 
     private ViewGroup mainView;
 
