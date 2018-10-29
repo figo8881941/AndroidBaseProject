@@ -1,0 +1,6 @@
+<resources>
+
+    <string name="main_classify_fragment_top_car_text">购物车</string>
+    <string name="main_classify_fragment_top_search_input_text">搜淘宝优惠券</string>
+
+</resources>

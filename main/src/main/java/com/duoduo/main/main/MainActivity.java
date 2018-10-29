@@ -10,6 +10,7 @@ import com.duoduo.commonbase.component.NoScrollViewPager;
 import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbase.permission.PermissionUtils;
 import com.duoduo.commonbase.utils.ActivityUtils;
+import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.main_main_main_activity);
 
         //白色风格透明状态栏
-        ActivityUtils.changeStatusBarTran(this, true);
+        StatusBarUtils.changeStatusBarTran(this, true);
 
         EventBus.getDefault().register(this);
 

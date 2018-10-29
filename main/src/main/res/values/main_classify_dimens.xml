@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="main_classify_fragment_top_layout_content_height">44dp</dimen>
+    <dimen name="main_classify_fragment_top_layout_car_layout_width">48.5dp</dimen>
+    <dimen name="main_classify_fragment_top_layout_car_layout_textsize">10sp</dimen>
+    <dimen name="main_classify_fragment_top_layout_search_layout_height">30dp</dimen>
+    <dimen name="main_classify_fragment_top_layout_search_layout_margin_left">12dp</dimen>
+    <dimen name="main_classify_fragment_top_layout_search_input_textsize">13sp</dimen>
+    <dimen name="main_classify_fragment_top_layout_search_input_margin_left">15dp</dimen>
+    <dimen name="main_classify_fragment_top_layout_search_input_drawablepadding">2dp</dimen>
+
+</resources>

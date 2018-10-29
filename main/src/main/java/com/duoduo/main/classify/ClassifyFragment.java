@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
@@ -44,7 +45,8 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     }
 
     private void initView() {
-
+        View statusBarSpaceView = mainView.findViewById(R.id.status_bar_space_view);
+        statusBarSpaceView.getLayoutParams().height = StatusBarUtils.getStatusBarHeightFit(getContext().getApplicationContext());
     }
 
     @Override

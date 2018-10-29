@@ -4,22 +4,68 @@
     android:layout_height="wrap_content"
     android:background="@drawable/main_classify_fragment_top_layout_bg">
 
-    <RelativeLayout
-        android:id="@+id/car_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        >
-
-    </RelativeLayout>
+    <View
+        android:id="@+id/status_bar_space_view"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_alignParentTop="true"></View>
 
     <RelativeLayout
-        android:id="@+id/search_input_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_classify_fragment_top_layout_content_height"
+        android:layout_below="@id/status_bar_space_view">
 
+        <RelativeLayout
+            android:id="@+id/car_layout"
+            android:layout_width="@dimen/main_classify_fragment_top_layout_car_layout_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/car_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/main_classify_fragment_top_layout_car_img" />
+
+            <TextView
+                android:id="@+id/car_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/car_img"
+                android:layout_centerHorizontal="true"
+                android:text="@string/main_classify_fragment_top_car_text"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/main_classify_fragment_top_layout_car_layout_textsize" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/search_input_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_classify_fragment_top_layout_search_layout_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/main_classify_fragment_top_layout_search_layout_margin_left"
+            android:layout_toLeftOf="@id/car_layout"
+            android:background="@drawable/main_classify_fragment_top_layout_search_layout_bg">
+
+            <TextView
+                android:id="@+id/search_input_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/main_classify_fragment_top_layout_search_layout_margin_left"
+                android:drawableLeft="@drawable/main_classify_fragment_top_layout_search_input_search_icon"
+                android:drawablePadding="@dimen/main_classify_fragment_top_layout_search_input_drawablepadding"
+                android:text="@string/main_classify_fragment_top_search_input_text"
+                android:textColor="#66000000"
+                android:textSize="@dimen/main_classify_fragment_top_layout_search_input_textsize" />
+
+        </RelativeLayout>
     </RelativeLayout>
-
 
 </RelativeLayout>
