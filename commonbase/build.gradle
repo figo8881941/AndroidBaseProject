@@ -44,4 +44,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //Log框架
     api 'com.orhanobut:logger:2.2.0'
+    //PagerSlidingTabStrip
+    api 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }

@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
@@ -20,7 +20,6 @@ import com.duoduo.main.classify.event.ClassifyHomeDataRequestEvent;
 import com.duoduo.main.classify.event.ClassifyTabDataRequestEvent;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
-import com.duoduo.main.classify.view.ClassifySubTabFactory;
 import com.duoduo.main.main.data.MainTabDataBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,7 +35,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
     private ViewGroup mainView;
 
-    private TabLayout tabLayout;
+    private PagerSlidingTabStrip tabStrip;
 
     private ViewPager subViewPager;
     private ClassifySubFragmentPagerAdapter subPagerAdapter;
@@ -74,15 +73,14 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         View statusBarSpaceView = mainView.findViewById(R.id.status_bar_space_view);
         statusBarSpaceView.getLayoutParams().height = StatusBarUtils.getStatusBarHeightFit(getContext().getApplicationContext());
 
-        //Tab
-        tabLayout = (TabLayout) mainView.findViewById(R.id.tab_layout);
-
         //Viewpage
         subViewPager = (ViewPager) mainView.findViewById(R.id.tab_fragment_viewpager);
         subPagerAdapter = new ClassifySubFragmentPagerAdapter(getChildFragmentManager());
         subViewPager.setAdapter(subPagerAdapter);
 
-        tabLayout.setupWithViewPager(subViewPager);
+        //Tab
+        tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_layout);
+
     }
 
     @Override
@@ -108,10 +106,10 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
             break;
             case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_FINISH: {
                 ClassifyTabDataBean classifyTabDataBean = event.getArg3();
-                ClassifySubTabFactory.createTabByData(tabLayout, classifyTabDataBean);
                 subFragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifyTabDataBean);
                 subPagerAdapter.setFragments(subFragmentList);
                 subViewPager.setAdapter(subPagerAdapter);
+                tabStrip.setViewPager(subViewPager);
             }
             break;
             case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_ERROR: {

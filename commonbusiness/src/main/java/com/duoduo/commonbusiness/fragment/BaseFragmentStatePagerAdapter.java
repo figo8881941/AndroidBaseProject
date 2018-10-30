@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class BaseFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
 
-    private ArrayList<BaseFragment> fragments;
+    protected ArrayList<BaseFragment> fragments;
 
     public BaseFragmentStatePagerAdapter(FragmentManager fm) {
         super(fm);
