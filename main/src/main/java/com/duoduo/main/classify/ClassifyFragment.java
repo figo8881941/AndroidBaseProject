@@ -1,5 +1,6 @@
 package com.duoduo.main.classify;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,6 +47,11 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     private BaseFragment curSubFragment;
 
     private ClassifyController controller;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -146,5 +152,15 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }
