@@ -1,5 +1,7 @@
 package com.duoduo.commonbusiness.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 /**
@@ -68,6 +70,13 @@ public abstract class BaseFragment<T> extends Fragment {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        isDestroy = false;
+        super.onCreate(savedInstanceState);
+
     }
 
     @Override

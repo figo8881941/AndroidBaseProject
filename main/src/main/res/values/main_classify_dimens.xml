@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 分类Fragment顶部布局 -->
     <dimen name="main_classify_fragment_top_layout_content_height">44dp</dimen>
     <dimen name="main_classify_fragment_top_layout_car_layout_width">48.5dp</dimen>
     <dimen name="main_classify_fragment_top_layout_car_layout_textsize">10sp</dimen>
@@ -9,5 +10,7 @@
     <dimen name="main_classify_fragment_top_layout_search_input_textsize">13sp</dimen>
     <dimen name="main_classify_fragment_top_layout_search_input_margin_left">15dp</dimen>
     <dimen name="main_classify_fragment_top_layout_search_input_drawablepadding">2dp</dimen>
+
+    <dimen name="main_classify_fragment_tab_height">40dp</dimen>
 
 </resources>

@@ -7,7 +7,23 @@
         android:id="@+id/top_layout"
         layout="@layout/main_classify_fragment_top_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_classify_fragment_tab_height"
+        android:layout_below="@id/top_layout"
+        android:background="@drawable/main_classify_fragment_tab_layout_bg">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tab_fragment_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tab_layout">
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>
