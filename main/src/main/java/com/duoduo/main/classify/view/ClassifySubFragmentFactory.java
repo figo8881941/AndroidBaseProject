@@ -1,16 +1,8 @@
 package com.duoduo.main.classify.view;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
-import com.duoduo.main.classify.ClassifyFragment;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
-import com.duoduo.main.classify.fragment.ClassifySubFragment;
-import com.duoduo.main.home.HomeFragment;
-import com.duoduo.main.largecoupon.LargeCouponFragment;
-import com.duoduo.main.main.consts.IMainConsts;
-import com.duoduo.main.main.data.MainTabDataBean;
-import com.duoduo.main.mine.MineFragment;
-import com.duoduo.main.shipping.ShippingFragment;
-import com.duoduo.main.web.H5Fragment;
+import com.duoduo.main.classify.subclassify.ClassifySubFragment;
 
 import java.util.ArrayList;
 import java.util.List;

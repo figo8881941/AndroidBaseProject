@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.fragment;
+package com.duoduo.main.classify.subclassify;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
