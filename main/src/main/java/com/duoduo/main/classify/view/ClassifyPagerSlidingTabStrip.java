@@ -155,6 +155,13 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
         a.recycle();
 
+
+        a = context.obtainStyledAttributes(attrs, com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip);
+
+        indicatorMarginBottom = a.getDimensionPixelSize(com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip_indicatorMarginBottom, indicatorMarginBottom);
+
+        a.recycle();
+
         rectPaint = new Paint();
         rectPaint.setAntiAlias(true);
         rectPaint.setStyle(Style.FILL);

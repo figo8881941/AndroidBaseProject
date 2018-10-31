@@ -29,6 +29,7 @@
             android:layout_alignLeft="@id/recommend_text"
             android:layout_alignRight="@id/recommend_text"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/main_classify_fragment_tab_recommend_baseline_margin_bottom"
             android:background="@drawable/main_classify_fragment_tab_layout_recommend_baseline_bg" />
     </RelativeLayout>
 
@@ -57,15 +58,15 @@
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/tab_classify_icon"
         android:layout_toRightOf="@id/recommend_divider"
-        android:textSize="@dimen/main_classify_fragment_tab_textsize"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/main_classify_fragment_tab_textsize"
+        app:indicatorMarginBottom="@dimen/main_classify_fragment_tab_indicator_margin_bottom"
         app:pstsDividerColor="@android:color/transparent"
         app:pstsIndicatorColor="@android:color/white"
         app:pstsIndicatorHeight="@dimen/main_classify_fragment_tab_slider_height"
         app:pstsTabPaddingLeftRight="@dimen/main_classify_fragment_tab_padding_left_right"
-        app:pstsUnderlineHeight="0px"
         app:pstsUnderlineColor="@android:color/transparent"
-        >
+        app:pstsUnderlineHeight="0px">
 
     </com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip>
 
