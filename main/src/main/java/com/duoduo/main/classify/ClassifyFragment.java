@@ -1,6 +1,8 @@
 package com.duoduo.main.classify;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -79,7 +81,10 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         subViewPager.setAdapter(subPagerAdapter);
 
         //Tab
-        tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_layout);
+        tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
+        tabStrip.setTextColor(Color.WHITE);
+        tabStrip.setTextSize(getResources().getDimensionPixelSize(R.dimen.main_classify_fragment_tab_textsize));
+        tabStrip.setTypeface(null, Typeface.NORMAL);
 
     }
 

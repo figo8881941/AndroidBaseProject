@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/main_classify_fragment_tab_height"
+    android:background="@drawable/main_classify_fragment_tab_layout_bg">
+
+    <RelativeLayout
+        android:id="@+id/recommend_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/main_classify_fragment_tab_recommend_margin"
+        android:layout_marginRight="@dimen/main_classify_fragment_tab_recommend_margin">
+
+        <TextView
+            android:id="@+id/recommend_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/main_classify_fragment_tab_recommend_text"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/main_classify_fragment_tab_recommend_textsize" />
+
+        <View
+            android:id="@+id/recommend_layout_baseline"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_classify_fragment_tab_recommend_baseline_height"
+            android:layout_alignLeft="@id/recommend_text"
+            android:layout_alignRight="@id/recommend_text"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/main_classify_fragment_tab_layout_recommend_baseline_bg" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/recommend_divider"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/main_classify_fragment_tab_recommend_divider_margin"
+        android:layout_marginBottom="@dimen/main_classify_fragment_tab_recommend_divider_margin"
+        android:layout_toRightOf="@id/recommend_layout"
+        android:background="@android:color/white"></View>
+
+    <ImageView
+        android:id="@+id/tab_classify_icon"
+        android:layout_width="@dimen/main_classify_fragment_tab_classify_icon_size"
+        android:layout_height="@dimen/main_classify_fragment_tab_classify_icon_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/main_classify_fragment_tab_classify_icon_margin_left"
+        android:layout_marginRight="@dimen/main_classify_fragment_tab_classify_icon_margin_right"
+        android:src="@drawable/main_classify_fragment_tab_classify_icon" />
+
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tab_strip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/tab_classify_icon"
+        android:layout_toRightOf="@id/recommend_divider"
+        app:pstsDividerColor="@android:color/white"
+        app:pstsIndicatorColor="@android:color/transparent"
+        app:pstsIndicatorHeight="@dimen/main_classify_fragment_tab_slider_height"
+        app:pstsTabPaddingLeftRight="@dimen/main_classify_fragment_tab_padding_left_right"
+        app:pstsUnderlineHeight="0px"
+        app:pstsUnderlineColor="@android:color/transparent"
+        >
+
+    </com.astuetz.PagerSlidingTabStrip>
+
+</RelativeLayout>

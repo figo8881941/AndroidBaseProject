@@ -12,5 +12,15 @@
     <dimen name="main_classify_fragment_top_layout_search_input_drawablepadding">2dp</dimen>
 
     <dimen name="main_classify_fragment_tab_height">40dp</dimen>
+    <dimen name="main_classify_fragment_tab_classify_icon_size">15dp</dimen>
+    <dimen name="main_classify_fragment_tab_classify_icon_margin_right">9dp</dimen>
+    <dimen name="main_classify_fragment_tab_classify_icon_margin_left">9dp</dimen>
+    <dimen name="main_classify_fragment_tab_recommend_margin">15dp</dimen>
+    <dimen name="main_classify_fragment_tab_recommend_textsize">14sp</dimen>
+    <dimen name="main_classify_fragment_tab_recommend_baseline_height">2dp</dimen>
+    <dimen name="main_classify_fragment_tab_recommend_divider_margin">9dp</dimen>
+    <dimen name="main_classify_fragment_tab_slider_height">2dp</dimen>
+    <dimen name="main_classify_fragment_tab_textsize">14sp</dimen>
+    <dimen name="main_classify_fragment_tab_padding_left_right">15dp</dimen>
 
 </resources>

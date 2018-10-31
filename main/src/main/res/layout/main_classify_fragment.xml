@@ -3,20 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 顶部布局 -->
     <include
         android:id="@+id/top_layout"
         layout="@layout/main_classify_fragment_top_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
-    <com.astuetz.PagerSlidingTabStrip
+    <!-- Tab布局 -->
+    <include
         android:id="@+id/tab_layout"
+        layout="@layout/main_classify_fragment_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_classify_fragment_tab_height"
-        android:layout_below="@id/top_layout"
-        android:background="@drawable/main_classify_fragment_tab_layout_bg">
-
-    </com.astuetz.PagerSlidingTabStrip>
+        android:layout_below="@id/top_layout" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/tab_fragment_viewpager"
