@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
@@ -20,6 +19,7 @@ import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
 import com.duoduo.main.classify.event.ClassifyHomeDataRequestEvent;
 import com.duoduo.main.classify.event.ClassifyTabDataRequestEvent;
+import com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.main.data.MainTabDataBean;
@@ -37,7 +37,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
     private ViewGroup mainView;
 
-    private PagerSlidingTabStrip tabStrip;
+    private ClassifyPagerSlidingTabStrip tabStrip;
 
     private ViewPager subViewPager;
     private ClassifySubFragmentPagerAdapter subPagerAdapter;
@@ -81,10 +81,11 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         subViewPager.setAdapter(subPagerAdapter);
 
         //Tab
-        tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
+        tabStrip = (ClassifyPagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
         tabStrip.setTextColor(Color.WHITE);
         tabStrip.setTextSize(getResources().getDimensionPixelSize(R.dimen.main_classify_fragment_tab_textsize));
         tabStrip.setTypeface(null, Typeface.NORMAL);
+        tabStrip.setShouldExpand(false);
 
     }
 

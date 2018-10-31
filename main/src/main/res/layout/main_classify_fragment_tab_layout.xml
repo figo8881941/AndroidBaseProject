@@ -51,20 +51,20 @@
         android:layout_marginRight="@dimen/main_classify_fragment_tab_classify_icon_margin_right"
         android:src="@drawable/main_classify_fragment_tab_classify_icon" />
 
-    <com.astuetz.PagerSlidingTabStrip
+    <com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip
         android:id="@+id/tab_strip"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/tab_classify_icon"
         android:layout_toRightOf="@id/recommend_divider"
-        app:pstsDividerColor="@android:color/white"
-        app:pstsIndicatorColor="@android:color/transparent"
+        app:pstsDividerColor="@android:color/transparent"
+        app:pstsIndicatorColor="@android:color/white"
         app:pstsIndicatorHeight="@dimen/main_classify_fragment_tab_slider_height"
         app:pstsTabPaddingLeftRight="@dimen/main_classify_fragment_tab_padding_left_right"
         app:pstsUnderlineHeight="0px"
         app:pstsUnderlineColor="@android:color/transparent"
         >
 
-    </com.astuetz.PagerSlidingTabStrip>
+    </com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip>
 
 </RelativeLayout>
