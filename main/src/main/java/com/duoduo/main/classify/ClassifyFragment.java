@@ -82,8 +82,6 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
         //Tab
         tabStrip = (ClassifyPagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
-        tabStrip.setTextColor(Color.WHITE);
-        tabStrip.setTextSize(getResources().getDimensionPixelSize(R.dimen.main_classify_fragment_tab_textsize));
         tabStrip.setTypeface(null, Typeface.NORMAL);
         tabStrip.setShouldExpand(false);
 

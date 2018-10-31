@@ -57,6 +57,8 @@
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/tab_classify_icon"
         android:layout_toRightOf="@id/recommend_divider"
+        android:textSize="@dimen/main_classify_fragment_tab_textsize"
+        android:textColor="@android:color/white"
         app:pstsDividerColor="@android:color/transparent"
         app:pstsIndicatorColor="@android:color/white"
         app:pstsIndicatorHeight="@dimen/main_classify_fragment_tab_slider_height"

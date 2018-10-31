@@ -82,6 +82,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     private int scrollOffset = 52;
     private int indicatorHeight = 8;
+    private int indicatorMarginBottom = 0;
     private int underlineHeight = 2;
     private int dividerPadding = 12;
     private int tabPadding = 24;
@@ -334,7 +335,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
             lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
         }
 
-        canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);
+        canvas.drawRect(lineLeft, height - indicatorHeight - indicatorMarginBottom, lineRight, height - indicatorMarginBottom, rectPaint);
 
         // draw underline
 
@@ -408,6 +409,15 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     public int getIndicatorHeight() {
         return indicatorHeight;
+    }
+
+    public int getIndicatorMarginBottom() {
+        return indicatorMarginBottom;
+    }
+
+    public void setIndicatorMarginBottom(int indicatorMarginBottomPx) {
+        this.indicatorMarginBottom = indicatorMarginBottomPx;
+        invalidate();
     }
 
     public void setUnderlineColor(int underlineColor) {
