@@ -41,9 +41,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 import com.astuetz.pagerslidingtabstrip.R;
+
+import java.util.Locale;
 
 public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
@@ -83,9 +83,14 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
     private boolean textAllCaps = true;
 
     private int scrollOffset = 52;
+
     private int indicatorHeight = 8;
     private int indicatorMarginBottom = 0;
     private int indicatorMarginLeftRight = 0;
+    private Path indicatorRoundPath = new Path();
+    private RectF indicatorRectF = new RectF();
+    private float[] indicatorRadiusArray = { 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f };
+
     private int underlineHeight = 2;
     private int dividerPadding = 12;
     private int tabPadding = 24;
@@ -316,10 +321,6 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     }
 
-    private Path reactPath = new Path();
-    private RectF rectF = new RectF();
-    private float[] radiusArray = { 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f };
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -350,13 +351,17 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
             lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
         }
 
-//        canvas.save();
-//        rectF.set(lineLeft, height - indicatorHeight - indicatorMarginBottom, lineRight, height - indicatorMarginBottom);
-//        reactPath.addRoundRect(rectF, radiusArray, Path.Direction.CW);
-//        canvas.clipPath(reactPath);
+        float lineTop = height - indicatorHeight - indicatorMarginBottom;
+        float lineBottom = lineTop + indicatorHeight;
 
-        canvas.drawRect(lineLeft, height - indicatorHeight - indicatorMarginBottom, lineRight, height - indicatorMarginBottom, rectPaint);
-//        canvas.restore();
+        canvas.save();
+        indicatorRectF.set(lineLeft, lineTop, lineRight, lineBottom);
+        indicatorRoundPath.reset();
+        indicatorRoundPath.addRoundRect(indicatorRectF, indicatorRadiusArray, Path.Direction.CW);
+        canvas.clipPath(indicatorRoundPath);
+        canvas.drawRect(indicatorRectF, rectPaint);
+        canvas.restore();
+
         // draw underline
 
         rectPaint.setColor(underlineColor);
