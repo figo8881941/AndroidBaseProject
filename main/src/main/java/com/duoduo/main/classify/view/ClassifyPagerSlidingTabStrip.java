@@ -22,6 +22,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Parcel;
@@ -83,6 +85,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
     private int scrollOffset = 52;
     private int indicatorHeight = 8;
     private int indicatorMarginBottom = 0;
+    private int indicatorMarginLeftRight = 0;
     private int underlineHeight = 2;
     private int dividerPadding = 12;
     private int tabPadding = 24;
@@ -159,6 +162,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
         a = context.obtainStyledAttributes(attrs, com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip);
 
         indicatorMarginBottom = a.getDimensionPixelSize(com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip_indicatorMarginBottom, indicatorMarginBottom);
+        indicatorMarginLeftRight = a.getDimensionPixelSize(com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip_indicatorMarginLeftRight, indicatorMarginLeftRight);
 
         a.recycle();
 
@@ -312,6 +316,10 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     }
 
+    private Path reactPath = new Path();
+    private RectF rectF = new RectF();
+    private float[] radiusArray = { 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f };
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -328,22 +336,27 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
         // default: line below current tab
         View currentTab = tabsContainer.getChildAt(currentPosition);
-        float lineLeft = currentTab.getLeft();
-        float lineRight = currentTab.getRight();
+        float lineLeft = currentTab.getLeft() + indicatorMarginLeftRight;
+        float lineRight = currentTab.getRight() - indicatorMarginLeftRight;
 
         // if there is an offset, start interpolating left and right coordinates between current and next tab
         if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
 
             View nextTab = tabsContainer.getChildAt(currentPosition + 1);
-            final float nextTabLeft = nextTab.getLeft();
-            final float nextTabRight = nextTab.getRight();
+            final float nextTabLeft = nextTab.getLeft() + indicatorMarginLeftRight;
+            final float nextTabRight = nextTab.getRight() - indicatorMarginLeftRight;
 
             lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
             lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
         }
 
-        canvas.drawRect(lineLeft, height - indicatorHeight - indicatorMarginBottom, lineRight, height - indicatorMarginBottom, rectPaint);
+//        canvas.save();
+//        rectF.set(lineLeft, height - indicatorHeight - indicatorMarginBottom, lineRight, height - indicatorMarginBottom);
+//        reactPath.addRoundRect(rectF, radiusArray, Path.Direction.CW);
+//        canvas.clipPath(reactPath);
 
+        canvas.drawRect(lineLeft, height - indicatorHeight - indicatorMarginBottom, lineRight, height - indicatorMarginBottom, rectPaint);
+//        canvas.restore();
         // draw underline
 
         rectPaint.setColor(underlineColor);
@@ -425,6 +438,14 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
     public void setIndicatorMarginBottom(int indicatorMarginBottomPx) {
         this.indicatorMarginBottom = indicatorMarginBottomPx;
         invalidate();
+    }
+
+    public int getIndicatorMarginLeftRight() {
+        return indicatorMarginLeftRight;
+    }
+
+    public void setIndicatorMarginLeftRight(int indicatorMarginLeftRightPx) {
+        this.indicatorMarginLeftRight = indicatorMarginLeftRight;
     }
 
     public void setUnderlineColor(int underlineColor) {

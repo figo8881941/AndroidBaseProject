@@ -83,8 +83,6 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         //Tab
         tabStrip = (ClassifyPagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
         tabStrip.setTypeface(null, Typeface.NORMAL);
-        tabStrip.setShouldExpand(false);
-
     }
 
     @Override

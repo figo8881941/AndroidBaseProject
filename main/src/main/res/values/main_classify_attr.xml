@@ -3,6 +3,7 @@
 
     <declare-styleable name="ClassifyPagerSlidingTabStrip">
         <attr name="indicatorMarginBottom" format="dimension"/>
+        <attr name="indicatorMarginLeftRight" format="dimension"/>
     </declare-styleable>
 
 </resources>

@@ -61,6 +61,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/main_classify_fragment_tab_textsize"
         app:indicatorMarginBottom="@dimen/main_classify_fragment_tab_indicator_margin_bottom"
+        app:indicatorMarginLeftRight="@dimen/main_classify_fragment_tab_indicator_margin_left_right"
         app:pstsDividerColor="@android:color/transparent"
         app:pstsIndicatorColor="@android:color/white"
         app:pstsIndicatorHeight="@dimen/main_classify_fragment_tab_slider_height"
