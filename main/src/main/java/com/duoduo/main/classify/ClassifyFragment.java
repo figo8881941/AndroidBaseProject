@@ -1,7 +1,6 @@
 package com.duoduo.main.classify;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,7 +16,7 @@ import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
-import com.duoduo.main.classify.event.ClassifyHomeDataRequestEvent;
+import com.duoduo.main.classify.home.event.ClassifyHomeDataRequestEvent;
 import com.duoduo.main.classify.event.ClassifyTabDataRequestEvent;
 import com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;

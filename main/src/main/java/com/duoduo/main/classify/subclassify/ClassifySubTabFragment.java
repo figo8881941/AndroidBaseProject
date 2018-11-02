@@ -15,7 +15,7 @@ import com.duoduo.main.classify.data.ClassifyTabDataBean;
 /**
  * 子分类Fragment
  */
-public class ClassifySubFragment extends BaseFragment<ClassifyTabDataBean.CategoryListEntity> {
+public class ClassifySubTabFragment extends BaseFragment<ClassifyTabDataBean.CategoryListEntity> {
 
     private ViewGroup mainView;
 
@@ -27,7 +27,7 @@ public class ClassifySubFragment extends BaseFragment<ClassifyTabDataBean.Catego
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_fragment, container, false);
+        mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_tab_fragment, container, false);
         initView();
         return mainView;
     }

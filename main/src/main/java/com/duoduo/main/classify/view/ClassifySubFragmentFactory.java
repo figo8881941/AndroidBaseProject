@@ -2,7 +2,7 @@ package com.duoduo.main.classify.view;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
-import com.duoduo.main.classify.subclassify.ClassifySubFragment;
+import com.duoduo.main.classify.subclassify.ClassifySubTabFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class ClassifySubFragmentFactory {
         if (entity == null) {
             return null;
         }
-        BaseFragment fragment = new ClassifySubFragment();
+        BaseFragment fragment = new ClassifySubTabFragment();
 
         if (fragment != null) {
             fragment.setData(entity);

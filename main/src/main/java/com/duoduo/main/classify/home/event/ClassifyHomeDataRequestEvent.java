@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.event;
+package com.duoduo.main.classify.home.event;
 
 import com.duoduo.commonbusiness.event.BaseEvent;
 import com.duoduo.main.classify.data.ClassifyHomeDataBean;

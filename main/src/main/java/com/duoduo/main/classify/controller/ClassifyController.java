@@ -7,7 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.duoduo.main.classify.data.ClassifyHomeDataBean;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
-import com.duoduo.main.classify.event.ClassifyHomeDataRequestEvent;
+import com.duoduo.main.classify.home.event.ClassifyHomeDataRequestEvent;
 import com.duoduo.main.classify.event.ClassifyTabDataRequestEvent;
 import com.duoduo.main.classify.model.ClassifyNetModel;
 
