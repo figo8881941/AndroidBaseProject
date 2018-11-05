@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 分类Tab数据单元
  */
-public class ClassifyTabDataBean {
+public class ClassifySubTabDataBean {
 
 
     /**

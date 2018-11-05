@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
-import com.duoduo.main.classify.data.ClassifyTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.home.ClassifySubHomeFragment;
 import com.duoduo.main.classify.subclassify.ClassifySubTabFragment;
 import com.duoduo.main.main.consts.IMainConsts;
@@ -26,7 +26,7 @@ public class ClassifySubFragmentFactory {
         Resources resources = context.getResources();
         ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
         BaseFragment homeFragment = new ClassifySubHomeFragment();
-        ClassifyTabDataBean.CategoryListEntity entity = new ClassifyTabDataBean.CategoryListEntity();
+        ClassifySubTabDataBean.CategoryListEntity entity = new ClassifySubTabDataBean.CategoryListEntity();
         entity.setCategoryName("");
         entity.setId(IMainConsts.MainTabIdValue.HOME_TAB);
         homeFragment.setData(entity);
@@ -37,19 +37,19 @@ public class ClassifySubFragmentFactory {
     /**
      * 根据数据，创建分类Fragment集合的方法
      *
-     * @param classifyTabDataBean
+     * @param classifySubTabDataBean
      * @return
      */
-    public static ArrayList<BaseFragment> createClassifySubFragmentList(ClassifyTabDataBean classifyTabDataBean) {
-        if (classifyTabDataBean == null) {
+    public static ArrayList<BaseFragment> createClassifySubFragmentList(ClassifySubTabDataBean classifySubTabDataBean) {
+        if (classifySubTabDataBean == null) {
             return null;
         }
-        List<ClassifyTabDataBean.CategoryListEntity> tabListEntityList = classifyTabDataBean.getCategoryList();
+        List<ClassifySubTabDataBean.CategoryListEntity> tabListEntityList = classifySubTabDataBean.getCategoryList();
         if (tabListEntityList == null || tabListEntityList.isEmpty()) {
             return null;
         }
         ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
-        for (ClassifyTabDataBean.CategoryListEntity entity : tabListEntityList) {
+        for (ClassifySubTabDataBean.CategoryListEntity entity : tabListEntityList) {
             BaseFragment fragment = createFragment(entity);
             if (fragment == null) {
                 continue;
@@ -65,7 +65,7 @@ public class ClassifySubFragmentFactory {
      * @param entity
      * @return
      */
-    private static BaseFragment createFragment(ClassifyTabDataBean.CategoryListEntity entity) {
+    private static BaseFragment createFragment(ClassifySubTabDataBean.CategoryListEntity entity) {
         if (entity == null) {
             return null;
         }

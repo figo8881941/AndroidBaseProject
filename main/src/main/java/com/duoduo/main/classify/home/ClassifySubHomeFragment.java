@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
-import com.duoduo.main.classify.data.ClassifyTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 
@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 分类子首页Fragment
  */
-public class ClassifySubHomeFragment extends BaseFragment<ClassifyTabDataBean.CategoryListEntity> {
+public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean.CategoryListEntity> {
 
     private ViewGroup mainView;
 
@@ -39,6 +39,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifyTabDataBean.Ca
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_home_fragment, container, false);
         initView();
+        controller.requestClassifySubHomeData();
         return mainView;
     }
 

@@ -25,7 +25,7 @@ public class ClassifyNetModel extends BaseNetModel {
     /**
      * 请求分类Tab数据的方法
      */
-    public void requestClassifyTabData(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
+    public void requestClassifySubTabData(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
         String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifyConsts.FunId.CLASSIFY_DATA, "quMall");
         JSONObject postData = CommonNetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
         postData.put("tabId", IMainConsts.MainTabIdValue.CLASSIFY_TAB);

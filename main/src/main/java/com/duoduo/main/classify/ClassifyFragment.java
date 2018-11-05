@@ -15,7 +15,7 @@ import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
-import com.duoduo.main.classify.data.ClassifyTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
 import com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
@@ -65,7 +65,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_fragment, container, false);
         initView();
-        controller.requestClassifyTabData();
+        controller.requestClassifySubTabData();
         return mainView;
     }
 
@@ -158,9 +158,9 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
             }
             break;
             case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH: {
-                ClassifyTabDataBean classifyTabDataBean = event.getArg3();
+                ClassifySubTabDataBean classifySubTabDataBean = event.getArg3();
                 //创建数据下发的fragment
-                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifyTabDataBean);
+                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifySubTabDataBean);
                 if (fragmentList != null) {
                     subFragmentList.addAll(fragmentList);
                 }

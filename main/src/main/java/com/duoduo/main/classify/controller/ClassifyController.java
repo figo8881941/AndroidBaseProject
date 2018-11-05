@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.duoduo.main.classify.data.ClassifyTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
 import com.duoduo.main.classify.model.ClassifyNetModel;
 
@@ -29,7 +29,7 @@ public class ClassifyController {
     /**
      * 请求分类Tab数据的方法
      */
-    public void requestClassifyTabData() {
+    public void requestClassifySubTabData() {
         final EventBus eventBus = EventBus.getDefault();
         final ClassifySubTabDataRequestEvent event = new ClassifySubTabDataRequestEvent();
 
@@ -38,13 +38,13 @@ public class ClassifyController {
         eventBus.post(event);
 
         try {
-            classifyNetModel.requestClassifyTabData(new Response.Listener<JSONObject>() {
+            classifyNetModel.requestClassifySubTabData(new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     //通知请求完成
                     event.setWhat(ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH);
-                    ClassifyTabDataBean classifyTabDataBean = JSON.parseObject(response.toString(), ClassifyTabDataBean.class);
-                    event.setArg3(classifyTabDataBean);
+                    ClassifySubTabDataBean classifySubTabDataBean = JSON.parseObject(response.toString(), ClassifySubTabDataBean.class);
+                    event.setArg3(classifySubTabDataBean);
                     eventBus.post(event);
                 }
             }, new Response.ErrorListener() {
