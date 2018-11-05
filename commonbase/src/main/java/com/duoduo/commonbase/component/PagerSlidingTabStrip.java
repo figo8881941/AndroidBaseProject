@@ -600,6 +600,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         return tabPadding;
     }
 
+    public View getTabItem(int position) {
+        View tabItem = null;
+        if (tabsContainer != null && tabsContainer.getChildCount() > position) {
+            tabItem = tabsContainer.getChildAt(position);
+        }
+        return tabItem;
+    }
+
     @Override
     public void onRestoreInstanceState(Parcelable state) {
         SavedState savedState = (SavedState) state;

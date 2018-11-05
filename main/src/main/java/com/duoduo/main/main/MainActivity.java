@@ -80,6 +80,9 @@ public class MainActivity extends BaseActivity {
         mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (isDestroy) {
+                    return;
+                }
                 if (curFragment != null) {
                     curFragment.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 }
@@ -87,6 +90,9 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if (isDestroy) {
+                    return;
+                }
                 //Fragment切换
                 BaseFragment fragment = getFragmentByPosition(position);
                 if (fragment != null) {
@@ -102,6 +108,9 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                if (isDestroy) {
+                    return;
+                }
                 if (curFragment != null) {
                     curFragment.onPageScrollStateChanged(state);
                 }
@@ -114,18 +123,27 @@ public class MainActivity extends BaseActivity {
         mainTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (isDestroy) {
+                    return;
+                }
                 //切换Tab样式
                 MainTabFactory.changeTabToSelectedStyle(tab);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                if (isDestroy) {
+                    return;
+                }
                 //切换Tab样式
                 MainTabFactory.changeTabToUnSelectedStyle(tab);
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                if (isDestroy) {
+                    return;
+                }
 
             }
         });

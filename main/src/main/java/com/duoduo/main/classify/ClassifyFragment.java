@@ -1,6 +1,8 @@
 package com.duoduo.main.classify;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,15 +11,17 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.duoduo.commonbase.component.PagerSlidingTabStrip;
 import com.duoduo.commonbase.utils.StatusBarUtils;
+import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
-import com.duoduo.commonbase.component.PagerSlidingTabStrip;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.main.data.MainTabDataBean;
@@ -36,7 +40,9 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     private ViewGroup mainView;
 
     private PagerSlidingTabStrip tabStrip;
+    private TextView recommendText;
     private View recommendLayoutBaseline;
+    private TextView currentSubTabItem;
 
     private ViewPager subViewPager;
     private ClassifySubFragmentPagerAdapter subPagerAdapter;
@@ -84,6 +90,9 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         subViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (isDestroy) {
+                    return;
+                }
                 if (curSubFragment != null) {
                     curSubFragment.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 }
@@ -91,6 +100,9 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
             @Override
             public void onPageSelected(int position) {
+                if (isDestroy) {
+                    return;
+                }
                 //Fragment切换
                 BaseFragment fragment = getFragmentByPosition(position);
                 if (fragment != null) {
@@ -106,6 +118,9 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                if (isDestroy) {
+                    return;
+                }
                 if (curSubFragment != null) {
                     curSubFragment.onPageScrollStateChanged(state);
                 }
@@ -119,21 +134,48 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         }
 
         //Tab
+        recommendText = (TextView) mainView.findViewById(R.id.recommend_text);
+        TextViewUtils.setTextStyleAndStrokeWidth(recommendText, Paint.Style.FILL_AND_STROKE, 1);
         recommendLayoutBaseline = mainView.findViewById(R.id.recommend_layout_baseline);
         tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
         tabStrip.setTypeface(null, Typeface.NORMAL);
         tabStrip.setViewPager(subViewPager);
+        Resources resources = getResources();
+        final int subTabItemTextSelectedColor = resources.getColor(R.color.main_classify_fragment_sub_tab_item_text_selected_color);
+        final int subTabItemTextUnSelectedColor = resources.getColor(R.color.main_classify_fragment_sub_tab_item_text_unselected_color);
         tabStrip.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                //切换到第一个fragment
+                if (isDestroy) {
+                    return;
+                }
+                TextView newCurSubTabItem = (TextView) tabStrip.getTabItem(position);
                 if (position == 0) {
+                    //切换到第一个fragment
                     recommendLayoutBaseline.setVisibility(View.VISIBLE);
+                    TextViewUtils.setTextStyleAndStrokeWidth(recommendText, Paint.Style.FILL_AND_STROKE, 1);
+                    recommendText.setTextColor(subTabItemTextSelectedColor);
+                    if (currentSubTabItem != null) {
+                        TextViewUtils.setTextStyleAndStrokeWidth(currentSubTabItem, Paint.Style.FILL_AND_STROKE, 0);
+                        currentSubTabItem.setTextColor(subTabItemTextUnSelectedColor);
+                    }
                 } else {
                     recommendLayoutBaseline.setVisibility(View.INVISIBLE);
+                    TextViewUtils.setTextStyleAndStrokeWidth(recommendText, Paint.Style.FILL_AND_STROKE, 0);
+                    recommendText.setTextColor(subTabItemTextUnSelectedColor);
+                    if (newCurSubTabItem != currentSubTabItem) {
+                        TextViewUtils.setTextStyleAndStrokeWidth(newCurSubTabItem, Paint.Style.FILL_AND_STROKE, 1);
+                        newCurSubTabItem.setTextColor(subTabItemTextSelectedColor);
+                        if (currentSubTabItem != null) {
+                            TextViewUtils.setTextStyleAndStrokeWidth(currentSubTabItem, Paint.Style.FILL_AND_STROKE, 0);
+                            currentSubTabItem.setTextColor(subTabItemTextUnSelectedColor);
+                        }
+                    }
                 }
+                currentSubTabItem = newCurSubTabItem;
             }
         });
+        currentSubTabItem = (TextView) tabStrip.getTabItem(0);
     }
 
     @Override
