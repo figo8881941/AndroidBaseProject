@@ -24,6 +24,10 @@ public interface IMainConsts {
         public int LARGE_AMOUNT_COUPON_TAB = 1008;
         //包邮Tab
         public int SHIPPING_TAB = 3000;
+        //分类类目汇总
+        public int CATEGORY_TAB = 2010;
+        //收藏列表
+        public int COLLECTION_TAB = 2011;
     }
 
     /**

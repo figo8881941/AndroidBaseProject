@@ -1,7 +1,9 @@
 package com.duoduo.main.main.view;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.main.category.CategoryFragment;
 import com.duoduo.main.classify.ClassifyFragment;
+import com.duoduo.main.collect.CollectFragment;
 import com.duoduo.main.home.HomeFragment;
 import com.duoduo.main.largecoupon.LargeCouponFragment;
 import com.duoduo.main.main.consts.IMainConsts;
@@ -75,6 +77,16 @@ public class MainFragmentFactory {
             case IMainConsts
                     .MainTabIdValue.LARGE_AMOUNT_COUPON_TAB: {
                 fragment = new LargeCouponFragment();
+            }
+            break;
+            case IMainConsts
+                    .MainTabIdValue.CATEGORY_TAB: {
+                fragment = new CategoryFragment();
+            }
+            break;
+            case IMainConsts
+                    .MainTabIdValue.COLLECTION_TAB: {
+                fragment = new CollectFragment();
             }
             break;
             default: {
