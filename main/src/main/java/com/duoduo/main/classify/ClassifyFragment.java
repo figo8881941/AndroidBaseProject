@@ -17,7 +17,7 @@ import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
-import com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip;
+import com.duoduo.commonbase.component.PagerSlidingTabStrip;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.main.data.MainTabDataBean;
@@ -35,7 +35,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
     private ViewGroup mainView;
 
-    private ClassifyPagerSlidingTabStrip tabStrip;
+    private PagerSlidingTabStrip tabStrip;
     private View recommendLayoutBaseline;
 
     private ViewPager subViewPager;
@@ -120,7 +120,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
         //Tab
         recommendLayoutBaseline = mainView.findViewById(R.id.recommend_layout_baseline);
-        tabStrip = (ClassifyPagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
+        tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
         tabStrip.setTypeface(null, Typeface.NORMAL);
         tabStrip.setViewPager(subViewPager);
         tabStrip.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.duoduo.main.classify.view;
+package com.duoduo.commonbase.component;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -47,7 +47,7 @@ import com.astuetz.pagerslidingtabstrip.R;
 
 import java.util.Locale;
 
-public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
+public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     public interface IconTabProvider {
         public int getPageIconResId(int position);
@@ -114,15 +114,15 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     private Locale locale;
 
-    public ClassifyPagerSlidingTabStrip(Context context) {
+    public PagerSlidingTabStrip(Context context) {
         this(context, null);
     }
 
-    public ClassifyPagerSlidingTabStrip(Context context, AttributeSet attrs) {
+    public PagerSlidingTabStrip(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ClassifyPagerSlidingTabStrip(Context context, AttributeSet attrs, int defStyle) {
+    public PagerSlidingTabStrip(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         setFillViewport(true);
@@ -171,10 +171,10 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
         a.recycle();
 
         // 解析一些自定义属性
-        a = context.obtainStyledAttributes(attrs, com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip);
+        a = context.obtainStyledAttributes(attrs, com.duoduo.commonbase.R.styleable.PagerSlidingTabStrip);
 
-        indicatorMarginBottom = a.getDimensionPixelSize(com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip_indicatorMarginBottom, indicatorMarginBottom);
-        indicatorMarginLeftRight = a.getDimensionPixelSize(com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip_indicatorMarginLeftRight, indicatorMarginLeftRight);
+        indicatorMarginBottom = a.getDimensionPixelSize(com.duoduo.commonbase.R.styleable.PagerSlidingTabStrip_indicatorMarginBottom, indicatorMarginBottom);
+        indicatorMarginLeftRight = a.getDimensionPixelSize(com.duoduo.commonbase.R.styleable.PagerSlidingTabStrip_indicatorMarginLeftRight, indicatorMarginLeftRight);
 
         a.recycle();
 
