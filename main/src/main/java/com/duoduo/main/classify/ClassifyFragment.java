@@ -78,6 +78,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         //Viewpage
         subViewPager = (ViewPager) mainView.findViewById(R.id.tab_fragment_viewpager);
         subPagerAdapter = new ClassifySubFragmentPagerAdapter(getChildFragmentManager());
+        //创建初始的fragment
         subFragmentList = ClassifySubFragmentFactory.createInitClassifySubFragmentList(getContext().getApplicationContext());
         subPagerAdapter.setFragments(subFragmentList);
         subViewPager.setAdapter(subPagerAdapter);
@@ -90,6 +91,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         tabStrip.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                //切换到第一个fragment
                 if (position == 0) {
                     recommendLayoutBaseline.setVisibility(View.VISIBLE);
                 } else {
@@ -122,6 +124,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
             break;
             case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_FINISH: {
                 ClassifyTabDataBean classifyTabDataBean = event.getArg3();
+                //创建数据下发的fragment
                 ArrayList<BaseFragment> fragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifyTabDataBean);
                 if (fragmentList != null) {
                     subFragmentList.addAll(fragmentList);

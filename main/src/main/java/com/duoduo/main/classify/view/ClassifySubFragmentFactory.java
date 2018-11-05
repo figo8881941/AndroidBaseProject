@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
-import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
 import com.duoduo.main.classify.home.ClassifySubHomeFragment;
 import com.duoduo.main.classify.subclassify.ClassifySubTabFragment;
@@ -28,7 +27,7 @@ public class ClassifySubFragmentFactory {
         ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
         BaseFragment homeFragment = new ClassifySubHomeFragment();
         ClassifyTabDataBean.CategoryListEntity entity = new ClassifyTabDataBean.CategoryListEntity();
-        entity.setCategoryName(resources.getString(R.string.main_classify_fragment_tab_recommend_text));
+        entity.setCategoryName("");
         entity.setId(IMainConsts.MainTabIdValue.HOME_TAB);
         homeFragment.setData(entity);
         fragments.add(homeFragment);

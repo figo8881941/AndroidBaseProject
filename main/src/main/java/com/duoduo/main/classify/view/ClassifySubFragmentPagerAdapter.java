@@ -21,7 +21,7 @@ public class ClassifySubFragmentPagerAdapter extends BaseNoDestoryFragmentStateP
     @Override
     public CharSequence getPageTitle(int position) {
         String title = "";
-        if (position > 0 && fragments != null) {
+        if (fragments != null) {
             BaseFragment fragment = fragments.get(position);
             if (fragment != null && fragment.getData() != null) {
                 ClassifyTabDataBean.CategoryListEntity entity = (ClassifyTabDataBean.CategoryListEntity) fragment.getData();
