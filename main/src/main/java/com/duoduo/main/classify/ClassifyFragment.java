@@ -16,8 +16,7 @@ import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
-import com.duoduo.main.classify.home.event.ClassifyHomeDataRequestEvent;
-import com.duoduo.main.classify.event.ClassifyTabDataRequestEvent;
+import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
 import com.duoduo.main.classify.view.ClassifyPagerSlidingTabStrip;
 import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
@@ -112,17 +111,17 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleClassifyTabDataRequestEvent(ClassifyTabDataRequestEvent event) {
+    public void handleClassifySubTabDataRequestEvent(ClassifySubTabDataRequestEvent event) {
         if (isDestroy || event == null) {
             return;
         }
         int what = event.getWhat();
         switch (what) {
-            case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_START: {
+            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_START: {
 
             }
             break;
-            case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_FINISH: {
+            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH: {
                 ClassifyTabDataBean classifyTabDataBean = event.getArg3();
                 //创建数据下发的fragment
                 ArrayList<BaseFragment> fragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifyTabDataBean);
@@ -134,33 +133,9 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
                 tabStrip.setViewPager(subViewPager);
             }
             break;
-            case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_ERROR: {
+            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_ERROR: {
                 Exception exception = event.getArg4();
                 CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
-            }
-            break;
-            default:
-                break;
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleClassifyHomeDataRequestEvent(ClassifyHomeDataRequestEvent event) {
-        if (isDestroy || event == null) {
-            return;
-        }
-        int what = event.getWhat();
-        switch (what) {
-            case ClassifyHomeDataRequestEvent.EVENT_CLASSIFY_HOME_DATA_REQUEST_START: {
-
-            }
-            break;
-            case ClassifyHomeDataRequestEvent.EVENT_CLASSIFY_HOME_DATA_REQUEST_FINISH: {
-
-            }
-            break;
-            case ClassifyHomeDataRequestEvent.EVENT_CLASSIFY_HOME_DATA_REQUEST_ERROR: {
-
             }
             break;
             default:

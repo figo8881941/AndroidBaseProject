@@ -11,6 +11,12 @@ import android.widget.TextView;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifyTabDataBean;
+import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
+import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * 分类子首页Fragment
@@ -19,9 +25,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifyTabDataBean.Ca
 
     private ViewGroup mainView;
 
+    private ClassifySubHomeController controller;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+        controller = new ClassifySubHomeController(getContext().getApplicationContext());
     }
 
     @Nullable
@@ -39,8 +49,33 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifyTabDataBean.Ca
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleClassifySubHomeDataRequestEvent(ClassifySubHomeDataRequestEvent event) {
+        if (isDestroy || event == null) {
+            return;
+        }
+        int what = event.getWhat();
+        switch (what) {
+            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_START: {
+
+            }
+            break;
+            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
+
+            }
+            break;
+            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
+
+            }
+            break;
+            default:
+                break;
+        }
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
