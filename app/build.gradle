@@ -38,7 +38,7 @@ android {
         //默认渠道号
         buildConfigField("Integer", "DEFAULT_CHANNEL", "91000");
         //服务器协议版本号
-        buildConfigField("Integer", "PVERSON", "33");
+        buildConfigField("Integer", "PVERSON", "39");
         //产品ID
         buildConfigField("String", "PRODUCT_ID", '"14000"');
     }

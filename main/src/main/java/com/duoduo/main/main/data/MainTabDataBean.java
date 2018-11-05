@@ -9,14 +9,14 @@ public class MainTabDataBean {
 
 
     /**
-     * tabListVersion : 20
-     * tabList : [{"id":1999,"tabName":"首页","sorted":1,"status":1,"isDel":0,"platformIosVersion":4,"platformAndroidVersion":4,"tabImg":"https://imgs.gmilesquan.com//ZlErpcRl.png","tabSelectedImg":"https://imgs.gmilesquan.com//ZPwHBPgp.png","tabImgNewMale":"https://imgs.gmilesquan.com//luMxGmkl.png","tabSelectedImgNewMale":"https://imgs.gmilesquan.com//BmWqitxg.png","tabImgNewFemale":"https://imgs.gmilesquan.com//glNiWYdR.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//iyZQCULU.png","tabImgNewMaleIOS":"https://imgs.gmilesquan.com//UPebaAkw.png","tabSelectedImgNewMaleIOS":"https://imgs.gmilesquan.com//NOyAFasc.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//RLcVRGJQ.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//zvjXNRQv.png","tabType":4,"createTime":"2018-06-01 11:23:39","isCategoryTab":1,"actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"searchBarBgImg":""},{"id":2010,"tabName":"分类","sorted":1,"status":1,"isDel":0,"platformIosVersion":4,"platformAndroidVersion":4,"tabImg":"https://imgs.gmilesquan.com//ZlErpcRl.png","tabSelectedImg":"https://imgs.gmilesquan.com//ZPwHBPgp.png","tabImgNewMale":"https://imgs.gmilesquan.com//luMxGmkl.png","tabSelectedImgNewMale":"https://imgs.gmilesquan.com//BmWqitxg.png","tabImgNewFemale":"https://imgs.gmilesquan.com//nFmLMTGt.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//DXGpkgBi.png","tabImgNewMaleIOS":"https://imgs.gmilesquan.com//UPebaAkw.png","tabSelectedImgNewMaleIOS":"https://imgs.gmilesquan.com//NOyAFasc.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//CJohVHoV.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//sfZxbeJk.png","tabType":1,"createTime":"2018-06-01 11:23:39","isCategoryTab":0,"actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"searchBarBgImg":""},{"id":2011,"tabName":"收藏","sorted":2,"status":1,"isDel":0,"platformIosVersion":4,"platformAndroidVersion":4,"tabImg":"https://imgs.gmilesquan.com//ZlErpcRl.png","tabSelectedImg":"https://imgs.gmilesquan.com//ZPwHBPgp.png","tabImgNewMale":"https://imgs.gmilesquan.com//luMxGmkl.png","tabSelectedImgNewMale":"https://imgs.gmilesquan.com//BmWqitxg.png","tabImgNewFemale":"https://imgs.gmilesquan.com//nFmLMTGt.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//DXGpkgBi.png","tabImgNewMaleIOS":"https://imgs.gmilesquan.com//UPebaAkw.png","tabSelectedImgNewMaleIOS":"https://imgs.gmilesquan.com//NOyAFasc.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//CJohVHoV.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//sfZxbeJk.png","tabType":1,"createTime":"2018-06-01 11:23:39","isCategoryTab":0,"actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"searchBarBgImg":""},{"id":1007,"tabName":"搜索省钱","sorted":2,"status":1,"isDel":0,"platformIosVersion":0,"platformAndroidVersion":0,"tabImg":"https://imgs.gmilesquan.com//mqPIKbAp.png","tabSelectedImg":"https://imgs.gmilesquan.com//iCvfEmXe.png","tabType":1,"isCategoryTab":0,"versionNotShow":"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,35,36,37","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"bigImg":"https://imgs.gmilesquan.com//tBsGPbjf.png","bigSelectedImg":"https://imgs.gmilesquan.com//BattNjgp.png"},{"id":1033,"tabName":"赚10元","sorted":3,"status":1,"isDel":0,"platformIosVersion":0,"platformAndroidVersion":15,"tabImg":"https://imgs.gmilesquan.com//liSeQTVB.png","tabSelectedImg":"https://imgs.gmilesquan.com//twYFhyIf.png","tabImgNewMale":"https://imgs.gmilesquan.com//WRQVUJHe.png","tabSelectedImgNewMale":"https://imgs.gmilesquan.com//bDbHYinB.png","tabImgNewFemale":"https://imgs.gmilesquan.com//JOCxSwkJ.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//tAxLYUwn.png","tabImgNewMaleIOS":"https://imgs.gmilesquan.com//QEDZgvbP.png","tabSelectedImgNewMaleIOS":"https://imgs.gmilesquan.com//NMtEXrHj.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//zLomEIhS.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//NXKEaIDL.png","tabType":2,"createTime":"2018-08-14 21:20:07","redirectUrl":"https://vipgift.gmilesquan.com/qn/common?funid=68","isCategoryTab":0,"versionNotShow":"30,35,36,37","actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0},{"id":1002,"tabName":"我的","sorted":4,"status":1,"isDel":0,"platformIosVersion":0,"platformAndroidVersion":0,"tabImg":"https://imgs.gmilesquan.com//lnfHnuzB.png","tabSelectedImg":"https://imgs.gmilesquan.com//MPSgfQlN.png","tabImgNewMale":"https://imgs.gmilesquan.com//sLdDOtJT.png","tabSelectedImgNewMale":"https://imgs.gmilesquan.com//CrlIPfhM.png","tabImgNewFemale":"https://imgs.gmilesquan.com//KzrEfPal.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//aqqDpmkR.png","tabImgNewMaleIOS":"https://imgs.gmilesquan.com//PBmSTzip.png","tabSelectedImgNewMaleIOS":"https://imgs.gmilesquan.com//rAUPydqv.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//OrxPSExP.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//FFYgsCxd.png","tabType":1,"isCategoryTab":0,"isFlashSale":0,"redPointShow":0,"rpShowTimes":0}]
+     * tabListVersion : 540
+     * tabList : [{"id":1999,"tabName":"首页","sorted":1,"status":1,"isDel":0,"platformIosVersion":4,"platformAndroidVersion":4,"tabImg":"https://imgs.gmilesquan.com//ZlErpcRl.png","tabSelectedImg":"https://imgs.gmilesquan.com//ZPwHBPgp.png","tabImgV2":"https://imgs.gmilesquan.com//BnIyOBJH.png","tabSelectedImgV2":"https://imgs.gmilesquan.com//eSqujkvW.png","tabImgNewFemale":"https://imgs.gmilesquan.com//glNiWYdR.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//iyZQCULU.png","tabIosImg":"https://imgs.gmilesquan.com//lWwlKySS.png","tabIosSelectedImg":"https://imgs.gmilesquan.com//uDjfLJZJ.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//RLcVRGJQ.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//zvjXNRQv.png","tabType":4,"createTime":"2018-06-01 11:23:39","isCategoryTab":1,"actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"searchBarBgImg":""},{"id":2010,"tabName":"分类","sorted":1,"status":1,"isDel":0,"platformIosVersion":4,"platformAndroidVersion":4,"tabImg":"https://imgs.gmilesquan.com//BQRFGHGY.png","tabSelectedImg":"https://imgs.gmilesquan.com//vMpBEEEm.png","tabImgV2":"https://imgs.gmilesquan.com//YEMvumUA.png","tabSelectedImgV2":"https://imgs.gmilesquan.com//Ayisqhrp.png","tabImgNewFemale":"https://imgs.gmilesquan.com//GzmXAPUZ.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//lAgrugql.png","tabIosImg":"https://imgs.gmilesquan.com//GvObDUfo.png","tabIosSelectedImg":"https://imgs.gmilesquan.com//puaMHGOC.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//vBLYPyrj.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//ptPpaWIi.png","tabType":4,"createTime":"2018-06-01 11:23:39","isCategoryTab":0,"versionNotShow":"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34","actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"searchBarBgImg":""},{"id":2011,"tabName":"收藏","sorted":1,"status":1,"isDel":0,"platformIosVersion":4,"platformAndroidVersion":4,"tabImg":"https://imgs.gmilesquan.com//exynTuIW.png","tabSelectedImg":"https://imgs.gmilesquan.com//WOvbdTGC.png","tabImgV2":"https://imgs.gmilesquan.com//sXpLYalm.png","tabSelectedImgV2":"https://imgs.gmilesquan.com//CoyJdUJq.png","tabImgNewFemale":"https://imgs.gmilesquan.com//sSYTtKMP.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//eDqCcWOo.png","tabIosImg":"https://imgs.gmilesquan.com//YqdKRVPK.png","tabIosSelectedImg":"https://imgs.gmilesquan.com//WZtUOEOA.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//LSkCgDqH.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//fNdCUREF.png","tabType":4,"createTime":"2018-06-01 11:23:39","isCategoryTab":0,"versionNotShow":"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34","actionBarTitleColor":"","isFlashSale":0,"redPointShow":0,"rpShowTimes":0,"searchBarBgImg":""},{"id":1002,"tabName":"我的","sorted":4,"status":1,"isDel":0,"platformIosVersion":0,"platformAndroidVersion":0,"tabImg":"https://imgs.gmilesquan.com//lnfHnuzB.png","tabSelectedImg":"https://imgs.gmilesquan.com//MPSgfQlN.png","tabImgV2":"https://imgs.gmilesquan.com//qBdkBynI.png","tabSelectedImgV2":"https://imgs.gmilesquan.com//Bgakchza.png","tabImgNewFemale":"https://imgs.gmilesquan.com//KzrEfPal.png","tabSelectedImgNewFemale":"https://imgs.gmilesquan.com//aqqDpmkR.png","tabIosImg":"https://imgs.gmilesquan.com//HuXZrIqG.png","tabIosSelectedImg":"https://imgs.gmilesquan.com//SIXqMovK.png","tabImgNewFemaleIOS":"https://imgs.gmilesquan.com//OrxPSExP.png","tabSelectedImgNewFemaleIOS":"https://imgs.gmilesquan.com//FFYgsCxd.png","tabType":1,"isCategoryTab":0,"isFlashSale":0,"redPointShow":0,"rpShowTimes":0}]
      * noLoginIconImg : https://imgs.gmilesquan.com//gXnxabIN.png
-     * currentTime : 2018-10-12 16:26:18
+     * currentTime : 2018-11-05 13:59:57
      * isFlashSalePage : 0
      * isNewUser : 0
      * result : {"status":1}
-     * costTime : 22
+     * costTime : 2
      */
 
     private int tabListVersion;
@@ -119,12 +119,12 @@ public class MainTabDataBean {
          * platformAndroidVersion : 4
          * tabImg : https://imgs.gmilesquan.com//ZlErpcRl.png
          * tabSelectedImg : https://imgs.gmilesquan.com//ZPwHBPgp.png
-         * tabImgNewMale : https://imgs.gmilesquan.com//luMxGmkl.png
-         * tabSelectedImgNewMale : https://imgs.gmilesquan.com//BmWqitxg.png
+         * tabImgV2 : https://imgs.gmilesquan.com//BnIyOBJH.png
+         * tabSelectedImgV2 : https://imgs.gmilesquan.com//eSqujkvW.png
          * tabImgNewFemale : https://imgs.gmilesquan.com//glNiWYdR.png
          * tabSelectedImgNewFemale : https://imgs.gmilesquan.com//iyZQCULU.png
-         * tabImgNewMaleIOS : https://imgs.gmilesquan.com//UPebaAkw.png
-         * tabSelectedImgNewMaleIOS : https://imgs.gmilesquan.com//NOyAFasc.png
+         * tabIosImg : https://imgs.gmilesquan.com//lWwlKySS.png
+         * tabIosSelectedImg : https://imgs.gmilesquan.com//uDjfLJZJ.png
          * tabImgNewFemaleIOS : https://imgs.gmilesquan.com//RLcVRGJQ.png
          * tabSelectedImgNewFemaleIOS : https://imgs.gmilesquan.com//zvjXNRQv.png
          * tabType : 4
@@ -135,10 +135,7 @@ public class MainTabDataBean {
          * redPointShow : 0
          * rpShowTimes : 0
          * searchBarBgImg :
-         * versionNotShow : 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,35,36,37
-         * bigImg : https://imgs.gmilesquan.com//tBsGPbjf.png
-         * bigSelectedImg : https://imgs.gmilesquan.com//BattNjgp.png
-         * redirectUrl : https://vipgift.gmilesquan.com/qn/common?funid=68
+         * versionNotShow : 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34
          */
 
         private int id;
@@ -150,12 +147,12 @@ public class MainTabDataBean {
         private int platformAndroidVersion;
         private String tabImg;
         private String tabSelectedImg;
-        private String tabImgNewMale;
-        private String tabSelectedImgNewMale;
+        private String tabImgV2;
+        private String tabSelectedImgV2;
         private String tabImgNewFemale;
         private String tabSelectedImgNewFemale;
-        private String tabImgNewMaleIOS;
-        private String tabSelectedImgNewMaleIOS;
+        private String tabIosImg;
+        private String tabIosSelectedImg;
         private String tabImgNewFemaleIOS;
         private String tabSelectedImgNewFemaleIOS;
         private int tabType;
@@ -167,9 +164,6 @@ public class MainTabDataBean {
         private int rpShowTimes;
         private String searchBarBgImg;
         private String versionNotShow;
-        private String bigImg;
-        private String bigSelectedImg;
-        private String redirectUrl;
 
         public int getId() {
             return id;
@@ -243,20 +237,20 @@ public class MainTabDataBean {
             this.tabSelectedImg = tabSelectedImg;
         }
 
-        public String getTabImgNewMale() {
-            return tabImgNewMale;
+        public String getTabImgV2() {
+            return tabImgV2;
         }
 
-        public void setTabImgNewMale(String tabImgNewMale) {
-            this.tabImgNewMale = tabImgNewMale;
+        public void setTabImgV2(String tabImgV2) {
+            this.tabImgV2 = tabImgV2;
         }
 
-        public String getTabSelectedImgNewMale() {
-            return tabSelectedImgNewMale;
+        public String getTabSelectedImgV2() {
+            return tabSelectedImgV2;
         }
 
-        public void setTabSelectedImgNewMale(String tabSelectedImgNewMale) {
-            this.tabSelectedImgNewMale = tabSelectedImgNewMale;
+        public void setTabSelectedImgV2(String tabSelectedImgV2) {
+            this.tabSelectedImgV2 = tabSelectedImgV2;
         }
 
         public String getTabImgNewFemale() {
@@ -275,20 +269,20 @@ public class MainTabDataBean {
             this.tabSelectedImgNewFemale = tabSelectedImgNewFemale;
         }
 
-        public String getTabImgNewMaleIOS() {
-            return tabImgNewMaleIOS;
+        public String getTabIosImg() {
+            return tabIosImg;
         }
 
-        public void setTabImgNewMaleIOS(String tabImgNewMaleIOS) {
-            this.tabImgNewMaleIOS = tabImgNewMaleIOS;
+        public void setTabIosImg(String tabIosImg) {
+            this.tabIosImg = tabIosImg;
         }
 
-        public String getTabSelectedImgNewMaleIOS() {
-            return tabSelectedImgNewMaleIOS;
+        public String getTabIosSelectedImg() {
+            return tabIosSelectedImg;
         }
 
-        public void setTabSelectedImgNewMaleIOS(String tabSelectedImgNewMaleIOS) {
-            this.tabSelectedImgNewMaleIOS = tabSelectedImgNewMaleIOS;
+        public void setTabIosSelectedImg(String tabIosSelectedImg) {
+            this.tabIosSelectedImg = tabIosSelectedImg;
         }
 
         public String getTabImgNewFemaleIOS() {
@@ -377,30 +371,6 @@ public class MainTabDataBean {
 
         public void setVersionNotShow(String versionNotShow) {
             this.versionNotShow = versionNotShow;
-        }
-
-        public String getBigImg() {
-            return bigImg;
-        }
-
-        public void setBigImg(String bigImg) {
-            this.bigImg = bigImg;
-        }
-
-        public String getBigSelectedImg() {
-            return bigSelectedImg;
-        }
-
-        public void setBigSelectedImg(String bigSelectedImg) {
-            this.bigSelectedImg = bigSelectedImg;
-        }
-
-        public String getRedirectUrl() {
-            return redirectUrl;
-        }
-
-        public void setRedirectUrl(String redirectUrl) {
-            this.redirectUrl = redirectUrl;
         }
     }
 }
