@@ -30,11 +30,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -60,6 +62,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     private LinearLayout.LayoutParams defaultTabLayoutParams;
     private LinearLayout.LayoutParams expandedTabLayoutParams;
+    private LinearLayout.LayoutParams emptyTextTabLayoutParams;
 
     private final PageListener pageListener = new PageListener();
     public OnPageChangeListener delegatePageListener;
@@ -181,6 +184,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
         defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         expandedTabLayoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f);
+        emptyTextTabLayoutParams = new LinearLayout.LayoutParams(0, 0);
 
         if (locale == null) {
             locale = getResources().getConfiguration().locale;
@@ -247,20 +251,29 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
         tab.setText(title);
         tab.setGravity(Gravity.CENTER);
         tab.setSingleLine();
+        if (!TextUtils.isEmpty(title)) {
+            tab.setPadding(tabPadding, 0, tabPadding, 0);
+            addTab(position, tab);
+        } else {
+            addTab(position, tab, emptyTextTabLayoutParams);
+        }
 
-        addTab(position, tab);
     }
 
     private void addIconTab(final int position, int resId) {
 
         ImageButton tab = new ImageButton(getContext());
         tab.setImageResource(resId);
-
+        tab.setPadding(tabPadding, 0, tabPadding, 0);
         addTab(position, tab);
 
     }
 
     private void addTab(final int position, View tab) {
+        addTab(position, tab, null);
+    }
+
+    private void addTab(final int position, View tab, LinearLayout.LayoutParams layoutParams) {
         tab.setFocusable(true);
         tab.setOnClickListener(new OnClickListener() {
             @Override
@@ -269,8 +282,9 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
             }
         });
 
-        tab.setPadding(tabPadding, 0, tabPadding, 0);
-        tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
+        LinearLayout.LayoutParams tabLayoutParams = layoutParams != null ? layoutParams
+                : shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams;
+        tabsContainer.addView(tab, position, tabLayoutParams);
     }
 
     private void updateTabStyles() {
@@ -337,8 +351,15 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
         // default: line below current tab
         View currentTab = tabsContainer.getChildAt(currentPosition);
-        float lineLeft = currentTab.getLeft() + indicatorMarginLeftRight;
-        float lineRight = currentTab.getRight() - indicatorMarginLeftRight;
+
+        boolean emptyTab = false;
+        ViewGroup.LayoutParams layoutParams = currentTab.getLayoutParams();
+        if (layoutParams.width == 0 && layoutParams.height == 0) {
+            emptyTab = true;
+        }
+
+        float lineLeft = emptyTab ? currentTab.getLeft() : currentTab.getLeft() + indicatorMarginLeftRight;
+        float lineRight = emptyTab ? currentTab.getRight() : currentTab.getRight() - indicatorMarginLeftRight;
 
         // if there is an offset, start interpolating left and right coordinates between current and next tab
         if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {

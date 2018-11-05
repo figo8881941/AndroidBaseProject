@@ -6,13 +6,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.main.R;
+import com.duoduo.main.classify.data.ClassifyTabDataBean;
 
 /**
  * 分类子首页Fragment
  */
-public class ClassifySubHomeFragment extends BaseFragment {
+public class ClassifySubHomeFragment extends BaseFragment<ClassifyTabDataBean.CategoryListEntity> {
+
+    private ViewGroup mainView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +27,16 @@ public class ClassifySubHomeFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_home_fragment, container, false);
+        initView();
+        return mainView;
+    }
+
+    private void initView() {
+        TextView name = (TextView) mainView.findViewById(R.id.name);
+        if (data != null) {
+            name.setText(data.getCategoryName());
+        }
     }
 
     @Override

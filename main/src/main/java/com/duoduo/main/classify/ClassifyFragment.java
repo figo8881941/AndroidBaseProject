@@ -37,6 +37,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
     private ViewGroup mainView;
 
     private ClassifyPagerSlidingTabStrip tabStrip;
+    private View recommendLayoutBaseline;
 
     private ViewPager subViewPager;
     private ClassifySubFragmentPagerAdapter subPagerAdapter;
@@ -77,11 +78,25 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         //Viewpage
         subViewPager = (ViewPager) mainView.findViewById(R.id.tab_fragment_viewpager);
         subPagerAdapter = new ClassifySubFragmentPagerAdapter(getChildFragmentManager());
+        subFragmentList = ClassifySubFragmentFactory.createInitClassifySubFragmentList(getContext().getApplicationContext());
+        subPagerAdapter.setFragments(subFragmentList);
         subViewPager.setAdapter(subPagerAdapter);
 
         //Tab
+        recommendLayoutBaseline = mainView.findViewById(R.id.recommend_layout_baseline);
         tabStrip = (ClassifyPagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
         tabStrip.setTypeface(null, Typeface.NORMAL);
+        tabStrip.setViewPager(subViewPager);
+        tabStrip.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    recommendLayoutBaseline.setVisibility(View.VISIBLE);
+                } else {
+                    recommendLayoutBaseline.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -107,7 +122,10 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
             break;
             case ClassifyTabDataRequestEvent.EVENT_CLASSIFY_TAB_DATA_REQUEST_FINISH: {
                 ClassifyTabDataBean classifyTabDataBean = event.getArg3();
-                subFragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifyTabDataBean);
+                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifyTabDataBean);
+                if (fragmentList != null) {
+                    subFragmentList.addAll(fragmentList);
+                }
                 subPagerAdapter.setFragments(subFragmentList);
                 subViewPager.setAdapter(subPagerAdapter);
                 tabStrip.setViewPager(subViewPager);
