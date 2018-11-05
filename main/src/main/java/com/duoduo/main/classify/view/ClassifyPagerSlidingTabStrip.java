@@ -62,6 +62,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
     private LinearLayout.LayoutParams defaultTabLayoutParams;
     private LinearLayout.LayoutParams expandedTabLayoutParams;
+    // 空白文案tab的布局参数
     private LinearLayout.LayoutParams emptyTextTabLayoutParams;
 
     private final PageListener pageListener = new PageListener();
@@ -88,8 +89,11 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
     private int scrollOffset = 52;
 
     private int indicatorHeight = 8;
+    // 底部滑条marginbottom
     private int indicatorMarginBottom = 0;
+    // 底部滑条marginleftright
     private int indicatorMarginLeftRight = 0;
+    // 底部滑条圆角
     private Path indicatorRoundPath = new Path();
     private RectF indicatorRectF = new RectF();
     private float[] indicatorRadiusArray = { 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f };
@@ -166,7 +170,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
 
         a.recycle();
 
-
+        // 解析一些自定义属性
         a = context.obtainStyledAttributes(attrs, com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip);
 
         indicatorMarginBottom = a.getDimensionPixelSize(com.duoduo.main.R.styleable.ClassifyPagerSlidingTabStrip_indicatorMarginBottom, indicatorMarginBottom);
@@ -255,6 +259,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
             tab.setPadding(tabPadding, 0, tabPadding, 0);
             addTab(position, tab);
         } else {
+            // 如果是文本为空的tab
             addTab(position, tab, emptyTextTabLayoutParams);
         }
 
@@ -352,6 +357,8 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
         // default: line below current tab
         View currentTab = tabsContainer.getChildAt(currentPosition);
 
+        // 从布局参数判断是否是空文本的tab
+        // 如果是空文本的tab，就不绘制底部滑条
         boolean emptyTab = false;
         ViewGroup.LayoutParams layoutParams = currentTab.getLayoutParams();
         if (layoutParams.width == 0 && layoutParams.height == 0) {
@@ -375,6 +382,7 @@ public class ClassifyPagerSlidingTabStrip extends HorizontalScrollView {
         float lineTop = height - indicatorHeight - indicatorMarginBottom;
         float lineBottom = lineTop + indicatorHeight;
 
+        // 绘制底部滑条及圆角
         canvas.save();
         indicatorRectF.set(lineLeft, lineTop, lineRight, lineBottom);
         indicatorRoundPath.reset();
