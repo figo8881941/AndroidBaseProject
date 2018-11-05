@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/main_classify_fragment_top_layout_bg">
+    android:background="@android:color/white">
 
     <View
         android:id="@+id/status_bar_space_view"
@@ -37,7 +37,7 @@
                 android:layout_below="@id/car_img"
                 android:layout_centerHorizontal="true"
                 android:text="@string/main_classify_fragment_top_car_text"
-                android:textColor="@android:color/white"
+                android:textColor="@color/main_classify_fragment_top_layout_car_textcolor"
                 android:textSize="@dimen/main_classify_fragment_top_layout_car_layout_textsize" />
 
         </RelativeLayout>
@@ -56,8 +56,7 @@
                 android:id="@+id/search_input_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/main_classify_fragment_top_layout_search_layout_margin_left"
                 android:drawableLeft="@drawable/main_classify_fragment_top_layout_search_input_search_icon"
                 android:drawablePadding="@dimen/main_classify_fragment_top_layout_search_input_drawablepadding"

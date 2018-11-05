@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.main_main_main_activity);
 
         //白色风格透明状态栏
-        StatusBarUtils.changeStatusBarTran(this, true);
+        StatusBarUtils.changeStatusBarTran(this, false);
 
         EventBus.getDefault().register(this);
 

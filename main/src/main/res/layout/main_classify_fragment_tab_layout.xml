@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/main_classify_fragment_tab_height"
-    android:background="@drawable/main_classify_fragment_tab_layout_bg">
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/recommend_layout"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="@string/main_classify_fragment_tab_recommend_text"
-            android:textColor="@android:color/white"
+            android:textColor="@color/main_classify_fragment_sub_tab_item_text_selected_color"
             android:textSize="@dimen/main_classify_fragment_tab_recommend_textsize" />
 
         <View
@@ -40,7 +40,7 @@
         android:layout_marginTop="@dimen/main_classify_fragment_tab_recommend_divider_margin"
         android:layout_marginBottom="@dimen/main_classify_fragment_tab_recommend_divider_margin"
         android:layout_toRightOf="@id/recommend_layout"
-        android:background="@android:color/white"></View>
+        android:background="@color/main_classify_fragment_sub_tab_recommend_divider_bg"></View>
 
     <ImageView
         android:id="@+id/tab_classify_icon"
@@ -58,12 +58,12 @@
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/tab_classify_icon"
         android:layout_toRightOf="@id/recommend_divider"
-        android:textColor="@android:color/white"
+        android:textColor="@color/main_classify_fragment_sub_tab_item_text_unselected_color"
         android:textSize="@dimen/main_classify_fragment_tab_textsize"
         app:indicatorMarginBottom="@dimen/main_classify_fragment_tab_indicator_margin_bottom"
         app:indicatorMarginLeftRight="@dimen/main_classify_fragment_tab_indicator_margin_left_right"
         app:pstsDividerColor="@android:color/transparent"
-        app:pstsIndicatorColor="@android:color/white"
+        app:pstsIndicatorColor="@color/main_classify_fragment_sub_tab_indicator_color"
         app:pstsIndicatorHeight="@dimen/main_classify_fragment_tab_slider_height"
         app:pstsTabPaddingLeftRight="@dimen/main_classify_fragment_tab_padding_left_right"
         app:pstsUnderlineColor="@android:color/transparent"
