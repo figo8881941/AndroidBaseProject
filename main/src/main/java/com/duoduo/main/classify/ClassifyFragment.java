@@ -81,6 +81,42 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         subFragmentList = ClassifySubFragmentFactory.createInitClassifySubFragmentList(getContext().getApplicationContext());
         subPagerAdapter.setFragments(subFragmentList);
         subViewPager.setAdapter(subPagerAdapter);
+        subViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (curSubFragment != null) {
+                    curSubFragment.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //Fragment切换
+                BaseFragment fragment = getFragmentByPosition(position);
+                if (fragment != null) {
+                    if (fragment != curSubFragment) {
+                        fragment.onSelected();
+                        if (curSubFragment != null) {
+                            curSubFragment.onUnSelected();
+                        }
+                        curSubFragment = fragment;
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (curSubFragment != null) {
+                    curSubFragment.onPageScrollStateChanged(state);
+                }
+            }
+        });
+
+        //默认选中第一个Framgnet
+        curSubFragment = getCurFragment();
+        if (curSubFragment != null) {
+            curSubFragment.onSelected();
+        }
 
         //Tab
         recommendLayoutBaseline = mainView.findViewById(R.id.recommend_layout_baseline);
@@ -143,10 +179,63 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         }
     }
 
+    /**
+     * 获取当前Fragment
+     *
+     * @return
+     */
+    private BaseFragment getCurFragment() {
+        if (subViewPager == null) {
+            return null;
+        }
+        int curPosition = subViewPager.getCurrentItem();
+        return getFragmentByPosition(curPosition);
+    }
+
+    /**
+     * 通过position获取Fragment
+     *
+     * @param position
+     * @return
+     */
+    private BaseFragment getFragmentByPosition(int position) {
+        if (subFragmentList == null) {
+            return null;
+        }
+        return subFragmentList.get(position);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+
+        mainView = null;
+        controller = null;
+        curSubFragment = null;
+        recommendLayoutBaseline = null;
+
+        if (subViewPager != null) {
+            subViewPager.setAdapter(null);
+            subViewPager = null;
+        }
+
+        if (tabStrip != null) {
+            tabStrip.setOnPageChangeListener(null);
+            tabStrip.setViewPager(null);
+            tabStrip.removeAllViews();
+            tabStrip = null;
+        }
+
+        if (subFragmentList != null) {
+            subFragmentList.clear();
+            subFragmentList = null;
+        }
+
+        if (subPagerAdapter != null) {
+            subPagerAdapter.destory();
+            subPagerAdapter = null;
+        }
     }
 
     @Override
