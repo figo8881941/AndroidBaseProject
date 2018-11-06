@@ -207,8 +207,8 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
                     subFragmentList.addAll(fragmentList);
                 }
                 subPagerAdapter.setFragments(subFragmentList);
-                subViewPager.setAdapter(subPagerAdapter);
-                tabStrip.setViewPager(subViewPager);
+                subPagerAdapter.notifyDataSetChanged();
+                tabStrip.notifyDataSetChanged();
             }
             break;
             case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_ERROR: {

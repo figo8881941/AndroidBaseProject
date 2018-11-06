@@ -25,10 +25,8 @@ public class ClassifySubHomeAdapter extends RecyclerView.Adapter {
     private Context context;
 
     private View headerView;
-    private RecyclerView.ViewHolder headerViewHolder;
 
     private View footerView;
-    private RecyclerView.ViewHolder footerViewHolder;
 
     private LayoutInflater layoutInflater;
 
@@ -42,22 +40,23 @@ public class ClassifySubHomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        if (headerView != null && position == 0) {
             return ITEM_TYPE.HEADER_ITEM_TYPE.ordinal();
-        } else if (data != null && !data.isEmpty() && position <= data.size()) {
-            return ITEM_TYPE.LIST_ITEM_TYPE.ordinal();
-        } else {
+        } else if (footerView != null && position == getItemCount() - 1) {
             return ITEM_TYPE.FOOTER_ITEM_TYPE.ordinal();
         }
+        return ITEM_TYPE.LIST_ITEM_TYPE.ordinal();
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE.HEADER_ITEM_TYPE.ordinal()) {
-            return headerViewHolder;
+            return new RecyclerView.ViewHolder(headerView) {
+            };
         } else if (viewType == ITEM_TYPE.FOOTER_ITEM_TYPE.ordinal()) {
-            return footerViewHolder;
+            return new RecyclerView.ViewHolder(footerView) {
+            };
         } else {
             View itemView = layoutInflater.inflate(R.layout.main_common_two_list_item_layout, parent, false);
             return new ViewHolder(itemView);
@@ -78,7 +77,13 @@ public class ClassifySubHomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        int count = 2;
+        int count = 0;
+        if (headerView != null) {
+            count++;
+        }
+        if (footerView != null) {
+            count++;
+        }
         if (data != null) {
             count += data.size();
         }
@@ -91,8 +96,6 @@ public class ClassifySubHomeAdapter extends RecyclerView.Adapter {
 
     public void setHeaderView(View headerView) {
         this.headerView = headerView;
-        this.headerViewHolder = new RecyclerView.ViewHolder(headerView) {
-        };
     }
 
     public View getFooterView() {
@@ -101,8 +104,6 @@ public class ClassifySubHomeAdapter extends RecyclerView.Adapter {
 
     public void setFooterView(View footerView) {
         this.footerView = footerView;
-        this.footerViewHolder = new RecyclerView.ViewHolder(footerView) {
-        };
     }
 
     public List<Object> getData() {

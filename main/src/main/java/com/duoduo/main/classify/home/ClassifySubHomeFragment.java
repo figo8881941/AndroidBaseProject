@@ -55,14 +55,15 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
         final Context context = getContext().getApplicationContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
+        recyclerAdapter = new ClassifySubHomeAdapter(context);
+        recyclerHeaderView = (ViewGroup) layoutInflater.inflate(R.layout.main_classify_sub_home_fragment_headerview, null);
+        recyclerAdapter.setHeaderView(recyclerHeaderView);
+
         recyclerView = (RecyclerView) mainView.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-        recyclerAdapter = new ClassifySubHomeAdapter(context);
-        recyclerHeaderView = (ViewGroup)layoutInflater.inflate(R.layout.main_classify_sub_home_fragment_headerview, null);
-        recyclerAdapter.setHeaderView(recyclerHeaderView);
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -78,7 +79,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
                 ClassifySubHomeDataBean homeDataBean = event.getArg3();
-                recyclerView.setAdapter(recyclerAdapter);
+                recyclerAdapter.notifyDataSetChanged();
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
