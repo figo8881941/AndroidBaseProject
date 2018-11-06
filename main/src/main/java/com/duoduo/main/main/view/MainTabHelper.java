@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabDataBean;
 
@@ -16,6 +18,11 @@ import java.util.List;
  * Tab辅助类
  */
 public class MainTabHelper {
+
+    /**
+     * Tab Icon图片加载设置
+     */
+    private static RequestOptions tabIconRequestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
     /**
      * 创建Tab的方法
@@ -39,7 +46,7 @@ public class MainTabHelper {
                 ViewGroup customView = (ViewGroup) inflater.inflate(R.layout.main_main_tabitem_layout, null);
                 customView.setTag(entity);
                 ImageView itemIcon = (ImageView) customView.findViewById(R.id.item_icon);
-                Glide.with(itemIcon).load(entity.getTabImgV2()).into(itemIcon);
+                Glide.with(itemIcon).load(entity.getTabImgV2()).apply(tabIconRequestOptions).into(itemIcon);
                 TextView itemName = (TextView) customView.findViewById(R.id.item_name);
                 itemName.setText(entity.getTabName());
                 tab.setCustomView(customView);
@@ -60,7 +67,7 @@ public class MainTabHelper {
         ViewGroup customView = (ViewGroup) tab.getCustomView();
         MainTabDataBean.TabListEntity entity = (MainTabDataBean.TabListEntity) customView.getTag();
         ImageView itemIcon = (ImageView) customView.findViewById(R.id.item_icon);
-        Glide.with(itemIcon).load(entity.getTabSelectedImgV2()).into(itemIcon);
+        Glide.with(itemIcon).load(entity.getTabSelectedImgV2()).apply(tabIconRequestOptions).into(itemIcon);
         TextView itemName = (TextView) customView.findViewById(R.id.item_name);
         int textColor = customView.getContext().getResources().getColor(R.color.main_main_main_tab_item_text_selected_color);
         itemName.setTextColor(textColor);
@@ -78,7 +85,7 @@ public class MainTabHelper {
         ViewGroup customView = (ViewGroup) tab.getCustomView();
         MainTabDataBean.TabListEntity entity = (MainTabDataBean.TabListEntity) customView.getTag();
         ImageView itemIcon = (ImageView) customView.findViewById(R.id.item_icon);
-        Glide.with(itemIcon).load(entity.getTabImgV2()).into(itemIcon);
+        Glide.with(itemIcon).load(entity.getTabImgV2()).apply(tabIconRequestOptions).into(itemIcon);
         TextView itemName = (TextView) customView.findViewById(R.id.item_name);
         int textColor = customView.getContext().getResources().getColor(R.color.main_main_main_tab_item_text_unselected_color);
         itemName.setTextColor(textColor);
