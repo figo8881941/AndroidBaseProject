@@ -59,7 +59,7 @@ public class ClassifySubHomeAdapter extends RecyclerView.Adapter {
         } else if (viewType == ITEM_TYPE.FOOTER_ITEM_TYPE.ordinal()) {
             return footerViewHolder;
         } else {
-            View itemView = layoutInflater.inflate(R.layout.main_common_list_item_layout, parent, false);
+            View itemView = layoutInflater.inflate(R.layout.main_common_two_list_item_layout, parent, false);
             return new ViewHolder(itemView);
         }
     }
