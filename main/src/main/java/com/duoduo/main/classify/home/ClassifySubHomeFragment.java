@@ -17,6 +17,7 @@ import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
+import com.duoduo.main.classify.home.view.ClassifySubHomeViewHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,7 +31,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
     private ViewGroup mainView;
 
     private RecyclerView recyclerView;
-    private ViewGroup recyclerHeaderView;
+    private View recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
 
     private ClassifySubHomeController controller;
@@ -56,8 +57,6 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         recyclerAdapter = new ClassifySubHomeAdapter(context);
-        recyclerHeaderView = (ViewGroup) layoutInflater.inflate(R.layout.main_classify_sub_home_fragment_headerview, null);
-        recyclerAdapter.setHeaderView(recyclerHeaderView);
 
         recyclerView = (RecyclerView) mainView.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -79,6 +78,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
                 ClassifySubHomeDataBean homeDataBean = event.getArg3();
+                recyclerHeaderView = ClassifySubHomeViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeDataBean);
+                recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerAdapter.notifyDataSetChanged();
             }
             break;

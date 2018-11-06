@@ -11,6 +11,7 @@
     <dimen name="main_classify_fragment_top_layout_search_input_margin_left">15dp</dimen>
     <dimen name="main_classify_fragment_top_layout_search_input_drawablepadding">2dp</dimen>
 
+    <!-- 分类Fragment tab布局 -->
     <dimen name="main_classify_fragment_tab_height">40dp</dimen>
     <dimen name="main_classify_fragment_tab_classify_icon_size">15dp</dimen>
     <dimen name="main_classify_fragment_tab_classify_icon_margin_right">9dp</dimen>
@@ -25,5 +26,8 @@
     <dimen name="main_classify_fragment_tab_padding_left_right">15dp</dimen>
     <dimen name="main_classify_fragment_tab_indicator_margin_bottom">5dp</dimen>
     <dimen name="main_classify_fragment_tab_indicator_margin_left_right">13dp</dimen>
+
+    <!-- 分类Fragment首页HeaderView -->
+    <dimen name="main_classify_sub_home_fragment_headerview_banner_height">90dp</dimen>
 
 </resources>
