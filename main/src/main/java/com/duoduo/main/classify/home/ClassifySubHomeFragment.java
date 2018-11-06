@@ -3,16 +3,18 @@ package com.duoduo.main.classify.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
+import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,6 +26,9 @@ import org.greenrobot.eventbus.ThreadMode;
 public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean.CategoryNewListEntity> {
 
     private ViewGroup mainView;
+
+    private RecyclerView recyclerView;
+    private ClassifySubHomeAdapter recyclerAdapter;
 
     private ClassifySubHomeController controller;
 
@@ -44,10 +49,11 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
     }
 
     private void initView() {
-        TextView name = (TextView) mainView.findViewById(R.id.name);
-        if (data != null) {
-            name.setText(data.getCategoryName());
-        }
+        recyclerView = (RecyclerView) mainView.findViewById(R.id.recyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerAdapter = new ClassifySubHomeAdapter(getContext());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -62,7 +68,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
-
+                recyclerView.setAdapter(recyclerAdapter);
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
