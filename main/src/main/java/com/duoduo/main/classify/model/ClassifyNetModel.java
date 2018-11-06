@@ -9,7 +9,6 @@ import com.duoduo.commonbusiness.net.BaseNetModel;
 import com.duoduo.commonbusiness.net.CommonJsonObjectRequest;
 import com.duoduo.commonbusiness.net.CommonNetDataUtils;
 import com.duoduo.main.classify.consts.IClassifyConsts;
-import com.duoduo.main.main.consts.IMainConsts;
 
 import org.json.JSONObject;
 
@@ -26,7 +25,7 @@ public class ClassifyNetModel extends BaseNetModel {
      * 请求分类Tab数据的方法
      */
     public void requestClassifySubTabData(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
-        String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifyConsts.FunId.CLASSIFY_DATA, "quMall");
+        String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifyConsts.FunId.CLASSIFY_SUB_TAB_DATA, "quMall");
         JSONObject postData = CommonNetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
         JsonObjectRequest request = new CommonJsonObjectRequest(Request.Method.POST, url,
                 CommonNetDataUtils.getParamJsonObject(postData),

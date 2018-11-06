@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.duoduo.main.classify.data.ClassifySubHomeDataBean;
+import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.model.ClassifySubHomeNetModel;
 

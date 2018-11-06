@@ -9,7 +9,7 @@ public interface IClassifyConsts {
      * 服务器接口Funid
      */
     public interface FunId {
-        //分类数据
-        public int CLASSIFY_DATA = 30328;
+        //分类Tab数据
+        public int CLASSIFY_SUB_TAB_DATA = 30328;
     }
 }

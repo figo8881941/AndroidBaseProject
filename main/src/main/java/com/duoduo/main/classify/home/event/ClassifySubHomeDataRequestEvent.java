@@ -1,7 +1,7 @@
 package com.duoduo.main.classify.home.event;
 
 import com.duoduo.commonbusiness.event.BaseEvent;
-import com.duoduo.main.classify.data.ClassifySubHomeDataBean;
+import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 
 /**
  * 分类首页数据请求事件
