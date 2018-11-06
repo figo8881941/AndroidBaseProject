@@ -5,4 +5,5 @@
     <color name="main_classify_fragment_sub_tab_item_text_unselected_color">#ff666666</color>
     <color name="main_classify_fragment_sub_tab_indicator_color">#fed932</color>
     <color name="main_classify_fragment_sub_tab_recommend_divider_bg">#cccccc</color>
+    <color name="main_classify_fragment_bg">#f6f6f6</color>
 </resources>

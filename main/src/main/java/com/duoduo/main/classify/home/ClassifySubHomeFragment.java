@@ -1,5 +1,6 @@
 package com.duoduo.main.classify.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
+import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 
@@ -28,6 +30,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
     private ViewGroup mainView;
 
     private RecyclerView recyclerView;
+    private ViewGroup recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
 
     private ClassifySubHomeController controller;
@@ -49,11 +52,17 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
     }
 
     private void initView() {
+        final Context context = getContext().getApplicationContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+
         recyclerView = (RecyclerView) mainView.findViewById(R.id.recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerAdapter = new ClassifySubHomeAdapter(getContext());
+
+        recyclerAdapter = new ClassifySubHomeAdapter(context);
+        recyclerHeaderView = (ViewGroup)layoutInflater.inflate(R.layout.main_classify_sub_home_fragment_headerview, null);
+        recyclerAdapter.setHeaderView(recyclerHeaderView);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -68,6 +77,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
+                ClassifySubHomeDataBean homeDataBean = event.getArg3();
                 recyclerView.setAdapter(recyclerAdapter);
             }
             break;
