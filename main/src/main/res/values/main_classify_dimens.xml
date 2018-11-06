@@ -29,5 +29,6 @@
 
     <!-- 分类Fragment首页HeaderView -->
     <dimen name="main_classify_sub_home_fragment_headerview_banner_height">150dp</dimen>
+    <dimen name="main_classify_sub_home_fragment_headerview_banner_indicator_size">6.5dp</dimen>
 
 </resources>
