@@ -28,6 +28,6 @@
     <dimen name="main_classify_fragment_tab_indicator_margin_left_right">13dp</dimen>
 
     <!-- 分类Fragment首页HeaderView -->
-    <dimen name="main_classify_sub_home_fragment_headerview_banner_height">90dp</dimen>
+    <dimen name="main_classify_sub_home_fragment_headerview_banner_height">150dp</dimen>
 
 </resources>
