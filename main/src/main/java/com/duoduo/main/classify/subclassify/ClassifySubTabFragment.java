@@ -15,7 +15,7 @@ import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 /**
  * 子分类Fragment
  */
-public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabDataBean.CategoryListEntity> {
+public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabDataBean.CategoryNewListEntity> {
 
     private ViewGroup mainView;
 

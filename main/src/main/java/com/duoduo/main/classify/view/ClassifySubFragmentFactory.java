@@ -26,7 +26,7 @@ public class ClassifySubFragmentFactory {
         Resources resources = context.getResources();
         ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
         BaseFragment homeFragment = new ClassifySubHomeFragment();
-        ClassifySubTabDataBean.CategoryListEntity entity = new ClassifySubTabDataBean.CategoryListEntity();
+        ClassifySubTabDataBean.CategoryNewListEntity entity = new ClassifySubTabDataBean.CategoryNewListEntity();
         entity.setCategoryName("");
         entity.setId(IMainConsts.MainTabIdValue.HOME_TAB);
         homeFragment.setData(entity);
@@ -44,12 +44,12 @@ public class ClassifySubFragmentFactory {
         if (classifySubTabDataBean == null) {
             return null;
         }
-        List<ClassifySubTabDataBean.CategoryListEntity> tabListEntityList = classifySubTabDataBean.getCategoryList();
+        List<ClassifySubTabDataBean.CategoryNewListEntity> tabListEntityList = classifySubTabDataBean.getCategoryNewList();
         if (tabListEntityList == null || tabListEntityList.isEmpty()) {
             return null;
         }
         ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
-        for (ClassifySubTabDataBean.CategoryListEntity entity : tabListEntityList) {
+        for (ClassifySubTabDataBean.CategoryNewListEntity entity : tabListEntityList) {
             BaseFragment fragment = createFragment(entity);
             if (fragment == null) {
                 continue;
@@ -65,7 +65,7 @@ public class ClassifySubFragmentFactory {
      * @param entity
      * @return
      */
-    private static BaseFragment createFragment(ClassifySubTabDataBean.CategoryListEntity entity) {
+    private static BaseFragment createFragment(ClassifySubTabDataBean.CategoryNewListEntity entity) {
         if (entity == null) {
             return null;
         }

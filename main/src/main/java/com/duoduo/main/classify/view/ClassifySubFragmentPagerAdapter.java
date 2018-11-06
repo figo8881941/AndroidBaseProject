@@ -24,7 +24,7 @@ public class ClassifySubFragmentPagerAdapter extends BaseNoDestoryFragmentStateP
         if (fragments != null) {
             BaseFragment fragment = fragments.get(position);
             if (fragment != null && fragment.getData() != null) {
-                ClassifySubTabDataBean.CategoryListEntity entity = (ClassifySubTabDataBean.CategoryListEntity) fragment.getData();
+                ClassifySubTabDataBean.CategoryNewListEntity entity = (ClassifySubTabDataBean.CategoryNewListEntity) fragment.getData();
                 title = entity.getCategoryName();
             }
         }

@@ -28,9 +28,6 @@ public class ClassifyNetModel extends BaseNetModel {
     public void requestClassifySubTabData(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
         String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifyConsts.FunId.CLASSIFY_DATA, "quMall");
         JSONObject postData = CommonNetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
-        postData.put("tabId", IMainConsts.MainTabIdValue.CLASSIFY_TAB);
-        postData.put("personal", 1);
-        postData.put("isCategory", 1);
         JsonObjectRequest request = new CommonJsonObjectRequest(Request.Method.POST, url,
                 CommonNetDataUtils.getParamJsonObject(postData),
                 listener, errorListener);

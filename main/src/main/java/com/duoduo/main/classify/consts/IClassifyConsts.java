@@ -10,6 +10,6 @@ public interface IClassifyConsts {
      */
     public interface FunId {
         //分类数据
-        public int CLASSIFY_DATA = 30001;
+        public int CLASSIFY_DATA = 30328;
     }
 }

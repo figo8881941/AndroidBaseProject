@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 分类子首页Fragment
  */
-public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean.CategoryListEntity> {
+public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean.CategoryNewListEntity> {
 
     private ViewGroup mainView;
 
