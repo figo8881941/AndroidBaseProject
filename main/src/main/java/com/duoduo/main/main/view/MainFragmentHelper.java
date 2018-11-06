@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 主界面Fragment工厂类
+ * 主界面Fragment辅助类
  */
-public class MainFragmentFactory {
+public class MainFragmentHelper {
 
     /**
      * 根据数据，创建主界面Fragment集合的方法

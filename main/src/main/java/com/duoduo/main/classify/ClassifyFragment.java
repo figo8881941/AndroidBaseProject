@@ -22,7 +22,7 @@ import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
 import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
-import com.duoduo.main.classify.view.ClassifySubFragmentFactory;
+import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.main.data.MainTabDataBean;
 
@@ -84,7 +84,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
         subViewPager = (ViewPager) mainView.findViewById(R.id.tab_fragment_viewpager);
         subPagerAdapter = new ClassifySubFragmentPagerAdapter(getChildFragmentManager());
         //创建初始的fragment
-        subFragmentList = ClassifySubFragmentFactory.createInitClassifySubFragmentList(getContext().getApplicationContext());
+        subFragmentList = ClassifySubFragmentHelper.createInitClassifySubFragmentList(getContext().getApplicationContext());
         subPagerAdapter.setFragments(subFragmentList);
         subViewPager.setAdapter(subPagerAdapter);
         subViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -202,7 +202,7 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
             case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH: {
                 ClassifySubTabDataBean classifySubTabDataBean = event.getArg3();
                 //创建数据下发的fragment
-                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentFactory.createClassifySubFragmentList(classifySubTabDataBean);
+                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentHelper.createClassifySubFragmentList(classifySubTabDataBean);
                 if (fragmentList != null) {
                     subFragmentList.addAll(fragmentList);
                 }

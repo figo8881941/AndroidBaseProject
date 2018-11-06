@@ -13,9 +13,9 @@ import com.duoduo.main.main.data.MainTabDataBean;
 import java.util.List;
 
 /**
- * Tab工厂类
+ * Tab辅助类
  */
-public class MainTabFactory {
+public class MainTabHelper {
 
     /**
      * 创建Tab的方法

@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.duoduo.commonbase.component.NoScrollViewPager;
 import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbase.permission.PermissionUtils;
-import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
@@ -18,9 +17,9 @@ import com.duoduo.main.R;
 import com.duoduo.main.main.controller.MainController;
 import com.duoduo.main.main.data.MainTabDataBean;
 import com.duoduo.main.main.event.MainTabRequestEvent;
-import com.duoduo.main.main.view.MainFragmentFactory;
+import com.duoduo.main.main.view.MainFragmentHelper;
 import com.duoduo.main.main.view.MainFragmentPagerAdapter;
-import com.duoduo.main.main.view.MainTabFactory;
+import com.duoduo.main.main.view.MainTabHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -127,7 +126,7 @@ public class MainActivity extends BaseActivity {
                     return;
                 }
                 //切换Tab样式
-                MainTabFactory.changeTabToSelectedStyle(tab);
+                MainTabHelper.changeTabToSelectedStyle(tab);
             }
 
             @Override
@@ -136,7 +135,7 @@ public class MainActivity extends BaseActivity {
                     return;
                 }
                 //切换Tab样式
-                MainTabFactory.changeTabToUnSelectedStyle(tab);
+                MainTabHelper.changeTabToUnSelectedStyle(tab);
             }
 
             @Override
@@ -213,7 +212,7 @@ public class MainActivity extends BaseActivity {
 
 
         //初始化Fragment
-        mainFragmentList = MainFragmentFactory.createMainFragmentList(mainTabDataBean);
+        mainFragmentList = MainFragmentHelper.createMainFragmentList(mainTabDataBean);
         mainFragmentPagerAdapter.setFragments(mainFragmentList);
         mainFragmentPagerAdapter.notifyDataSetChanged();
         //默认选中第一个Framgnet
@@ -223,7 +222,7 @@ public class MainActivity extends BaseActivity {
         }
 
         //初始化Tab
-        MainTabFactory.createTabByData(mainTabLayout, mainTabDataBean);
+        MainTabHelper.createTabByData(mainTabLayout, mainTabDataBean);
     }
 
     /**

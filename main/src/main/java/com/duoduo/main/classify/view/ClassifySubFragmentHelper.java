@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分类Fragment工厂类
+ * 分类Fragment辅助类
  */
-public class ClassifySubFragmentFactory {
+public class ClassifySubFragmentHelper {
 
     /**
      * 创建初始的分类Fragment集合的方法
