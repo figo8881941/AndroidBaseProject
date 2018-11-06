@@ -101,7 +101,7 @@ public class ClassifySubHomeViewHelper {
             images.add(entranceItemDtoListEntity.getImg());
             titles.add(entranceItemDtoListEntity.getTitle());
         }
-        
+
         Banner banner = (Banner) LayoutInflater.from(context).inflate(R.layout.main_classify_sub_home_fragment_banner, null);
         parent.addView(banner, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 600));
         //设置banner样式
@@ -114,10 +114,6 @@ public class ClassifySubHomeViewHelper {
         banner.setBannerAnimation(Transformer.DepthPage);
         //设置标题集合（当banner样式有显示title时）
         banner.setBannerTitles(titles);
-        //设置自动轮播，默认为true
-        banner.isAutoPlay(true);
-        //设置轮播时间
-        banner.setDelayTime(1500);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
