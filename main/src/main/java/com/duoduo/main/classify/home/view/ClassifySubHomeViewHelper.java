@@ -72,6 +72,11 @@ public class ClassifySubHomeViewHelper {
 
             }
             break;
+            case IClassifySubHomeConsts
+                    .ModuleType.HOT_SELL: {
+
+            }
+            break;
         }
     }
 

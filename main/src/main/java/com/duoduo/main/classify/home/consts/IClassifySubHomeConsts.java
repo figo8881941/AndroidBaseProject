@@ -21,6 +21,8 @@ public interface IClassifySubHomeConsts {
         public int BANNER_SMALL = 1;
         //通用网格（3个）
         public int COMMON_GRID_THREE = 5;
+        //过去一小时卖爆了
+        public int HOT_SELL = 32;
         //750 * 270 尺寸的banner
         public int BANNER_LAYGE_750_270 = 48;
     }
