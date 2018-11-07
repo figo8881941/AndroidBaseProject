@@ -17,7 +17,7 @@ import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
-import com.duoduo.main.classify.home.view.ClassifySubHomeViewHelper;
+import com.duoduo.main.classify.view.ClassifyViewHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,7 +78,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
                 ClassifySubHomeDataBean homeDataBean = event.getArg3();
-                recyclerHeaderView = ClassifySubHomeViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeDataBean);
+                recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeDataBean);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerAdapter.notifyDataSetChanged();
             }

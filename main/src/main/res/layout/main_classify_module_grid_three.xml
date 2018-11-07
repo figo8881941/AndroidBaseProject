@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/main_classify_sub_home_fragment_grid_three_height"
+    android:layout_height="@dimen/main_classify_module_grid_three_height"
     android:background="@android:color/white"
     >
 
@@ -19,7 +19,7 @@
         android:id="@+id/item_one_divider"
         android:layout_width="1px"
         android:layout_height="match_parent"
-        android:background="@color/main_classify_sub_home_fragment_grid_three_divider_bg"
+        android:background="@color/main_classify_module_grid_three_divider_bg"
         app:layout_constraintLeft_toRightOf="@id/item_one" />
 
     <RelativeLayout
@@ -37,7 +37,7 @@
         android:id="@+id/item_two_divider"
         android:layout_width="0dp"
         android:layout_height="1px"
-        android:background="@color/main_classify_sub_home_fragment_grid_three_divider_bg"
+        android:background="@color/main_classify_module_grid_three_divider_bg"
         app:layout_constraintLeft_toRightOf="@id/item_one_divider"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_two" />

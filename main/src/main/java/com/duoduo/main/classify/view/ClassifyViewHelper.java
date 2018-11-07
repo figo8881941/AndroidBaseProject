@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.home.view;
+package com.duoduo.main.classify.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.duoduo.main.R;
-import com.duoduo.main.classify.home.consts.IClassifySubHomeConsts;
+import com.duoduo.main.classify.consts.IClassifyConsts;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 import com.duoduo.main.common.image.BannerGlideImageLoader;
 import com.youth.banner.Banner;
@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 分类首页ViewHelper
  */
-public class ClassifySubHomeViewHelper {
+public class ClassifyViewHelper {
 
     /**
      * 数据初始化headerView的方法
@@ -57,22 +57,22 @@ public class ClassifySubHomeViewHelper {
         }
         int moduleType = entity.getType();
         switch (moduleType) {
-            case IClassifySubHomeConsts
+            case IClassifyConsts
                     .ModuleType.BANNER_LAYGE_750_270: {
                 createBannerLayge750_270(context, parent, entity);
             }
             break;
-            case IClassifySubHomeConsts
+            case IClassifyConsts
                     .ModuleType.COMMON_GRID_THREE: {
                 createGridThree(context, parent, entity);
             }
             break;
-            case IClassifySubHomeConsts
+            case IClassifyConsts
                     .ModuleType.BANNER_SMALL: {
 
             }
             break;
-            case IClassifySubHomeConsts
+            case IClassifyConsts
                     .ModuleType.HOT_SELL: {
 
             }
@@ -97,7 +97,7 @@ public class ClassifySubHomeViewHelper {
         if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
             return;
         }
-        ViewGroup gridThree = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_sub_home_fragment_grid_three, parent, false);
+        ViewGroup gridThree = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_grid_three, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, gridThree);
         parent.addView(gridThree);
@@ -127,7 +127,7 @@ public class ClassifySubHomeViewHelper {
             images.add(entranceItemDtoListEntity.getImg());
         }
 
-        Banner banner = (Banner) LayoutInflater.from(context).inflate(R.layout.main_classify_sub_home_fragment_banner, parent, false);
+        Banner banner = (Banner) LayoutInflater.from(context).inflate(R.layout.main_classify_module_banner, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, banner);
         parent.addView(banner);
@@ -157,7 +157,7 @@ public class ClassifySubHomeViewHelper {
         int childCount = parent.getChildCount();
         if (childCount > 0) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) moduleView.getLayoutParams();
-            layoutParams.topMargin = context.getResources().getDimensionPixelSize(R.dimen.main_classify_sub_home_fragment_module_divider_height);
+            layoutParams.topMargin = context.getResources().getDimensionPixelSize(R.dimen.main_classify_module_divider_height);
         }
     }
 
