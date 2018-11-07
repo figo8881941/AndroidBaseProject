@@ -69,19 +69,65 @@ public class ClassifyViewHelper {
             break;
             case IClassifyConsts
                     .ModuleType.BANNER_SMALL: {
-
+                createBannerSmall(context, parent, entity);
             }
             break;
             case IClassifyConsts
                     .ModuleType.HOT_SELL: {
-
+                createHotSell(context, parent, entity);
             }
             break;
         }
     }
 
     /**
-     * 根据数据创建模块
+     * 根据数据创建小Banner模块
+     *
+     * @param context
+     * @param parent
+     * @param entity
+     */
+    private static void createBannerSmall(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+        if (context == null || parent == null || entity == null) {
+            return;
+        }
+
+        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
+
+        if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
+            return;
+        }
+        ViewGroup bannerSmall = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_banner_small, parent, false);
+        //调整布局
+        adjustModuleLayout(context, parent, bannerSmall);
+        parent.addView(bannerSmall);
+    }
+
+    /**
+     * 根据数据创建排行榜模块
+     *
+     * @param context
+     * @param parent
+     * @param entity
+     */
+    private static void createHotSell(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+        if (context == null || parent == null || entity == null) {
+            return;
+        }
+
+        List<ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity> productInfoListEntities = entity.getProductInfoList();
+
+        if (productInfoListEntities == null || productInfoListEntities.isEmpty()) {
+            return;
+        }
+        ViewGroup hotSell = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_hot_sell, parent, false);
+        //调整布局
+        adjustModuleLayout(context, parent, hotSell);
+        parent.addView(hotSell);
+    }
+
+    /**
+     * 根据数据创建网格模块
      *
      * @param context
      * @param parent
@@ -104,7 +150,7 @@ public class ClassifyViewHelper {
     }
 
     /**
-     * 根据数据创建模块
+     * 根据数据创建Banner模块
      *
      * @param context
      * @param parent
