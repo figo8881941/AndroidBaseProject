@@ -2,11 +2,11 @@
 <com.youth.banner.Banner xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/main_classify_sub_home_fragment_headerview_banner_height"
+    android:layout_height="@dimen/main_classify_sub_home_fragment_banner_height"
     app:delay_time="3000"
     app:image_scale_type="fit_xy"
-    app:indicator_height="@dimen/main_classify_sub_home_fragment_headerview_banner_indicator_size"
-    app:indicator_width="@dimen/main_classify_sub_home_fragment_headerview_banner_indicator_size"
+    app:indicator_height="@dimen/main_classify_sub_home_fragment_banner_indicator_size"
+    app:indicator_width="@dimen/main_classify_sub_home_fragment_banner_indicator_size"
     app:is_auto_play="true">
 
 </com.youth.banner.Banner>

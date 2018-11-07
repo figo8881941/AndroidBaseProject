@@ -28,7 +28,9 @@
     <dimen name="main_classify_fragment_tab_indicator_margin_left_right">13dp</dimen>
 
     <!-- 分类Fragment首页HeaderView -->
-    <dimen name="main_classify_sub_home_fragment_headerview_banner_height">150dp</dimen>
-    <dimen name="main_classify_sub_home_fragment_headerview_banner_indicator_size">6.5dp</dimen>
+    <dimen name="main_classify_sub_home_fragment_banner_height">150dp</dimen>
+    <dimen name="main_classify_sub_home_fragment_banner_indicator_size">6.5dp</dimen>
+    <dimen name="main_classify_sub_home_fragment_grid_three_height">180dp</dimen>
+    <dimen name="main_classify_sub_home_fragment_module_divider_height">8dp</dimen>
 
 </resources>

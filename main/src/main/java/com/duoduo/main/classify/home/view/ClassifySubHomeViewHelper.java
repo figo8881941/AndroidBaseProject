@@ -3,6 +3,7 @@ package com.duoduo.main.classify.home.view;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.duoduo.main.R;
@@ -63,7 +64,7 @@ public class ClassifySubHomeViewHelper {
             break;
             case IClassifySubHomeConsts
                     .ModuleType.COMMON_GRID_THREE: {
-
+                createGridThree(context, parent, entity);
             }
             break;
             case IClassifySubHomeConsts
@@ -72,6 +73,29 @@ public class ClassifySubHomeViewHelper {
             }
             break;
         }
+    }
+
+    /**
+     * 根据数据创建模块
+     *
+     * @param context
+     * @param parent
+     * @param entity
+     */
+    private static void createGridThree(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+        if (context == null || parent == null || entity == null) {
+            return;
+        }
+
+        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
+
+        if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
+            return;
+        }
+        ViewGroup gridThree = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_sub_home_fragment_grid_three, parent, false);
+        //调整布局
+        adjustModuleLayout(context, parent, gridThree);
+        parent.addView(gridThree);
     }
 
     /**
@@ -99,6 +123,8 @@ public class ClassifySubHomeViewHelper {
         }
 
         Banner banner = (Banner) LayoutInflater.from(context).inflate(R.layout.main_classify_sub_home_fragment_banner, parent, false);
+        //调整布局
+        adjustModuleLayout(context, parent, banner);
         parent.addView(banner);
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -110,6 +136,24 @@ public class ClassifySubHomeViewHelper {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    /**
+     * 调整模块布局的方法
+     *
+     * @param parent
+     * @param moduleView
+     */
+    private static void adjustModuleLayout(Context context, LinearLayout parent, View moduleView) {
+        if (context == null || parent == null || moduleView == null) {
+            return;
+        }
+
+        int childCount = parent.getChildCount();
+        if (childCount > 0) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) moduleView.getLayoutParams();
+            layoutParams.topMargin = context.getResources().getDimensionPixelSize(R.dimen.main_classify_sub_home_fragment_module_divider_height);
+        }
     }
 
 }
