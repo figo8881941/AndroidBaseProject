@@ -48,4 +48,6 @@ dependencies {
     api 'com.astuetz:pagerslidingtabstrip:1.0.1'
     //Banner轮播组件
     api 'com.youth.banner:banner:1.4.10'
+    //gif
+    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
 }

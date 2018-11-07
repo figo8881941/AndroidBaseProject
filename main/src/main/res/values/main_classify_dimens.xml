@@ -32,6 +32,20 @@
     <dimen name="main_classify_module_banner_height">140dp</dimen>
     <dimen name="main_classify_module_banner_indicator_size">6.5dp</dimen>
     <dimen name="main_classify_module_grid_three_height">180dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_padding_top">9dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_padding_left_right">9dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_title_textsize">16sp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_desc_margin_top">2dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_desc_textsize">12sp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_tag_margin_top">5dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_tag_height">17dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_tag_textsize">10sp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_tag_padding_left_right">7dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_one_img_size">105dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_one_gif_img_size">25dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_one_gif_img_margin_bottom">5dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_two_three_img_size">72dp</dimen>
+    <dimen name="main_classify_module_grid_three_grid_item_two_three_img_margin_right">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_height">180dp</dimen>
     <dimen name="main_classify_module_banner_small_height">180dp</dimen>
 

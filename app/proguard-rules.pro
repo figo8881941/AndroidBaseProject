@@ -108,4 +108,8 @@
 # banner 的混淆代码
 -keep class com.youth.banner.** {
     *;
- }
+}
+
+# droidsonroids.gif
+-keep public class pl.droidsonroids.gif.GifIOException{<init>(int);}
+-keep class pl.droidsonroids.gif.GifInfoHandle{<init>(long,int,int,int);}

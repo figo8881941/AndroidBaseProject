@@ -1,11 +1,18 @@
 package com.duoduo.main.classify.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.consts.IClassifyConsts;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
@@ -16,10 +23,14 @@ import com.youth.banner.BannerConfig;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 /**
  * 分类首页ViewHelper
  */
 public class ClassifyViewHelper {
+
+    private static RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
     /**
      * 数据初始化headerView的方法
@@ -143,10 +154,84 @@ public class ClassifyViewHelper {
         if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
             return;
         }
+
         ViewGroup gridThree = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_grid_three, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, gridThree);
         parent.addView(gridThree);
+
+        int size = entranceItemDtoListEntities.size();
+        ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
+
+        //第一个项
+        ViewGroup item = (ViewGroup) gridThree.findViewById(R.id.item_one);
+        TextView itemTile = (TextView) item.findViewById(R.id.item_one_title);
+        TextView itemDesc = (TextView) item.findViewById(R.id.item_one_desc);
+        TextView itemTag = (TextView) item.findViewById(R.id.item_one_tag);
+        GifImageView itemImg = (GifImageView) item.findViewById(R.id.item_one_img);
+        GifImageView itemGifImg = (GifImageView) item.findViewById(R.id.item_one_gif_img);
+        initGridThreeItem(context, entranceItemDtoListEntity, itemTile, itemDesc, itemTag, itemImg, itemGifImg);
+
+        //第二项
+        if (size >= 2) {
+            entranceItemDtoListEntity = entranceItemDtoListEntities.get(1);
+            item = (ViewGroup) gridThree.findViewById(R.id.item_two);
+            itemTile = (TextView) item.findViewById(R.id.item_two_title);
+            itemDesc = (TextView) item.findViewById(R.id.item_two_desc);
+            itemTag = (TextView) item.findViewById(R.id.item_two_tag);
+            itemImg = (GifImageView) item.findViewById(R.id.item_two_img);
+            itemGifImg = (GifImageView) item.findViewById(R.id.item_two_gif_img);
+            initGridThreeItem(context, entranceItemDtoListEntity, itemTile, itemDesc, itemTag, itemImg, itemGifImg);
+        }
+
+        //第三项
+        if (size >= 3) {
+            entranceItemDtoListEntity = entranceItemDtoListEntities.get(2);
+            item = (ViewGroup) gridThree.findViewById(R.id.item_three);
+            itemTile = (TextView) item.findViewById(R.id.item_three_title);
+            itemDesc = (TextView) item.findViewById(R.id.item_three_desc);
+            itemTag = (TextView) item.findViewById(R.id.item_three_tag);
+            itemImg = (GifImageView) item.findViewById(R.id.item_three_img);
+            itemGifImg = (GifImageView) item.findViewById(R.id.item_three_gif_img);
+            initGridThreeItem(context, entranceItemDtoListEntity, itemTile, itemDesc, itemTag, itemImg, itemGifImg);
+        }
+    }
+
+    /**
+     * 初始化GridThree模块的项的方法
+     *
+     * @param context
+     * @param entranceItemDtoListEntity
+     * @param itemTile
+     * @param itemDesc
+     * @param itemTag
+     * @param itemImg
+     * @param itemGifImg
+     */
+    private static void initGridThreeItem(Context context, ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity
+            , TextView itemTile, TextView itemDesc, TextView itemTag, GifImageView itemImg, GifImageView itemGifImg) {
+        itemTile.setText(entranceItemDtoListEntity.getTitle());
+        itemTile.setTextColor(Color.parseColor(entranceItemDtoListEntity.getTitleColor()));
+        itemDesc.setText(entranceItemDtoListEntity.getDescription());
+        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity> tagListEntities = entranceItemDtoListEntity.getNewTagList();
+        itemTag.setVisibility(View.INVISIBLE);
+        if (tagListEntities != null && !tagListEntities.isEmpty()) {
+            itemTag.setVisibility(View.VISIBLE);
+            for (ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity tagListEntity : tagListEntities) {
+                if (tagListEntity == null || TextUtils.isEmpty(tagListEntity.getName())) {
+                    continue;
+                }
+                itemTag.setText(tagListEntity.getName());
+                break;
+            }
+        }
+        Glide.with(context).load(entranceItemDtoListEntity.getImg()).apply(requestOptions).into(itemImg);
+        String movieImgUrl = entranceItemDtoListEntity.getMovieImg();
+        itemGifImg.setVisibility(View.INVISIBLE);
+        if (!TextUtils.isEmpty(movieImgUrl)) {
+            itemGifImg.setVisibility(View.VISIBLE);
+            Glide.with(context).asGif().load(movieImgUrl).apply(requestOptions).into(itemGifImg);
+        }
     }
 
     /**

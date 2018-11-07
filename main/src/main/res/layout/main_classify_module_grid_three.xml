@@ -3,16 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/main_classify_module_grid_three_height"
-    android:background="@android:color/white"
-    >
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/item_one"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintDimensionRatio="h,16:15"
+        android:paddingLeft="@dimen/main_classify_module_grid_three_grid_padding_left_right"
+        android:paddingTop="@dimen/main_classify_module_grid_three_grid_padding_top"
+        android:paddingRight="@dimen/main_classify_module_grid_three_grid_padding_left_right"
+        app:layout_constraintDimensionRatio="h,16:14"
         app:layout_constraintLeft_toLeftOf="parent">
 
+        <TextView
+            android:id="@+id/item_one_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:lines="1"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_title_textsize" />
+
+        <TextView
+            android:id="@+id/item_one_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_one_title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/main_classify_module_grid_three_grid_item_desc_margin_top"
+            android:lines="1"
+            android:textColor="@color/main_classify_module_grid_three_grid_item_desc_color"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_desc_textsize" />
+
+        <TextView
+            android:id="@+id/item_one_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_tag_height"
+            android:layout_below="@id/item_one_desc"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/main_classify_module_grid_three_grid_item_tag_margin_top"
+            android:background="@drawable/main_classify_module_grid_three_grid_item_tag_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/main_classify_module_grid_three_grid_item_tag_padding_left_right"
+            android:paddingRight="@dimen/main_classify_module_grid_three_grid_item_tag_padding_left_right"
+            android:text="item_tag"
+            android:textColor="@color/main_classify_module_grid_three_grid_item_tag_color"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_tag_textsize"
+            android:visibility="invisible" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_one_img"
+            android:layout_width="@dimen/main_classify_module_grid_three_grid_item_one_img_size"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_one_img_size"
+            android:layout_below="@id/item_one_tag"
+            android:layout_centerHorizontal="true" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_one_gif_img"
+            android:layout_width="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_size"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_size"
+            android:layout_alignRight="@id/item_one_img"
+            android:layout_alignBottom="@id/item_one_img"
+            android:layout_marginBottom="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_margin_bottom"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <View
@@ -26,11 +79,66 @@
         android:id="@+id/item_two"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingLeft="@dimen/main_classify_module_grid_three_grid_padding_left_right"
+        android:paddingTop="@dimen/main_classify_module_grid_three_grid_padding_top"
+        android:paddingRight="@dimen/main_classify_module_grid_three_grid_padding_left_right"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintLeft_toRightOf="@id/item_one_divider"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/item_two_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:lines="1"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_title_textsize" />
+
+        <TextView
+            android:id="@+id/item_two_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_two_title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/main_classify_module_grid_three_grid_item_desc_margin_top"
+            android:lines="1"
+            android:textColor="@color/main_classify_module_grid_three_grid_item_desc_color"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_desc_textsize" />
+
+        <TextView
+            android:id="@+id/item_two_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_tag_height"
+            android:layout_below="@id/item_two_desc"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/main_classify_module_grid_three_grid_item_tag_margin_top"
+            android:background="@drawable/main_classify_module_grid_three_grid_item_tag_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/main_classify_module_grid_three_grid_item_tag_padding_left_right"
+            android:paddingRight="@dimen/main_classify_module_grid_three_grid_item_tag_padding_left_right"
+            android:text="item_tag"
+            android:textColor="@color/main_classify_module_grid_three_grid_item_tag_color"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_tag_textsize"
+            android:visibility="invisible" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_two_img"
+            android:layout_width="@dimen/main_classify_module_grid_three_grid_item_two_three_img_size"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_two_three_img_size"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/main_classify_module_grid_three_grid_item_two_three_img_margin_right" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_two_gif_img"
+            android:layout_width="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_size"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_size"
+            android:layout_alignRight="@id/item_two_img"
+            android:layout_alignBottom="@id/item_two_img"
+            android:layout_marginBottom="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_margin_bottom"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <View
@@ -46,11 +154,66 @@
         android:id="@+id/item_three"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingLeft="@dimen/main_classify_module_grid_three_grid_padding_left_right"
+        android:paddingTop="@dimen/main_classify_module_grid_three_grid_padding_top"
+        android:paddingRight="@dimen/main_classify_module_grid_three_grid_padding_left_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/item_one_divider"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_two_divider">
 
+        <TextView
+            android:id="@+id/item_three_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:lines="1"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_title_textsize" />
+
+        <TextView
+            android:id="@+id/item_three_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_three_title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/main_classify_module_grid_three_grid_item_desc_margin_top"
+            android:lines="1"
+            android:textColor="@color/main_classify_module_grid_three_grid_item_desc_color"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_desc_textsize" />
+
+        <TextView
+            android:id="@+id/item_three_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_tag_height"
+            android:layout_below="@id/item_three_desc"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/main_classify_module_grid_three_grid_item_tag_margin_top"
+            android:background="@drawable/main_classify_module_grid_three_grid_item_tag_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/main_classify_module_grid_three_grid_item_tag_padding_left_right"
+            android:paddingRight="@dimen/main_classify_module_grid_three_grid_item_tag_padding_left_right"
+            android:text="item_tag"
+            android:textColor="@color/main_classify_module_grid_three_grid_item_tag_color"
+            android:textSize="@dimen/main_classify_module_grid_three_grid_item_tag_textsize"
+            android:visibility="invisible" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_three_img"
+            android:layout_width="@dimen/main_classify_module_grid_three_grid_item_two_three_img_size"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_two_three_img_size"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/main_classify_module_grid_three_grid_item_two_three_img_margin_right" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_three_gif_img"
+            android:layout_width="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_size"
+            android:layout_height="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_size"
+            android:layout_alignRight="@id/item_three_img"
+            android:layout_alignBottom="@id/item_three_img"
+            android:layout_marginBottom="@dimen/main_classify_module_grid_three_grid_item_one_gif_img_margin_bottom"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 

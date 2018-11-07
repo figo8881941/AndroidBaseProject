@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_classify_fragment_top_layout_car_textcolor">#434343</color>
+
     <color name="main_classify_fragment_sub_tab_item_text_selected_color">#ff333333</color>
     <color name="main_classify_fragment_sub_tab_item_text_unselected_color">#ff666666</color>
     <color name="main_classify_fragment_sub_tab_indicator_color">#fed932</color>
     <color name="main_classify_fragment_sub_tab_recommend_divider_bg">#cccccc</color>
+
     <color name="main_classify_module_grid_three_divider_bg">#1a000000</color>
+    <color name="main_classify_module_grid_three_grid_item_desc_color">#999999</color>
+    <color name="main_classify_module_grid_three_grid_item_tag_color">#333333</color>
 </resources>
