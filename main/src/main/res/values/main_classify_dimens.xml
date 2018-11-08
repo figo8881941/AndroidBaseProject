@@ -47,6 +47,7 @@
     <dimen name="main_classify_module_grid_three_grid_item_two_three_img_size">72dp</dimen>
     <dimen name="main_classify_module_grid_three_grid_item_two_three_img_margin_right">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_height">180dp</dimen>
-    <dimen name="main_classify_module_banner_small_height">180dp</dimen>
+    <dimen name="main_classify_module_banner_small_height">100dp</dimen>
+    <dimen name="main_classify_module_banner_small_padding_left_right">15dp</dimen>
 
 </resources>

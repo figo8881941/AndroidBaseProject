@@ -111,6 +111,10 @@ public class ClassifyViewHelper {
         //调整布局
         adjustModuleLayout(context, parent, bannerSmall);
         parent.addView(bannerSmall);
+
+        ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity =  entranceItemDtoListEntities.get(0);
+        GifImageView bannerImg = (GifImageView) bannerSmall.findViewById(R.id.banner_img);
+        Glide.with(context).load(entranceItemDtoListEntity.getImg()).apply(requestOptions).into(bannerImg);
     }
 
     /**
