@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/main_classify_module_banner_small_height"
+    android:layout_height="wrap_content"
     android:paddingLeft="@dimen/main_classify_module_banner_small_padding_left_right"
     android:paddingRight="@dimen/main_classify_module_banner_small_padding_left_right">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/banner_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        />
 
 </RelativeLayout>

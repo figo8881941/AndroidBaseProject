@@ -2,8 +2,69 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/main_classify_module_hot_sell_height"
-    android:background="@android:color/white"
-    >
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_classify_module_hot_sell_top_layout_height"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/main_classify_module_hot_sell_top_layout_title_layout_margin_left">
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:visibility="gone" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/title_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/see_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/main_classify_module_hot_sell_top_layout_see_more_margin_right"
+            android:drawableRight="@drawable/main_classify_module_hot_sell_more"
+            android:drawablePadding="@dimen/main_classify_module_hot_sell_top_layout_see_more_drawablepadding"
+            android:text="@string/main_classify_module_hot_sell_seemore"
+            android:textColor="@color/main_classify_module_hot_sell_top_layout_see_more_textcolor"
+            android:textSize="@dimen/main_classify_module_hot_sell_top_layout_see_more_textsize" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/top_layout_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/main_classify_module_hot_sell_top_layout_divider_color"
+        app:layout_constraintTop_toBottomOf="@id/top_layout" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/item_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_layout_divider">
+
+    </android.support.v4.view.ViewPager>
 
 </android.support.constraint.ConstraintLayout>

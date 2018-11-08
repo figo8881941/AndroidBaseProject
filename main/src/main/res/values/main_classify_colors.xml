@@ -10,4 +10,7 @@
     <color name="main_classify_module_grid_three_divider_bg">#1a000000</color>
     <color name="main_classify_module_grid_three_grid_item_desc_color">#999999</color>
     <color name="main_classify_module_grid_three_grid_item_tag_color">#333333</color>
+
+    <color name="main_classify_module_hot_sell_top_layout_see_more_textcolor">#cc434343</color>
+    <color name="main_classify_module_hot_sell_top_layout_divider_color">#1a222222</color>
 </resources>

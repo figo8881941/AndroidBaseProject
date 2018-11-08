@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -138,6 +139,22 @@ public class ClassifyViewHelper {
         //调整布局
         adjustModuleLayout(context, parent, hotSell);
         parent.addView(hotSell);
+
+        //标题
+        TextView titleText = (TextView) hotSell.findViewById(R.id.title_text);
+        GifImageView titleImg = (GifImageView) hotSell.findViewById(R.id.title_img);
+        String titleString = entity.getTitle();
+        String titleImgUrl = entity.getTitleImg();
+        if (!TextUtils.isEmpty(titleImgUrl)) {
+            titleText.setVisibility(View.GONE);
+            titleImg.setVisibility(View.VISIBLE);
+            Glide.with(context).load(titleImgUrl).apply(requestOptions).into(titleImg);
+        } else {
+            titleText.setVisibility(View.VISIBLE);
+            titleImg.setVisibility(View.GONE);
+            titleText.setText(titleString);
+        }
+
     }
 
     /**
