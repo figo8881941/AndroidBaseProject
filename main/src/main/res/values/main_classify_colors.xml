@@ -13,6 +13,7 @@
 
     <color name="main_classify_module_hot_sell_top_layout_see_more_textcolor">#cc434343</color>
     <color name="main_classify_module_hot_sell_top_layout_divider_color">#1a222222</color>
+    <color name="main_classify_module_hot_sell_prd_item_position_color">#333333</color>
     <color name="main_classify_module_hot_sell_prd_item_name_color">#666666</color>
     <color name="main_classify_module_hot_sell_prd_item_price_color">#ff4f4c</color>
     <color name="main_classify_module_hot_sell_prd_item_sell_count_color">#999999</color>

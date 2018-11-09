@@ -18,6 +18,19 @@
         app:radius="@dimen/main_classify_module_hot_sell_prd_item_img_radius" />
 
     <TextView
+        android:id="@+id/item_position"
+        android:layout_width="@dimen/main_classify_module_hot_sell_prd_item_position_width"
+        android:layout_height="@dimen/main_classify_module_hot_sell_prd_item_position_height"
+        android:layout_alignLeft="@id/item_img"
+        android:layout_alignBottom="@id/item_img"
+        android:background="@drawable/main_classify_module_hot_sell_prd_item_position_bg"
+        android:gravity="center"
+        android:textColor="@color/main_classify_module_hot_sell_prd_item_position_color"
+        android:textSize="@dimen/main_classify_module_hot_sell_prd_item_position_textsize"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

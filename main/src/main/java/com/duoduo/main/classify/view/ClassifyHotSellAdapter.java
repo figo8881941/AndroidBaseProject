@@ -2,6 +2,7 @@ package com.duoduo.main.classify.view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -39,6 +40,13 @@ public class ClassifyHotSellAdapter extends QuickRecyclerViewAdapter<ClassifySub
     public void bindViewHolder(QuickerViewHolder holder, ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity itemData, int position) {
         GifImageView itemImg = (GifImageView) holder.getView(R.id.item_img);
         Glide.with(context).load(itemData.getImg()).apply(requestOptions).into(itemImg);
+        TextView itemPosition = (TextView) holder.getView(R.id.item_position);
+        if (position < 3) {
+            itemPosition.setVisibility(View.VISIBLE);
+            itemPosition.setText(String.valueOf(position + 1));
+        } else {
+            itemPosition.setVisibility(View.GONE);
+        }
         TextView itemName = (TextView) holder.getView(R.id.item_name);
         itemName.setText(itemData.getTitle());
         TextView itemPrice = (TextView) holder.getView(R.id.item_price);
