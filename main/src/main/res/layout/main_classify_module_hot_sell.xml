@@ -59,12 +59,12 @@
         android:background="@color/main_classify_module_hot_sell_top_layout_divider_color"
         app:layout_constraintTop_toBottomOf="@id/top_layout" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/item_viewpager"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/item_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/top_layout_divider">
 
-    </android.support.v4.view.ViewPager>
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

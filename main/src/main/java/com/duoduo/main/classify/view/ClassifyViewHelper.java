@@ -2,11 +2,12 @@ package com.duoduo.main.classify.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -113,7 +114,7 @@ public class ClassifyViewHelper {
         adjustModuleLayout(context, parent, bannerSmall);
         parent.addView(bannerSmall);
 
-        ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity =  entranceItemDtoListEntities.get(0);
+        ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
         GifImageView bannerImg = (GifImageView) bannerSmall.findViewById(R.id.banner_img);
         Glide.with(context).load(entranceItemDtoListEntity.getImg()).apply(requestOptions).into(bannerImg);
     }
@@ -155,6 +156,14 @@ public class ClassifyViewHelper {
             titleText.setText(titleString);
         }
 
+        //ViewPager
+        RecyclerView itemRecyclerView = (RecyclerView) hotSell.findViewById(R.id.item_recyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        itemRecyclerView.setLayoutManager(linearLayoutManager);
+        ClassifyHotSellAdapter classifyHotSellAdapter = new ClassifyHotSellAdapter(context);
+        classifyHotSellAdapter.setData(productInfoListEntities);
+        itemRecyclerView.setAdapter(classifyHotSellAdapter);
     }
 
     /**
