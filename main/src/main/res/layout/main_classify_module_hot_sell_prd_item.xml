@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -7,13 +8,14 @@
     android:paddingTop="@dimen/main_classify_module_hot_sell_prd_item_padding_top_bottom"
     android:paddingBottom="@dimen/main_classify_module_hot_sell_prd_item_padding_top_bottom">
 
-    <pl.droidsonroids.gif.GifImageView
+    <com.duoduo.commonbase.component.RoundGifImageView
         android:id="@+id/item_img"
         android:layout_width="@dimen/main_classify_module_hot_sell_prd_item_img_size"
         android:layout_height="@dimen/main_classify_module_hot_sell_prd_item_img_size"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        app:radius="@dimen/main_classify_module_hot_sell_prd_item_img_radius" />
 
     <TextView
         android:id="@+id/item_name"

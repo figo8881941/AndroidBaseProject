@@ -51,6 +51,7 @@
     <dimen name="main_classify_module_hot_sell_prd_item_padding_top_bottom">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_padding_left">15dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_img_size">101dp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_img_radius">5dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_name_textsize">12sp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_name_margin_top">5dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_price_textsize">12sp</dimen>
