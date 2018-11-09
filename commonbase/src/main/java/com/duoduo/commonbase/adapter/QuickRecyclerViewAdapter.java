@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * 快捷的QuickRecyclerViewAdapter
+ * 快捷的RecyclerViewAdapter
  * @param <T>
  */
 public abstract class QuickRecyclerViewAdapter<T> extends RecyclerView.Adapter<QuickRecyclerViewAdapter.QuickerViewHolder> {
