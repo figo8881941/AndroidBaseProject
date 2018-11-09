@@ -1,12 +1,14 @@
 package com.duoduo.main.classify.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.commonbase.adapter.QuickRecyclerViewAdapter;
+import com.duoduo.commonbase.utils.NumberUtils;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 
@@ -19,8 +21,13 @@ public class ClassifyHotSellAdapter extends QuickRecyclerViewAdapter<ClassifySub
 
     private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
+    private String priceFormat;
+    private String sellCountFormat;
+
     public ClassifyHotSellAdapter(Context context) {
         super(context);
+        Resources resources = this.context.getResources();
+        sellCountFormat = resources.getString(R.string.main_classify_module_hot_sell_sell_count_format);
     }
 
     @Override
@@ -35,9 +42,8 @@ public class ClassifyHotSellAdapter extends QuickRecyclerViewAdapter<ClassifySub
         TextView itemName = (TextView) holder.getView(R.id.item_name);
         itemName.setText(itemData.getTitle());
         TextView itemPrice = (TextView) holder.getView(R.id.item_price);
-        itemPrice.setText("¥" + itemData.getCouponFinalPrice());
+        itemPrice.setText("¥" + NumberUtils.formatDoubleToScale(1, itemData.getCouponFinalPrice()));
         TextView itemSellCount = (TextView) holder.getView(R.id.item_sell_count);
-        itemSellCount.setText(itemData.getSellAmounts() + "人已买");
-
+        itemSellCount.setText(String.format(sellCountFormat, itemData.getSellAmounts()));
     }
 }

@@ -27,7 +27,7 @@
     <dimen name="main_classify_fragment_tab_indicator_margin_bottom">5dp</dimen>
     <dimen name="main_classify_fragment_tab_indicator_margin_left_right">13dp</dimen>
 
-    <!-- 分类Fragment首页HeaderView -->
+    <!-- 分类Fragment module -->
     <dimen name="main_classify_module_divider_height">8dp</dimen>
     <dimen name="main_classify_module_banner_height">140dp</dimen>
     <dimen name="main_classify_module_banner_indicator_size">6.5dp</dimen>
@@ -48,8 +48,15 @@
     <dimen name="main_classify_module_grid_three_grid_item_two_three_img_margin_right">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_height">36dp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_title_layout_margin_left">15dp</dimen>
-    <dimen name="main_classify_module_hot_sell_prd_item_width">101dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_padding_top_bottom">9dp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_padding_left">15dp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_img_size">101dp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_name_textsize">12sp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_name_margin_top">5dp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_price_textsize">12sp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_price_margin_top">9dp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_sell_count_textsize">10sp</dimen>
+    <dimen name="main_classify_module_hot_sell_prd_item_sell_count_margin_left">5dp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_see_more_textsize">11sp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_see_more_drawablepadding">3dp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_see_more_margin_right">9dp</dimen>

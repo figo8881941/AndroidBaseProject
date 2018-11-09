@@ -1,31 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/main_classify_module_hot_sell_prd_item_width"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
+    android:paddingLeft="@dimen/main_classify_module_hot_sell_prd_item_padding_left"
     android:paddingTop="@dimen/main_classify_module_hot_sell_prd_item_padding_top_bottom"
     android:paddingBottom="@dimen/main_classify_module_hot_sell_prd_item_padding_top_bottom">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/item_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="@dimen/main_classify_module_hot_sell_prd_item_img_size"
+        android:layout_height="@dimen/main_classify_module_hot_sell_prd_item_img_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_img"
+        android:layout_alignLeft="@id/item_img"
+        android:layout_alignRight="@id/item_img"
+        android:layout_marginTop="@dimen/main_classify_module_hot_sell_prd_item_name_margin_top"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/main_classify_module_hot_sell_prd_item_name_color"
+        android:textSize="@dimen/main_classify_module_hot_sell_prd_item_name_textsize" />
 
     <TextView
         android:id="@+id/item_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_name"
+        android:layout_alignLeft="@id/item_img"
+        android:layout_marginTop="@dimen/main_classify_module_hot_sell_prd_item_price_margin_top"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/main_classify_module_hot_sell_prd_item_price_color"
+        android:textSize="@dimen/main_classify_module_hot_sell_prd_item_price_textsize"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/item_sell_count"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_name"
+        android:layout_alignBaseline="@id/item_price"
+        android:layout_alignRight="@id/item_img"
+        android:layout_alignBottom="@id/item_price"
+        android:layout_marginLeft="@dimen/main_classify_module_hot_sell_prd_item_sell_count_margin_left"
+        android:layout_toRightOf="@id/item_price"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/main_classify_module_hot_sell_prd_item_sell_count_color"
+        android:textSize="@dimen/main_classify_module_hot_sell_prd_item_sell_count_textsize" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
