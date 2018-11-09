@@ -7,4 +7,5 @@
     <string name="main_classify_module_hot_sell_title">今日排行榜</string>
     <string name="main_classify_module_hot_sell_seemore">查看全部</string>
     <string name="main_classify_module_hot_sell_sell_count_format">%1$s人已买</string>
+    <string name="main_classify_module_hot_sell_seemore_item_text">查看全部\nSee More</string>
 </resources>

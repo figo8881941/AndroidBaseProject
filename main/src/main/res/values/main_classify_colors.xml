@@ -17,4 +17,5 @@
     <color name="main_classify_module_hot_sell_prd_item_name_color">#666666</color>
     <color name="main_classify_module_hot_sell_prd_item_price_color">#ff4f4c</color>
     <color name="main_classify_module_hot_sell_prd_item_sell_count_color">#999999</color>
+    <color name="main_classify_module_hot_sell_seemore_item_textcolor">#ff999999</color>
 </resources>

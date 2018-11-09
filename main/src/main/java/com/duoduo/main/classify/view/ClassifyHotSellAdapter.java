@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.duoduo.commonbase.adapter.QuickRecyclerViewAdapter;
+import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.commonbase.utils.NumberUtils;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
@@ -18,11 +18,10 @@ import pl.droidsonroids.gif.GifImageView;
 /**
  * 排行榜Adapter
  */
-public class ClassifyHotSellAdapter extends QuickRecyclerViewAdapter<ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity> {
+public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter<ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity> {
 
     private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
-    private String priceFormat;
     private String sellCountFormat;
 
     public ClassifyHotSellAdapter(Context context) {

@@ -163,6 +163,8 @@ public class ClassifyViewHelper {
         itemRecyclerView.setLayoutManager(linearLayoutManager);
         ClassifyHotSellAdapter classifyHotSellAdapter = new ClassifyHotSellAdapter(context);
         classifyHotSellAdapter.setData(productInfoListEntities);
+        View footerView = LayoutInflater.from(context).inflate(R.layout.main_classify_module_hot_sell_seemore_item, itemRecyclerView, false);
+        classifyHotSellAdapter.setFooterView(footerView);
         itemRecyclerView.setAdapter(classifyHotSellAdapter);
     }
 

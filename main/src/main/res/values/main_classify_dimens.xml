@@ -48,6 +48,9 @@
     <dimen name="main_classify_module_grid_three_grid_item_two_three_img_margin_right">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_height">36dp</dimen>
     <dimen name="main_classify_module_hot_sell_top_layout_title_layout_margin_left">15dp</dimen>
+    <dimen name="main_classify_module_hot_sell_top_layout_see_more_textsize">11sp</dimen>
+    <dimen name="main_classify_module_hot_sell_top_layout_see_more_drawablepadding">3dp</dimen>
+    <dimen name="main_classify_module_hot_sell_top_layout_see_more_margin_right">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_padding_top_bottom">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_padding_left">15dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_img_size">101dp</dimen>
@@ -61,9 +64,9 @@
     <dimen name="main_classify_module_hot_sell_prd_item_price_margin_top">9dp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_sell_count_textsize">10sp</dimen>
     <dimen name="main_classify_module_hot_sell_prd_item_sell_count_margin_left">5dp</dimen>
-    <dimen name="main_classify_module_hot_sell_top_layout_see_more_textsize">11sp</dimen>
-    <dimen name="main_classify_module_hot_sell_top_layout_see_more_drawablepadding">3dp</dimen>
-    <dimen name="main_classify_module_hot_sell_top_layout_see_more_margin_right">9dp</dimen>
+    <dimen name="main_classify_module_hot_sell_seemore_item_size">101dp</dimen>
+    <dimen name="main_classify_module_hot_sell_seemore_item_textsize">14sp</dimen>
+    <dimen name="main_classify_module_hot_sell_seemore_item_linespacing">3dp</dimen>
     <dimen name="main_classify_module_banner_small_height">100dp</dimen>
     <dimen name="main_classify_module_banner_small_padding_left_right">15dp</dimen>
 
