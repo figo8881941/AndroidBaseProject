@@ -264,7 +264,6 @@ public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity
 
         if (tabStrip != null) {
             tabStrip.setOnPageChangeListener(null);
-            tabStrip.setViewPager(null);
             tabStrip.removeAllViews();
             tabStrip = null;
         }
