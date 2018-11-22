@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
+import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.model.ClassifySubHomeNetModel;
 
@@ -43,8 +43,8 @@ public class ClassifySubHomeController {
                 public void onResponse(JSONObject response) {
                     //通知请求完成
                     event.setWhat(ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH);
-                    ClassifySubHomeDataBean classifySubHomeDataBean = JSON.parseObject(response.toString(), ClassifySubHomeDataBean.class);
-                    event.setArg3(classifySubHomeDataBean);
+                    ClassifySubHomeEntity classifySubHomeEntity = JSON.parseObject(response.toString(), ClassifySubHomeEntity.class);
+                    event.setArg3(classifySubHomeEntity);
                     eventBus.post(event);
                 }
             }, new Response.ErrorListener() {

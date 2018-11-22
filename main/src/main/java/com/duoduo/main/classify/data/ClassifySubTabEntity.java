@@ -1,11 +1,13 @@
 package com.duoduo.main.classify.data;
 
+import com.duoduo.main.base.data.ResultEntity;
+
 import java.util.List;
 
 /**
  * 分类Tab数据单元
  */
-public class ClassifySubTabDataBean {
+public class ClassifySubTabEntity {
 
 
     /**
@@ -40,22 +42,6 @@ public class ClassifySubTabDataBean {
 
     public void setCategoryNewList(List<CategoryNewListEntity> categoryNewList) {
         this.categoryNewList = categoryNewList;
-    }
-
-    public static class ResultEntity {
-        /**
-         * status : 1
-         */
-
-        private int status;
-
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
     }
 
     public static class CategoryNewListEntity {

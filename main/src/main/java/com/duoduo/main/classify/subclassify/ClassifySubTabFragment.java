@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
-import com.duoduo.main.classify.data.ClassifySubTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabEntity;
 
 /**
  * 子分类Fragment
  */
-public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabDataBean.CategoryNewListEntity> {
+public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.CategoryNewListEntity> {
 
     private ViewGroup mainView;
 

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.main.base.data.ProductInfoEntity;
-import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 
 /**
  * 分类首页adapter

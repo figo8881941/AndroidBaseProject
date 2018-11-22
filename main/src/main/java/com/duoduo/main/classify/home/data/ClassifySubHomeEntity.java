@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 分类首页数据Bean
  */
-public class ClassifySubHomeDataBean {
+public class ClassifySubHomeEntity {
 
 
     /**

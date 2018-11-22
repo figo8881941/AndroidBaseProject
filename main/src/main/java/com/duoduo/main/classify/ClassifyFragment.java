@@ -20,7 +20,7 @@ import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.controller.ClassifyController;
-import com.duoduo.main.classify.data.ClassifySubTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
@@ -200,9 +200,9 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
             }
             break;
             case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH: {
-                ClassifySubTabDataBean classifySubTabDataBean = event.getArg3();
+                ClassifySubTabEntity classifySubTabEntity = event.getArg3();
                 //创建数据下发的fragment
-                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentHelper.createClassifySubFragmentList(classifySubTabDataBean);
+                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentHelper.createClassifySubFragmentList(classifySubTabEntity);
                 if (fragmentList != null) {
                     subFragmentList.addAll(fragmentList);
                 }

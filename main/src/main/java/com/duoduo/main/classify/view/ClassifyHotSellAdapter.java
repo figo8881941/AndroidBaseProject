@@ -12,7 +12,6 @@ import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.commonbase.utils.NumberUtils;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductInfoEntity;
-import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 
 import pl.droidsonroids.gif.GifImageView;
 

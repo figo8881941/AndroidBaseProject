@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.fragment.BaseNoDestoryFragmentStatePagerAdapter;
-import com.duoduo.main.classify.data.ClassifySubTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabEntity;
 
 /**
  * 分类界面FragmentPagerAdapter
@@ -24,7 +24,7 @@ public class ClassifySubFragmentPagerAdapter extends BaseNoDestoryFragmentStateP
         if (fragments != null) {
             BaseFragment fragment = fragments.get(position);
             if (fragment != null && fragment.getData() != null) {
-                ClassifySubTabDataBean.CategoryNewListEntity entity = (ClassifySubTabDataBean.CategoryNewListEntity) fragment.getData();
+                ClassifySubTabEntity.CategoryNewListEntity entity = (ClassifySubTabEntity.CategoryNewListEntity) fragment.getData();
                 title = entity.getCategoryName();
             }
         }

@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
-import com.duoduo.main.classify.data.ClassifySubTabDataBean;
+import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
-import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
+import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 import com.duoduo.main.classify.view.ClassifyViewHelper;
@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 分类子首页Fragment
  */
-public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean.CategoryNewListEntity> {
+public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.CategoryNewListEntity> {
 
     private ViewGroup mainView;
 
@@ -77,7 +77,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabDataBean
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
-                ClassifySubHomeDataBean homeDataBean = event.getArg3();
+                ClassifySubHomeEntity homeDataBean = event.getArg3();
                 recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeDataBean);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerAdapter.notifyDataSetChanged();

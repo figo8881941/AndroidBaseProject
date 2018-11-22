@@ -17,7 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.classify.consts.IClassifyConsts;
-import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
+import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 import com.duoduo.main.common.image.BannerGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -40,17 +40,17 @@ public class ClassifyViewHelper {
      * @param context
      * @param dataBean
      */
-    public static View createHeaderViewByData(Context context, ClassifySubHomeDataBean dataBean) {
+    public static View createHeaderViewByData(Context context, ClassifySubHomeEntity dataBean) {
         if (context == null || dataBean == null) {
             return null;
         }
-        List<ClassifySubHomeDataBean.ModuleDtoListEntity> moduleDtoListEntities = dataBean.getModuleDtoList();
+        List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = dataBean.getModuleDtoList();
         if (moduleDtoListEntities == null || moduleDtoListEntities.isEmpty()) {
             return null;
         }
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        for (ClassifySubHomeDataBean.ModuleDtoListEntity entity : moduleDtoListEntities) {
+        for (ClassifySubHomeEntity.ModuleDtoListEntity entity : moduleDtoListEntities) {
             createModuleView(context, linearLayout, entity);
         }
         return linearLayout;
@@ -64,7 +64,7 @@ public class ClassifyViewHelper {
      * @param entity
      * @return
      */
-    public static void createModuleView(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+    public static void createModuleView(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -100,12 +100,12 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static void createBannerSmall(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+    private static void createBannerSmall(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
         if (context == null || parent == null || entity == null) {
             return;
         }
 
-        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
+        List<ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
 
         if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
             return;
@@ -115,7 +115,7 @@ public class ClassifyViewHelper {
         adjustModuleLayout(context, parent, bannerSmall);
         parent.addView(bannerSmall);
 
-        ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
+        ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
         GifImageView bannerImg = (GifImageView) bannerSmall.findViewById(R.id.banner_img);
         Glide.with(context).load(entranceItemDtoListEntity.getImg()).apply(requestOptions).into(bannerImg);
     }
@@ -127,7 +127,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static void createHotSell(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+    private static void createHotSell(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -176,12 +176,12 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static void createGridThree(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+    private static void createGridThree(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
         if (context == null || parent == null || entity == null) {
             return;
         }
 
-        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
+        List<ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
 
         if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
             return;
@@ -193,7 +193,7 @@ public class ClassifyViewHelper {
         parent.addView(gridThree);
 
         int size = entranceItemDtoListEntities.size();
-        ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
+        ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
 
         //第一个项
         ViewGroup item = (ViewGroup) gridThree.findViewById(R.id.item_one);
@@ -240,16 +240,16 @@ public class ClassifyViewHelper {
      * @param itemImg
      * @param itemGifImg
      */
-    private static void initGridThreeItem(Context context, ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity
+    private static void initGridThreeItem(Context context, ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity
             , TextView itemTile, TextView itemDesc, TextView itemTag, GifImageView itemImg, GifImageView itemGifImg) {
         itemTile.setText(entranceItemDtoListEntity.getTitle());
         itemTile.setTextColor(Color.parseColor(entranceItemDtoListEntity.getTitleColor()));
         itemDesc.setText(entranceItemDtoListEntity.getDescription());
-        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity> tagListEntities = entranceItemDtoListEntity.getNewTagList();
+        List<ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity> tagListEntities = entranceItemDtoListEntity.getNewTagList();
         itemTag.setVisibility(View.INVISIBLE);
         if (tagListEntities != null && !tagListEntities.isEmpty()) {
             itemTag.setVisibility(View.VISIBLE);
-            for (ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity tagListEntity : tagListEntities) {
+            for (ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity tagListEntity : tagListEntities) {
                 if (tagListEntity == null || TextUtils.isEmpty(tagListEntity.getName())) {
                     continue;
                 }
@@ -274,19 +274,19 @@ public class ClassifyViewHelper {
      * @param entity
      * @return
      */
-    public static void createBannerLayge750_270(Context context, LinearLayout parent, ClassifySubHomeDataBean.ModuleDtoListEntity entity) {
+    public static void createBannerLayge750_270(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
         if (context == null || parent == null || entity == null) {
             return;
         }
 
-        List<ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
+        List<ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity> entranceItemDtoListEntities = entity.getEntranceItemDtoList();
 
         if (entranceItemDtoListEntities == null || entranceItemDtoListEntities.isEmpty()) {
             return;
         }
 
         ArrayList<String> images = new ArrayList<String>();
-        for (ClassifySubHomeDataBean.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity : entranceItemDtoListEntities) {
+        for (ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity : entranceItemDtoListEntities) {
             images.add(entranceItemDtoListEntity.getImg());
         }
 
