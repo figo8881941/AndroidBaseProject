@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.duoduo.main.main.data.MainTabDataBean;
+import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.main.event.MainTabRequestEvent;
 import com.duoduo.main.main.model.MainNetModel;
 
@@ -43,8 +43,8 @@ public class MainController {
                 public void onResponse(JSONObject response) {
                     //通知请求完成
                     event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH);
-                    MainTabDataBean mainTabDataBean = JSON.parseObject(response.toString(), MainTabDataBean.class);
-                    event.setArg3(mainTabDataBean);
+                    MainTabEntity mainTabEntity = JSON.parseObject(response.toString(), MainTabEntity.class);
+                    event.setArg3(mainTabEntity);
                     eventBus.post(event);
                 }
             }, new Response.ErrorListener() {

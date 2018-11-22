@@ -1,11 +1,13 @@
 package com.duoduo.main.main.data;
 
+import com.duoduo.main.base.data.ResultEntity;
+
 import java.util.List;
 
 /**
  * 首页Tab数据bean
  */
-public class MainTabDataBean {
+public class MainTabEntity {
 
 
     /**
@@ -90,22 +92,6 @@ public class MainTabDataBean {
 
     public void setTabList(List<TabListEntity> tabList) {
         this.tabList = tabList;
-    }
-
-    public static class ResultEntity {
-        /**
-         * status : 1
-         */
-
-        private int status;
-
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
     }
 
     public static class TabListEntity {

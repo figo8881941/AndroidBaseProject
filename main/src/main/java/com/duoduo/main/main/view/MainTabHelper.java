@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.main.R;
-import com.duoduo.main.main.data.MainTabDataBean;
+import com.duoduo.main.main.data.MainTabEntity;
 
 import java.util.List;
 
@@ -28,20 +28,20 @@ public class MainTabHelper {
      * 创建Tab的方法
      *
      * @param tabLayout
-     * @param mainTabDataBean
+     * @param mainTabEntity
      */
-    public static void createTabByData(TabLayout tabLayout, MainTabDataBean mainTabDataBean) {
+    public static void createTabByData(TabLayout tabLayout, MainTabEntity mainTabEntity) {
         if (tabLayout == null) {
             return;
         }
         tabLayout.removeAllTabs();
-        if (mainTabDataBean == null) {
+        if (mainTabEntity == null) {
             return;
         }
-        List<MainTabDataBean.TabListEntity> entityList = mainTabDataBean.getTabList();
+        List<MainTabEntity.TabListEntity> entityList = mainTabEntity.getTabList();
         if (entityList != null && !entityList.isEmpty()) {
             LayoutInflater inflater = LayoutInflater.from(tabLayout.getContext().getApplicationContext());
-            for (MainTabDataBean.TabListEntity entity : entityList) {
+            for (MainTabEntity.TabListEntity entity : entityList) {
                 TabLayout.Tab tab = tabLayout.newTab();
                 ViewGroup customView = (ViewGroup) inflater.inflate(R.layout.main_main_tabitem_layout, null);
                 customView.setTag(entity);
@@ -65,7 +65,7 @@ public class MainTabHelper {
             return;
         }
         ViewGroup customView = (ViewGroup) tab.getCustomView();
-        MainTabDataBean.TabListEntity entity = (MainTabDataBean.TabListEntity) customView.getTag();
+        MainTabEntity.TabListEntity entity = (MainTabEntity.TabListEntity) customView.getTag();
         ImageView itemIcon = (ImageView) customView.findViewById(R.id.item_icon);
         Glide.with(itemIcon).load(entity.getTabSelectedImgV2()).apply(tabIconRequestOptions).into(itemIcon);
         TextView itemName = (TextView) customView.findViewById(R.id.item_name);
@@ -83,7 +83,7 @@ public class MainTabHelper {
             return;
         }
         ViewGroup customView = (ViewGroup) tab.getCustomView();
-        MainTabDataBean.TabListEntity entity = (MainTabDataBean.TabListEntity) customView.getTag();
+        MainTabEntity.TabListEntity entity = (MainTabEntity.TabListEntity) customView.getTag();
         ImageView itemIcon = (ImageView) customView.findViewById(R.id.item_icon);
         Glide.with(itemIcon).load(entity.getTabImgV2()).apply(tabIconRequestOptions).into(itemIcon);
         TextView itemName = (TextView) customView.findViewById(R.id.item_name);

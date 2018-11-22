@@ -24,7 +24,7 @@ import com.duoduo.main.classify.data.ClassifySubTabDataBean;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
-import com.duoduo.main.main.data.MainTabDataBean;
+import com.duoduo.main.main.data.MainTabEntity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * 分类Fragment
  */
-public class ClassifyFragment extends BaseFragment<MainTabDataBean.TabListEntity> {
+public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> {
 
     private ViewGroup mainView;
 

@@ -7,7 +7,7 @@ import com.duoduo.main.collect.CollectFragment;
 import com.duoduo.main.home.HomeFragment;
 import com.duoduo.main.largecoupon.LargeCouponFragment;
 import com.duoduo.main.main.consts.IMainConsts;
-import com.duoduo.main.main.data.MainTabDataBean;
+import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.mine.MineFragment;
 import com.duoduo.main.shipping.ShippingFragment;
 import com.duoduo.main.web.H5Fragment;
@@ -23,19 +23,19 @@ public class MainFragmentHelper {
     /**
      * 根据数据，创建主界面Fragment集合的方法
      *
-     * @param mainTabDataBean
+     * @param mainTabEntity
      * @return
      */
-    public static ArrayList<BaseFragment> createMainFragmentList(MainTabDataBean mainTabDataBean) {
-        if (mainTabDataBean == null) {
+    public static ArrayList<BaseFragment> createMainFragmentList(MainTabEntity mainTabEntity) {
+        if (mainTabEntity == null) {
             return null;
         }
-        List<MainTabDataBean.TabListEntity> tabListEntityList = mainTabDataBean.getTabList();
+        List<MainTabEntity.TabListEntity> tabListEntityList = mainTabEntity.getTabList();
         if (tabListEntityList == null || tabListEntityList.isEmpty()) {
             return null;
         }
         ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
-        for (MainTabDataBean.TabListEntity entity : tabListEntityList) {
+        for (MainTabEntity.TabListEntity entity : tabListEntityList) {
             BaseFragment fragment = createFragment(entity);
             if (fragment == null) {
                 continue;
@@ -51,7 +51,7 @@ public class MainFragmentHelper {
      * @param entity
      * @return
      */
-    private static BaseFragment createFragment(MainTabDataBean.TabListEntity entity) {
+    private static BaseFragment createFragment(MainTabEntity.TabListEntity entity) {
         if (entity == null) {
             return null;
         }

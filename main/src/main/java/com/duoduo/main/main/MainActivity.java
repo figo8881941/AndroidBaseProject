@@ -15,7 +15,7 @@ import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.main.controller.MainController;
-import com.duoduo.main.main.data.MainTabDataBean;
+import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.main.event.MainTabRequestEvent;
 import com.duoduo.main.main.view.MainFragmentHelper;
 import com.duoduo.main.main.view.MainFragmentPagerAdapter;
@@ -188,8 +188,8 @@ public class MainActivity extends BaseActivity {
             break;
             case MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH: {
                 //tab数据返回，更新界面
-                MainTabDataBean mainTabDataBean = event.getArg3();
-                updateViewByMainTabData(mainTabDataBean);
+                MainTabEntity mainTabEntity = event.getArg3();
+                updateViewByMainTabData(mainTabEntity);
             }
             break;
             case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR: {
@@ -203,16 +203,16 @@ public class MainActivity extends BaseActivity {
     /**
      * 根据tab数据更新界面的方法
      *
-     * @param mainTabDataBean
+     * @param mainTabEntity
      */
-    private void updateViewByMainTabData(MainTabDataBean mainTabDataBean) {
-        if (mainTabDataBean == null) {
+    private void updateViewByMainTabData(MainTabEntity mainTabEntity) {
+        if (mainTabEntity == null) {
             return;
         }
 
 
         //初始化Fragment
-        mainFragmentList = MainFragmentHelper.createMainFragmentList(mainTabDataBean);
+        mainFragmentList = MainFragmentHelper.createMainFragmentList(mainTabEntity);
         mainFragmentPagerAdapter.setFragments(mainFragmentList);
         mainFragmentPagerAdapter.notifyDataSetChanged();
         //默认选中第一个Framgnet
@@ -222,7 +222,7 @@ public class MainActivity extends BaseActivity {
         }
 
         //初始化Tab
-        MainTabHelper.createTabByData(mainTabLayout, mainTabDataBean);
+        MainTabHelper.createTabByData(mainTabLayout, mainTabEntity);
     }
 
     /**
