@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.classify.consts.IClassifyConsts;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 import com.duoduo.main.common.image.BannerGlideImageLoader;
@@ -131,7 +132,7 @@ public class ClassifyViewHelper {
             return;
         }
 
-        List<ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity> productInfoListEntities = entity.getProductInfoList();
+        List<ProductInfoEntity> productInfoListEntities = entity.getProductInfoList();
 
         if (productInfoListEntities == null || productInfoListEntities.isEmpty()) {
             return;

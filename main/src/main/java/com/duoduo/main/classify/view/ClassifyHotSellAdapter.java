@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.commonbase.utils.NumberUtils;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.classify.home.data.ClassifySubHomeDataBean;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -18,7 +19,7 @@ import pl.droidsonroids.gif.GifImageView;
 /**
  * 排行榜Adapter
  */
-public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter<ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity> {
+public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter<ProductInfoEntity> {
 
     private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
@@ -36,7 +37,7 @@ public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter
     }
 
     @Override
-    public void bindViewHolder(QuickerViewHolder holder, ClassifySubHomeDataBean.ModuleDtoListEntity.ProductInfoListEntity itemData, int position) {
+    public void bindViewHolder(QuickerViewHolder holder, ProductInfoEntity itemData, int position) {
         GifImageView itemImg = (GifImageView) holder.getView(R.id.item_img);
         Glide.with(context).load(itemData.getImg()).apply(requestOptions).into(itemImg);
         TextView itemPosition = (TextView) holder.getView(R.id.item_position);
