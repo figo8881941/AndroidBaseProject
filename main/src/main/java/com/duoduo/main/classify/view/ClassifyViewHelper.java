@@ -234,16 +234,18 @@ public class ClassifyViewHelper {
      *
      * @param context
      * @param entranceItemDtoListEntity
-     * @param itemTile
+     * @param itemTitle
      * @param itemDesc
      * @param itemTag
      * @param itemImg
      * @param itemGifImg
      */
     private static void initGridThreeItem(Context context, ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity
-            , TextView itemTile, TextView itemDesc, TextView itemTag, GifImageView itemImg, GifImageView itemGifImg) {
-        itemTile.setText(entranceItemDtoListEntity.getTitle());
-        itemTile.setTextColor(Color.parseColor(entranceItemDtoListEntity.getTitleColor()));
+            , TextView itemTitle, TextView itemDesc, TextView itemTag, GifImageView itemImg, GifImageView itemGifImg) {
+        itemTitle.setText(entranceItemDtoListEntity.getTitle());
+        int itemTitleTextColor = TextUtils.isEmpty(entranceItemDtoListEntity.getTitleColor()) ?
+                Color.BLACK : Color.parseColor(entranceItemDtoListEntity.getTitleColor());
+        itemTitle.setTextColor(itemTitleTextColor);
         itemDesc.setText(entranceItemDtoListEntity.getDescription());
         List<ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity> tagListEntities = entranceItemDtoListEntity.getNewTagList();
         itemTag.setVisibility(View.INVISIBLE);
