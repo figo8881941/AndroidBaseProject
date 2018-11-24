@@ -135,6 +135,14 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
 
         //Tab
         recommendText = (TextView) mainView.findViewById(R.id.recommend_text);
+        recommendText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (subViewPager != null) {
+                    subViewPager.setCurrentItem(0, false);
+                }
+            }
+        });
         TextViewUtils.setTextStyleAndStrokeWidth(recommendText, Paint.Style.FILL_AND_STROKE, 1);
         recommendLayoutBaseline = mainView.findViewById(R.id.recommend_layout_baseline);
         tabStrip = (PagerSlidingTabStrip) mainView.findViewById(R.id.tab_strip);
