@@ -32,7 +32,15 @@ import pl.droidsonroids.gif.GifImageView;
  */
 public class ClassifyViewHelper {
 
+    /**
+     * 加载图片的RequestOptions
+     */
     private static RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
+
+    /**
+     * 下一个module是否需要增加margintop
+     */
+    private static boolean shouldAjustNextModuleLayout = true;
 
     /**
      * 数据初始化headerView的方法
@@ -44,14 +52,21 @@ public class ClassifyViewHelper {
         if (context == null || homeEntity == null) {
             return null;
         }
-        List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = homeEntity.getModuleDtoList();
-        if (moduleDtoListEntities == null || moduleDtoListEntities.isEmpty()) {
-            return null;
-        }
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        for (ClassifySubHomeEntity.ModuleDtoListEntity entity : moduleDtoListEntities) {
-            createModuleView(context, linearLayout, entity);
+        List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = homeEntity.getModuleDtoList();
+        if (moduleDtoListEntities != null && !moduleDtoListEntities.isEmpty()) {
+            for (ClassifySubHomeEntity.ModuleDtoListEntity entity : moduleDtoListEntities) {
+                createModuleView(context, linearLayout, entity);
+            }
+        }
+        ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
+        if (topicModuleDtoEntity != null) {
+            createTopicTilteView(context, linearLayout, topicModuleDtoEntity);
+        }
+        if (linearLayout.getChildCount() <= 0) {
+            //如果经过上面处理，都没有任务的子view添加，则返回空
+            return null;
         }
         return linearLayout;
     }
@@ -306,6 +321,8 @@ public class ClassifyViewHelper {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+        //接下来的module不需要增加margintop,紧贴banner
+        shouldAjustNextModuleLayout = false;
     }
 
     /**
@@ -319,11 +336,37 @@ public class ClassifyViewHelper {
             return;
         }
 
+        if (!shouldAjustNextModuleLayout) {
+            shouldAjustNextModuleLayout = true;
+            return;
+        }
+
         int childCount = parent.getChildCount();
         if (childCount > 0) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) moduleView.getLayoutParams();
             layoutParams.topMargin = context.getResources().getDimensionPixelSize(R.dimen.main_classify_module_divider_height);
         }
+    }
+
+    /**
+     * 创建主题标题
+     *
+     * @param context
+     * @param parent
+     * @param topicModuleDtoEntity
+     */
+    private static void createTopicTilteView(Context context, LinearLayout parent, ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity) {
+        if (context == null || parent == null || topicModuleDtoEntity == null) {
+            return;
+        }
+        ViewGroup titleView = (ViewGroup) LayoutInflater.from(context)
+                .inflate(R.layout.main_classify_topic_title, parent, false);
+        String titleImgUrl = topicModuleDtoEntity.getTitleImg();
+        if (!TextUtils.isEmpty(titleImgUrl)) {
+            GifImageView titleImgView = titleView.findViewById(R.id.title_img);
+            Glide.with(context).load(titleImgUrl).apply(requestOptions).into(titleImgView);
+        }
+        parent.addView(titleView);
     }
 
 }
