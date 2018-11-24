@@ -77,8 +77,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
-                ClassifySubHomeEntity homeDataBean = event.getArg3();
-                recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeDataBean);
+                ClassifySubHomeEntity homeEntity = event.getArg3();
+                recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeEntity);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerAdapter.notifyDataSetChanged();
             }

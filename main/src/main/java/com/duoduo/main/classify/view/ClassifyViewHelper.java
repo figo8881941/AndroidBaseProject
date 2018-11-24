@@ -38,13 +38,13 @@ public class ClassifyViewHelper {
      * 数据初始化headerView的方法
      *
      * @param context
-     * @param dataBean
+     * @param homeEntity
      */
-    public static View createHeaderViewByData(Context context, ClassifySubHomeEntity dataBean) {
-        if (context == null || dataBean == null) {
+    public static View createHeaderViewByData(Context context, ClassifySubHomeEntity homeEntity) {
+        if (context == null || homeEntity == null) {
             return null;
         }
-        List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = dataBean.getModuleDtoList();
+        List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = homeEntity.getModuleDtoList();
         if (moduleDtoListEntities == null || moduleDtoListEntities.isEmpty()) {
             return null;
         }
