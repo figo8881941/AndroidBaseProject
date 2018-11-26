@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="main_common_list_item_two_product_layout_padding_left_right">8dp</dimen>
+    <dimen name="main_common_list_item_two_product_layout_item_divider_height">8dp</dimen>
+    <dimen name="main_common_list_item_two_product_layout_inner_divider_width">8dp</dimen>
+
+    <dimen name="main_common_list_item_single_small_product_height">300dp</dimen>
+
+</resources>

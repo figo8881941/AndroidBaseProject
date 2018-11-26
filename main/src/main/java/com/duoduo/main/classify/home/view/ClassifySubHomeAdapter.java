@@ -4,12 +4,12 @@ import android.content.Context;
 
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.main.R;
-import com.duoduo.main.base.data.ProductInfoEntity;
+import com.duoduo.main.base.data.TopicTwoProductListEntity;
 
 /**
  * 分类首页adapter
  */
-public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter<ProductInfoEntity> {
+public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter<TopicTwoProductListEntity> {
 
 
     public ClassifySubHomeAdapter(Context context) {
@@ -18,11 +18,11 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
 
     @Override
     public int getViewLayoutId(int viewType) {
-        return R.layout.main_common_two_list_item_layout;
+        return R.layout.main_common_list_item_two_product_layout;
     }
 
     @Override
-    public void bindViewHolder(QuickerViewHolder holder, ProductInfoEntity itemData, int position) {
+    public void bindViewHolder(QuickerViewHolder holder, TopicTwoProductListEntity itemData, int position) {
 
     }
 

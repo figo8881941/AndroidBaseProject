@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/main_common_list_item_two_product_layout_padding_left_right"
+    android:paddingRight="@dimen/main_common_list_item_two_product_layout_padding_left_right">
+
+    <View
+        android:id="@+id/item_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_common_list_item_two_product_layout_item_divider_height"
+        android:layout_alignParentTop="true" />
+
+    <View
+        android:id="@+id/inner_divider"
+        android:layout_width="@dimen/main_common_list_item_two_product_layout_inner_divider_width"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+
+    <include
+        android:id="@+id/left_item"
+        layout="@layout/main_common_list_item_single_small_product_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_common_list_item_single_small_product_height"
+        android:layout_below="@id/item_divider"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/inner_divider"></include>
+
+    <include
+        android:id="@+id/right_item"
+        layout="@layout/main_common_list_item_single_small_product_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_common_list_item_single_small_product_height"
+        android:layout_below="@id/item_divider"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/inner_divider"></include>
+
+</RelativeLayout>

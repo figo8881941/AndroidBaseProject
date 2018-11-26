@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.BaseDataUtils;
+import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
@@ -24,6 +26,8 @@ import com.duoduo.main.classify.view.ClassifyViewHelper;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 /**
  * 分类子首页Fragment
@@ -119,7 +123,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_FINISH: {
                 ClassifyTopicEntity classifyTopicEntity = event.getArg3();
-                recyclerAdapter.setData(classifyTopicEntity.getProductList());
+                List<TopicTwoProductListEntity> data = BaseDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), classifyTopicEntity.getProductList());
+                recyclerAdapter.setData(data);
                 recyclerAdapter.notifyDataSetChanged();
             }
             break;
