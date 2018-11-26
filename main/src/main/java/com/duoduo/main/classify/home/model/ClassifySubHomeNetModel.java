@@ -36,4 +36,20 @@ public class ClassifySubHomeNetModel extends BaseNetModel {
                 listener, errorListener);
         requestQueue.add(request);
     }
+
+    /**
+     * 请求主题数据的方法
+     */
+    public void requestTopicData(int topicId, int pageNum, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
+        String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifySubHomeConsts.FunId.CLASSIFY_TOPIC_DATA, "quMall");
+        JSONObject postData = CommonNetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
+        postData.put("topicId", topicId);
+        postData.put("pageNum", pageNum);
+        postData.put("pageSize", 30);
+        postData.put("personal", 1);
+        JsonObjectRequest request = new CommonJsonObjectRequest(Request.Method.POST, url,
+                CommonNetDataUtils.getParamJsonObject(postData),
+                listener, errorListener);
+        requestQueue.add(request);
+    }
 }

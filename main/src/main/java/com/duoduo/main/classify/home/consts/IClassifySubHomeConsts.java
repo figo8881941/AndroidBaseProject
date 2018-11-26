@@ -11,6 +11,9 @@ public interface IClassifySubHomeConsts {
     public interface FunId {
         //分类首页
         public int CLASSIFY_SUB_HOME_DATA = 30001;
+
+        //主题
+        public int CLASSIFY_TOPIC_DATA = 30329;
     }
 
 }

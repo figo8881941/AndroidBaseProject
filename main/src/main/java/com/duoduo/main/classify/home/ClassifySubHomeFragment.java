@@ -15,7 +15,9 @@ import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
+import com.duoduo.main.classify.home.data.ClassifyTopicEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
+import com.duoduo.main.classify.home.event.ClassifyTopicDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 import com.duoduo.main.classify.view.ClassifyViewHelper;
 
@@ -33,6 +35,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     private RecyclerView recyclerView;
     private View recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
+
+    private ClassifySubHomeEntity homeEntity;
 
     private ClassifySubHomeController controller;
 
@@ -77,10 +81,16 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
-                ClassifySubHomeEntity homeEntity = event.getArg3();
+                homeEntity = event.getArg3();
+                //初始化headerview
                 recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeEntity);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerAdapter.notifyDataSetChanged();
+                //如果有主题，就请求主题数据
+                ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
+                if (topicModuleDtoEntity != null) {
+                    controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), 0);
+                }
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
@@ -90,6 +100,37 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             default:
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleClassifyTopicDataRequestEvent(ClassifyTopicDataRequestEvent event) {
+        if (isDestroy || event == null) {
+            return;
+        }
+        int requestId = event.getArg1();
+        if (requestId != data.getId()) {
+            return;
+        }
+        int what = event.getWhat();
+        switch (what) {
+            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_START: {
+
+            }
+            break;
+            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_FINISH: {
+                ClassifyTopicEntity classifyTopicEntity = event.getArg3();
+                recyclerAdapter.setData(classifyTopicEntity.getProductList());
+                recyclerAdapter.notifyDataSetChanged();
+            }
+            break;
+            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_ERROR: {
+
+            }
+            break;
+            default:
+                break;
+        }
+
     }
 
     @Override
