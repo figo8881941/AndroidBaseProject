@@ -1,9 +1,11 @@
 package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
+import android.view.ViewGroup;
 
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 
 /**
@@ -23,6 +25,10 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
 
     @Override
     public void bindViewHolder(QuickerViewHolder holder, TopicTwoProductListEntity itemData, int position) {
+
+    }
+
+    private void initSingleItemWithData(ViewGroup samllItem, ProductInfoEntity entity) {
 
     }
 
