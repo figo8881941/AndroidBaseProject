@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_common_fragment_bg">#f6f6f6</color>
+
+    <color name="main_common_list_item_single_small_product_layout_item_title_textcolor">#333333</color>
+    <color name="main_common_list_item_single_small_product_layout_item_postal_textcolor">#999999</color>
+    <color name="main_common_list_item_single_small_product_layout_item_tag_textcolor">#333</color>
+    <color name="main_common_list_item_single_small_product_layout_item_original_price_textcolor">#999999</color>
+    <color name="main_common_list_item_single_small_product_layout_item_buy_count_textcolor">#999999</color>
+
 </resources>

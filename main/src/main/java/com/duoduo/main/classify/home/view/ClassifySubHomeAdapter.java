@@ -2,6 +2,7 @@ package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -10,6 +11,8 @@ import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
+
+import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -48,6 +51,24 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
     private void initSingleItemWithData(QuickerViewHolder holder, View samllItem, ProductInfoEntity entity) {
         GifImageView itemImg = (GifImageView) holder.getView(samllItem, R.id.item_img);
         Glide.with(context).load(entity.getImg()).apply(requestOptions).into(itemImg);
+        TextView itemTitle = (TextView) holder.getView(samllItem, R.id.item_title);
+        itemTitle.setText(entity.getTitle());
+        TextView itemCoupon = (TextView) holder.getView(samllItem, R.id.item_tag);
+        List<ProductInfoEntity.TagListEntity> tags = entity.getTagList();
+        if (tags != null && !tags.isEmpty()) {
+            itemCoupon.setVisibility(View.VISIBLE);
+            ProductInfoEntity.TagListEntity tagListEntity = tags.get(0);
+            itemCoupon.setText(tagListEntity.getName());
+        } else {
+            itemCoupon.setVisibility(View.INVISIBLE);
+        }
+        TextView itemPostal = (TextView) holder.getView(samllItem, R.id.item_postal);
+        TextView itemPrice = (TextView) holder.getView(samllItem, R.id.item_price);
+        itemPrice.setText("¥" + entity.getHandPrice());
+        TextView itemOriginalPrice = (TextView) holder.getView(samllItem, R.id.item_original_price);
+        itemOriginalPrice.setText("¥" + entity.getFinalPrice());
+        TextView itemBuyCount = (TextView) holder.getView(samllItem, R.id.item_buy_count);
+        itemBuyCount.setText(entity.getSellAmounts());
     }
 
 }

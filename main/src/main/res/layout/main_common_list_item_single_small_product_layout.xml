@@ -6,33 +6,77 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/item_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_common_list_item_single_small_product_layout_imgsize"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/item_coupon"
+        android:id="@+id/item_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_img"
+        android:layout_marginLeft="@dimen/main_common_list_item_single_small_product_layout_item_title_margin_left_right"
+        android:layout_marginTop="@dimen/main_common_list_item_single_small_product_layout_item_title_margin_top"
+        android:layout_marginRight="@dimen/main_common_list_item_single_small_product_layout_item_title_margin_left_right"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/main_common_list_item_single_small_product_layout_item_title_textcolor"
+        android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_title_textsize" />
+
+    <TextView
+        android:id="@+id/item_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/main_common_list_item_single_small_product_layout_item_tag_height"
+        android:layout_below="@id/item_title"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/main_common_list_item_single_small_product_layout_item_tag_margin_left_right"
+        android:paddingLeft="@dimen/main_common_list_item_single_small_product_layout_item_tag_padding"
+        android:paddingRight="@dimen/main_common_list_item_single_small_product_layout_item_tag_padding"
+        android:textColor="@color/main_common_list_item_single_small_product_layout_item_tag_textcolor"
+        android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_tag_textsize"
+
+        />
 
     <TextView
         android:id="@+id/item_postal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_title"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/main_common_list_item_single_small_product_layout_item_postal_margin_left_right"
+        android:text="@string/main_common_list_item_two_product_postal"
+        android:textColor="@color/main_common_list_item_single_small_product_layout_item_postal_textcolor"
+        android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_postal_textsize"
+
+        />
 
     <TextView
         android:id="@+id/item_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_postal"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/main_common_list_item_single_small_product_layout_item_price_margin_left_right" />
 
     <TextView
         android:id="@+id/item_original_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_postal"
+        android:layout_toRightOf="@id/item_price"
+        android:textColor="@color/main_common_list_item_single_small_product_layout_item_original_price_textcolor"
+        android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_original_price_textsize" />
 
     <TextView
         android:id="@+id/item_buy_count"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_postal"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/main_common_list_item_single_small_product_layout_item_buy_count_margin_left_right"
+        android:textColor="@color/main_common_list_item_single_small_product_layout_item_buy_count_textcolor"
+        android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_buy_count_textsize" />
 
 </RelativeLayout>

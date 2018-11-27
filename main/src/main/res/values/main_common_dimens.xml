@@ -6,4 +6,19 @@
     <dimen name="main_common_list_item_two_product_layout_item_divider_height">8dp</dimen>
     <dimen name="main_common_list_item_two_product_layout_inner_divider_width">8dp</dimen>
 
+    <dimen name="main_common_list_item_single_small_product_layout_imgsize">200dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_title_textsize">12sp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_title_margin_top">6dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_title_margin_left_right">6dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_postal_textsize">10sp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_postal_margin_left_right">6dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_tag_height">15dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_tag_padding">4.5dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_tag_textsize">10sp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_tag_margin_left_right">6dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_price_margin_left_right">6dp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_original_price_textsize">10sp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_buy_count_textsize">10sp</dimen>
+    <dimen name="main_common_list_item_single_small_product_layout_item_buy_count_margin_left_right">6dp</dimen>
+
 </resources>
