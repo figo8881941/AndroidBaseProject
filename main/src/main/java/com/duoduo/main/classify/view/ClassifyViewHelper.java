@@ -366,6 +366,7 @@ public class ClassifyViewHelper {
             GifImageView titleImgView = titleView.findViewById(R.id.title_img);
             Glide.with(context).load(titleImgUrl).apply(requestOptions).into(titleImgView);
         }
+        adjustModuleLayout(context, parent, titleView);
         parent.addView(titleView);
     }
 

@@ -70,7 +70,6 @@
     <dimen name="main_classify_module_hot_sell_seemore_item_linespacing">3dp</dimen>
     <dimen name="main_classify_module_banner_small_height">100dp</dimen>
     <dimen name="main_classify_module_banner_small_padding_left_right">15dp</dimen>
-    <dimen name="main_classify_topic_title_padding_top_bottom">8dp</dimen>
 
 
 </resources>

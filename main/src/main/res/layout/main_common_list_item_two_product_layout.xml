@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/main_common_list_item_two_product_layout_height"
     android:paddingLeft="@dimen/main_common_list_item_two_product_layout_padding_left_right"
     android:paddingRight="@dimen/main_common_list_item_two_product_layout_padding_left_right">
 
@@ -21,7 +21,7 @@
         android:id="@+id/left_item"
         layout="@layout/main_common_list_item_single_small_product_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_common_list_item_single_small_product_height"
+        android:layout_height="match_parent"
         android:layout_below="@id/item_divider"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/inner_divider"></include>
@@ -30,7 +30,7 @@
         android:id="@+id/right_item"
         layout="@layout/main_common_list_item_single_small_product_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_common_list_item_single_small_product_height"
+        android:layout_height="match_parent"
         android:layout_below="@id/item_divider"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/inner_divider"></include>

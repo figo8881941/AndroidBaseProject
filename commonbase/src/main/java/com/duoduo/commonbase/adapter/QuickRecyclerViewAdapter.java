@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * 快捷的RecyclerViewAdapter
+ *
  * @param <T>
  */
 public abstract class QuickRecyclerViewAdapter<T> extends RecyclerView.Adapter<QuickRecyclerViewAdapter.QuickerViewHolder> {
@@ -78,6 +80,8 @@ public abstract class QuickRecyclerViewAdapter<T> extends RecyclerView.Adapter<Q
 
         private SparseArray<View> views = new SparseArray<View>();
 
+        private HashMap<View, SparseArray<View>> viewViews = new HashMap<View, SparseArray<View>>();
+
         public QuickerViewHolder(View itemView) {
             super(itemView);
         }
@@ -93,5 +97,20 @@ public abstract class QuickRecyclerViewAdapter<T> extends RecyclerView.Adapter<Q
             return view;
         }
 
+        public View getView(View view, int id) {
+            SparseArray<View> views = viewViews.get(view);
+            if (views == null) {
+                views = new SparseArray<View>();
+                viewViews.put(view, views);
+            }
+            View returnView = views.get(id);
+            if (returnView == null) {
+                returnView = ((ViewGroup) view).findViewById(id);
+                if (returnView != null) {
+                    views.append(id, returnView);
+                }
+            }
+            return returnView;
+        }
     }
 }
