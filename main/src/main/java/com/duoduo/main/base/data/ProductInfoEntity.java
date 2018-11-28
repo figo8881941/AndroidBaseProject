@@ -97,7 +97,7 @@ public class ProductInfoEntity {
     private double couponFinalPrice;
     private String action;
     private double handPrice;
-    private String handPriceString;
+    private CharSequence handPriceString;
     private int categoryId;
     private int categoryLeafId;
     private int isJuhuasuan;
@@ -398,11 +398,11 @@ public class ProductInfoEntity {
         this.handPrice = handPrice;
     }
 
-    public String getHandPriceString() {
+    public CharSequence getHandPriceString() {
         return handPriceString;
     }
 
-    public void setHandPriceString(String handPriceString) {
+    public void setHandPriceString(CharSequence handPriceString) {
         this.handPriceString = handPriceString;
     }
 

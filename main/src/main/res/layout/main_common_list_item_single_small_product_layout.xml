@@ -68,7 +68,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_tag"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/main_common_list_item_single_small_product_layout_item_price_margin_left_right" />
+            android:layout_marginTop="@dimen/main_common_list_item_single_small_product_layout_item_price_margin_top"
+            android:layout_marginLeft="@dimen/main_common_list_item_single_small_product_layout_item_price_margin_left_right"
+            android:textColor="@color/main_common_list_item_single_small_product_layout_item_price_textcolor"
+            android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_price_textsize"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_original_price"
@@ -77,6 +81,7 @@
             android:layout_below="@id/item_tag"
             android:layout_alignBaseline="@id/item_price"
             android:layout_toRightOf="@id/item_price"
+            android:layout_marginLeft="@dimen/main_common_list_item_single_small_product_layout_item_original_price_margin_left_right"
             android:textColor="@color/main_common_list_item_single_small_product_layout_item_original_price_textcolor"
             android:textSize="@dimen/main_common_list_item_single_small_product_layout_item_original_price_textsize" />
 

@@ -7,5 +7,6 @@
     <color name="main_common_list_item_single_small_product_layout_item_tag_textcolor">#333</color>
     <color name="main_common_list_item_single_small_product_layout_item_original_price_textcolor">#999999</color>
     <color name="main_common_list_item_single_small_product_layout_item_buy_count_textcolor">#999999</color>
+    <color name="main_common_list_item_single_small_product_layout_item_price_textcolor">#ff4f4c</color>
 
 </resources>

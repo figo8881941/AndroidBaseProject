@@ -86,15 +86,15 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
                 homeEntity = event.getArg3();
-                //初始化headerview
-                recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeEntity);
-                recyclerAdapter.setHeaderView(recyclerHeaderView);
-                recyclerAdapter.notifyDataSetChanged();
                 //如果有主题，就请求主题数据
                 ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
                 if (topicModuleDtoEntity != null) {
                     controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), 1);
                 }
+                //初始化headerview
+                recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeEntity);
+                recyclerAdapter.setHeaderView(recyclerHeaderView);
+                recyclerAdapter.notifyDataSetChanged();
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {

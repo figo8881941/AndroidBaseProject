@@ -1,6 +1,9 @@
 package com.duoduo.main.base.data;
 
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
 
 import com.duoduo.commonbase.utils.NumberUtils;
 
@@ -52,10 +55,34 @@ public class ProductDataUtils {
      * @param entity
      * @return
      */
-    public static String getProductHandPriceString(ProductInfoEntity entity) {
-        String handPriceString = entity.getHandPriceString();
+    public static CharSequence getProductHandPriceString(ProductInfoEntity entity) {
+        CharSequence handPriceString = entity.getHandPriceString();
         if (TextUtils.isEmpty(handPriceString)) {
             handPriceString = "¥" + NumberUtils.formatDoubleToScale(1, entity.getHandPrice());
+            entity.setHandPriceString(handPriceString);
+        }
+        return handPriceString;
+    }
+
+    /**
+     * 获取商品主题列表展示的到手价格字符串的方法
+     *
+     * @param entity
+     * @return
+     */
+    public static CharSequence getProductTopicHandPriceString(ProductInfoEntity entity) {
+        CharSequence handPriceString = entity.getHandPriceString();
+        if (TextUtils.isEmpty(handPriceString)) {
+            String originalString = "¥ " + NumberUtils.formatDoubleToScale(1, entity.getHandPrice());
+            int dotIndex = originalString.indexOf(".");
+            if (dotIndex >= 0) {
+                SpannableString handPriceSpannableString = new SpannableString(originalString);
+                AbsoluteSizeSpan absoluteSizeSpan = new AbsoluteSizeSpan(14, true);
+                handPriceSpannableString.setSpan(absoluteSizeSpan, dotIndex + 1, originalString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                handPriceString = handPriceSpannableString;
+            } else {
+                handPriceString = originalString;
+            }
             entity.setHandPriceString(handPriceString);
         }
         return handPriceString;

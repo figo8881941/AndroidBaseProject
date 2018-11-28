@@ -2,6 +2,10 @@ package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -66,7 +70,7 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
         }
         TextView itemPostal = (TextView) holder.getView(samllItem, R.id.item_postal);
         TextView itemPrice = (TextView) holder.getView(samllItem, R.id.item_price);
-        itemPrice.setText(ProductDataUtils.getProductHandPriceString(entity));
+        itemPrice.setText(ProductDataUtils.getProductTopicHandPriceString(entity));
         TextView itemOriginalPrice = (TextView) holder.getView(samllItem, R.id.item_original_price);
         itemOriginalPrice.setText(ProductDataUtils.getProductFinalPriceString(entity));
         itemOriginalPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG); //中划线
