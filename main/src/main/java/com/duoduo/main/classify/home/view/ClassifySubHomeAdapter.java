@@ -1,6 +1,7 @@
 package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,6 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 
@@ -64,11 +66,12 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
         }
         TextView itemPostal = (TextView) holder.getView(samllItem, R.id.item_postal);
         TextView itemPrice = (TextView) holder.getView(samllItem, R.id.item_price);
-        itemPrice.setText("¥" + entity.getHandPrice());
+        itemPrice.setText(ProductDataUtils.getProductHandPriceString(entity));
         TextView itemOriginalPrice = (TextView) holder.getView(samllItem, R.id.item_original_price);
-        itemOriginalPrice.setText("¥" + entity.getFinalPrice());
+        itemOriginalPrice.setText(ProductDataUtils.getProductFinalPriceString(entity));
+        itemOriginalPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG); //中划线
         TextView itemBuyCount = (TextView) holder.getView(samllItem, R.id.item_buy_count);
-        itemBuyCount.setText(entity.getSellAmounts());
+        itemBuyCount.setText(ProductDataUtils.getProductSellAmountsString(entity));
     }
 
 }

@@ -2,6 +2,7 @@ package com.duoduo.main.classify.view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
 import com.duoduo.commonbase.utils.NumberUtils;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.ProductInfoEntity;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -49,7 +51,7 @@ public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter
         TextView itemName = (TextView) holder.getView(R.id.item_name);
         itemName.setText(itemData.getTitle());
         TextView itemPrice = (TextView) holder.getView(R.id.item_price);
-        itemPrice.setText("¥" + NumberUtils.formatDoubleToScale(1, itemData.getCouponFinalPrice()));
+        itemPrice.setText(ProductDataUtils.getProductHandPriceString(itemData));
         TextView itemSellCount = (TextView) holder.getView(R.id.item_sell_count);
         itemSellCount.setText(String.format(sellCountFormat, itemData.getSellAmounts()));
     }

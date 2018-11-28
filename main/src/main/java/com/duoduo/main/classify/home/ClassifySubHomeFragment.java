@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.main.R;
-import com.duoduo.main.base.data.BaseDataUtils;
+import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
@@ -123,7 +123,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_FINISH: {
                 ClassifyTopicEntity classifyTopicEntity = event.getArg3();
-                List<TopicTwoProductListEntity> data = BaseDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), classifyTopicEntity.getProductList());
+                List<TopicTwoProductListEntity> data = ProductDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), classifyTopicEntity.getProductList());
                 recyclerAdapter.setData(data);
                 recyclerAdapter.notifyDataSetChanged();
             }

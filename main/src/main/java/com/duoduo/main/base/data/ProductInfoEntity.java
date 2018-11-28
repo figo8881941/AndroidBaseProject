@@ -73,6 +73,7 @@ public class ProductInfoEntity {
     private String sourceType;
     private String img;
     private double finalPrice;
+    private String finalPriceString;
     private double reservePrice;
     private String couponInfo;
     private String couponClickUrl;
@@ -92,9 +93,11 @@ public class ProductInfoEntity {
     private String category;
     private String categoryLeaf;
     private String sellAmounts;
+    private String sellAmountsString;
     private double couponFinalPrice;
     private String action;
     private double handPrice;
+    private String handPriceString;
     private int categoryId;
     private int categoryLeafId;
     private int isJuhuasuan;
@@ -201,6 +204,14 @@ public class ProductInfoEntity {
 
     public void setFinalPrice(double finalPrice) {
         this.finalPrice = finalPrice;
+    }
+
+    public String getFinalPriceString() {
+        return finalPriceString;
+    }
+
+    public void setFinalPriceString(String finalPriceString) {
+        this.finalPriceString = finalPriceString;
     }
 
     public double getReservePrice() {
@@ -355,6 +366,14 @@ public class ProductInfoEntity {
         this.sellAmounts = sellAmounts;
     }
 
+    public String getSellAmountsString() {
+        return sellAmountsString;
+    }
+
+    public void setSellAmountsString(String sellAmountsString) {
+        this.sellAmountsString = sellAmountsString;
+    }
+
     public double getCouponFinalPrice() {
         return couponFinalPrice;
     }
@@ -377,6 +396,14 @@ public class ProductInfoEntity {
 
     public void setHandPrice(double handPrice) {
         this.handPrice = handPrice;
+    }
+
+    public String getHandPriceString() {
+        return handPriceString;
+    }
+
+    public void setHandPriceString(String handPriceString) {
+        this.handPriceString = handPriceString;
     }
 
     public int getCategoryId() {
