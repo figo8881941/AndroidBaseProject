@@ -22,6 +22,10 @@ import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.event.ClassifyTopicDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 import com.duoduo.main.classify.view.ClassifyViewHelper;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,6 +39,8 @@ import java.util.List;
 public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.CategoryNewListEntity> {
 
     private ViewGroup mainView;
+
+    private SmartRefreshLayout refreshLayout;
 
     private RecyclerView recyclerView;
     private View recyclerHeaderView;
@@ -64,6 +70,22 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         final Context context = getContext().getApplicationContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
+        refreshLayout = (SmartRefreshLayout) mainView.findViewById(R.id.smartRefreshLayout);
+        //下拉刷新
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+            }
+        });
+
+        //上拉加载更多
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+
+            }
+        });
+
         recyclerAdapter = new ClassifySubHomeAdapter(context);
 
         recyclerView = (RecyclerView) mainView.findViewById(R.id.recyclerView);
@@ -71,18 +93,6 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

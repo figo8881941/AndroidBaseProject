@@ -2,4 +2,6 @@
 
     <string name="main_common_list_item_two_product_postal">包邮</string>
 
+    <string name="main_common_pull_refresh_tips">领券购物省50%</string>
+
 </resources>

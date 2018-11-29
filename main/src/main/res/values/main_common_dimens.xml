@@ -26,4 +26,8 @@
     <dimen name="main_common_list_item_single_small_product_layout_item_buy_count_textsize">10sp</dimen>
     <dimen name="main_common_list_item_single_small_product_layout_item_buy_count_margin_left_right">6dp</dimen>
 
+    <dimen name="main_common_pull_refresh_tips_textsize">11sp</dimen>
+    <dimen name="main_common_pull_refresh_tips_margin_bottom">6dp</dimen>
+
+
 </resources>
