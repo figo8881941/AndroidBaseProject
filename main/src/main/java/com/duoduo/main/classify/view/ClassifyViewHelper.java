@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -48,18 +49,58 @@ public class ClassifyViewHelper {
      * @param context
      * @param homeEntity
      */
-    public static View createHeaderViewByData(Context context, ClassifySubHomeEntity homeEntity) {
+    public static View initHeaderViewByData(Context context, ClassifySubHomeEntity homeEntity, View oldHeaderView) {
         if (context == null || homeEntity == null) {
             return null;
         }
-        LinearLayout linearLayout = new LinearLayout(context);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        //如果已经初始化过一次headerview，就重用
+        //并且对比数据，看看是否需要刷新
+        LinearLayout linearLayout = null;
+        if (oldHeaderView != null && oldHeaderView instanceof LinearLayout) {
+            linearLayout = (LinearLayout) oldHeaderView;
+        } else {
+            linearLayout = new LinearLayout(context);
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+        }
+
+        //把之前生成的子View保存好
+        int childCount = linearLayout.getChildCount();
+        ArrayList<View> childViews = new ArrayList<View>();
+        for (int i = 0; i < childCount; i++) {
+            childViews.add(linearLayout.getChildAt(i));
+        }
+
+        //移除所有的子View
+        linearLayout.removeAllViews();
+
         List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = homeEntity.getModuleDtoList();
         if (moduleDtoListEntities != null && !moduleDtoListEntities.isEmpty()) {
-            for (ClassifySubHomeEntity.ModuleDtoListEntity entity : moduleDtoListEntities) {
-                createModuleView(context, linearLayout, entity);
+            //有module
+            int size = moduleDtoListEntities.size();
+            for (int i = 0; i < size; i++) {
+                ClassifySubHomeEntity.ModuleDtoListEntity entity = moduleDtoListEntities.get(i);
+                if (i < childCount) {
+                    //当前数据与子View的数据进行匹配
+                    View child = childViews.get(i);
+                    Object tag = child.getTag();
+                    if (tag instanceof ClassifySubHomeEntity.ModuleDtoListEntity) {
+                        ClassifySubHomeEntity.ModuleDtoListEntity oldEntity =
+                                (ClassifySubHomeEntity.ModuleDtoListEntity) child.getTag();
+                        if (JSON.toJSONString(oldEntity).equals(JSON.toJSONString(entity))) {
+                            //老数据跟新数据一致，直接使用旧的子View
+                            linearLayout.addView(child, i);
+                            if (i == 0) {
+                                shouldAjustNextModuleLayout = false;
+                            }
+                            continue;
+                        }
+                    }
+                }
+                //新老数据不一致，生成新的子View
+                createModuleView(context, linearLayout, entity, i);
             }
         }
+
         ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
         if (topicModuleDtoEntity != null) {
             createTopicTilteView(context, linearLayout, topicModuleDtoEntity);
@@ -79,7 +120,7 @@ public class ClassifyViewHelper {
      * @param entity
      * @return
      */
-    public static void createModuleView(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
+    public static void createModuleView(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -87,22 +128,22 @@ public class ClassifyViewHelper {
         switch (moduleType) {
             case IClassifyConsts
                     .ModuleType.BANNER_LAYGE_750_270: {
-                createBannerLayge750_270(context, parent, entity);
+                createBannerLayge750_270(context, parent, entity, position);
             }
             break;
             case IClassifyConsts
                     .ModuleType.COMMON_GRID_THREE: {
-                createGridThree(context, parent, entity);
+                createGridThree(context, parent, entity, position);
             }
             break;
             case IClassifyConsts
                     .ModuleType.BANNER_SMALL: {
-                createBannerSmall(context, parent, entity);
+                createBannerSmall(context, parent, entity, position);
             }
             break;
             case IClassifyConsts
                     .ModuleType.HOT_SELL: {
-                createHotSell(context, parent, entity);
+                createHotSell(context, parent, entity, position);
             }
             break;
         }
@@ -115,7 +156,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static void createBannerSmall(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
+    private static void createBannerSmall(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -128,7 +169,8 @@ public class ClassifyViewHelper {
         ViewGroup bannerSmall = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_banner_small, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, bannerSmall);
-        parent.addView(bannerSmall);
+        bannerSmall.setTag(entity);
+        parent.addView(bannerSmall, position);
 
         ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
         GifImageView bannerImg = (GifImageView) bannerSmall.findViewById(R.id.banner_img);
@@ -142,7 +184,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static void createHotSell(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
+    private static void createHotSell(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -155,7 +197,8 @@ public class ClassifyViewHelper {
         ViewGroup hotSell = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_hot_sell, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, hotSell);
-        parent.addView(hotSell);
+        hotSell.setTag(entity);
+        parent.addView(hotSell, position);
 
         //标题
         TextView titleText = (TextView) hotSell.findViewById(R.id.title_text);
@@ -191,7 +234,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static void createGridThree(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
+    private static void createGridThree(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -205,7 +248,8 @@ public class ClassifyViewHelper {
         ViewGroup gridThree = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_classify_module_grid_three, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, gridThree);
-        parent.addView(gridThree);
+        gridThree.setTag(entity);
+        parent.addView(gridThree, position);
 
         int size = entranceItemDtoListEntities.size();
         ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
@@ -291,7 +335,7 @@ public class ClassifyViewHelper {
      * @param entity
      * @return
      */
-    public static void createBannerLayge750_270(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity) {
+    public static void createBannerLayge750_270(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return;
         }
@@ -310,7 +354,8 @@ public class ClassifyViewHelper {
         Banner banner = (Banner) LayoutInflater.from(context).inflate(R.layout.main_classify_module_banner, parent, false);
         //调整布局
         adjustModuleLayout(context, parent, banner);
-        parent.addView(banner);
+        banner.setTag(entity);
+        parent.addView(banner, position);
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
@@ -367,6 +412,7 @@ public class ClassifyViewHelper {
             Glide.with(context).load(titleImgUrl).apply(requestOptions).into(titleImgView);
         }
         adjustModuleLayout(context, parent, titleView);
+        titleView.setTag(topicModuleDtoEntity);
         parent.addView(titleView);
     }
 

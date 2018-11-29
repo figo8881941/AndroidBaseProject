@@ -153,7 +153,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 recyclerAdapter.setData(null);
 
                 //初始化headerview
-                recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeEntity);
+                recyclerHeaderView = ClassifyViewHelper.initHeaderViewByData(
+                        getContext().getApplicationContext(), homeEntity, recyclerHeaderView);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerView.setAdapter(recyclerAdapter);
 
