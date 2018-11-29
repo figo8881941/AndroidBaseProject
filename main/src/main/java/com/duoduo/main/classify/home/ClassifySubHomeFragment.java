@@ -14,6 +14,7 @@ import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductDataUtils;
+import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
@@ -47,7 +48,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     private View recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
 
+    //首页数据
     private ClassifySubHomeEntity homeEntity;
+
+    //当前主题页
+    private int currentTopicPage = 1;
+    //是否有下一页数据
+    private boolean hasNextPage = true;
 
     private ClassifySubHomeController controller;
 
@@ -95,9 +102,10 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                if (hasTopicData()) {
+                if (hasTopicData() && hasNextPageData()) {
                     //如果有主题数据，上拉请求更多
-
+                    ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
+                    controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage + 1);
                 } else {
                     //如果没有主题数据，不上拉请求更多
                     refreshlayout.finishLoadmore();
@@ -133,10 +141,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                     refreshLayout.setEnableRefresh(true);
                 }
 
+                //主题页重制为第1页
+                currentTopicPage = 1;
+
                 //如果有主题，就请求主题数据
                 ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
                 if (topicModuleDtoEntity != null) {
-                    controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), 1);
+                    controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage);
                 }
                 //清空原来的主题数据
                 recyclerAdapter.setData(null);
@@ -178,18 +189,30 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_FINISH: {
                 ClassifyTopicEntity classifyTopicEntity = event.getArg3();
-                List<TopicTwoProductListEntity> data = ProductDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), classifyTopicEntity.getProductList());
-                recyclerAdapter.setData(data);
-                recyclerAdapter.notifyDataSetChanged();
-                if (hasTopicData()) {
-                    //如果有主题数据，打开上拉加载更多
-                    refreshLayout.setEnableLoadmore(true);
+                List<ProductInfoEntity> productInfoEntities = classifyTopicEntity != null ?
+                        classifyTopicEntity.getProductList() : null;
+                if (productInfoEntities != null && !productInfoEntities.isEmpty()) {
+                    //如果有商品数据
+                    currentTopicPage = event.getArg2();
+                    List<TopicTwoProductListEntity> data = ProductDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), productInfoEntities);
+                    recyclerAdapter.setData(data);
+                    recyclerAdapter.notifyDataSetChanged();
+                    if (hasTopicData()) {
+                        //如果有主题数据，打开上拉加载更多
+                        refreshLayout.setEnableLoadmore(true);
+                    }
+                    refreshLayout.finishLoadmore();
+                } else {
+                    //如果没有商品数据
+                    hasNextPage = false;
+                    refreshLayout.finishLoadmoreWithNoMoreData();
                 }
             }
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_ERROR: {
                 Exception exception = event.getArg4();
                 CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
+                refreshLayout.finishLoadmore();
             }
             break;
             default:
@@ -216,6 +239,15 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         List<TopicTwoProductListEntity> datas = recyclerAdapter != null
                 ? recyclerAdapter.getData() : null;
         return datas != null && !datas.isEmpty();
+    }
+
+    /**
+     * 是否有下一页数据
+     *
+     * @return
+     */
+    private boolean hasNextPageData() {
+        return hasNextPage;
     }
 
     @Override

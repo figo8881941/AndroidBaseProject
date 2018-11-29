@@ -74,6 +74,7 @@ public class ClassifySubHomeController {
         final EventBus eventBus = EventBus.getDefault();
         final ClassifyTopicDataRequestEvent event = new ClassifyTopicDataRequestEvent();
         event.setArg1(requestId);
+        event.setArg2(pageNum);
 
         //通知开始
         event.setWhat(ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_START);
