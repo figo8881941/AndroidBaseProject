@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
@@ -71,10 +72,22 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         refreshLayout = (SmartRefreshLayout) mainView.findViewById(R.id.smartRefreshLayout);
+        //一开始，没有数据，禁止下拉、上拉刷新，等加载数据回来，再打开
+        refreshLayout.setEnableRefresh(false);
+        refreshLayout.setEnableLoadmore(false);
         //下拉刷新
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                if (hasHomeData()) {
+                    //如果已经有数据，下拉重新请求数据
+                    if (controller != null) {
+                        controller.requestClassifySubHomeData();
+                    }
+                } else {
+                    //如果没有数据，不下拉刷新
+                    refreshlayout.finishRefresh();
+                }
             }
         });
 
@@ -82,7 +95,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
+                if (hasTopicData()) {
+                    //如果有主题数据，上拉请求更多
 
+                } else {
+                    //如果没有主题数据，不上拉请求更多
+                    refreshlayout.finishLoadmore();
+                }
             }
         });
 
@@ -108,19 +127,33 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
                 homeEntity = event.getArg3();
+
+                if (hasHomeData()) {
+                    //如果有数据，打开上拉刷新
+                    refreshLayout.setEnableRefresh(true);
+                }
+
                 //如果有主题，就请求主题数据
                 ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
                 if (topicModuleDtoEntity != null) {
                     controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), 1);
                 }
+                //清空原来的主题数据
+                recyclerAdapter.setData(null);
+
                 //初始化headerview
                 recyclerHeaderView = ClassifyViewHelper.createHeaderViewByData(getContext().getApplicationContext(), homeEntity);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
-                recyclerAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(recyclerAdapter);
+
+                refreshLayout.finishRefresh();
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
+                Exception exception = event.getArg4();
+                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
 
+                refreshLayout.finishRefresh();
             }
             break;
             default:
@@ -148,16 +181,41 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 List<TopicTwoProductListEntity> data = ProductDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), classifyTopicEntity.getProductList());
                 recyclerAdapter.setData(data);
                 recyclerAdapter.notifyDataSetChanged();
+                if (hasTopicData()) {
+                    //如果有主题数据，打开上拉加载更多
+                    refreshLayout.setEnableLoadmore(true);
+                }
             }
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_ERROR: {
-
+                Exception exception = event.getArg4();
+                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
             }
             break;
             default:
                 break;
         }
 
+    }
+
+    /**
+     * 是否有首页数据
+     *
+     * @return
+     */
+    private boolean hasHomeData() {
+        return homeEntity != null;
+    }
+
+    /**
+     * 是否有主题数据
+     *
+     * @return
+     */
+    private boolean hasTopicData() {
+        List<TopicTwoProductListEntity> datas = recyclerAdapter != null
+                ? recyclerAdapter.getData() : null;
+        return datas != null && !datas.isEmpty();
     }
 
     @Override
