@@ -2,10 +2,6 @@ package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,7 +23,7 @@ import pl.droidsonroids.gif.GifImageView;
  */
 public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter<TopicTwoProductListEntity> {
 
-    private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
+    private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL).placeholder(R.drawable.main_common_list_item_single_product_item_default_img);
 
     public ClassifySubHomeAdapter(Context context) {
         super(context);
