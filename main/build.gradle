@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.duoduo.main.eventbus.MyEventBusIndex' ]
+            }
+        }
     }
 
     buildTypes {
@@ -25,4 +30,6 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':commonbusiness')
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 }
+

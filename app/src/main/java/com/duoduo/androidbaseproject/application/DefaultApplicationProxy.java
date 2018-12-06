@@ -5,8 +5,11 @@ import android.support.annotation.Nullable;
 
 import com.duoduo.androidbaseproject.BuildConfig;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
+import com.duoduo.main.eventbus.MyEventBusIndex;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -23,6 +26,8 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
     public void onCreate() {
         // 初始化全局配置
         initGlobalBuildConfig();
+        // 初始化默认的EventBus
+        initEventBust();
         // 初始化Logger日志框架
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
@@ -31,6 +36,14 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
                 return true;
             }
         });
+    }
+
+    /**
+     * 初始化EventBus
+     */
+    private void initEventBust() {
+        //使用编译期生成的SubscriberInfoIndex初始化默认的EventBus
+        EventBus.builder().addIndex(new MyEventBusIndex()).installDefaultEventBus();
     }
 
     /**
