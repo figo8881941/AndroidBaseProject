@@ -151,6 +151,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 }
                 //清空原来的主题数据
                 recyclerAdapter.setData(null);
+                //先禁止下拉加载更多
+                refreshLayout.setEnableLoadmore(false);
 
                 //初始化headerview
                 recyclerHeaderView = ClassifyViewHelper.initHeaderViewByData(
