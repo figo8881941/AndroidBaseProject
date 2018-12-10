@@ -89,7 +89,7 @@ public class ClassifyViewHelper {
                         if (JSON.toJSONString(oldEntity).equals(JSON.toJSONString(entity))) {
                             //老数据跟新数据一致，直接使用旧的子View
                             linearLayout.addView(child, position);
-                            position ++;
+                            position++;
                             if (i == 0) {
                                 shouldAjustNextModuleLayout = false;
                             }
@@ -100,7 +100,7 @@ public class ClassifyViewHelper {
                 //新老数据不一致，生成新的子View
                 boolean add = createModuleView(context, linearLayout, entity, position);
                 if (add) {
-                    position ++;
+                    position++;
                 }
             }
         }
