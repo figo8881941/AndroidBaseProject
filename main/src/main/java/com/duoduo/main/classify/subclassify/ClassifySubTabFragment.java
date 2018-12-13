@@ -51,7 +51,10 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_tab_fragment, container, false);
         initView();
-        controller.requestSubTabProductData(data.getId());
+        if (data != null) {
+            controller.requestSubTabProductData(data.getId());
+            controller.requestSubTabTopicData(data.getTopicId());
+        }
         return mainView;
     }
 
