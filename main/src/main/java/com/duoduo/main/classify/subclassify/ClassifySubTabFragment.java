@@ -34,7 +34,10 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     private ClassifySubTabTopicDataEntity topicDataEntity;
 
-    private boolean isDodingRequest = false;
+    private boolean isDodingProductDataRequest = false;
+
+    private boolean isDodingTopicDataRequest = false;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,16 +70,16 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         int what = event.getWhat();
         switch (what) {
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_START: {
-
+                isDodingProductDataRequest = true;
             }
             break;
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_SUCCESS: {
+                isDodingProductDataRequest = false;
                 productDataEntity = event.getArg3();
-
             }
             break;
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_ERROR: {
-
+                isDodingProductDataRequest = false;
             }
             break;
         }
@@ -90,15 +93,16 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         int what = event.getWhat();
         switch (what) {
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_START: {
-
+                isDodingTopicDataRequest = true;
             }
             break;
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_SUCCESS: {
+                isDodingTopicDataRequest = false;
                 topicDataEntity = event.getArg3();
             }
             break;
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_ERROR: {
-
+                isDodingTopicDataRequest = false;
             }
             break;
         }
@@ -108,6 +112,9 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         return productDataEntity != null || topicDataEntity != null;
     }
 
+    private boolean isDodingRequest() {
+        return isDodingProductDataRequest || isDodingTopicDataRequest;
+    }
 
     @Override
     public void onDestroy() {
