@@ -177,7 +177,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleClassifyTopicDataRequestEvent(ClassifyTopicDataRequestEvent event) {
-        if (isDestroy || event == null) {
+        if (data == null || isDestroy || event == null) {
             return;
         }
         int requestId = event.getArg1();

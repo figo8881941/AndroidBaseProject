@@ -84,7 +84,12 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleRequestSubTabProductData(ClassifySubTabProductDataReqeustEvent event) {
-        if (isDestroy || event == null) {
+        if (data == null || isDestroy || event == null) {
+            return;
+        }
+        int categoryId = event.getArg1();
+        if (categoryId != data.getId()) {
+            //不是这个子Tab的事件
             return;
         }
         int what = event.getWhat();
@@ -115,7 +120,12 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleRequestSubTabTopicData(ClassifySubTabTopicDataReqeustEvent event) {
-        if (isDestroy || event == null) {
+        if (data == null || isDestroy || event == null) {
+            return;
+        }
+        int topicId = event.getArg1();
+        if (topicId != data.getTopicId()) {
+            //不是这个tab的事件
             return;
         }
         int what = event.getWhat();
