@@ -186,7 +186,7 @@ public class MainActivity extends BaseActivity {
 
             }
             break;
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH: {
+            case MainTabRequestEvent.EVENT_NAME_REQUEST_SUCCESS: {
                 //tab数据返回，更新界面
                 MainTabEntity mainTabEntity = event.getArg3();
                 updateViewByMainTabData(mainTabEntity);

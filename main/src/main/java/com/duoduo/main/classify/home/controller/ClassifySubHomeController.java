@@ -44,7 +44,7 @@ public class ClassifySubHomeController {
                 @Override
                 public void onResponse(JSONObject response) {
                     //通知请求完成
-                    event.setWhat(ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH);
+                    event.setWhat(ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_SUCCESS);
                     ClassifySubHomeEntity classifySubHomeEntity = JSON.parseObject(response.toString(), ClassifySubHomeEntity.class);
                     event.setArg3(classifySubHomeEntity);
                     eventBus.post(event);
@@ -85,7 +85,7 @@ public class ClassifySubHomeController {
                 @Override
                 public void onResponse(JSONObject response) {
                     //通知请求完成
-                    event.setWhat(ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_FINISH);
+                    event.setWhat(ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_SUCCESS);
                     ClassifyTopicEntity classifyTopicEntity = JSON.parseObject(response.toString(), ClassifyTopicEntity.class);
                     event.setArg3(classifyTopicEntity);
                     eventBus.post(event);

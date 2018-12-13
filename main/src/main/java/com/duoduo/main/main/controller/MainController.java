@@ -42,7 +42,7 @@ public class MainController {
                 @Override
                 public void onResponse(JSONObject response) {
                     //通知请求完成
-                    event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_FINISH);
+                    event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_SUCCESS);
                     MainTabEntity mainTabEntity = JSON.parseObject(response.toString(), MainTabEntity.class);
                     event.setArg3(mainTabEntity);
                     eventBus.post(event);

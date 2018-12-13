@@ -42,7 +42,7 @@ public class ClassifyController {
                 @Override
                 public void onResponse(JSONObject response) {
                     //通知请求完成
-                    event.setWhat(ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH);
+                    event.setWhat(ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_SUCCESS);
                     ClassifySubTabEntity classifySubTabEntity = JSON.parseObject(response.toString(), ClassifySubTabEntity.class);
                     event.setArg3(classifySubTabEntity);
                     eventBus.post(event);

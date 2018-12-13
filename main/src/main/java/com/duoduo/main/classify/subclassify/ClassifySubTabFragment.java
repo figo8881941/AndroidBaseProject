@@ -13,9 +13,11 @@ import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.subclassify.controller.ClassifySubTabController;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabProductDataEntity;
+import com.duoduo.main.classify.subclassify.data.ClassifySubTabTopicDataEntity;
 import com.duoduo.main.classify.subclassify.event.ClassifySubTabProductDataReqeustEvent;
 import com.duoduo.main.classify.subclassify.event.ClassifySubTabTopicDataReqeustEvent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -28,9 +30,16 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     private ClassifySubTabController controller;
 
+    private ClassifySubTabProductDataEntity productDataEntity;
+
+    private ClassifySubTabTopicDataEntity topicDataEntity;
+
+    private boolean isDodingRequest = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         controller = new ClassifySubTabController(getContext().getApplicationContext());
     }
 
@@ -61,8 +70,8 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
             }
             break;
-            case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_FINISH: {
-                ClassifySubTabProductDataEntity entity = event.getArg3();
+            case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_SUCCESS: {
+                productDataEntity = event.getArg3();
 
             }
             break;
@@ -84,8 +93,8 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
             }
             break;
-            case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_FINISH: {
-
+            case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_SUCCESS: {
+                topicDataEntity = event.getArg3();
             }
             break;
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_ERROR: {
@@ -95,8 +104,14 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         }
     }
 
+    private boolean hasData() {
+        return productDataEntity != null || topicDataEntity != null;
+    }
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

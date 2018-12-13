@@ -133,7 +133,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
 
             }
             break;
-            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH: {
+            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_SUCCESS: {
                 homeEntity = event.getArg3();
 
                 if (hasHomeData()) {
@@ -190,7 +190,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
 
             }
             break;
-            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_FINISH: {
+            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_SUCCESS: {
                 ClassifyTopicEntity classifyTopicEntity = event.getArg3();
                 List<ProductInfoEntity> productInfoEntities = classifyTopicEntity != null ?
                         classifyTopicEntity.getProductList() : null;

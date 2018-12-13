@@ -41,7 +41,7 @@ public class ClassifySubTabController {
                 @Override
                 public void onResponse(JSONObject response) {
                     ClassifySubTabProductDataEntity dataEntity = JSON.parseObject(response.toString(), ClassifySubTabProductDataEntity.class);
-                    event.setWhat(ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_FINISH);
+                    event.setWhat(ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_SUCCESS);
                     event.setArg3(dataEntity);
                     eventBus.post(event);
                 }

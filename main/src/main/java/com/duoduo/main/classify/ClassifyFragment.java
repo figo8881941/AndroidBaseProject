@@ -207,7 +207,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
 
             }
             break;
-            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_FINISH: {
+            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_SUCCESS: {
                 ClassifySubTabEntity classifySubTabEntity = event.getArg3();
                 //创建数据下发的fragment
                 ArrayList<BaseFragment> fragmentList = ClassifySubFragmentHelper.createClassifySubFragmentList(classifySubTabEntity);

@@ -8,6 +8,8 @@ import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
  */
 public class ClassifySubHomeDataRequestEvent extends BaseEvent<ClassifySubHomeEntity, Exception> {
     public static final int EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_START = 1;
-    public static final int EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH = 2;
+    public static final int EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_SUCCESS = 2;
     public static final int EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR = 3;
+    public static final int EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_FINISH = 4;
+
 }
