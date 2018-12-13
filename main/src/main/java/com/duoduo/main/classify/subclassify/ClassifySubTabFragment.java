@@ -1,16 +1,23 @@
 package com.duoduo.main.classify.subclassify;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
+import com.duoduo.main.base.data.ProductDataUtils;
+import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
+import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 import com.duoduo.main.classify.subclassify.controller.ClassifySubTabController;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabProductDataEntity;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabTopicDataEntity;
@@ -20,6 +27,8 @@ import com.duoduo.main.classify.subclassify.event.ClassifySubTabTopicDataReqeust
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 /**
  * 子分类Fragment
@@ -38,6 +47,9 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     private boolean isDodingTopicDataRequest = false;
 
+    private RecyclerView recyclerView;
+
+    private ClassifySubHomeAdapter recyclerAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,10 +71,15 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
     }
 
     private void initView() {
-        TextView name = (TextView) mainView.findViewById(R.id.name);
-        if (data != null) {
-            name.setText(data.getCategoryName());
-        }
+        final Context context = getContext().getApplicationContext();
+
+        recyclerAdapter = new ClassifySubHomeAdapter(context);
+
+        recyclerView = (RecyclerView) mainView.findViewById(R.id.recyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -79,10 +96,18 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_SUCCESS: {
                 isDodingProductDataRequest = false;
                 productDataEntity = event.getArg3();
+                if (productDataEntity != null) {
+                    List<TopicTwoProductListEntity> entities = ProductDataUtils
+                            .makeTopicTwoProductListEntitys(recyclerAdapter.getData(), productDataEntity.getProductList());
+                    recyclerAdapter.setData(entities);
+                    recyclerAdapter.notifyDataSetChanged();
+                }
             }
             break;
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_ERROR: {
                 isDodingProductDataRequest = false;
+                Exception exception = event.getArg4();
+                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
             }
             break;
         }
@@ -106,6 +131,8 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
             break;
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_ERROR: {
                 isDodingTopicDataRequest = false;
+                Exception exception = event.getArg4();
+                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
             }
             break;
         }

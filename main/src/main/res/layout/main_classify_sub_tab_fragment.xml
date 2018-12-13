@@ -5,9 +5,22 @@
     android:background="@color/main_common_fragment_bg"
     >
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/main_common_pull_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_common_fragment_bg" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </RelativeLayout>
