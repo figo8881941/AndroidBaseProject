@@ -5,7 +5,7 @@ import com.duoduo.main.base.data.ResultEntity;
 
 import java.util.List;
 
-public class ClassifySubTabDataEntity {
+public class ClassifySubTabProductDataEntity {
 
     /**
      * opStatus : 0

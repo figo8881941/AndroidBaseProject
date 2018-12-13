@@ -26,7 +26,7 @@ public class ClassifySubTabNetModel extends BaseNetModel {
      * @param errorListener
      * @throws Exception
      */
-    public void requestSubTabData(int categoryId, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
+    public void requestSubTabProductData(int categoryId, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
         String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifySubTabConsts.FunId.CLASSIFY_SUB_TAB_DATA, "quMall");
         JSONObject postData = CommonNetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
         postData.put("curCategoryId", categoryId);
