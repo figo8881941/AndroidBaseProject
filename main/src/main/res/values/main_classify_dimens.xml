@@ -71,5 +71,9 @@
     <dimen name="main_classify_module_banner_small_height">100dp</dimen>
     <dimen name="main_classify_module_banner_small_padding_left_right">15dp</dimen>
 
+    <!-- 分类主题标题 -->
+    <dimen name="main_classify_topic_title_img_height">40dp</dimen>
+
+
 
 </resources>
