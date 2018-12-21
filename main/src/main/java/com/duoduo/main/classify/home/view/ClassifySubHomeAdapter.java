@@ -23,7 +23,9 @@ import pl.droidsonroids.gif.GifImageView;
  */
 public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter<TopicTwoProductListEntity> {
 
-    private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL).placeholder(R.drawable.main_common_list_item_single_product_item_default_img);
+    private RequestOptions requestOptions = RequestOptions
+            .diskCacheStrategyOf(DiskCacheStrategy.ALL)
+            .placeholder(R.drawable.main_common_list_item_single_product_item_default_img);
 
     public ClassifySubHomeAdapter(Context context) {
         super(context);
@@ -52,6 +54,7 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
 
     private void initSingleItemWithData(QuickerViewHolder holder, View samllItem, ProductInfoEntity entity) {
         GifImageView itemImg = (GifImageView) holder.getView(samllItem, R.id.item_img);
+        Glide.with(context).clear(itemImg);
         Glide.with(context).load(entity.getImg()).apply(requestOptions).into(itemImg);
         TextView itemTitle = (TextView) holder.getView(samllItem, R.id.item_title);
         itemTitle.setText(entity.getTitle());
