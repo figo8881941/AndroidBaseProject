@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.duoduo.commonbusiness.dialog.CommonLoadingDialogHelper;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
@@ -48,6 +49,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     private RecyclerView recyclerView;
     private ClassifySubHomeHeaderView recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
+
+    private CommonLoadingDialogHelper loadingDialogHelper;
 
     //首页数据
     private ClassifySubHomeEntity homeEntity;
@@ -123,6 +126,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
+
+        loadingDialogHelper = new CommonLoadingDialogHelper(getActivity());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -190,10 +195,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         if (requestId != data.getId()) {
             return;
         }
+        int page = event.getArg2();
         int what = event.getWhat();
         switch (what) {
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_START: {
-
+                if (page == 1) {
+                    loadingDialogHelper.showLoadingDialog();
+                }
             }
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_SUCCESS: {
@@ -216,12 +224,14 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                     hasNextPage = false;
                     refreshLayout.finishLoadmoreWithNoMoreData();
                 }
+                loadingDialogHelper.hideLoadingDialog();
             }
             break;
             case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_ERROR: {
                 Exception exception = event.getArg4();
                 CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
                 refreshLayout.finishLoadmore();
+                loadingDialogHelper.hideLoadingDialog();
             }
             break;
             default:
@@ -321,6 +331,11 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         }
         recyclerAdapter = null;
         recyclerHeaderView = null;
+
+        if (loadingDialogHelper != null) {
+            loadingDialogHelper.destroy();
+            loadingDialogHelper = null;
+        }
 
         homeEntity = null;
 
