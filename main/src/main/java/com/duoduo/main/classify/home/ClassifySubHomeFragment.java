@@ -92,6 +92,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                     if (controller != null) {
                         controller.requestClassifySubHomeData();
                     }
+                    //刷新数据，先停止banner滚动
+                    stopBannerAutoPlay();
                 } else {
                     //如果没有数据，不下拉刷新
                     refreshlayout.finishRefresh();
@@ -162,6 +164,9 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 recyclerView.setAdapter(recyclerAdapter);
 
                 refreshLayout.finishRefresh();
+
+                //开启banner滚动
+                startBannerAutoPlay();
             }
             break;
             case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
@@ -252,6 +257,50 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
      */
     private boolean hasNextPageData() {
         return hasNextPage;
+    }
+
+    /**
+     * 如果有banner，就开启banner自动播放
+     */
+    private void startBannerAutoPlay() {
+        if (recyclerHeaderView != null) {
+            recyclerHeaderView.startBannerAutoPlay();
+        }
+    }
+
+    /**
+     * 如果有banner，就停止banner自动播放
+     */
+    private void stopBannerAutoPlay() {
+        if (recyclerHeaderView != null) {
+            recyclerHeaderView.stopBannerAutoPlay();
+        }
+    }
+
+    @Override
+    public void onSelected() {
+        super.onSelected();
+        startBannerAutoPlay();
+    }
+
+    @Override
+    public void onUnSelected() {
+        super.onUnSelected();
+        stopBannerAutoPlay();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isSelected) {
+            startBannerAutoPlay();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopBannerAutoPlay();
     }
 
     @Override
