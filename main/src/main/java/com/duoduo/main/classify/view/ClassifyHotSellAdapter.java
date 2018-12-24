@@ -40,6 +40,7 @@ public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter
     @Override
     public void bindViewHolder(QuickerViewHolder holder, ProductInfoEntity itemData, int position) {
         GifImageView itemImg = (GifImageView) holder.getView(R.id.item_img);
+        Glide.with(context).clear(itemImg);
         Glide.with(context).load(itemData.getImg()).apply(requestOptions).into(itemImg);
         TextView itemPosition = (TextView) holder.getView(R.id.item_position);
         if (position < 3) {

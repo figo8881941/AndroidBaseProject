@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.view;
+package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -19,6 +19,8 @@ import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.classify.consts.IClassifyConsts;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
+import com.duoduo.main.classify.home.view.ClassifySubHomeHeaderView;
+import com.duoduo.main.classify.view.ClassifyHotSellAdapter;
 import com.duoduo.main.common.image.BannerGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -31,7 +33,7 @@ import pl.droidsonroids.gif.GifImageView;
 /**
  * 分类首页ViewHelper
  */
-public class ClassifyViewHelper {
+public class ClassifySubHomeViewHelper {
 
     /**
      * 加载图片的RequestOptions
@@ -49,29 +51,29 @@ public class ClassifyViewHelper {
      * @param context
      * @param homeEntity
      */
-    public static View initHeaderViewByData(Context context, ClassifySubHomeEntity homeEntity, View oldHeaderView) {
+    public static ClassifySubHomeHeaderView initHeaderViewByData(Context context, ClassifySubHomeEntity homeEntity, ClassifySubHomeHeaderView oldHeaderView) {
         if (context == null || homeEntity == null) {
             return null;
         }
         //如果已经初始化过一次headerview，就重用
         //并且对比数据，看看是否需要刷新
-        LinearLayout linearLayout = null;
-        if (oldHeaderView != null && oldHeaderView instanceof LinearLayout) {
-            linearLayout = (LinearLayout) oldHeaderView;
+        ClassifySubHomeHeaderView headerView = null;
+        if (oldHeaderView != null) {
+            headerView = oldHeaderView;
         } else {
-            linearLayout = new LinearLayout(context);
-            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            headerView = new ClassifySubHomeHeaderView(context);
+            headerView.setOrientation(LinearLayout.VERTICAL);
         }
 
         //把之前生成的子View保存好
-        int childCount = linearLayout.getChildCount();
+        int childCount = headerView.getChildCount();
         ArrayList<View> childViews = new ArrayList<View>();
         for (int i = 0; i < childCount; i++) {
-            childViews.add(linearLayout.getChildAt(i));
+            childViews.add(headerView.getChildAt(i));
         }
 
         //移除所有的子View
-        linearLayout.removeAllViews();
+        headerView.removeAllViews();
 
         List<ClassifySubHomeEntity.ModuleDtoListEntity> moduleDtoListEntities = homeEntity.getModuleDtoList();
         if (moduleDtoListEntities != null && !moduleDtoListEntities.isEmpty()) {
@@ -88,7 +90,7 @@ public class ClassifyViewHelper {
                                 (ClassifySubHomeEntity.ModuleDtoListEntity) child.getTag();
                         if (JSON.toJSONString(oldEntity).equals(JSON.toJSONString(entity))) {
                             //老数据跟新数据一致，直接使用旧的子View
-                            linearLayout.addView(child, position);
+                            headerView.addView(child, position);
                             position++;
                             if (i == 0) {
                                 shouldAjustNextModuleLayout = false;
@@ -98,7 +100,7 @@ public class ClassifyViewHelper {
                     }
                 }
                 //新老数据不一致，生成新的子View
-                boolean add = createModuleView(context, linearLayout, entity, position);
+                boolean add = createModuleView(context, headerView, entity, position);
                 if (add) {
                     position++;
                 }
@@ -107,13 +109,13 @@ public class ClassifyViewHelper {
 
         ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
         if (topicModuleDtoEntity != null) {
-            createTopicTilteView(context, linearLayout, topicModuleDtoEntity);
+            createTopicTilteView(context, headerView, topicModuleDtoEntity);
         }
-        if (linearLayout.getChildCount() <= 0) {
+        if (headerView.getChildCount() <= 0) {
             //如果经过上面处理，都没有任务的子view添加，则返回空
             return null;
         }
-        return linearLayout;
+        return headerView;
     }
 
     /**
@@ -124,7 +126,7 @@ public class ClassifyViewHelper {
      * @param entity
      * @return
      */
-    public static boolean createModuleView(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
+    public static boolean createModuleView(Context context, ClassifySubHomeHeaderView parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return false;
         }
@@ -162,7 +164,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static boolean createBannerSmall(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
+    private static boolean createBannerSmall(Context context, ClassifySubHomeHeaderView parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return false;
         }
@@ -191,7 +193,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static boolean createHotSell(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
+    private static boolean createHotSell(Context context, ClassifySubHomeHeaderView parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return false;
         }
@@ -242,7 +244,7 @@ public class ClassifyViewHelper {
      * @param parent
      * @param entity
      */
-    private static boolean createGridThree(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
+    private static boolean createGridThree(Context context, ClassifySubHomeHeaderView parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return false;
         }
@@ -344,7 +346,7 @@ public class ClassifyViewHelper {
      * @param entity
      * @return
      */
-    public static boolean createBannerLayge750_270(Context context, LinearLayout parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
+    public static boolean createBannerLayge750_270(Context context, ClassifySubHomeHeaderView parent, ClassifySubHomeEntity.ModuleDtoListEntity entity, int position) {
         if (context == null || parent == null || entity == null) {
             return false;
         }

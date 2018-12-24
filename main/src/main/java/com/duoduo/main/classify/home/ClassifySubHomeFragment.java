@@ -23,7 +23,8 @@ import com.duoduo.main.classify.home.data.ClassifyTopicEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.event.ClassifyTopicDataRequestEvent;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
-import com.duoduo.main.classify.view.ClassifyViewHelper;
+import com.duoduo.main.classify.home.view.ClassifySubHomeHeaderView;
+import com.duoduo.main.classify.home.view.ClassifySubHomeViewHelper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -45,7 +46,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     private SmartRefreshLayout refreshLayout;
 
     private RecyclerView recyclerView;
-    private View recyclerHeaderView;
+    private ClassifySubHomeHeaderView recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
 
     //首页数据
@@ -155,7 +156,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 refreshLayout.setEnableLoadmore(false);
 
                 //初始化headerview
-                recyclerHeaderView = ClassifyViewHelper.initHeaderViewByData(
+                recyclerHeaderView = ClassifySubHomeViewHelper.initHeaderViewByData(
                         getContext().getApplicationContext(), homeEntity, recyclerHeaderView);
                 recyclerAdapter.setHeaderView(recyclerHeaderView);
                 recyclerView.setAdapter(recyclerAdapter);
