@@ -1,34 +1,37 @@
 package com.duoduo.commonbusiness.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
+
+import java.lang.ref.WeakReference;
 
 /**
  * 通用loading对话框helper
  */
 public class CommonLoadingDialogHelper {
 
-    private Context context;
-
-    public CommonLoadingDialogHelper(Context context) {
-        this.context = context;
-    }
-
     /**
      * 对话框
      */
     protected Dialog loadingDialog;
+
+    protected WeakReference<Activity> activityWeakReference;
+
+    public CommonLoadingDialogHelper(Activity activity) {
+        this.activityWeakReference = new WeakReference<Activity>(activity);
+    }
 
     public boolean isLoadingDialogShow() {
         return loadingDialog != null && loadingDialog.isShowing();
     }
 
     public void showLoadingDialog() {
-//        if (isDestroy || isFinishing()) {
-//            return;
-//        }
+        Activity activity = activityWeakReference.get();
+        if (activity == null || activity.isFinishing()) {
+            return;
+        }
         if (loadingDialog == null) {
-            loadingDialog = createDialog();
+            loadingDialog = createDialog(activity);
         }
         if (!isLoadingDialogShow()) {
             loadingDialog.show();
@@ -41,8 +44,8 @@ public class CommonLoadingDialogHelper {
         }
     }
 
-    protected Dialog createDialog() {
-        return new CommonLoadingDialog(context);
+    protected Dialog createDialog(Activity activity) {
+        return new CommonLoadingDialog(activity);
     }
 
     public void destroy() {
