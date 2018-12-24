@@ -30,16 +30,16 @@ public class ClassifySubTabController {
      *
      * @param categoryId
      */
-    public void requestSubTabProductData(int categoryId) {
+    public void requestSubTabProductData(int categoryId, int pageNume) {
         final EventBus eventBus = EventBus.getDefault();
         final ClassifySubTabProductDataReqeustEvent event = new ClassifySubTabProductDataReqeustEvent();
         event.setWhat(ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_START);
         event.setArg1(categoryId);
-
+        event.setArg2(pageNume);
         eventBus.post(event);
 
         try {
-            netModel.requestSubTabProductData(categoryId, new Response.Listener<JSONObject>() {
+            netModel.requestSubTabProductData(categoryId, pageNume, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     ClassifySubTabProductDataEntity dataEntity = JSON.parseObject(response.toString(), ClassifySubTabProductDataEntity.class);

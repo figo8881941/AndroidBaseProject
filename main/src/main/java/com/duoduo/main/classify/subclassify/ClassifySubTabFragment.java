@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.duoduo.commonbusiness.dialog.CommonLoadingDialogHelper;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
@@ -39,17 +39,27 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     private ClassifySubTabController controller;
 
+    //当前商品数据页码
+    private int currentProductPage = 1;
+
+    //当前子分类商品数据
     private ClassifySubTabProductDataEntity productDataEntity;
 
+    //当前子分类热销排行榜主题数据
     private ClassifySubTabTopicDataEntity topicDataEntity;
 
+    //是否正在进行商品数据请求
     private boolean isDodingProductDataRequest = false;
 
+    //是否正在进行热销排行榜主题数据请求
     private boolean isDodingTopicDataRequest = false;
 
     private RecyclerView recyclerView;
 
     private ClassifySubHomeAdapter recyclerAdapter;
+
+    //Commonloading
+    private CommonLoadingDialogHelper loadingDialogHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +86,8 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
+
+        loadingDialogHelper = new CommonLoadingDialogHelper(getActivity());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -88,10 +100,14 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
             //不是这个子Tab的事件
             return;
         }
+        currentProductPage = event.getArg2();
         int what = event.getWhat();
         switch (what) {
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_START: {
                 isDodingProductDataRequest = true;
+                if (currentProductPage == 1) {
+                    loadingDialogHelper.showLoadingDialog();
+                }
             }
             break;
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_SUCCESS: {
@@ -103,12 +119,14 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
                     recyclerAdapter.setData(entities);
                     recyclerAdapter.notifyDataSetChanged();
                 }
+                hideCommonLoadingWhenNoRequest();
             }
             break;
             case ClassifySubTabProductDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_PRODUCT_DATA_REQUEST_ERROR: {
                 isDodingProductDataRequest = false;
                 Exception exception = event.getArg4();
                 CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
+                hideCommonLoadingWhenNoRequest();
             }
             break;
         }
@@ -128,17 +146,20 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         switch (what) {
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_START: {
                 isDodingTopicDataRequest = true;
+                loadingDialogHelper.showLoadingDialog();
             }
             break;
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_SUCCESS: {
                 isDodingTopicDataRequest = false;
                 topicDataEntity = event.getArg3();
+                hideCommonLoadingWhenNoRequest();
             }
             break;
             case ClassifySubTabTopicDataReqeustEvent.EVENT_CLASSIFY_SUB_TAB_TOPIC_DATA_REQUEST_ERROR: {
                 isDodingTopicDataRequest = false;
                 Exception exception = event.getArg4();
                 CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
+                hideCommonLoadingWhenNoRequest();
             }
             break;
         }
@@ -152,9 +173,21 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         return isDodingProductDataRequest || isDodingTopicDataRequest;
     }
 
-    private void requestData() {
+    /**
+     * 判断是否正在请求，如果没有，就隐藏loading对话框
+     */
+    private void hideCommonLoadingWhenNoRequest() {
+        if (!isDodingRequest() && loadingDialogHelper != null) {
+            loadingDialogHelper.hideLoadingDialog();
+        }
+    }
+
+    /**
+     * 请求首页数据
+     */
+    private void requestFirstData() {
         if (data != null) {
-            controller.requestSubTabProductData(data.getId());
+            controller.requestSubTabProductData(data.getId(), 1);
             controller.requestSubTabTopicData(data.getTopicId());
         }
     }
@@ -164,7 +197,7 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         super.onSelected();
         //如果被选中，而且当前没有数据，也没有正在进行请求，就请求数据
         if (!hasData() && !isDodingRequest()) {
-            requestData();
+            requestFirstData();
         }
     }
 
@@ -172,6 +205,7 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        currentProductPage = 1;
         productDataEntity = null;
         topicDataEntity = null;
         isDodingProductDataRequest = false;
@@ -184,5 +218,10 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
             recyclerView = null;
         }
         recyclerAdapter = null;
+
+        if (loadingDialogHelper != null) {
+            loadingDialogHelper.destroy();
+            loadingDialogHelper = null;
+        }
     }
 }

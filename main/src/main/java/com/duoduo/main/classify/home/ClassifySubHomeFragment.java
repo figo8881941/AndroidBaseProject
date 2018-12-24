@@ -50,6 +50,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     private ClassifySubHomeHeaderView recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
 
+    //Commonloading
     private CommonLoadingDialogHelper loadingDialogHelper;
 
     //首页数据

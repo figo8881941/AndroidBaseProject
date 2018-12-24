@@ -21,16 +21,17 @@ public class ClassifySubTabNetModel extends BaseNetModel {
 
     /**
      * 请求子分类数据的方法
+     *
      * @param categoryId
      * @param listener
      * @param errorListener
      * @throws Exception
      */
-    public void requestSubTabProductData(int categoryId, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
+    public void requestSubTabProductData(int categoryId, int pageNum, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) throws Exception {
         String url = CommonNetDataUtils.getUrlWithGlobalBuildConfig(IClassifySubTabConsts.FunId.CLASSIFY_SUB_TAB_DATA, "quMall");
         JSONObject postData = CommonNetDataUtils.getPostDataWithPheadFromGlobalBuildConfig(context);
         postData.put("curCategoryId", categoryId);
-        postData.put("pageNum", 1);
+        postData.put("pageNum", pageNum);
         postData.put("pageSize", 30);
         CommonJsonObjectRequest request = new CommonJsonObjectRequest(
                 Request.Method.POST, url, CommonNetDataUtils.getParamJsonObject(postData), listener, errorListener);
@@ -39,6 +40,7 @@ public class ClassifySubTabNetModel extends BaseNetModel {
 
     /**
      * 请求子分类排行榜主题数据的方法
+     *
      * @param topicId
      * @param listener
      * @param errorListener
