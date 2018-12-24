@@ -266,35 +266,41 @@ public class ClassifySubHomeViewHelper {
 
         //第一个项
         ViewGroup item = (ViewGroup) gridThree.findViewById(R.id.item_one);
+        GifImageView itemTilteImg = (GifImageView) item.findViewById(R.id.item_one_tilte_img);
         TextView itemTile = (TextView) item.findViewById(R.id.item_one_title);
         TextView itemDesc = (TextView) item.findViewById(R.id.item_one_desc);
         TextView itemTag = (TextView) item.findViewById(R.id.item_one_tag);
         GifImageView itemImg = (GifImageView) item.findViewById(R.id.item_one_img);
         GifImageView itemGifImg = (GifImageView) item.findViewById(R.id.item_one_gif_img);
-        initGridThreeItem(context, entranceItemDtoListEntity, itemTile, itemDesc, itemTag, itemImg, itemGifImg);
+        initGridThreeItem(context, entranceItemDtoListEntity, itemTilteImg,
+                itemTile, itemDesc, itemTag, itemImg, itemGifImg);
 
         //第二项
         if (size >= 2) {
             entranceItemDtoListEntity = entranceItemDtoListEntities.get(1);
             item = (ViewGroup) gridThree.findViewById(R.id.item_two);
+            itemTilteImg = (GifImageView) item.findViewById(R.id.item_two_tilte_img);
             itemTile = (TextView) item.findViewById(R.id.item_two_title);
             itemDesc = (TextView) item.findViewById(R.id.item_two_desc);
             itemTag = (TextView) item.findViewById(R.id.item_two_tag);
             itemImg = (GifImageView) item.findViewById(R.id.item_two_img);
             itemGifImg = (GifImageView) item.findViewById(R.id.item_two_gif_img);
-            initGridThreeItem(context, entranceItemDtoListEntity, itemTile, itemDesc, itemTag, itemImg, itemGifImg);
+            initGridThreeItem(context, entranceItemDtoListEntity, itemTilteImg,
+                    itemTile, itemDesc, itemTag, itemImg, itemGifImg);
         }
 
         //第三项
         if (size >= 3) {
             entranceItemDtoListEntity = entranceItemDtoListEntities.get(2);
             item = (ViewGroup) gridThree.findViewById(R.id.item_three);
+            itemTilteImg = (GifImageView) item.findViewById(R.id.item_three_tilte_img);
             itemTile = (TextView) item.findViewById(R.id.item_three_title);
             itemDesc = (TextView) item.findViewById(R.id.item_three_desc);
             itemTag = (TextView) item.findViewById(R.id.item_three_tag);
             itemImg = (GifImageView) item.findViewById(R.id.item_three_img);
             itemGifImg = (GifImageView) item.findViewById(R.id.item_three_gif_img);
-            initGridThreeItem(context, entranceItemDtoListEntity, itemTile, itemDesc, itemTag, itemImg, itemGifImg);
+            initGridThreeItem(context, entranceItemDtoListEntity, itemTilteImg,
+                    itemTile, itemDesc, itemTag, itemImg, itemGifImg);
         }
         return true;
     }
@@ -311,11 +317,21 @@ public class ClassifySubHomeViewHelper {
      * @param itemGifImg
      */
     private static void initGridThreeItem(Context context, ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity
-            , TextView itemTitle, TextView itemDesc, TextView itemTag, GifImageView itemImg, GifImageView itemGifImg) {
-        itemTitle.setText(entranceItemDtoListEntity.getTitle());
-        int itemTitleTextColor = TextUtils.isEmpty(entranceItemDtoListEntity.getTitleColor()) ?
-                Color.BLACK : Color.parseColor(entranceItemDtoListEntity.getTitleColor());
-        itemTitle.setTextColor(itemTitleTextColor);
+            , GifImageView itemTitleImg, TextView itemTitle, TextView itemDesc
+            , TextView itemTag, GifImageView itemImg, GifImageView itemGifImg) {
+        String titleImg = entranceItemDtoListEntity.getTitleImg();
+        if (!TextUtils.isEmpty(titleImg)) {
+            itemTitleImg.setVisibility(View.VISIBLE);
+            itemTitle.setVisibility(View.INVISIBLE);
+            Glide.with(context).load(titleImg).into(itemTitleImg);
+        } else {
+            itemTitleImg.setVisibility(View.INVISIBLE);
+            itemTitle.setVisibility(View.VISIBLE);
+            itemTitle.setText(entranceItemDtoListEntity.getTitle());
+            int itemTitleTextColor = TextUtils.isEmpty(entranceItemDtoListEntity.getTitleColor()) ?
+                    Color.BLACK : Color.parseColor(entranceItemDtoListEntity.getTitleColor());
+            itemTitle.setTextColor(itemTitleTextColor);
+        }
         itemDesc.setText(entranceItemDtoListEntity.getDescription());
         List<ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity.NewTagListEntity> tagListEntities = entranceItemDtoListEntity.getNewTagList();
         itemTag.setVisibility(View.INVISIBLE);
