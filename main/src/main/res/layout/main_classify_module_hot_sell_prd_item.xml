@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/main_classify_module_hot_sell_prd_item_padding_top_bottom"
     android:paddingBottom="@dimen/main_classify_module_hot_sell_prd_item_padding_top_bottom">
 
-    <com.duoduo.commonbase.component.RoundGifImageView
+    <com.duoduo.commonbase.view.RoundGifImageView
         android:id="@+id/item_img"
         android:layout_width="@dimen/main_classify_module_hot_sell_prd_item_img_size"
         android:layout_height="@dimen/main_classify_module_hot_sell_prd_item_img_size"

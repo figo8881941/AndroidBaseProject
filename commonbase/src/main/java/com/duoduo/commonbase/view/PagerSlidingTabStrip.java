@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.duoduo.commonbase.component;
+package com.duoduo.commonbase.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

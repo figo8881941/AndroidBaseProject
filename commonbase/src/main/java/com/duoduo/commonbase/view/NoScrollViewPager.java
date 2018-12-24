@@ -1,4 +1,4 @@
-package com.duoduo.commonbase.component;
+package com.duoduo.commonbase.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

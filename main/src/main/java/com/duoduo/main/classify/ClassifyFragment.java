@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.duoduo.commonbase.component.PagerSlidingTabStrip;
+import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
