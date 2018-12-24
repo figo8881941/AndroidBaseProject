@@ -6,10 +6,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
-import com.duoduo.commonbase.view.NoScrollViewPager;
 import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbase.permission.PermissionUtils;
 import com.duoduo.commonbase.utils.StatusBarUtils;
+import com.duoduo.commonbase.view.NoScrollViewPager;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
