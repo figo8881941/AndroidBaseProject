@@ -19,6 +19,8 @@ public interface IClassifyConsts {
     interface ModuleType {
         //banner 非通屏
         public int BANNER_SMALL = 1;
+        //banner 非通屏
+        public int BANNER_SMALL_TWO = 29;
         //通用网格（3个）
         public int COMMON_GRID_THREE = 5;
         //过去一小时卖爆了

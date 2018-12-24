@@ -149,6 +149,11 @@ public class ClassifySubHomeViewHelper {
             }
             break;
             case IClassifyConsts
+                    .ModuleType.BANNER_SMALL_TWO: {
+                result = createBannerSmall(context, parent, entity, position);
+            }
+            break;
+            case IClassifyConsts
                     .ModuleType.HOT_SELL: {
                 result = createHotSell(context, parent, entity, position);
             }
