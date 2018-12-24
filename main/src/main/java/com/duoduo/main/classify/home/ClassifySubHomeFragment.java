@@ -257,5 +257,25 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mainView = null;
+        if (refreshLayout != null) {
+            refreshLayout.finishRefresh();
+            refreshLayout.finishLoadmore();
+            refreshLayout.setOnRefreshListener(null);
+            refreshLayout.setOnLoadmoreListener(null);
+            refreshLayout = null;
+        }
+        if (recyclerView != null) {
+            recyclerView.setAdapter(null);
+            recyclerView = null;
+        }
+        recyclerAdapter = null;
+        recyclerHeaderView = null;
+
+        homeEntity = null;
+
+        currentTopicPage = 1;
+        hasNextPage = true;
+        controller = null;
     }
 }

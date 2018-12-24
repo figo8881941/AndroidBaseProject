@@ -63,10 +63,6 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_tab_fragment, container, false);
         initView();
-        if (data != null) {
-            controller.requestSubTabProductData(data.getId());
-            controller.requestSubTabTopicData(data.getTopicId());
-        }
         return mainView;
     }
 
@@ -156,9 +152,37 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         return isDodingProductDataRequest || isDodingTopicDataRequest;
     }
 
+    private void requestData() {
+        if (data != null) {
+            controller.requestSubTabProductData(data.getId());
+            controller.requestSubTabTopicData(data.getTopicId());
+        }
+    }
+
+    @Override
+    public void onSelected() {
+        super.onSelected();
+        //如果被选中，而且当前没有数据，也没有正在进行请求，就请求数据
+        if (!hasData() && !isDodingRequest()) {
+            requestData();
+        }
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        productDataEntity = null;
+        topicDataEntity = null;
+        isDodingProductDataRequest = false;
+        isDodingTopicDataRequest = false;
+
+        mainView = null;
+        controller = null;
+        if (recyclerView != null) {
+            recyclerView.setAdapter(null);
+            recyclerView = null;
+        }
+        recyclerAdapter = null;
     }
 }

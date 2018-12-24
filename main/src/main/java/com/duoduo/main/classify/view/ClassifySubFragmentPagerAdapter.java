@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.commonbusiness.fragment.BaseFragmentStatePagerAdapter;
 import com.duoduo.commonbusiness.fragment.BaseNoDestoryFragmentStatePagerAdapter;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 
