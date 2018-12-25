@@ -30,6 +30,9 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':commonbusiness')
+    //Eventbus编译期处理器，在编译期查找订阅方法，生成订阅方法索引，供运行期使用
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+    //Glide编译期处理器，在编译期生成API
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 }
 
