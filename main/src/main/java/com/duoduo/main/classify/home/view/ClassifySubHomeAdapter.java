@@ -55,7 +55,10 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
     private void initSingleItemWithData(QuickerViewHolder holder, View samllItem, ProductInfoEntity entity) {
         GifImageView itemImg = (GifImageView) holder.getView(samllItem, R.id.item_img);
         Glide.with(context).clear(itemImg);
-        Glide.with(context).load(entity.getImg()).apply(requestOptions).into(itemImg);
+        Glide.with(context)
+                .load(entity.getImg())
+                .apply(requestOptions)
+                .into(itemImg);
         TextView itemTitle = (TextView) holder.getView(samllItem, R.id.item_title);
         itemTitle.setText(entity.getTitle());
         TextView itemCoupon = (TextView) holder.getView(samllItem, R.id.item_tag);
