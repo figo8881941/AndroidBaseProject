@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
@@ -13,6 +12,7 @@ import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
+import com.duoduo.main.glide.GlideApp;
 
 import java.util.List;
 
@@ -22,10 +22,6 @@ import pl.droidsonroids.gif.GifImageView;
  * 分类首页adapter
  */
 public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter<TopicTwoProductListEntity> {
-
-    private RequestOptions requestOptions = RequestOptions
-            .diskCacheStrategyOf(DiskCacheStrategy.ALL)
-            .placeholder(R.drawable.main_common_list_item_single_product_item_default_img);
 
     public ClassifySubHomeAdapter(Context context) {
         super(context);
@@ -54,10 +50,10 @@ public class ClassifySubHomeAdapter extends QuickHeaderFooterRecyclerViewAdapter
 
     private void initSingleItemWithData(QuickerViewHolder holder, View samllItem, ProductInfoEntity entity) {
         GifImageView itemImg = (GifImageView) holder.getView(samllItem, R.id.item_img);
-        Glide.with(context).clear(itemImg);
-        Glide.with(context)
+        GlideApp.with(context)
                 .load(entity.getImg())
-                .apply(requestOptions)
+                .applyGlobalOptions()
+                .placeholder(R.drawable.main_common_list_item_single_product_item_default_img)
                 .into(itemImg);
         TextView itemTitle = (TextView) holder.getView(samllItem, R.id.item_title);
         itemTitle.setText(entity.getTitle());

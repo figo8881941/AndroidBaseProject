@@ -13,15 +13,13 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.classify.consts.IClassifyConsts;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
-import com.duoduo.main.classify.home.view.ClassifySubHomeHeaderView;
 import com.duoduo.main.classify.view.ClassifyHotSellAdapter;
 import com.duoduo.main.common.image.BannerGlideImageLoader;
+import com.duoduo.main.glide.GlideApp;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -34,11 +32,6 @@ import pl.droidsonroids.gif.GifImageView;
  * 分类首页ViewHelper
  */
 public class ClassifySubHomeViewHelper {
-
-    /**
-     * 加载图片的RequestOptions
-     */
-    private static RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
     /**
      * 下一个module是否需要增加margintop
@@ -187,7 +180,10 @@ public class ClassifySubHomeViewHelper {
 
         ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
         GifImageView bannerImg = (GifImageView) bannerSmall.findViewById(R.id.banner_img);
-        Glide.with(context).load(entranceItemDtoListEntity.getImg()).apply(requestOptions).into(bannerImg);
+        GlideApp.with(context)
+                .load(entranceItemDtoListEntity.getImg())
+                .applyGlobalOptions()
+                .into(bannerImg);
         return true;
     }
 
@@ -222,7 +218,10 @@ public class ClassifySubHomeViewHelper {
         if (!TextUtils.isEmpty(titleImgUrl)) {
             titleText.setVisibility(View.GONE);
             titleImg.setVisibility(View.VISIBLE);
-            Glide.with(context).load(titleImgUrl).apply(requestOptions).into(titleImg);
+            GlideApp.with(context)
+                    .load(titleImgUrl)
+                    .applyGlobalOptions()
+                    .into(titleImg);
         } else {
             titleText.setVisibility(View.VISIBLE);
             titleImg.setVisibility(View.GONE);
@@ -350,12 +349,19 @@ public class ClassifySubHomeViewHelper {
                 break;
             }
         }
-        Glide.with(context).load(entranceItemDtoListEntity.getImg()).apply(requestOptions).into(itemImg);
+        GlideApp.with(context)
+                .load(entranceItemDtoListEntity.getImg())
+                .applyGlobalOptions()
+                .into(itemImg);
         String movieImgUrl = entranceItemDtoListEntity.getMovieImg();
         itemGifImg.setVisibility(View.INVISIBLE);
         if (!TextUtils.isEmpty(movieImgUrl)) {
             itemGifImg.setVisibility(View.VISIBLE);
-            Glide.with(context).asGif().load(movieImgUrl).apply(requestOptions).into(itemGifImg);
+            GlideApp.with(context)
+                    .asGif()
+                    .load(movieImgUrl)
+                    .applyGlobalOptions()
+                    .into(itemGifImg);
         }
     }
 
@@ -442,7 +448,10 @@ public class ClassifySubHomeViewHelper {
         String titleImgUrl = topicModuleDtoEntity.getTitleImg();
         if (!TextUtils.isEmpty(titleImgUrl)) {
             GifImageView titleImgView = titleView.findViewById(R.id.title_img);
-            Glide.with(context).load(titleImgUrl).apply(requestOptions).into(titleImgView);
+            GlideApp.with(context)
+                    .load(titleImgUrl)
+                    .applyGlobalOptions()
+                    .into(titleImgView);
         }
         adjustModuleLayout(context, parent, titleView);
         titleView.setTag(topicModuleDtoEntity);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideOption;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.duoduo.commonbase.adapter.QuickHeaderFooterRecyclerViewAdapter;
@@ -14,6 +15,7 @@ import com.duoduo.commonbase.utils.NumberUtils;
 import com.duoduo.main.R;
 import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.ProductInfoEntity;
+import com.duoduo.main.glide.GlideApp;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -21,8 +23,6 @@ import pl.droidsonroids.gif.GifImageView;
  * 排行榜Adapter
  */
 public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter<ProductInfoEntity> {
-
-    private RequestOptions requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL);
 
     private String sellCountFormat;
 
@@ -40,8 +40,10 @@ public class ClassifyHotSellAdapter extends QuickHeaderFooterRecyclerViewAdapter
     @Override
     public void bindViewHolder(QuickerViewHolder holder, ProductInfoEntity itemData, int position) {
         GifImageView itemImg = (GifImageView) holder.getView(R.id.item_img);
-        Glide.with(context).clear(itemImg);
-        Glide.with(context).load(itemData.getImg()).apply(requestOptions).into(itemImg);
+        GlideApp.with(context)
+                .load(itemData.getImg())
+                .applyGlobalOptions()
+                .into(itemImg);
         TextView itemPosition = (TextView) holder.getView(R.id.item_position);
         if (position < 3) {
             itemPosition.setVisibility(View.VISIBLE);
