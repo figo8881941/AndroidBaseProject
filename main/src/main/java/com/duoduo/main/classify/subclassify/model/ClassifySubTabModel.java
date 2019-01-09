@@ -5,11 +5,11 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.duoduo.commonbusiness.mvp.model.BaseModel;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabProductDataEntity;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabTopicDataEntity;
 import com.duoduo.main.classify.subclassify.event.ClassifySubTabProductDataReqeustEvent;
 import com.duoduo.main.classify.subclassify.event.ClassifySubTabTopicDataReqeustEvent;
-import com.duoduo.main.classify.subclassify.model.ClassifySubTabNetModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -17,14 +17,12 @@ import org.json.JSONObject;
 /**
  * 分类子Tab model
  */
-public class ClassifySubTabModel implements IClassifySubTabModel{
+public class ClassifySubTabModel extends BaseModel implements IClassifySubTabModel{
 
     private ClassifySubTabNetModel netModel;
 
-    private Context context;
-
     public ClassifySubTabModel(Context context) {
-        this.context = context.getApplicationContext();
+        super(context);
         netModel = new ClassifySubTabNetModel(this.context);
     }
 
@@ -108,4 +106,9 @@ public class ClassifySubTabModel implements IClassifySubTabModel{
 
     }
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        netModel = null;
+    }
 }

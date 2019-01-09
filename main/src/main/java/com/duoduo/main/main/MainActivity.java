@@ -148,7 +148,6 @@ public class MainActivity extends BaseActivity implements IMainView {
             return;
         }
 
-
         //初始化Fragment
         mainFragmentList = MainFragmentHelper.createMainFragmentList(mainTabEntity);
         mainFragmentPagerAdapter.setFragments(mainFragmentList);

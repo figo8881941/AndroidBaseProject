@@ -5,11 +5,11 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.duoduo.commonbusiness.mvp.model.BaseModel;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 import com.duoduo.main.classify.home.data.ClassifyTopicEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.event.ClassifyTopicDataRequestEvent;
-import com.duoduo.main.classify.home.model.ClassifySubHomeNetModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -17,14 +17,12 @@ import org.json.JSONObject;
 /**
  * 分类首页Model
  */
-public class ClassifySubHomeModel implements IClassifySubHomeModel{
-
-    private Context context;
+public class ClassifySubHomeModel extends BaseModel implements IClassifySubHomeModel {
 
     private ClassifySubHomeNetModel classifySubHomeNetModel;
 
     public ClassifySubHomeModel(Context context) {
-        this.context = context.getApplicationContext();
+        super(context);
         classifySubHomeNetModel = new ClassifySubHomeNetModel(context);
     }
 
@@ -106,5 +104,11 @@ public class ClassifySubHomeModel implements IClassifySubHomeModel{
             event.setArg4(e);
             eventBus.post(event);
         }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        classifySubHomeNetModel = null;
     }
 }

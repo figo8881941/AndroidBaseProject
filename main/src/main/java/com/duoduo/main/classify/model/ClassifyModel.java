@@ -5,9 +5,9 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.duoduo.commonbusiness.mvp.model.BaseModel;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
-import com.duoduo.main.classify.model.ClassifyNetModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -15,14 +15,12 @@ import org.json.JSONObject;
 /**
  * 分类Model
  */
-public class ClassifyModel implements IClassifyModel{
-
-    private Context context;
+public class ClassifyModel extends BaseModel implements IClassifyModel {
 
     private ClassifyNetModel classifyNetModel;
 
     public ClassifyModel(Context context) {
-        this.context = context.getApplicationContext();
+        super(context);
         classifyNetModel = new ClassifyNetModel(context);
     }
 
@@ -67,7 +65,7 @@ public class ClassifyModel implements IClassifyModel{
 
     @Override
     public void destroy() {
-        context = null;
+        super.destroy();
         classifyNetModel = null;
     }
 }

@@ -5,9 +5,9 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.duoduo.commonbusiness.mvp.model.BaseModel;
 import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.main.event.MainTabRequestEvent;
-import com.duoduo.main.main.model.MainNetModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -15,14 +15,12 @@ import org.json.JSONObject;
 /**
  * 主界面Model
  */
-public class MainModel implements IMainModel{
-
-    private Context context;
+public class MainModel extends BaseModel implements IMainModel {
 
     private MainNetModel mainNetModel;
 
     public MainModel(Context context) {
-        this.context = context.getApplicationContext();
+        super(context);
         mainNetModel = new MainNetModel(context);
     }
 
@@ -67,7 +65,7 @@ public class MainModel implements IMainModel{
 
     @Override
     public void destroy() {
-        context = null;
+        super.destroy();
         mainNetModel = null;
     }
 }
