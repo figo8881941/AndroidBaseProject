@@ -1,9 +1,11 @@
 package com.duoduo.main.main.model;
 
+import com.duoduo.commonbusiness.mvp.IBaseModel;
+
 /**
  * 主界面model接口
  */
-public interface IMainModel {
+public interface IMainModel extends IBaseModel {
 
     /**
      * 请求首页Tab数据的方法

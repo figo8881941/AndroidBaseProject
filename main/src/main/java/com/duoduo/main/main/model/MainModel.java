@@ -65,4 +65,9 @@ public class MainModel implements IMainModel{
         }
     }
 
+    @Override
+    public void destroy() {
+        context = null;
+        mainNetModel = null;
+    }
 }

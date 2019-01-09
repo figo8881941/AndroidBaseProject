@@ -1,39 +1,30 @@
 package com.duoduo.main.main;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
 
-import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
-import com.duoduo.commonbase.permission.PermissionUtils;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.view.NoScrollViewPager;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
-import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
-import com.duoduo.main.main.model.IMainModel;
-import com.duoduo.main.main.model.MainModel;
 import com.duoduo.main.main.data.MainTabEntity;
-import com.duoduo.main.main.event.MainTabRequestEvent;
+import com.duoduo.main.main.presenter.IMainPresenter;
+import com.duoduo.main.main.presenter.MainPresenter;
+import com.duoduo.main.main.view.IMainView;
 import com.duoduo.main.main.view.MainFragmentHelper;
 import com.duoduo.main.main.view.MainFragmentPagerAdapter;
 import com.duoduo.main.main.view.MainTabHelper;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
 /**
  * 主activity
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainView {
 
-    private IMainModel mainModel;
+    private IMainPresenter mainPresenter;
 
     //Viewpager、Fragment
     private NoScrollViewPager mainViewPager;
@@ -55,15 +46,12 @@ public class MainActivity extends BaseActivity {
         //白色风格透明状态栏
         StatusBarUtils.changeStatusBarTran(this, false);
 
-        EventBus.getDefault().register(this);
-
         //初始化界面
         initView();
 
-        mainModel = new MainModel(getApplicationContext());
-
-        // 检查必须的权限
-        checkShouldGetPermission();
+        mainPresenter = new MainPresenter(getApplicationContext(), this);
+        //检查必须的权限
+        mainPresenter.checkNeedPermissions();
 
     }
 
@@ -151,62 +139,11 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 检查必须权限的方法
-     */
-    private void checkShouldGetPermission() {
-        PermissionUtils.checkAndRequestPermission(getApplicationContext(), true, new DefaultCheckRequestListener() {
-            @Override
-            public void onGrantedPermission(String... permissions) {
-                //授权成功，请求Tab数据
-                if (mainModel != null) {
-                    mainModel.requestTabData();
-                }
-            }
-
-            @Override
-            public void onDeniedPermission(String... permissions) {
-                //授权失败，提示
-                Toast.makeText(getApplicationContext(), R.string.main_main_no_permission_tips, Toast.LENGTH_LONG).show();
-            }
-        }, Manifest.permission.READ_PHONE_STATE);
-    }
-
-    /**
-     * 处理请求tab数据返回
-     *
-     * @param event
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleMainTabRequest(MainTabRequestEvent event) {
-        if (isDestroy || event == null) {
-            return;
-        }
-        int what = event.getWhat();
-        switch (what) {
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_START: {
-
-            }
-            break;
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_SUCCESS: {
-                //tab数据返回，更新界面
-                MainTabEntity mainTabEntity = event.getArg3();
-                updateViewByMainTabData(mainTabEntity);
-            }
-            break;
-            case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR: {
-                Exception exception = event.getArg4();
-                CommonNetErrorHandler.handleNetError(getApplicationContext(), exception);
-            }
-            break;
-        }
-    }
-
-    /**
      * 根据tab数据更新界面的方法
      *
      * @param mainTabEntity
      */
-    private void updateViewByMainTabData(MainTabEntity mainTabEntity) {
+    public void updateViewByMainTabData(MainTabEntity mainTabEntity) {
         if (mainTabEntity == null) {
             return;
         }
@@ -256,9 +193,10 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        EventBus.getDefault().unregister(this);
-
-        mainModel = null;
+        if (mainPresenter != null) {
+            mainPresenter.destroy();
+            mainPresenter = null;
+        }
 
         if (mainViewPager != null) {
             mainViewPager.setAdapter(null);

@@ -18,6 +18,10 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    public boolean isDestroy() {
+        return isDestroy;
+    }
+
     @Override
     protected void onDestroy() {
         isDestroy = true;
