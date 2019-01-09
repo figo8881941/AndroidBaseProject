@@ -1,6 +1,6 @@
 package com.duoduo.main.main.model;
 
-import com.duoduo.commonbusiness.mvp.IBaseModel;
+import com.duoduo.commonbusiness.mvp.model.IBaseModel;
 
 /**
  * 主界面model接口

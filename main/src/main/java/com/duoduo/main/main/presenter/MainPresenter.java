@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbase.permission.PermissionUtils;
+import com.duoduo.commonbusiness.mvp.presenter.BasePresenter;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabEntity;
@@ -21,25 +22,22 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 主界面Presenter
  */
-public class MainPresenter implements IMainPresenter {
-
-    private IMainView mainView;
-
-    private IMainModel mainModel;
-
-    private Context context;
+public class MainPresenter extends BasePresenter<IMainView, IMainModel> implements IMainPresenter {
 
     public MainPresenter(Context context, IMainView view) {
-        this.context = context.getApplicationContext();
-        mainView = view;
-        mainModel = new MainModel(context);
+        super(context, view);
         EventBus.getDefault().register(this);
     }
 
     @Override
+    public IMainModel createModel() {
+        return new MainModel(context);
+    }
+
+    @Override
     public void requestTabData() {
-        if (mainModel != null) {
-            mainModel.requestTabData();
+        if (model != null) {
+            model.requestTabData();
         }
     }
 
@@ -51,7 +49,7 @@ public class MainPresenter implements IMainPresenter {
             @Override
             public void onGrantedPermission(String... permissions) {
                 //授权成功，请求Tab数据
-                if (mainView != null && !mainView.isDestroy()) {
+                if (view != null && !view.isDestroy()) {
                     requestTabData();
                 }
             }
@@ -71,7 +69,7 @@ public class MainPresenter implements IMainPresenter {
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleMainTabRequest(MainTabRequestEvent event) {
-        if (mainView == null || mainView.isDestroy() || event == null) {
+        if (view == null || view.isDestroy() || event == null) {
             return;
         }
         int what = event.getWhat();
@@ -83,7 +81,7 @@ public class MainPresenter implements IMainPresenter {
             case MainTabRequestEvent.EVENT_NAME_REQUEST_SUCCESS: {
                 //tab数据返回，更新界面
                 MainTabEntity mainTabEntity = event.getArg3();
-                mainView.updateViewByMainTabData(mainTabEntity);
+                view.updateViewByMainTabData(mainTabEntity);
             }
             break;
             case MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR: {
@@ -96,13 +94,8 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void destroy() {
+        super.destroy();
         EventBus.getDefault().unregister(this);
-        mainView = null;
-        if (mainModel != null) {
-            mainModel.destroy();
-            mainModel = null;
-        }
-        context = null;
     }
 
 }

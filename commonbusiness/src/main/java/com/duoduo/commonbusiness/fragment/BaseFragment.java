@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.duoduo.commonbusiness.mvp.view.IBaseView;
+
 /**
  * Fragment基类
  */
-public abstract class BaseFragment<T> extends Fragment {
+public abstract class BaseFragment<T> extends Fragment implements IBaseView {
 
     /**
      * 是否选中的标志
@@ -83,5 +85,10 @@ public abstract class BaseFragment<T> extends Fragment {
     public void onDestroy() {
         isDestroy = true;
         super.onDestroy();
+    }
+
+    @Override
+    public boolean isDestroy() {
+        return isDestroy;
     }
 }

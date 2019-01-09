@@ -13,30 +13,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.TextViewUtils;
+import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
-import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
-import com.duoduo.main.classify.model.ClassifyModel;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
-import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
-import com.duoduo.main.classify.model.IClassifyModel;
+import com.duoduo.main.classify.presenter.ClassifyPresenter;
+import com.duoduo.main.classify.presenter.IClassifyPresenter;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
+import com.duoduo.main.classify.view.IClassifyView;
 import com.duoduo.main.main.data.MainTabEntity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
 /**
  * 分类Fragment
  */
-public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> {
+public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> implements IClassifyView {
+
+    private IClassifyPresenter classifyPresenter;
 
     private ViewGroup mainView;
 
@@ -53,8 +50,6 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     //当前Fragment
     private BaseFragment curSubFragment;
 
-    private IClassifyModel classifyModel;
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -63,8 +58,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-        classifyModel = new ClassifyModel(getContext());
+        classifyPresenter = new ClassifyPresenter(getActivity().getApplicationContext(), this);
     }
 
     @Nullable
@@ -72,7 +66,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_fragment, container, false);
         initView();
-        classifyModel.requestClassifySubTabData();
+        classifyPresenter.requestClassifySubTabData();
         return mainView;
     }
 
@@ -187,6 +181,23 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
         currentSubTabItem = (TextView) tabStrip.getTabItem(0);
     }
 
+    /**
+     * 数据初始化子分类Tab
+     *
+     * @param classifySubTabEntity
+     */
+    @Override
+    public void updateSubTabByData(ClassifySubTabEntity classifySubTabEntity) {
+        //创建数据下发的fragment
+        ArrayList<BaseFragment> fragmentList = ClassifySubFragmentHelper.createClassifySubFragmentList(classifySubTabEntity);
+        if (fragmentList != null) {
+            subFragmentList.addAll(fragmentList);
+        }
+        subPagerAdapter.setFragments(subFragmentList);
+        subPagerAdapter.notifyDataSetChanged();
+        tabStrip.notifyDataSetChanged();
+    }
+
     @Override
     public void onSelected() {
         super.onSelected();
@@ -195,39 +206,6 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     @Override
     public void onUnSelected() {
         super.onUnSelected();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleClassifySubTabDataRequestEvent(ClassifySubTabDataRequestEvent event) {
-        if (isDestroy || event == null) {
-            return;
-        }
-        int what = event.getWhat();
-        switch (what) {
-            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_START: {
-
-            }
-            break;
-            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_SUCCESS: {
-                ClassifySubTabEntity classifySubTabEntity = event.getArg3();
-                //创建数据下发的fragment
-                ArrayList<BaseFragment> fragmentList = ClassifySubFragmentHelper.createClassifySubFragmentList(classifySubTabEntity);
-                if (fragmentList != null) {
-                    subFragmentList.addAll(fragmentList);
-                }
-                subPagerAdapter.setFragments(subFragmentList);
-                subPagerAdapter.notifyDataSetChanged();
-                tabStrip.notifyDataSetChanged();
-            }
-            break;
-            case ClassifySubTabDataRequestEvent.EVENT_CLASSIFY_SUB_TAB_DATA_REQUEST_ERROR: {
-                Exception exception = event.getArg4();
-                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
-            }
-            break;
-            default:
-                break;
-        }
     }
 
     /**
@@ -259,10 +237,13 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+
+        if (classifyPresenter != null) {
+            classifyPresenter.destroy();
+            classifyPresenter = null;
+        }
 
         mainView = null;
-        classifyModel = null;
         curSubFragment = null;
         recommendLayoutBaseline = null;
 

@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.duoduo.commonbusiness.mvp.view.IBaseView;
+
 /**
  * activity基类
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
     /**
      * 是否被销毁的标志
      */
@@ -18,6 +20,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
     public boolean isDestroy() {
         return isDestroy;
     }

@@ -65,4 +65,9 @@ public class ClassifyModel implements IClassifyModel{
         }
     }
 
+    @Override
+    public void destroy() {
+        context = null;
+        classifyNetModel = null;
+    }
 }
