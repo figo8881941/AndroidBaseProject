@@ -19,9 +19,10 @@ import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
-import com.duoduo.main.classify.controller.ClassifyController;
+import com.duoduo.main.classify.model.ClassifyModel;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
+import com.duoduo.main.classify.model.IClassifyModel;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.main.data.MainTabEntity;
@@ -52,7 +53,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     //当前Fragment
     private BaseFragment curSubFragment;
 
-    private ClassifyController controller;
+    private IClassifyModel classifyModel;
 
     @Override
     public void onAttach(Context context) {
@@ -63,7 +64,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-        controller = new ClassifyController(getContext());
+        classifyModel = new ClassifyModel(getContext());
     }
 
     @Nullable
@@ -71,7 +72,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_fragment, container, false);
         initView();
-        controller.requestClassifySubTabData();
+        classifyModel.requestClassifySubTabData();
         return mainView;
     }
 
@@ -261,7 +262,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
         EventBus.getDefault().unregister(this);
 
         mainView = null;
-        controller = null;
+        classifyModel = null;
         curSubFragment = null;
         recommendLayoutBaseline = null;
 

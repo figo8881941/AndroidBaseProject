@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.controller;
+package com.duoduo.main.classify.model;
 
 import android.content.Context;
 
@@ -13,15 +13,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 /**
- * 分类controller
+ * 分类Model
  */
-public class ClassifyController {
+public class ClassifyModel implements IClassifyModel{
 
     private Context context;
 
     private ClassifyNetModel classifyNetModel;
 
-    public ClassifyController(Context context) {
+    public ClassifyModel(Context context) {
         this.context = context.getApplicationContext();
         classifyNetModel = new ClassifyNetModel(context);
     }

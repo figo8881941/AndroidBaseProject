@@ -1,4 +1,4 @@
-package com.duoduo.main.main.controller;
+package com.duoduo.main.main.model;
 
 import android.content.Context;
 
@@ -13,15 +13,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 /**
- * 主界面Controller
+ * 主界面Model
  */
-public class MainController {
+public class MainModel implements IMainModel{
 
     private Context context;
 
     private MainNetModel mainNetModel;
 
-    public MainController(Context context) {
+    public MainModel(Context context) {
         this.context = context.getApplicationContext();
         mainNetModel = new MainNetModel(context);
     }

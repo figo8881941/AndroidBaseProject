@@ -14,7 +14,8 @@ import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
-import com.duoduo.main.main.controller.MainController;
+import com.duoduo.main.main.model.IMainModel;
+import com.duoduo.main.main.model.MainModel;
 import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.main.event.MainTabRequestEvent;
 import com.duoduo.main.main.view.MainFragmentHelper;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  */
 public class MainActivity extends BaseActivity {
 
-    private MainController mainController;
+    private IMainModel mainModel;
 
     //Viewpager、Fragment
     private NoScrollViewPager mainViewPager;
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity {
         //初始化界面
         initView();
 
-        mainController = new MainController(getApplicationContext());
+        mainModel = new MainModel(getApplicationContext());
 
         // 检查必须的权限
         checkShouldGetPermission();
@@ -157,8 +158,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onGrantedPermission(String... permissions) {
                 //授权成功，请求Tab数据
-                if (mainController != null) {
-                    mainController.requestTabData();
+                if (mainModel != null) {
+                    mainModel.requestTabData();
                 }
             }
 
@@ -257,7 +258,7 @@ public class MainActivity extends BaseActivity {
 
         EventBus.getDefault().unregister(this);
 
-        mainController = null;
+        mainModel = null;
 
         if (mainViewPager != null) {
             mainViewPager.setAdapter(null);
