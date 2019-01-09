@@ -18,11 +18,12 @@ import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
-import com.duoduo.main.classify.subclassify.controller.ClassifySubTabController;
+import com.duoduo.main.classify.subclassify.model.ClassifySubTabModel;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabProductDataEntity;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabTopicDataEntity;
 import com.duoduo.main.classify.subclassify.event.ClassifySubTabProductDataReqeustEvent;
 import com.duoduo.main.classify.subclassify.event.ClassifySubTabTopicDataReqeustEvent;
+import com.duoduo.main.classify.subclassify.model.IClassifySubTabModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,7 +38,7 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
 
     private ViewGroup mainView;
 
-    private ClassifySubTabController controller;
+    private IClassifySubTabModel classifySubTabModel;
 
     //当前商品数据页码
     private int currentProductPage = 1;
@@ -65,7 +66,7 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-        controller = new ClassifySubTabController(getContext().getApplicationContext());
+        classifySubTabModel = new ClassifySubTabModel(getContext().getApplicationContext());
     }
 
     @Nullable
@@ -187,8 +188,8 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
      */
     private void requestFirstData() {
         if (data != null) {
-            controller.requestSubTabProductData(data.getId(), 1);
-            controller.requestSubTabTopicData(data.getTopicId());
+            classifySubTabModel.requestSubTabProductData(data.getId(), 1);
+            classifySubTabModel.requestSubTabTopicData(data.getTopicId());
         }
     }
 
@@ -212,7 +213,7 @@ public class ClassifySubTabFragment extends BaseFragment<ClassifySubTabEntity.Ca
         isDodingTopicDataRequest = false;
 
         mainView = null;
-        controller = null;
+        classifySubTabModel = null;
         if (recyclerView != null) {
             recyclerView.setAdapter(null);
             recyclerView = null;

@@ -18,11 +18,12 @@ import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
-import com.duoduo.main.classify.home.controller.ClassifySubHomeController;
+import com.duoduo.main.classify.home.model.ClassifySubHomeModel;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 import com.duoduo.main.classify.home.data.ClassifyTopicEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
 import com.duoduo.main.classify.home.event.ClassifyTopicDataRequestEvent;
+import com.duoduo.main.classify.home.model.IClassifySubHomeModel;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 import com.duoduo.main.classify.home.view.ClassifySubHomeHeaderView;
 import com.duoduo.main.classify.home.view.ClassifySubHomeViewHelper;
@@ -61,13 +62,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     //是否有下一页数据
     private boolean hasNextPage = true;
 
-    private ClassifySubHomeController controller;
+    private IClassifySubHomeModel classifySubHomeModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-        controller = new ClassifySubHomeController(getContext().getApplicationContext());
+        classifySubHomeModel = new ClassifySubHomeModel(getContext().getApplicationContext());
     }
 
     @Nullable
@@ -75,7 +76,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_home_fragment, container, false);
         initView();
-        controller.requestClassifySubHomeData();
+        classifySubHomeModel.requestClassifySubHomeData();
         return mainView;
     }
 
@@ -93,8 +94,8 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
             public void onRefresh(RefreshLayout refreshlayout) {
                 if (hasHomeData()) {
                     //如果已经有数据，下拉重新请求数据
-                    if (controller != null) {
-                        controller.requestClassifySubHomeData();
+                    if (classifySubHomeModel != null) {
+                        classifySubHomeModel.requestClassifySubHomeData();
                     }
                     //刷新数据，先停止banner滚动
                     stopBannerAutoPlay();
@@ -112,7 +113,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 if (hasTopicData() && hasNextPageData()) {
                     //如果有主题数据，上拉请求更多
                     ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
-                    controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage + 1);
+                    classifySubHomeModel.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage + 1);
                 } else {
                     //如果没有主题数据，不上拉请求更多
                     refreshlayout.finishLoadmore();
@@ -156,7 +157,7 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
                 //如果有主题，就请求主题数据
                 ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
                 if (topicModuleDtoEntity != null) {
-                    controller.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage);
+                    classifySubHomeModel.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage);
                 }
                 //清空原来的主题数据
                 recyclerAdapter.setData(null);
@@ -342,6 +343,6 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
 
         currentTopicPage = 1;
         hasNextPage = true;
-        controller = null;
+        classifySubHomeModel = null;
     }
 }

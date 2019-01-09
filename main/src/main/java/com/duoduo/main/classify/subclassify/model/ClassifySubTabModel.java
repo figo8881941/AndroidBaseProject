@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.subclassify.controller;
+package com.duoduo.main.classify.subclassify.model;
 
 import android.content.Context;
 
@@ -14,13 +14,16 @@ import com.duoduo.main.classify.subclassify.model.ClassifySubTabNetModel;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
-public class ClassifySubTabController {
+/**
+ * 分类子Tab model
+ */
+public class ClassifySubTabModel implements IClassifySubTabModel{
 
     private ClassifySubTabNetModel netModel;
 
     private Context context;
 
-    public ClassifySubTabController(Context context) {
+    public ClassifySubTabModel(Context context) {
         this.context = context.getApplicationContext();
         netModel = new ClassifySubTabNetModel(this.context);
     }

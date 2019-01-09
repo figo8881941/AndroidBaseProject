@@ -1,4 +1,4 @@
-package com.duoduo.main.classify.home.controller;
+package com.duoduo.main.classify.home.model;
 
 import android.content.Context;
 
@@ -15,15 +15,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 /**
- * 分类首页Controller
+ * 分类首页Model
  */
-public class ClassifySubHomeController {
+public class ClassifySubHomeModel implements IClassifySubHomeModel{
 
     private Context context;
 
     private ClassifySubHomeNetModel classifySubHomeNetModel;
 
-    public ClassifySubHomeController(Context context) {
+    public ClassifySubHomeModel(Context context) {
         this.context = context.getApplicationContext();
         classifySubHomeNetModel = new ClassifySubHomeNetModel(context);
     }
