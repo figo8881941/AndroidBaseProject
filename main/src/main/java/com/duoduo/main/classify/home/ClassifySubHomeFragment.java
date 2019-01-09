@@ -10,38 +10,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.duoduo.commonbusiness.dialog.CommonLoadingDialogHelper;
-import com.duoduo.commonbusiness.fragment.BaseFragment;
-import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
+import com.duoduo.commonbusiness.fragment.BaseLoadingDialogFragment;
 import com.duoduo.main.R;
-import com.duoduo.main.base.data.ProductDataUtils;
-import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
-import com.duoduo.main.classify.home.model.ClassifySubHomeModel;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
-import com.duoduo.main.classify.home.data.ClassifyTopicEntity;
-import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;
-import com.duoduo.main.classify.home.event.ClassifyTopicDataRequestEvent;
-import com.duoduo.main.classify.home.model.IClassifySubHomeModel;
+import com.duoduo.main.classify.home.presenter.ClassifySubHomePresenter;
+import com.duoduo.main.classify.home.presenter.IClassifySubHomePresenter;
 import com.duoduo.main.classify.home.view.ClassifySubHomeAdapter;
 import com.duoduo.main.classify.home.view.ClassifySubHomeHeaderView;
 import com.duoduo.main.classify.home.view.ClassifySubHomeViewHelper;
+import com.duoduo.main.classify.home.view.IClassifySubHomeView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
 /**
  * 分类子首页Fragment
  */
-public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.CategoryNewListEntity> {
+public class ClassifySubHomeFragment
+        extends BaseLoadingDialogFragment<ClassifySubTabEntity.CategoryNewListEntity>
+        implements IClassifySubHomeView {
+
+    private IClassifySubHomePresenter presenter;
 
     private ViewGroup mainView;
 
@@ -51,24 +45,11 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     private ClassifySubHomeHeaderView recyclerHeaderView;
     private ClassifySubHomeAdapter recyclerAdapter;
 
-    //Commonloading
-    private CommonLoadingDialogHelper loadingDialogHelper;
-
-    //首页数据
-    private ClassifySubHomeEntity homeEntity;
-
-    //当前主题页
-    private int currentTopicPage = 1;
-    //是否有下一页数据
-    private boolean hasNextPage = true;
-
-    private IClassifySubHomeModel classifySubHomeModel;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-        classifySubHomeModel = new ClassifySubHomeModel(getContext().getApplicationContext());
+        presenter = new ClassifySubHomePresenter(
+                getActivity().getApplicationContext(), this, data);
     }
 
     @Nullable
@@ -76,13 +57,12 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.main_classify_sub_home_fragment, container, false);
         initView();
-        classifySubHomeModel.requestClassifySubHomeData();
+        presenter.requestClassifySubHomeData();
         return mainView;
     }
 
     private void initView() {
         final Context context = getContext().getApplicationContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         refreshLayout = (SmartRefreshLayout) mainView.findViewById(R.id.smartRefreshLayout);
         //一开始，没有数据，禁止下拉、上拉刷新，等加载数据回来，再打开
@@ -92,17 +72,10 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                if (hasHomeData()) {
-                    //如果已经有数据，下拉重新请求数据
-                    if (classifySubHomeModel != null) {
-                        classifySubHomeModel.requestClassifySubHomeData();
-                    }
-                    //刷新数据，先停止banner滚动
-                    stopBannerAutoPlay();
-                } else {
-                    //如果没有数据，不下拉刷新
-                    refreshlayout.finishRefresh();
+                if (presenter == null) {
+                    return;
                 }
+                presenter.handlePullToRefresh();
             }
         });
 
@@ -110,14 +83,10 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                if (hasTopicData() && hasNextPageData()) {
-                    //如果有主题数据，上拉请求更多
-                    ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
-                    classifySubHomeModel.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage + 1);
-                } else {
-                    //如果没有主题数据，不上拉请求更多
-                    refreshlayout.finishLoadmore();
+                if (presenter == null) {
+                    return;
                 }
+                presenter.handleToLoadMore();
             }
         });
 
@@ -128,153 +97,13 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
-
-        loadingDialogHelper = new CommonLoadingDialogHelper(getActivity());
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleClassifySubHomeDataRequestEvent(ClassifySubHomeDataRequestEvent event) {
-        if (isDestroy || event == null) {
-            return;
-        }
-        int what = event.getWhat();
-        switch (what) {
-            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_START: {
-
-            }
-            break;
-            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_SUCCESS: {
-                homeEntity = event.getArg3();
-
-                if (hasHomeData()) {
-                    //如果有数据，打开上拉刷新
-                    refreshLayout.setEnableRefresh(true);
-                }
-
-                //主题页重制为第1页
-                currentTopicPage = 1;
-
-                //如果有主题，就请求主题数据
-                ClassifySubHomeEntity.TopicModuleDtoEntity topicModuleDtoEntity = homeEntity.getTopicModuleDto();
-                if (topicModuleDtoEntity != null) {
-                    classifySubHomeModel.requestTopicData(data.getId(), topicModuleDtoEntity.getTopicPageId(), currentTopicPage);
-                }
-                //清空原来的主题数据
-                recyclerAdapter.setData(null);
-                //先禁止下拉加载更多
-                refreshLayout.setEnableLoadmore(false);
-
-                //初始化headerview
-                recyclerHeaderView = ClassifySubHomeViewHelper.initHeaderViewByData(
-                        getContext().getApplicationContext(), homeEntity, recyclerHeaderView);
-                recyclerAdapter.setHeaderView(recyclerHeaderView);
-                recyclerView.setAdapter(recyclerAdapter);
-
-                refreshLayout.finishRefresh();
-
-                //开启banner滚动
-                startBannerAutoPlay();
-            }
-            break;
-            case ClassifySubHomeDataRequestEvent.EVENT_CLASSIFY_SUB_HOME_DATA_REQUEST_ERROR: {
-                Exception exception = event.getArg4();
-                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
-
-                refreshLayout.finishRefresh();
-            }
-            break;
-            default:
-                break;
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleClassifyTopicDataRequestEvent(ClassifyTopicDataRequestEvent event) {
-        if (data == null || isDestroy || event == null) {
-            return;
-        }
-        int requestId = event.getArg1();
-        if (requestId != data.getId()) {
-            return;
-        }
-        int page = event.getArg2();
-        int what = event.getWhat();
-        switch (what) {
-            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_START: {
-                if (page == 1) {
-                    loadingDialogHelper.showLoadingDialog();
-                }
-            }
-            break;
-            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_SUCCESS: {
-                ClassifyTopicEntity classifyTopicEntity = event.getArg3();
-                List<ProductInfoEntity> productInfoEntities = classifyTopicEntity != null ?
-                        classifyTopicEntity.getProductList() : null;
-                if (productInfoEntities != null && !productInfoEntities.isEmpty()) {
-                    //如果有商品数据
-                    currentTopicPage = event.getArg2();
-                    List<TopicTwoProductListEntity> data = ProductDataUtils.makeTopicTwoProductListEntitys(recyclerAdapter.getData(), productInfoEntities);
-                    recyclerAdapter.setData(data);
-                    recyclerAdapter.notifyDataSetChanged();
-                    if (hasTopicData()) {
-                        //如果有主题数据，打开上拉加载更多
-                        refreshLayout.setEnableLoadmore(true);
-                    }
-                    refreshLayout.finishLoadmore();
-                } else {
-                    //如果没有商品数据
-                    hasNextPage = false;
-                    refreshLayout.finishLoadmoreWithNoMoreData();
-                }
-                loadingDialogHelper.hideLoadingDialog();
-            }
-            break;
-            case ClassifyTopicDataRequestEvent.EVENT_CLASSIFY_TOPIC_DATA_REQUEST_ERROR: {
-                Exception exception = event.getArg4();
-                CommonNetErrorHandler.handleNetError(getContext().getApplicationContext(), exception);
-                refreshLayout.finishLoadmore();
-                loadingDialogHelper.hideLoadingDialog();
-            }
-            break;
-            default:
-                break;
-        }
-
-    }
-
-    /**
-     * 是否有首页数据
-     *
-     * @return
-     */
-    private boolean hasHomeData() {
-        return homeEntity != null;
-    }
-
-    /**
-     * 是否有主题数据
-     *
-     * @return
-     */
-    private boolean hasTopicData() {
-        List<TopicTwoProductListEntity> datas = recyclerAdapter != null
-                ? recyclerAdapter.getData() : null;
-        return datas != null && !datas.isEmpty();
-    }
-
-    /**
-     * 是否有下一页数据
-     *
-     * @return
-     */
-    private boolean hasNextPageData() {
-        return hasNextPage;
     }
 
     /**
      * 如果有banner，就开启banner自动播放
      */
-    private void startBannerAutoPlay() {
+    @Override
+    public void startBannerAutoPlay() {
         if (recyclerHeaderView != null) {
             recyclerHeaderView.startBannerAutoPlay();
         }
@@ -283,10 +112,69 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     /**
      * 如果有banner，就停止banner自动播放
      */
-    private void stopBannerAutoPlay() {
+    @Override
+    public void stopBannerAutoPlay() {
         if (recyclerHeaderView != null) {
             recyclerHeaderView.stopBannerAutoPlay();
         }
+    }
+
+    @Override
+    public void finishRefresh() {
+        if (refreshLayout != null) {
+            refreshLayout.finishRefresh();
+        }
+    }
+
+    @Override
+    public void finishLoadMore() {
+        if (refreshLayout != null) {
+            refreshLayout.finishLoadmore();
+        }
+    }
+
+    @Override
+    public void finishLoadMoreWithNoMoreData() {
+        if (refreshLayout != null) {
+            refreshLayout.finishLoadmoreWithNoMoreData();
+        }
+    }
+
+    @Override
+    public void setEnableRefresh(boolean enable) {
+        if (refreshLayout != null) {
+            refreshLayout.setEnableRefresh(enable);
+        }
+    }
+
+    @Override
+    public void setEnableLoadMore(boolean enable) {
+        if (refreshLayout != null) {
+            refreshLayout.setEnableLoadmore(enable);
+        }
+    }
+
+    @Override
+    public void updateViewBySubHomeData(ClassifySubHomeEntity homeEntity) {
+        if (isDestroy) {
+            return;
+        }
+        //清空原来的主题数据
+        recyclerAdapter.setData(null);
+        //初始化headerview
+        recyclerHeaderView = ClassifySubHomeViewHelper.initHeaderViewByData(
+                getContext().getApplicationContext(), homeEntity, recyclerHeaderView);
+        recyclerAdapter.setHeaderView(recyclerHeaderView);
+        recyclerView.setAdapter(recyclerAdapter);
+    }
+
+    @Override
+    public void updateListByTopicData(List<TopicTwoProductListEntity> topicData) {
+        if (isDestroy) {
+            return;
+        }
+        recyclerAdapter.setData(topicData);
+        recyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -318,7 +206,10 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+        if (presenter != null) {
+            presenter.destroy();
+            presenter = null;
+        }
         mainView = null;
         if (refreshLayout != null) {
             refreshLayout.finishRefresh();
@@ -333,16 +224,5 @@ public class ClassifySubHomeFragment extends BaseFragment<ClassifySubTabEntity.C
         }
         recyclerAdapter = null;
         recyclerHeaderView = null;
-
-        if (loadingDialogHelper != null) {
-            loadingDialogHelper.destroy();
-            loadingDialogHelper = null;
-        }
-
-        homeEntity = null;
-
-        currentTopicPage = 1;
-        hasNextPage = true;
-        classifySubHomeModel = null;
     }
 }
