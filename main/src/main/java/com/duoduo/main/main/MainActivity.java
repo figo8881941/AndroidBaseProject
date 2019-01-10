@@ -51,7 +51,8 @@ public class MainActivity extends BaseActivity implements IMainView {
 
         mainPresenter = new MainPresenter(getApplicationContext(), this);
         //检查必须的权限
-        mainPresenter.checkNeedPermissions();
+        //mainPresenter.checkNeedPermissions();
+        mainPresenter.requestTabData();
 
     }
 

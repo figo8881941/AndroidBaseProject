@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
 import com.duoduo.commonbase.permission.PermissionUtils;
+import com.duoduo.commonbase.permission.annotation.NeedPermission;
 import com.duoduo.commonbusiness.mvp.presenter.BasePresenter;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
@@ -35,6 +36,7 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
     }
 
     @Override
+    @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}, ignoreShowRationale = true)
     public void requestTabData() {
         if (model != null) {
             model.requestTabData();

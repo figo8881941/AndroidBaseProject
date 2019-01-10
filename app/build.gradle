@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+//aspectj插件，必须在application module引入
+apply plugin: 'android-aspectjx'
 android {
     compileSdkVersion 27
     defaultConfig {
