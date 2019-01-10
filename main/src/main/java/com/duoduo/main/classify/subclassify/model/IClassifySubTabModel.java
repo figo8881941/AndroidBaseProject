@@ -1,9 +1,11 @@
 package com.duoduo.main.classify.subclassify.model;
 
+import com.duoduo.commonbusiness.mvp.model.IBaseModel;
+
 /**
  * 分类子Tab model接口
  */
-public interface IClassifySubTabModel {
+public interface IClassifySubTabModel extends IBaseModel {
 
     /**
      * 请求子分类商品数据的方法
