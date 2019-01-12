@@ -34,7 +34,7 @@ public class ClassifySubHomeNetModel extends BaseNetModel {
         JsonObjectRequest request = new CommonJsonObjectRequest(Request.Method.POST, url,
                 CommonNetDataUtils.getParamJsonObject(postData),
                 listener, errorListener);
-        requestQueue.add(request);
+        executeRequest(request);
     }
 
     /**
@@ -50,6 +50,6 @@ public class ClassifySubHomeNetModel extends BaseNetModel {
         JsonObjectRequest request = new CommonJsonObjectRequest(Request.Method.POST, url,
                 CommonNetDataUtils.getParamJsonObject(postData),
                 listener, errorListener);
-        requestQueue.add(request);
+        executeRequest(request);
     }
 }

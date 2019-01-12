@@ -2,6 +2,7 @@ package com.duoduo.commonbusiness.net;
 
 import android.content.Context;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 
 /**
@@ -19,15 +20,19 @@ public abstract class BaseNetModel {
         requestQueue = RequestQueueFactory.getRequeQueueRespondInAsyn(this.context);
     }
 
-    public void destroy() {
-        requestQueue = null;
-        context = null;
+    public void executeRequest(Request request) {
+        requestQueue.add(request);
     }
 
     public void cancelTaskByTag(Object tag) {
         if (requestQueue != null) {
             requestQueue.cancelAll(tag);
         }
+    }
+
+    public void destroy() {
+        requestQueue = null;
+        context = null;
     }
 
 }

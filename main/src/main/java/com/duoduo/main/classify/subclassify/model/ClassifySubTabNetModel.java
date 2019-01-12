@@ -35,7 +35,7 @@ public class ClassifySubTabNetModel extends BaseNetModel {
         postData.put("pageSize", 30);
         CommonJsonObjectRequest request = new CommonJsonObjectRequest(
                 Request.Method.POST, url, CommonNetDataUtils.getParamJsonObject(postData), listener, errorListener);
-        requestQueue.add(request);
+        executeRequest(request);
     }
 
     /**
@@ -55,6 +55,6 @@ public class ClassifySubTabNetModel extends BaseNetModel {
         postData.put("personal", 1);
         CommonJsonObjectRequest request = new CommonJsonObjectRequest(
                 Request.Method.POST, url, CommonNetDataUtils.getParamJsonObject(postData), listener, errorListener);
-        requestQueue.add(request);
+        executeRequest(request);
     }
 }

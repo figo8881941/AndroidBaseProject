@@ -30,6 +30,6 @@ public class MainNetModel extends BaseNetModel {
         JsonObjectRequest request = new CommonJsonObjectRequest(Request.Method.POST, url,
                 CommonNetDataUtils.getParamJsonObject(postData),
                 listener, errorListener);
-        requestQueue.add(request);
+        executeRequest(request);
     }
 }
