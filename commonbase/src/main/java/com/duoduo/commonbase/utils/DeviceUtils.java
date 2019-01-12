@@ -1,11 +1,14 @@
 package com.duoduo.commonbase.utils;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -22,7 +25,6 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.TimeZone;
 
 /**
  * 设备工具类
@@ -170,9 +172,13 @@ public class DeviceUtils {
      * @return
      */
     public static String getIMEI(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context
-                .getSystemService(Context.TELEPHONY_SERVICE);
-        String imei = telephonyManager.getDeviceId();
+        String imei = null;
+        int state = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE);
+        if (state == PackageManager.PERMISSION_GRANTED) {
+            TelephonyManager telephonyManager = (TelephonyManager) context
+                    .getSystemService(Context.TELEPHONY_SERVICE);
+            imei = telephonyManager.getDeviceId();
+        }
         return imei;
     }
 
