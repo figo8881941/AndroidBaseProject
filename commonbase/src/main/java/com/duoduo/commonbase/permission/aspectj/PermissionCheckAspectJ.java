@@ -24,6 +24,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * 权限检查注解的AOP处理
@@ -34,6 +35,7 @@ public class PermissionCheckAspectJ {
     private static HashMap<Class, Method> classDeniedPermissionMethodCache = new HashMap<Class, Method>();
     private static HashMap<Class, Method> classShowRationableMethodCache = new HashMap<Class, Method>();
     private static HashMap<Class, Field> classContextFieldCache = new HashMap<Class, Field>();
+    private static HashSet<Method> onceMethodRecord = new HashSet<Method>();
 
     private final String TAG = "PermissionCheckAspectJ";
 
@@ -55,6 +57,18 @@ public class PermissionCheckAspectJ {
         boolean ignoreShowRationale = needPermission.ignoreShowRationale();
         final int requestCode = needPermission.requestCode();
         final boolean continueWhenDenied = needPermission.continueWhenDenied();
+        final boolean once = needPermission.once();
+
+        //处理只进行一次权限检查的方法
+        if (once) {
+            if (methodHasCheckPermissionsOnce(method)) {
+                //已经检查过一次，直接执行
+                joinPoint.proceed();
+                return;
+            }
+        }
+
+        addMethodOnceRecord(method);
 
         //如果context为空，走授权失败
         if (context == null) {
@@ -98,6 +112,26 @@ public class PermissionCheckAspectJ {
                 handleShowRationable(joinPoint, requestCode, executor, permissions);
             }
         }, permissons);
+    }
+
+    /**
+     * 方法是否已经进行过一次权限检查
+     * @param targetMethod
+     * @return
+     */
+    private boolean methodHasCheckPermissionsOnce(Method targetMethod) {
+        synchronized (onceMethodRecord) {
+            return onceMethodRecord.contains(targetMethod);
+        }
+    }
+
+    /**
+     * 把方法添加到进行过一次权限检查的记录里面
+     */
+    private void addMethodOnceRecord(Method targetMethod) {
+        synchronized (onceMethodRecord) {
+            onceMethodRecord.add(targetMethod);
+        }
     }
 
     /**

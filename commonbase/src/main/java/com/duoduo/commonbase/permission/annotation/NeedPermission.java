@@ -33,4 +33,10 @@ public @interface NeedPermission {
      * @return
      */
     boolean continueWhenDenied() default false;
+
+    /**
+     * 一次程序运行，是否只进行一次权限检查
+     * @return
+     */
+    boolean once() default false;
 }
