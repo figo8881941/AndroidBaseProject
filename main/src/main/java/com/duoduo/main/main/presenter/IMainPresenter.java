@@ -12,8 +12,4 @@ public interface IMainPresenter extends IBasePresenter {
      */
     public void requestTabData();
 
-    /**
-     * 检查需要的权限的方法
-     */
-    public void checkNeedPermissions();
 }

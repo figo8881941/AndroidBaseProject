@@ -3,11 +3,14 @@ package com.duoduo.commonbase.permission.aspectj;
 import android.app.Fragment;
 import android.content.Context;
 import android.view.View;
-import android.widget.Toast;
 
 import com.duoduo.commonbase.permission.ICheckAndRequestPermissionListener;
 import com.duoduo.commonbase.permission.PermissionUtils;
+import com.duoduo.commonbase.permission.annotation.DeniedPermission;
 import com.duoduo.commonbase.permission.annotation.NeedPermission;
+import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
+import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
+import com.duoduo.commonbase.utils.ReflectUtils;
 import com.yanzhenjie.permission.RequestExecutor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -44,6 +47,7 @@ public class PermissionCheckAspectJ {
         NeedPermission needPermission = method.getAnnotation(NeedPermission.class);
         String[] permissons = needPermission.permissions();
         boolean ignoreShowRationale = needPermission.ignoreShowRationale();
+        final int requestCode = needPermission.requestCode();
         //调用工具方法进行权限检查
         PermissionUtils.checkAndRequestPermission(context, ignoreShowRationale, new ICheckAndRequestPermissionListener() {
             @Override
@@ -58,14 +62,65 @@ public class PermissionCheckAspectJ {
 
             @Override
             public void onDeniedPermission(String... permissions) {
-                Toast.makeText(context, "onDeniedPermission", Toast.LENGTH_SHORT).show();
+                //授权拒绝
+                handleDeniedPermission(joinPoint, requestCode, permissions);
             }
 
             @Override
             public void onShowRationale(RequestExecutor executor, String... permissions) {
-                Toast.makeText(context, "onShowRationale", Toast.LENGTH_SHORT).show();
+                //展示权限说明对话框
+                handleShowRationable(joinPoint, requestCode, executor, permissions);
             }
         }, permissons);
+    }
+
+    /**
+     * 处理授权拒绝
+     *
+     * @param joinPoint
+     * @param permissions
+     */
+    private void handleDeniedPermission(ProceedingJoinPoint joinPoint, int requestCode
+            , String... permissions) {
+        try {
+            Object targetObject = joinPoint.getTarget();
+            Class targetObjectClass = targetObject.getClass();
+            Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, DeniedPermission.class);
+            if (method != null) {
+                method.setAccessible(true);
+                DeniedPermissionEntity entity = new DeniedPermissionEntity();
+                entity.setPermissions(permissions);
+                entity.setRequestCode(requestCode);
+                method.invoke(targetObject, entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 处理展示权限说明对话框
+     *
+     * @param joinPoint
+     * @param executor
+     * @param permissions
+     */
+    private void handleShowRationable(ProceedingJoinPoint joinPoint, int requestCode, RequestExecutor executor, String... permissions) {
+        try {
+            Object targetObject = joinPoint.getTarget();
+            Class targetObjectClass = targetObject.getClass();
+            Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, DeniedPermission.class);
+            if (method != null) {
+                method.setAccessible(true);
+                ShowRationaleEntity entity = new ShowRationaleEntity();
+                entity.setPermissions(permissions);
+                entity.setExecutor(executor);
+                entity.setRequestCode(requestCode);
+                method.invoke(targetObject, entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

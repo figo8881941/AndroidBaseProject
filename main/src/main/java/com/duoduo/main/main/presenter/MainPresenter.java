@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.duoduo.commonbase.permission.DefaultCheckRequestListener;
-import com.duoduo.commonbase.permission.PermissionUtils;
+import com.duoduo.commonbase.permission.annotation.DeniedPermission;
 import com.duoduo.commonbase.permission.annotation.NeedPermission;
+import com.duoduo.commonbase.permission.annotation.ShowRationable;
+import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
+import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
 import com.duoduo.commonbusiness.mvp.presenter.BasePresenter;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
@@ -35,8 +37,12 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
         return new MainModel(context);
     }
 
+    /**
+     * 请求Tab数据，需要权限检查
+     */
     @Override
-    @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}, ignoreShowRationale = true)
+    @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}
+    , ignoreShowRationale = true, requestCode = 1000)
     public void requestTabData() {
         if (model != null) {
             model.requestTabData();
@@ -44,24 +50,22 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
     }
 
     /**
-     * 检查需要的权限的方法
+     * 处理权限申请被拒绝的方法
+     *
+     * @param entity
      */
-    public void checkNeedPermissions() {
-        PermissionUtils.checkAndRequestPermission(context, true, new DefaultCheckRequestListener() {
-            @Override
-            public void onGrantedPermission(String... permissions) {
-                //授权成功，请求Tab数据
-                if (view != null && !view.isDestroy()) {
-                    requestTabData();
-                }
-            }
+    @DeniedPermission
+    private void handleDeniedPermission(DeniedPermissionEntity entity) {
+        Toast.makeText(context, R.string.main_main_no_permission_tips, Toast.LENGTH_LONG).show();
+    }
 
-            @Override
-            public void onDeniedPermission(String... permissions) {
-                //授权失败，提示
-                Toast.makeText(context, R.string.main_main_no_permission_tips, Toast.LENGTH_LONG).show();
-            }
-        }, Manifest.permission.READ_PHONE_STATE);
+    /**
+     * 处理需要展示权限说明对话框的方法
+     * @param entity
+     */
+    @ShowRationable
+    private void handleShowRationable(ShowRationaleEntity entity) {
+
     }
 
     /**

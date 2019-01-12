@@ -24,4 +24,9 @@ public @interface NeedPermission {
      */
     boolean ignoreShowRationale() default false;
 
+    /**
+     * 请求码
+     * @return
+     */
+    int requestCode() default -1;
 }
