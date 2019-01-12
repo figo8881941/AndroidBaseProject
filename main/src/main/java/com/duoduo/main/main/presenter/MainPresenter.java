@@ -43,7 +43,7 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
      */
     @Override
     @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}
-    , ignoreShowRationale = true, requestCode = 1000, once = true, continueWhenDenied = false)
+    , ignoreShowRationale = true, requestCode = 1000, once = true, continueWhenDenied = true)
     public void requestTabData() {
         if (model != null) {
             model.requestTabData();
