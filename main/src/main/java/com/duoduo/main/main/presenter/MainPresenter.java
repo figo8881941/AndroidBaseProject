@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.duoduo.commonbase.performance.time.annotation.TimeTrace;
 import com.duoduo.commonbase.permission.annotation.DeniedPermission;
 import com.duoduo.commonbase.permission.annotation.NeedPermission;
 import com.duoduo.commonbase.permission.annotation.ShowRationable;
@@ -44,6 +45,7 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
     @Override
     @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}
     , ignoreShowRationale = true, requestCode = 1000, once = true, continueWhenDenied = true)
+    @TimeTrace
     public void requestTabData() {
         if (model != null) {
             model.requestTabData();
