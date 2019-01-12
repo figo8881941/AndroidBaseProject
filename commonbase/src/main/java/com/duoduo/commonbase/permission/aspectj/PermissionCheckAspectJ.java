@@ -23,12 +23,17 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 /**
  * 权限检查注解的AOP处理
  */
 @Aspect
 public class PermissionCheckAspectJ {
+
+    private static HashMap<Class, Method> classDeniedPermissionMethodCache = new HashMap<Class, Method>();
+    private static HashMap<Class, Method> classShowRationableMethodCache = new HashMap<Class, Method>();
+    private static HashMap<Class, Field> classContextFieldCache = new HashMap<Class, Field>();
 
     private final String TAG = "PermissionCheckAspectJ";
 
@@ -106,7 +111,7 @@ public class PermissionCheckAspectJ {
         try {
             Object targetObject = joinPoint.getTarget();
             Class targetObjectClass = targetObject.getClass();
-            Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, DeniedPermission.class);
+            Method method = getClassHandleDeniedPermissionMethod(targetObjectClass);
             if (method != null) {
                 Class[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes == null || parameterTypes.length != 1 ||
@@ -125,6 +130,26 @@ public class PermissionCheckAspectJ {
     }
 
     /**
+     * 获取类处理授权拒绝的方法
+     *
+     * @param targetClass
+     * @return
+     */
+    private Method getClassHandleDeniedPermissionMethod(Class targetClass) {
+        Method method = null;
+        synchronized (classDeniedPermissionMethodCache) {
+            method = classDeniedPermissionMethodCache.get(targetClass);
+            if (method == null) {
+                method = ReflectUtils.getMethodByAnnotation(targetClass, DeniedPermission.class);
+                if (method != null) {
+                    classDeniedPermissionMethodCache.put(targetClass, method);
+                }
+            }
+        }
+        return method;
+    }
+
+    /**
      * 处理展示权限说明对话框
      *
      * @param joinPoint
@@ -135,7 +160,7 @@ public class PermissionCheckAspectJ {
         try {
             Object targetObject = joinPoint.getTarget();
             Class targetObjectClass = targetObject.getClass();
-            Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, ShowRationable.class);
+            Method method = getClassHandleShowRationableMethod(targetObjectClass);
             if (method != null) {
                 Class[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes == null || parameterTypes.length != 1 ||
@@ -152,6 +177,26 @@ public class PermissionCheckAspectJ {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取类处理显示权限说明对话框的方法
+     *
+     * @param targetClass
+     * @return
+     */
+    private Method getClassHandleShowRationableMethod(Class targetClass) {
+        Method method = null;
+        synchronized (classShowRationableMethodCache) {
+            method = classShowRationableMethodCache.get(targetClass);
+            if (method == null) {
+                method = ReflectUtils.getMethodByAnnotation(targetClass, ShowRationable.class);
+                if (method != null) {
+                    classShowRationableMethodCache.put(targetClass, method);
+                }
+            }
+        }
+        return method;
     }
 
     /**
@@ -179,21 +224,12 @@ public class PermissionCheckAspectJ {
                 //尝试通过反射，获取targetObject的Context字段
                 //如果没有Context字段，则获取失败
                 Class targetObjectClass = targetObject.getClass();
-                for (Class forclass = targetObjectClass; !forclass.equals(Object.class) && context == null; forclass = forclass.getSuperclass()) {
-                    Field[] fields = forclass.getDeclaredFields();
-                    if (fields != null) {
-                        int size = fields.length;
-                        for (int i = 0; i < size; i++) {
-                            Field field = fields[i];
-                            Class fieldType = field.getType();
-                            if (fieldType.equals(Context.class)) {
-                                field.setAccessible(true);
-                                context = (Context) field.get(targetObject);
-                                break;
-                            }
-                        }
-                    }
+                Field field = getClassContextField(targetObjectClass);
+                if (field != null) {
+                    field.setAccessible(true);
+                    context = (Context) field.get(targetObject);
                 }
+
             }
             if (context != null) {
                 context = context.getApplicationContext();
@@ -202,5 +238,37 @@ public class PermissionCheckAspectJ {
             e.printStackTrace();
         }
         return context;
+    }
+
+    /**
+     * 获取类Context字段
+     *
+     * @param targetClass
+     */
+    private Field getClassContextField(Class targetClass) {
+        Field field = null;
+        synchronized (classContextFieldCache) {
+            field = classContextFieldCache.get(targetClass);
+            if (field == null) {
+                for (Class forclass = targetClass; !forclass.equals(Object.class) && field == null; forclass = forclass.getSuperclass()) {
+                    Field[] fields = forclass.getDeclaredFields();
+                    if (fields != null) {
+                        int size = fields.length;
+                        for (int i = 0; i < size; i++) {
+                            Field fieldItem = fields[i];
+                            Class fieldType = fieldItem.getType();
+                            if (fieldType.equals(Context.class)) {
+                                field = fieldItem;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (field != null) {
+                    classContextFieldCache.put(targetClass, field);
+                }
+            }
+        }
+        return field;
     }
 }
