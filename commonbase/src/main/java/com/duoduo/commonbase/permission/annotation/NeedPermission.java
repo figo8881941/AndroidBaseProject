@@ -1,7 +1,5 @@
 package com.duoduo.commonbase.permission.annotation;
 
-import android.content.Context;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,4 +27,10 @@ public @interface NeedPermission {
      * @return
      */
     int requestCode() default -1;
+
+    /**
+     * 当授权拒绝时，是否继续执行原方法
+     * @return
+     */
+    boolean continueWhenDenied() default false;
 }

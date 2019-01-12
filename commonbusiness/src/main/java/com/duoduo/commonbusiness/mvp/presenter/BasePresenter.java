@@ -2,7 +2,7 @@ package com.duoduo.commonbusiness.mvp.presenter;
 
 import android.content.Context;
 
-import com.duoduo.commonbase.permission.aspectj.IContextHolder;
+import com.duoduo.commonbase.permission.IContextHolder;
 import com.duoduo.commonbusiness.mvp.model.IBaseModel;
 import com.duoduo.commonbusiness.mvp.view.IBaseView;
 

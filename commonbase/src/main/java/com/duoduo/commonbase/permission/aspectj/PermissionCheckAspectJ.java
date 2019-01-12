@@ -5,9 +5,11 @@ import android.content.Context;
 import android.view.View;
 
 import com.duoduo.commonbase.permission.ICheckAndRequestPermissionListener;
+import com.duoduo.commonbase.permission.IContextHolder;
 import com.duoduo.commonbase.permission.PermissionUtils;
 import com.duoduo.commonbase.permission.annotation.DeniedPermission;
 import com.duoduo.commonbase.permission.annotation.NeedPermission;
+import com.duoduo.commonbase.permission.annotation.ShowRationable;
 import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
 import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
 import com.duoduo.commonbase.utils.ReflectUtils;
@@ -36,18 +38,29 @@ public class PermissionCheckAspectJ {
 
     @Around("needPermission()")
     public void checkPermission(final ProceedingJoinPoint joinPoint) throws Throwable {
+
         //尝试获取Context
         final Context context = tryToGetContext(joinPoint);
 
-        //如果context为空，走授权失败
-        if (context == null) return;
-
+        //获取注解参数
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         NeedPermission needPermission = method.getAnnotation(NeedPermission.class);
         String[] permissons = needPermission.permissions();
         boolean ignoreShowRationale = needPermission.ignoreShowRationale();
         final int requestCode = needPermission.requestCode();
+        final boolean continueWhenDenied = needPermission.continueWhenDenied();
+
+        //如果context为空，走授权失败
+        if (context == null) {
+            if (continueWhenDenied) {
+                joinPoint.proceed();
+            } else {
+                handleDeniedPermission(joinPoint, requestCode, permissons);
+            }
+            return;
+        }
+
         //调用工具方法进行权限检查
         PermissionUtils.checkAndRequestPermission(context, ignoreShowRationale, new ICheckAndRequestPermissionListener() {
             @Override
@@ -63,7 +76,15 @@ public class PermissionCheckAspectJ {
             @Override
             public void onDeniedPermission(String... permissions) {
                 //授权拒绝
-                handleDeniedPermission(joinPoint, requestCode, permissions);
+                if (continueWhenDenied) {
+                    try {
+                        joinPoint.proceed();
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                } else {
+                    handleDeniedPermission(joinPoint, requestCode, permissions);
+                }
             }
 
             @Override
@@ -87,6 +108,11 @@ public class PermissionCheckAspectJ {
             Class targetObjectClass = targetObject.getClass();
             Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, DeniedPermission.class);
             if (method != null) {
+                Class[] parameterTypes = method.getParameterTypes();
+                if (parameterTypes == null || parameterTypes.length != 1 ||
+                        !parameterTypes[0].equals(DeniedPermissionEntity.class)) {
+                    return;
+                }
                 method.setAccessible(true);
                 DeniedPermissionEntity entity = new DeniedPermissionEntity();
                 entity.setPermissions(permissions);
@@ -109,8 +135,13 @@ public class PermissionCheckAspectJ {
         try {
             Object targetObject = joinPoint.getTarget();
             Class targetObjectClass = targetObject.getClass();
-            Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, DeniedPermission.class);
+            Method method = ReflectUtils.getMethodByAnnotation(targetObjectClass, ShowRationable.class);
             if (method != null) {
+                Class[] parameterTypes = method.getParameterTypes();
+                if (parameterTypes == null || parameterTypes.length != 1 ||
+                        !parameterTypes[0].equals(ShowRationaleEntity.class)) {
+                    return;
+                }
                 method.setAccessible(true);
                 ShowRationaleEntity entity = new ShowRationaleEntity();
                 entity.setPermissions(permissions);

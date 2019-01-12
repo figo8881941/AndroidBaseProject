@@ -1,4 +1,4 @@
-package com.duoduo.commonbase.permission.aspectj;
+package com.duoduo.commonbase.permission;
 
 import android.content.Context;
 

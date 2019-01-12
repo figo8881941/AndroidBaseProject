@@ -17,6 +17,7 @@ import com.duoduo.main.main.event.MainTabRequestEvent;
 import com.duoduo.main.main.model.IMainModel;
 import com.duoduo.main.main.model.MainModel;
 import com.duoduo.main.main.view.IMainView;
+import com.yanzhenjie.permission.RequestExecutor;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +43,7 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
      */
     @Override
     @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}
-    , ignoreShowRationale = true, requestCode = 1000)
+    , ignoreShowRationale = false, requestCode = 1000)
     public void requestTabData() {
         if (model != null) {
             model.requestTabData();
@@ -65,7 +66,8 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
      */
     @ShowRationable
     private void handleShowRationable(ShowRationaleEntity entity) {
-
+        RequestExecutor requestExecutor = entity.getExecutor();
+        requestExecutor.execute();
     }
 
     /**

@@ -1,7 +1,5 @@
 package com.duoduo.commonbase.utils;
 
-import com.duoduo.commonbase.permission.annotation.DeniedPermission;
-
 import java.lang.reflect.Method;
 
 /**
@@ -25,7 +23,7 @@ public class ReflectUtils {
                 int length = methods.length;
                 for (int i = 0; i < length; i++) {
                     Method methodItem = methods[i];
-                    boolean isAnnotationPresent = methodItem.isAnnotationPresent(DeniedPermission.class);
+                    boolean isAnnotationPresent = methodItem.isAnnotationPresent(annotationClass);
                     if (isAnnotationPresent) {
                         method = methodItem;
                         break;
