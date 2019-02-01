@@ -60,4 +60,6 @@ dependencies {
     api 'com.github.lzyzsd:jsbridge:1.0.4'
     //DSBridge
     api 'com.github.wendux:DSBridge-Android:3.0-SNAPSHOT'
+    //ARouter
+    api 'com.alibaba:arouter-api:1.4.1'
 }

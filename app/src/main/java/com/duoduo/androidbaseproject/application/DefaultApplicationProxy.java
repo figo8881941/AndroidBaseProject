@@ -3,6 +3,7 @@ package com.duoduo.androidbaseproject.application;
 import android.app.Application;
 import android.support.annotation.Nullable;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.duoduo.androidbaseproject.BuildConfig;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
 import com.duoduo.main.eventbus.MyEventBusIndex;
@@ -36,6 +37,8 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
                 return true;
             }
         });
+        // 初始化ARouter
+        initARouter();
     }
 
     /**
@@ -58,5 +61,20 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
         config.setPrdid(BuildConfig.PRODUCT_ID);
         config.setPVersion(BuildConfig.PVERSON);
         config.setSDCardFolderName(BuildConfig.SDCARD_FOLDER_NAME);
+    }
+
+    /**
+     * 初始化ARouter
+     */
+    private void initARouter() {
+        // These two lines must be written before init, otherwise these configurations will be invalid in the init process
+        if (GlobalBuildConfig.getInstance().isDebugMode()) {
+            // Print log
+            ARouter.openLog();
+            // Turn on debugging mode (If you are running in InstantRun mode, you must turn on debug mode! Online version needs to be closed, otherwise there is a security risk)
+            ARouter.openDebug();
+        }
+        // As early as possible, it is recommended to initialize in the Application
+        ARouter.init(application);
     }
 }

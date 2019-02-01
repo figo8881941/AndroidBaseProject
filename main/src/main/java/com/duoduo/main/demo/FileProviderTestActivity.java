@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.duoduo.commonbase.permission.annotation.NeedPermission;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.main.R;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@Route(path = "/main/demo/fileProviderTest")
 public class FileProviderTestActivity extends BaseActivity {
 
 

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbase.view.PagerSlidingTabStrip;
@@ -186,8 +187,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
         carLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), FileProviderTestActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build("/main/demo/fileProviderTest").navigation();
             }
         });
     }
