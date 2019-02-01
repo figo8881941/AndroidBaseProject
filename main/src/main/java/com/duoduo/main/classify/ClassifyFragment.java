@@ -1,6 +1,7 @@
 package com.duoduo.main.classify;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -24,6 +25,7 @@ import com.duoduo.main.classify.presenter.IClassifyPresenter;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.classify.view.IClassifyView;
+import com.duoduo.main.demo.FileProviderTestActivity;
 import com.duoduo.main.main.data.MainTabEntity;
 
 import java.util.ArrayList;
@@ -179,6 +181,15 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
             }
         });
         currentSubTabItem = (TextView) tabStrip.getTabItem(0);
+
+        View carLayout = mainView.findViewById(R.id.car_layout);
+        carLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FileProviderTestActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
