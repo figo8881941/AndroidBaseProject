@@ -11,6 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- 外部路由Activity -->
+        <activity android:name=".router.SchemeFilterActivity">
+            <!-- Schame -->
+            <intent-filter>
+                <data
+                    android:host="com.xmiles.vipgift"
+                    android:scheme="vipgift"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -13,7 +13,8 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ eventBusIndex : 'com.duoduo.web.eventbus.MyEventBusIndex' ]
+                arguments = [ eventBusIndex : 'com.duoduo.web.eventbus.MyEventBusIndex',
+                              AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -21,18 +22,20 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':commonbusiness')
     //Eventbus注解处理器，在编译期查找订阅方法，生成订阅方法索引，供运行期使用
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
     //Glide注解处理器，在编译期生成API
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //ARouter注解处理器，在编译期生成映射关系
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }
+

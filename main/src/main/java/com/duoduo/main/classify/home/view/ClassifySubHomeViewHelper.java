@@ -2,6 +2,7 @@ package com.duoduo.main.classify.home.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.duoduo.main.R;
@@ -178,12 +180,22 @@ public class ClassifySubHomeViewHelper {
         bannerSmall.setTag(entity);
         parent.addView(bannerSmall, position);
 
-        ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
+        final ClassifySubHomeEntity.ModuleDtoListEntity.EntranceItemDtoListEntity
+                entranceItemDtoListEntity = entranceItemDtoListEntities.get(0);
         GifImageView bannerImg = (GifImageView) bannerSmall.findViewById(R.id.banner_img);
         GlideApp.with(context)
                 .load(entranceItemDtoListEntity.getImg())
                 .applyGlobalOptions()
                 .into(bannerImg);
+
+        bannerSmall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance()
+                        .build(Uri.parse(entranceItemDtoListEntity.getAction()))
+                        .navigation();
+            }
+        });
         return true;
     }
 
