@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.duoduo.commonbusiness.view.CommonErrorView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="#f6f6f6"
+    >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="182dp"
+                    android:layout_height="164.5dp"
+                    android:src="@drawable/commonbusiness_common_network_reload_pic"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="41dp"
+                    android:text="@string/commonbusiness_common_network_error_text"
+                    android:textColor="#91959c"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/commonbusiness_common_network_error_tip"
+                    android:textColor="#caccd0"
+                    android:textSize="13sp"
+                    android:includeFontPadding="false"
+                    />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="31dp">
+
+                        <TextView
+                            android:id="@+id/btn_refresh"
+                            android:layout_width="109dp"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/commonbusiness_common_error_btn_refresh"
+                            android:gravity="center"
+                            android:text="@string/commonbusiness_common_network_refresh"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/loading_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/commonbusiness_common_network_reload_pic"
+                            android:visibility="invisible"
+                            />
+                </FrameLayout>
+
+        </LinearLayout>
+
+
+</com.duoduo.commonbusiness.view.CommonErrorView>

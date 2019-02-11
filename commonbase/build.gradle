@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -59,7 +59,8 @@ dependencies {
     //jsbridge
     api 'com.github.lzyzsd:jsbridge:1.0.4'
     //DSBridge
-    api 'com.github.wendux:DSBridge-Android:3.0-SNAPSHOT'
+    //api 'com.github.wendux:DSBridge-Android:3.0-SNAPSHOT'
+    api 'com.github.wendux:DSBridge-Android:2.0-SNAPSHOT'
     //ARouter
     api 'com.alibaba:arouter-api:1.4.1'
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 下拉刷新 -->
+    <color name="commonbusiness_common_pull_refresh_tips_textcolor">#69696f</color>
+
+</resources>
