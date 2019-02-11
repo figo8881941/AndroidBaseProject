@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xmiles.vipgift.business.view.CommonActionBar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/commonbusiness_common_actionbar_height"
+    android:background="@color/commonbusiness_common_actionbar_bg">
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/commonbusiness_common_actionbar_back_padding_left"
+        android:paddingRight="@dimen/commonbusiness_common_actionbar_back_padding_right"
+        android:paddingTop="@dimen/commonbusiness_common_actionbar_back_padding_right"
+        android:paddingBottom="@dimen/commonbusiness_common_actionbar_back_padding_right"
+        android:src="@drawable/commonbusiness_common_actionbar_back"/>
+
+    <TextView
+        android:id="@+id/menu_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/commonbusiness_common_actionbar_menu_padding_right"
+        android:singleLine="true"
+        android:textColor="@color/commonbusiness_common_actionbar_title_textcolor"
+        android:textSize="@dimen/commonbusiness_common_actionbar_menu_textsize"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/action_bar_menu_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"/>
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/action_bar_menu_container"
+        android:layout_toRightOf="@id/back_button"
+        android:layout_marginRight="@dimen/commonbusiness_common_actionbar_title_padding_right"
+        android:singleLine="true"
+        android:textColor="@color/commonbusiness_common_actionbar_title_textcolor"
+        android:textSize="@dimen/commonbusiness_common_actionbar_title_textsize"/>
+
+    <!--下划线一条-->
+    <View
+        android:id="@+id/title_bar_under_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="#dcdcdc" />
+
+</com.xmiles.vipgift.business.view.CommonActionBar>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- common webview -->
+    <dimen name="web_container_common_webview_guide_bar_back_paddingleft">14dp</dimen>
+    <dimen name="web_container_common_webview_guide_bar_back_paddingright">3dp</dimen>
+    <dimen name="web_container_common_webview_guide_bar_close_paddingleft">4dp</dimen>
+    <dimen name="web_container_common_webview_guide_bar_close_paddingright">7dp</dimen>
+    <dimen name="web_container_common_webview_guide_bar_title_textsize">18sp</dimen>
+    <dimen name="web_container_common_webview_guide_bar_padding_right">10dp</dimen>
+
+</resources>

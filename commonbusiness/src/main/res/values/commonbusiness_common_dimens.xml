@@ -5,4 +5,18 @@
     <dimen name="commonbusiness_common_pull_refresh_tips_textsize">11sp</dimen>
     <dimen name="commonbusiness_common_pull_refresh_tips_margin_bottom">6dp</dimen>
 
+    <!-- 标题栏 -->
+    <dimen name="commonbusiness_common_actionbar_height">44dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_back_padding_left">14dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_back_padding_right">14dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_title_textsize">18sp</dimen>
+    <dimen name="commonbusiness_common_actionbar_title_padding_right">70dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_textsize">18sp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_padding_right">10dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_img_size">24dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_img_icon_size">23dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_img_small_textsize">10sp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_img_small_iconsize">14dp</dimen>
+    <dimen name="commonbusiness_common_actionbar_menu_img_small_margintop">5dp</dimen>
+
 </resources>

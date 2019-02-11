@@ -4,4 +4,9 @@
     <!-- 下拉刷新 -->
     <color name="commonbusiness_common_pull_refresh_tips_textcolor">#69696f</color>
 
+    <!-- 标题栏背景色 -->
+    <color name="commonbusiness_common_actionbar_bg">#ffffff</color>
+    <!-- 标题栏字体色 -->
+    <color name="commonbusiness_common_actionbar_title_textcolor">#333333</color>
+
 </resources>

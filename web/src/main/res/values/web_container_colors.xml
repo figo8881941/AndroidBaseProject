@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 标题栏背景色 -->
+    <color name="web_container_common_webview_guiebar_bg">#ffffff</color>
+    <!-- 标题栏字体色 -->
+    <color name="web_container_common_webview_guiebar_textcolor">#333333</color>
+
+</resources>
