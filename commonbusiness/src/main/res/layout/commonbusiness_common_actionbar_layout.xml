@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.xmiles.vipgift.business.view.CommonActionBar
+<com.duoduo.commonbusiness.view.CommonActionBar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/commonbusiness_common_actionbar_height"
@@ -59,4 +59,4 @@
         android:layout_alignParentBottom="true"
         android:background="#dcdcdc" />
 
-</com.xmiles.vipgift.business.view.CommonActionBar>
+</com.duoduo.commonbusiness.view.CommonActionBar>
