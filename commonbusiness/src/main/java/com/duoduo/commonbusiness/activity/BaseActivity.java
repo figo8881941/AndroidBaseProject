@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.duoduo.commonbusiness.mvp.view.IBaseView;
 
 /**
@@ -18,6 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);
     }
 
     @Override
