@@ -12,6 +12,7 @@ import android.webkit.WebViewClient;
 
 import com.duoduo.commonbase.utils.DeviceUtils;
 import com.duoduo.commonbusiness.R;
+import com.duoduo.commonbusiness.config.GlobalBuildConfig;
 import com.duoduo.commonbusiness.fragment.BaseLoadingDialogFragment;
 import com.duoduo.commonbusiness.net.CommonNetDataUtils;
 import com.duoduo.commonbusiness.view.CommonErrorView;
@@ -30,7 +31,7 @@ import wendu.dsbridge.DWebView;
 
 public abstract class BaseWebViewFragment<D> extends BaseLoadingDialogFragment<D> implements IBaseWebViewContainer {
 
-    protected final boolean DEBUG = true;
+    protected final boolean DEBUG = GlobalBuildConfig.getInstance().isDebugMode();
     protected final String TAG = this.getClass().getSimpleName();
 
     protected ViewGroup root;
