@@ -214,7 +214,7 @@ public class BaseWebInterface {
     }
 
     @JavascriptInterface
-    public void close(final JSONObject jsonObjecisAppInstallt) throws JSONException {
+    public void close(final JSONObject jsonObject) throws JSONException {
         IBaseWebViewContainer container = getContainer();
         if (container != null) {
             container.close();
@@ -329,7 +329,6 @@ public class BaseWebInterface {
             return;
         }
         final String param = jsonObject.optString("param");
-        Log.e("cpt", "-=-=-：" + param);
         if (TextUtils.isEmpty(param)) {
             return;
         }

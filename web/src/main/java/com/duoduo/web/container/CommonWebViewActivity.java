@@ -418,7 +418,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         if (contentWebView == null) {
             return;
         }
-        webAppInterface = new BaseWebInterface(this, contentWebView, this);
+        webAppInterface = new BaseWebInterface(getApplicationContext(), contentWebView, this);
         contentWebView.setJavascriptInterface(webAppInterface);
     }
 
