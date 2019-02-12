@@ -19,6 +19,7 @@ import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.commonbusiness.router.path.IWebPath;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.presenter.ClassifyPresenter;
@@ -187,7 +188,11 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
         carLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ARouter.getInstance().build("/main/demo/fileProviderTest").navigation();
+                //ARouter.getInstance().build("/main/demo/fileProviderTest").navigation();
+                ARouter.getInstance()
+                        .build(IWebPath.COMMON_WEBVIEW_ACTIVITY)
+                        .withString("htmlUrl", "http://www.baidu.com")
+                        .navigation();
             }
         });
     }

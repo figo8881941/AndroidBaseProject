@@ -12,6 +12,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true">
 
+        <View
+            android:id="@+id/status_bar_spaceview"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:background="@color/commonbusiness_common_actionbar_bg"
+            />
+
         <include
             android:id="@+id/actionbar"
             layout="@layout/commonbusiness_common_actionbar_layout"

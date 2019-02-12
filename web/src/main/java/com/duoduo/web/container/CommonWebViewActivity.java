@@ -84,18 +84,13 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     // js接口
     private BaseWebInterface webAppInterface;
 
-    private HashMap<String, String> datas = new HashMap<String, String>();
-
     // 加载出错界面
     private CommonErrorView noDataView;
 
     // 加载loading界面
     private CommonPageLoading pageLoading;
 
-    //    private ActionBarButtonController mActionBarMenuController;
-//    private ActionBarMoreWindow mMoreWindow;
-
-    private IconImageView menuImage;
+    // 加载进度条
     private ProgressBar mProgressBar;
 
     // 处理超时的Runnable
@@ -158,11 +153,12 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //如果需要全屏展示
+        // 如果需要全屏展示
         if (isFullScreen) {
             ActivityUtils.changeActivityToFullScreen(this);
         }
 
+        // 设置状态栏颜色
         StatusBarUtils.changeStatusBarTran(this, false);
 
         setContentView(R.layout.web_container_common_webview_activity);
@@ -184,7 +180,6 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     @SuppressLint("JavascriptInterface")
     private void initView() {
         actionBar = (CommonActionBar) findViewById(R.id.actionbar);
-        initMorePopWindow();
         actionBar.setTitle(title);
         actionBar.setBackButtonOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,13 +203,6 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         outterWebBackBt.setOnClickListener(backButtonOnClickListener);
         outterWebCloseBt = (ImageView) findViewById(R.id.outter_webview_close_bt);
         outterWebCloseBt.setOnClickListener(closeButtonOnClickListener);
-        menuImage = (IconImageView) findViewById(R.id.menu_img);
-//        menuImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mMoreWindow.showAsDropDown(menuImage, -mMoreWindow.getWidth() + (int) (menuImage.getWidth() * 0.9f), DrawUtils.dip2px(8));
-//            }
-//        });
 
         if (!TextUtils.isEmpty(title)) {
             showTitle = true;
@@ -428,57 +416,6 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         }
     }
 
-    private void initMorePopWindow() {
-//        mMoreWindow = new ActionBarMoreWindow(getApplicationContext());
-//        mMoreWindow.setBtnClickListener(new ActionBarMoreWindow.OnBtnClickListener() {
-//            @Override
-//            public void onFresh() {
-////                refreshData();
-//                contentWebView.reload();
-//                mMoreWindow.dismiss();
-//            }
-//
-//            @Override
-//            public void onOpenBrowser() {
-//                try {
-//                    String url = contentWebView.getUrl();
-//                    String finalUrl = IGlobalRoutePathConsts.COMMON_PREFIX + IGlobalRoutePathConsts.COMMON_EXTERNAL_WEB + "?htmlUrl=" + URLEncoder.encode(url, "UTF-8");
-//                    ARouter.getInstance().build(Uri.parse(finalUrl)).navigation();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//                mMoreWindow.dismiss();
-//            }
-//
-//            @Override
-//            public void onShare() {
-//                try {
-//                    String currentShareAction = null;
-//
-//                    if (!TextUtils.isEmpty(shareAction)) {
-//                        currentShareAction = shareAction;
-//                    } else {
-//                        JSONObject defaultx = new JSONObject();
-//                        defaultx.put("title", AppUtils.getAppName(getApplication(), getPackageName()));
-//                        defaultx.put("content", title != null ? title : "");
-//                        defaultx.put("webUrl", URLEncoder.encode(url, "UTF-8"));
-//
-//                        JSONObject object = new JSONObject();
-//                        object.put("defaultx", defaultx);
-//                        currentShareAction = IGlobalRoutePathConsts.COMMON_PREFIX + IGlobalRoutePathConsts.SHARE_PAGE +
-//                                "?sharecontent=" + object.toString();
-//                    }
-//
-//                    ARouter.getInstance().build(Uri.parse(currentShareAction)).navigation();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                mMoreWindow.dismiss();
-//            }
-//        });
-    }
-
     /**
      * 初始化native js接口的方法
      */
@@ -513,7 +450,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         mProgressRunnable = new Runnable() {
             @Override
             public void run() {
-                ViewUtils.hideView(mProgressBar);
+                ViewUtils.goneView(mProgressBar);
             }
         };
     }
@@ -618,7 +555,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     }
 
     private void hideContentView() {
-        ViewUtils.hideView(contentWebView);
+        ViewUtils.goneView(contentWebView);
     }
 
     private void showNoDataView() {
@@ -626,7 +563,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     }
 
     private void hideNoDataView() {
-        ViewUtils.hideView(noDataView);
+        ViewUtils.goneView(noDataView);
     }
 
     private void showTitle() {
@@ -634,7 +571,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     }
 
     private void hideTitle() {
-        ViewUtils.hideView(actionBar);
+        ViewUtils.goneView(actionBar);
     }
 
     private void showToolbar() {
@@ -642,7 +579,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     }
 
     public void hideToolbar() {
-        ViewUtils.hideView(outterWebTitle);
+        ViewUtils.goneView(outterWebTitle);
     }
 
     @Override
@@ -657,7 +594,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
 
     @Override
     public void hideLoadingPage() {
-        ViewUtils.hideView(pageLoading);
+        ViewUtils.goneView(pageLoading);
     }
 
     @Override

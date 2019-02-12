@@ -19,6 +19,12 @@ public class ViewUtils {
     }
 
     public static void hideView(View view) {
+        if (view != null && view.getVisibility() != View.INVISIBLE) {
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public static void goneView(View view) {
         if (view != null && view.getVisibility() != View.GONE) {
             view.setVisibility(View.GONE);
         }

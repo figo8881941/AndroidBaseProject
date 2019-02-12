@@ -36,15 +36,5 @@
         android:singleLine="true"
         android:textColor="@color/web_container_common_webview_guiebar_textcolor"
         android:textSize="@dimen/web_container_common_webview_guide_bar_title_textsize" />
-
-    <com.duoduo.commonbase.view.IconImageView
-        android:id="@+id/menu_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="@dimen/web_container_common_webview_guide_bar_padding_right"
-        android:scaleType="centerInside"
-        android:src="@drawable/web_container_common_webview_guide_bar_more"
-        android:visibility="visible" />
 </LinearLayout>
 
