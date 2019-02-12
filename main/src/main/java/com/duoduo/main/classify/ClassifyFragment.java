@@ -201,7 +201,7 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
 //                        .navigation();
                 try {
                     String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
-                    "?showTitle=true&withHead=false&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
+                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
                     ARouter.getInstance()
                             .build(Uri.parse(url))
                             .navigation();
