@@ -2,6 +2,7 @@ package com.duoduo.web.container;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
@@ -310,6 +311,9 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (DEBUG) {
+                    Logger.t(TAG).i("shouldOverrideUrlLoading = url :" + url);
+                }
                 if (WebViewUtils.handleUrlIntent(
                         CommonWebViewActivity.this, url)) {
                     return true;
@@ -338,8 +342,19 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
             }
 
             @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                if (DEBUG) {
+                    Logger.t(TAG).i("onPageStarted == ");
+                }
+            }
+
+            @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                if (DEBUG) {
+                    Logger.t(TAG).i("onPageFinished == ");
+                }
                 if (!TextUtils.isEmpty(injectJS)) {
                     String js = "window.phead=" + CommonNetDataUtils.getPheadJsonWithGlobalBuildConfig(getApplicationContext()).toString().replace("\"", "'") + ";";
                     js += "var newscript = document.createElement(\"script\");";
