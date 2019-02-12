@@ -17,21 +17,21 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:background="@color/commonbusiness_common_actionbar_bg"
-            />
+            android:visibility="gone" />
 
         <include
             android:id="@+id/actionbar"
             layout="@layout/commonbusiness_common_actionbar_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/commonbusiness_common_actionbar_height"
-            android:layout_alignParentTop="true" />
+            android:layout_below="@id/status_bar_spaceview" />
 
         <include
             android:id="@+id/webview_guide_bar"
             layout="@layout/web_container_common_webview_guide_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/commonbusiness_common_actionbar_height"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/status_bar_spaceview"
             android:background="@color/web_container_common_webview_guiebar_bg"
             android:visibility="gone" />
 

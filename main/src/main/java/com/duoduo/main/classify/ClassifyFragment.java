@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
+import com.duoduo.commonbusiness.router.path.IGlobalPath;
 import com.duoduo.commonbusiness.router.path.IWebPath;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
@@ -30,6 +32,7 @@ import com.duoduo.main.classify.view.IClassifyView;
 import com.duoduo.main.demo.FileProviderTestActivity;
 import com.duoduo.main.main.data.MainTabEntity;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -189,10 +192,22 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
             @Override
             public void onClick(View v) {
                 //ARouter.getInstance().build("/main/demo/fileProviderTest").navigation();
-                ARouter.getInstance()
-                        .build(IWebPath.COMMON_WEBVIEW_ACTIVITY)
-                        .withString("htmlUrl", "http://www.baidu.com")
-                        .navigation();
+//                ARouter.getInstance()
+//                        .build(IWebPath.COMMON_WEBVIEW_ACTIVITY)
+//                        .withString("htmlUrl", "http://www.baidu.com")
+//                        .withBoolean("controlPageBack",true)
+//                        .withBoolean("showTitle", true)
+//                        //.withBoolean("showToolbar", true)
+//                        .navigation();
+                try {
+                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
+                    "?showTitle=true&withHead=false&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
+                    ARouter.getInstance()
+                            .build(Uri.parse(url))
+                            .navigation();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

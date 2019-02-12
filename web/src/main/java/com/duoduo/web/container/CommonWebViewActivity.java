@@ -2,7 +2,6 @@ package com.duoduo.web.container;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +9,6 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.SslErrorHandler;
-import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,7 +22,6 @@ import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbase.utils.DeviceUtils;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.ViewUtils;
-import com.duoduo.commonbase.view.IconImageView;
 import com.duoduo.commonbusiness.activity.BaseLoadingDialogActivity;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
 import com.duoduo.commonbusiness.net.CommonNetDataUtils;
@@ -35,7 +32,6 @@ import com.duoduo.commonbusiness.view.CommonPageLoading;
 import com.duoduo.commonbusiness.web.BaseWebInterface;
 import com.duoduo.commonbusiness.web.IBaseWebViewContainer;
 import com.duoduo.commonbusiness.web.IWebConsts;
-import com.duoduo.commonbusiness.web.WebChromeClientExt;
 import com.duoduo.commonbusiness.web.WebViewUtils;
 import com.duoduo.web.R;
 import com.orhanobut.logger.Logger;
@@ -57,7 +53,7 @@ import wendu.dsbridge.DWebView;
  */
 @Route(path = IWebPath.COMMON_WEBVIEW_ACTIVITY)
 public class CommonWebViewActivity extends BaseLoadingDialogActivity
-        implements IBaseWebViewContainer, WebChromeClientExt.OpenFileChooserCallBack {
+        implements IBaseWebViewContainer {
 
     private final boolean DEBUG = GlobalBuildConfig.getInstance().isDebugMode();
     private final String TAG = this.getClass().getSimpleName();
@@ -67,6 +63,9 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
 
     // 标题
     private CommonActionBar actionBar;
+
+    // 状态栏占位
+    private View statusBarSpaceView;
 
     // 加载外部页面使用的标题栏
     private View outterWebTitle;
@@ -179,6 +178,9 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
      */
     @SuppressLint("JavascriptInterface")
     private void initView() {
+        statusBarSpaceView = findViewById(R.id.status_bar_spaceview);
+        statusBarSpaceView.getLayoutParams().height = StatusBarUtils.getStatusBarHeightFit(getApplicationContext());
+
         actionBar = (CommonActionBar) findViewById(R.id.actionbar);
         actionBar.setTitle(title);
         actionBar.setBackButtonOnClickListener(new View.OnClickListener() {
@@ -204,26 +206,8 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         outterWebCloseBt = (ImageView) findViewById(R.id.outter_webview_close_bt);
         outterWebCloseBt.setOnClickListener(closeButtonOnClickListener);
 
-        if (!TextUtils.isEmpty(title)) {
-            showTitle = true;
-        }
-
-        if (isFullScreen) {
-            hideTitle();
-            hideToolbar();
-        } else {
-            if (showTitle && !showToolbar) {
-                showTitle();
-            } else {
-                hideTitle();
-            }
-
-            if (showToolbar) {
-                showToolbar();
-            } else {
-                hideToolbar();
-            }
-        }
+        // 控制titlebar or toolbar的展示
+        controlActionBarLayout();
 
         // 错误页面
         noDataView = (CommonErrorView) findViewById(R.id.no_data_view);
@@ -255,7 +239,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         // 初始化native js接口
         initWebViewInterface();
         WebViewUtils.setFullFunctionForWebView(getApplicationContext(), contentWebView, DEBUG);
-        WebChromeClient webChromeClient = new WebChromeClientExt(this) {
+        WebChromeClient webChromeClient = new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (DEBUG) {
@@ -276,22 +260,8 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
                         hideLoadingPage();
                         hideNoDataView();
 
-                        if (isFullScreen) {
-                            hideTitle();
-                            hideToolbar();
-                        } else {
-                            if (showTitle && !showToolbar) {
-                                showTitle();
-                            } else {
-                                hideTitle();
-                            }
-
-                            if (showToolbar) {
-                                showToolbar();
-                            } else {
-                                hideToolbar();
-                            }
-                        }
+                        // 控制titlebar or toolbar的展示
+                        controlActionBarLayout();
 
                         showContentView();
                         checkShowCloseBt();
@@ -386,7 +356,32 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     }
 
     /**
+     * 控制titlebar or toolbar的展示
+     */
+    private void controlActionBarLayout() {
+        if (isFullScreen) {
+            hideStatusBarSpace();
+            hideTitle();
+            hideToolbar();
+        } else {
+            showStatusBarSpace();
+            if (showTitle && !showToolbar) {
+                showTitle();
+            } else {
+                hideTitle();
+            }
+
+            if (showToolbar) {
+                showToolbar();
+            } else {
+                hideToolbar();
+            }
+        }
+    }
+
+    /**
      * 刷新加载进度条的方法
+     *
      * @param newProgress
      */
     private void refreshProgess(int newProgress) {
@@ -477,9 +472,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
             showLoadingPage();
             onRefreshComplete();
             hideNoDataView();
-            if (!isFullScreen) {
-                showTitle();
-            }
+            controlActionBarLayout();
             hideContentView();
             // 开始计时
             if (handler != null && timeoutRunnable != null) {
@@ -578,8 +571,16 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         ViewUtils.showView(outterWebTitle);
     }
 
-    public void hideToolbar() {
+    private void hideToolbar() {
         ViewUtils.goneView(outterWebTitle);
+    }
+
+    private void hideStatusBarSpace() {
+        ViewUtils.goneView(statusBarSpaceView);
+    }
+
+    private void showStatusBarSpace() {
+        ViewUtils.showView(statusBarSpaceView);
     }
 
     @Override
@@ -692,175 +693,6 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
             contentWebView = null;
         }
     }
-
-    @Override
-    public void openFileChooserCallBack(ValueCallback<Uri> uploadMsg, String acceptType) {
-//        mUploadMsg = uploadMsg;
-//        showPhotoDialog();
-    }
-
-    @Override
-    public void showFileChooserCallBack(ValueCallback<Uri[]> filePathCallBack) {
-//        mUploadMsg5Plus = filePathCallBack;
-//        showPhotoDialog();
-    }
-
-//    private boolean mIsGotoChasePic;
-//    public static final int REQUEST_CODE_PICK_IMAGE = 10000;//相册
-//    public static final int REQUEST_CODE_CAPTURE_CAMERA = 10001;//照相机
-//    private ValueCallback<Uri> mUploadMsg;
-//    private ValueCallback<Uri[]> mUploadMsg5Plus;
-//    private InfoUpdateDialog mPhotoDialog;
-//
-//    private void showPhotoDialog() {
-//        if (mPhotoDialog == null) {
-//            mPhotoDialog = new InfoUpdateDialog(getActivity());
-//            mPhotoDialog.setCancelable(true);
-//            mPhotoDialog.setItemText(getString(R.string.info_update_take_photo), getString(R.string.info_update_from_gallery));
-//
-//            mPhotoDialog.setListener(new InfoUpdateDialog.OnItemClickListener() {
-//                @Override
-//                public void onTopClick(String top) {
-//                    mIsGotoChasePic = true;
-//                    getImageFromCamera();
-//                    mPhotoDialog.cancel();
-//                }
-//
-//                @Override
-//                public void onBottomClick(String bottom) {
-//                    mIsGotoChasePic = true;
-//                    getImageFromAlbum();
-//                    mPhotoDialog.cancel();
-//                }
-//
-//                @Override
-//                public void onCancelClick() {
-//                    mIsGotoChasePic = false;
-//                    mPhotoDialog.cancel();
-//                }
-//            });
-//
-//            mPhotoDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                @Override
-//                public void onShow(DialogInterface dialog) {
-//                    mIsGotoChasePic = false;
-//                }
-//            });
-//
-//            mPhotoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//                @Override
-//                public void onDismiss(DialogInterface dialog) {
-//
-//                    if (!mIsGotoChasePic) {
-//                        try {
-//                            if (mUploadMsg != null) {
-//                                mUploadMsg.onReceiveValue(null);
-//                            }
-//                            if (mUploadMsg5Plus != null) {
-//                                mUploadMsg5Plus.onReceiveValue(null);
-//                            }
-//                        } catch (Exception e) {
-//                        }
-//                    }
-//                }
-//            });
-//        }
-//        mPhotoDialog.show();
-//    }
-//
-//    protected void getImageFromAlbum() {
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_PICK);
-//        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-//        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
-//    }
-//
-//    private String mCurImageName;
-//
-//    protected void getImageFromCamera() {
-//        String state = Environment.getExternalStorageState();
-//        if (state.equals(Environment.MEDIA_MOUNTED)) {
-//            mCurImageName = "/" + System.currentTimeMillis() + ".jpg";
-//            Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            File file = new File(Environment.getExternalStorageDirectory(), mCurImageName);
-//            intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-//            startActivityForResult(intent1, REQUEST_CODE_CAPTURE_CAMERA);
-//        }
-//    }
-//
-//    @Override
-//    public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-//        if ((requestCode == REQUEST_CODE_PICK_IMAGE || requestCode == REQUEST_CODE_CAPTURE_CAMERA) && resultCode == RESULT_OK) {
-//
-//            Runnable runnable = new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        Uri imageUri = null;
-//                        String picturePath = null;
-//
-//                        if (requestCode == REQUEST_CODE_PICK_IMAGE) {
-//                            if (data.getData() != null) {
-//                                picturePath = ImageUtil.getImagePath(getApplicationContext(), data.getData());
-//                            }
-//                        } else {
-//                            File pictureFile = new File(Environment.getExternalStorageDirectory() + mCurImageName);
-//                            if (pictureFile.exists() && pictureFile.isFile()) {
-//                                picturePath = pictureFile.getPath();
-//                            }
-//                        }
-//
-//                        if (picturePath != null) {
-//                            Bitmap getimage = ImageUtil.resizeBitmapFile0(picturePath, 1280, 1280);
-//                            if (getimage != null) {
-//                                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                                getimage.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-//                                imageUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), getimage, null, null));
-//                            }
-//                        }
-//
-//                        if (mUploadMsg == null && mUploadMsg5Plus == null) {
-//                            return;
-//                        }
-//
-//                        if (imageUri == null) {
-//                            if (mUploadMsg != null) {
-//                                mUploadMsg.onReceiveValue(null);
-//                            }
-//                            if (mUploadMsg5Plus != null) {
-//                                mUploadMsg5Plus.onReceiveValue(null);
-//                            }
-//                            return;
-//                        }
-//                        if (mUploadMsg != null) {
-//                            mUploadMsg.onReceiveValue(imageUri);
-//                            mUploadMsg = null;
-//                        } else {
-//                            mUploadMsg5Plus.onReceiveValue(new Uri[]{imageUri});
-//                            mUploadMsg5Plus = null;
-//                        }
-//                    } catch (Exception ignore) {
-//                    }
-//                }
-//            };
-//
-//            ThreadUtils.runInGlobalWorkThread(runnable);
-//
-//        } else if (resultCode == RESULT_CANCELED) {
-//
-//            try {
-//                if (mUploadMsg != null) {
-//                    mUploadMsg.onReceiveValue(null);
-//                }
-//                if (mUploadMsg5Plus != null) {
-//                    mUploadMsg5Plus.onReceiveValue(null);
-//                }
-//            } catch (Exception e) {
-//            }
-//        }
-//    }
 
     @Override
     public void onDestroy() {
