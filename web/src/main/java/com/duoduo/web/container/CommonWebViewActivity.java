@@ -1,15 +1,20 @@
 package com.duoduo.web.container;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.SslErrorHandler;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,6 +25,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.duoduo.commonbase.utils.ActivityUtils;
+import com.duoduo.commonbase.utils.AppUtils;
 import com.duoduo.commonbase.utils.DeviceUtils;
 import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.ViewUtils;
@@ -33,6 +39,7 @@ import com.duoduo.commonbusiness.view.CommonPageLoading;
 import com.duoduo.commonbusiness.web.BaseWebInterface;
 import com.duoduo.commonbusiness.web.IBaseWebViewContainer;
 import com.duoduo.commonbusiness.web.IWebConsts;
+import com.duoduo.commonbusiness.web.WebChromeClientExt;
 import com.duoduo.commonbusiness.web.WebViewUtils;
 import com.duoduo.web.R;
 import com.orhanobut.logger.Logger;
@@ -109,6 +116,11 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     private boolean timeout = false;
 
     private Handler handler;
+
+    // 选择文件相关
+    private int CHOOSE_FILE = 1;
+    private ValueCallback<Uri> uploadMessage;
+    private ValueCallback<Uri[]> uploadMessageArray;
 
     // 标题
     @Autowired
@@ -240,7 +252,7 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
         // 初始化native js接口
         initWebViewInterface();
         WebViewUtils.setFullFunctionForWebView(getApplicationContext(), contentWebView, DEBUG);
-        WebChromeClient webChromeClient = new WebChromeClient() {
+        WebChromeClient webChromeClient = new WebChromeClientExt() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (DEBUG) {
@@ -305,6 +317,36 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
                     }
                 }
             }
+
+            @Override
+            public void openFileChooser(ValueCallback valueCallback, String acceptType) {
+                openFileChooser(valueCallback, acceptType, null);
+            }
+
+            @Override
+            public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType, String capture) {
+                if (DEBUG) {
+                    Logger.t(TAG).i("openFileChooser");
+                }
+                uploadMessage = valueCallback;
+                pickFile(acceptType);
+            }
+
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                if (DEBUG) {
+                    Logger.t(TAG).i("onShowFileChooser");
+                }
+                uploadMessageArray = filePathCallback;
+                String acceptType = null;
+                if (fileChooserParams != null) {
+                    String[] acceptTypes = fileChooserParams.getAcceptTypes();
+                    acceptType = acceptTypes == null || acceptTypes.length == 0 ? null : acceptTypes[0];
+                }
+                pickFile(acceptType);
+                return true;
+            }
         };
         contentWebView.setWebChromeClient(webChromeClient);
         contentWebView.setWebViewClient(new WebViewClient() {
@@ -368,6 +410,39 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
 
         mProgressBar = (ProgressBar) findViewById(R.id.common_webview_progressBar);
 
+    }
+
+    /**
+     * 选择图片的方法
+     */
+    public void pickFile(String acceptType) {
+        if (DEBUG) {
+            Logger.t(TAG).i("pickFile -- acceptType: " + acceptType);
+        }
+        Intent chooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        chooserIntent.setType(acceptType);
+        AppUtils.startActivityForResultSafely(CommonWebViewActivity.this, chooserIntent, CHOOSE_FILE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == CHOOSE_FILE) {
+            if (null == uploadMessage && null == uploadMessageArray){
+                return;
+            }
+            if(null!= uploadMessage && null == uploadMessageArray){
+                Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+                uploadMessage.onReceiveValue(result);
+                uploadMessage = null;
+            }
+
+            if(null == uploadMessage && null != uploadMessageArray){
+                Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+                uploadMessageArray.onReceiveValue(new Uri[]{result});
+                uploadMessageArray = null;
+            }
+
+        }
     }
 
     /**

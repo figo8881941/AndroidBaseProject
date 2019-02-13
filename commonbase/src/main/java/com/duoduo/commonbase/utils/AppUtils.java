@@ -1,5 +1,6 @@
 package com.duoduo.commonbase.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -96,6 +97,24 @@ public class AppUtils {
         }
         return false;
     }
+
+    /**
+     * 安全启动activity的方法
+     * @param activity
+     * @param intent
+     * @param requestCode
+     * @return
+     */
+    public static boolean startActivityForResultSafely(Activity activity, Intent intent, int requestCode) {
+        try {
+            activity.startActivityForResult(intent, requestCode);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     /**
      * 获取应用程序版本号的方法
