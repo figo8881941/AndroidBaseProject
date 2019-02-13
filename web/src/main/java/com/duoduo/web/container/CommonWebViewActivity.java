@@ -1,19 +1,24 @@
 package com.duoduo.web.container;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.SslErrorHandler;
+import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -24,6 +29,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.duoduo.commonbase.permission.annotation.NeedPermission;
 import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbase.utils.AppUtils;
 import com.duoduo.commonbase.utils.DeviceUtils;
@@ -119,8 +125,8 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
 
     // 选择文件相关
     private int CHOOSE_FILE = 1;
-    private ValueCallback<Uri> uploadMessage;
-    private ValueCallback<Uri[]> uploadMessageArray;
+    private ValueCallback<Uri> valueCallback;
+    private ValueCallback<Uri[]> valueCallbackArray;
 
     // 标题
     @Autowired
@@ -318,33 +324,51 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
                 }
             }
 
+            /**
+             * 选择文件的处理
+             * @param valueCallback
+             * @param acceptType
+             */
             @Override
             public void openFileChooser(ValueCallback valueCallback, String acceptType) {
                 openFileChooser(valueCallback, acceptType, null);
             }
 
+            /**
+             * 选择文件的处理
+             * @param valueCallback
+             * @param acceptType
+             * @param capture
+             */
             @Override
             public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType, String capture) {
                 if (DEBUG) {
                     Logger.t(TAG).i("openFileChooser");
                 }
-                uploadMessage = valueCallback;
-                pickFile(acceptType);
+                CommonWebViewActivity.this.valueCallback = valueCallback;
+                chooseFile(acceptType);
             }
 
+            /**
+             * 选择文件的处理
+             * @param webView
+             * @param filePathCallback
+             * @param fileChooserParams
+             * @return
+             */
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
                 if (DEBUG) {
                     Logger.t(TAG).i("onShowFileChooser");
                 }
-                uploadMessageArray = filePathCallback;
+                valueCallbackArray = filePathCallback;
                 String acceptType = null;
                 if (fileChooserParams != null) {
                     String[] acceptTypes = fileChooserParams.getAcceptTypes();
                     acceptType = acceptTypes == null || acceptTypes.length == 0 ? null : acceptTypes[0];
                 }
-                pickFile(acceptType);
+                chooseFile(acceptType);
                 return true;
             }
         };
@@ -408,16 +432,80 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
             }
         });
 
+        //下载处理
+        contentWebView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                if (DEBUG) {
+                    Logger.t(TAG).i("onDownloadStart -- url: " + url);
+                }
+                //downloadByBrowser(url);
+                downloadByDownloadManager(url, contentDisposition, mimetype);
+            }
+        });
+
+        //加载进度条处理
         mProgressBar = (ProgressBar) findViewById(R.id.common_webview_progressBar);
 
     }
 
     /**
-     * 选择图片的方法
+     * 打开外部浏览器以下载文件
+     *
+     * @param url
      */
-    public void pickFile(String acceptType) {
+    private void downloadByBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(url));
+        AppUtils.startActivitySafely(CommonWebViewActivity.this, intent);
+    }
+
+    /**
+     * 使用DownloadManager下载
+     *
+     * @param url
+     * @param contentDisposition
+     * @param mimeType
+     */
+    @NeedPermission(permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE}
+            , ignoreShowRationale = true, requestCode = 1001)
+    private void downloadByDownloadManager(String url, String contentDisposition, String mimeType) {
+        // 指定下载地址
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        // 允许媒体扫描，根据下载的文件类型被加入相册、音乐等媒体库
+        request.allowScanningByMediaScanner();
+        // 设置通知的显示类型，下载进行时和完成后显示通知
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        // 设置通知栏的标题，如果不设置，默认使用文件名
+        // request.setTitle("This is title");
+        // 设置通知栏的描述
+        // request.setDescription("This is description");
+        // 允许在计费流量下下载
+        request.setAllowedOverMetered(false);
+        // 允许该记录在下载管理界面可见
+        request.setVisibleInDownloadsUi(false);
+        // 允许漫游时下载
+        request.setAllowedOverRoaming(true);
+        // 允许下载的网路类型
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE);
+        // 设置下载文件保存的路径和文件名
+        String fileName = URLUtil.guessFileName(url, contentDisposition, mimeType);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+        //另外可选一下方法，自定义下载路径
+        //request.setDestinationUri()
+        //request.setDestinationInExternalFilesDir()
+        final DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        // 添加一个下载任务
+        long downloadId = downloadManager.enqueue(request);
+    }
+
+    /**
+     * 选择文件的方法
+     */
+    private void chooseFile(String acceptType) {
         if (DEBUG) {
-            Logger.t(TAG).i("pickFile -- acceptType: " + acceptType);
+            Logger.t(TAG).i("chooseFile -- acceptType: " + acceptType);
         }
         Intent chooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
         chooserIntent.setType(acceptType);
@@ -427,19 +515,19 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == CHOOSE_FILE) {
-            if (null == uploadMessage && null == uploadMessageArray){
+            if (null == valueCallback && null == valueCallbackArray) {
                 return;
             }
-            if(null!= uploadMessage && null == uploadMessageArray){
+            if (null != valueCallback && null == valueCallbackArray) {
                 Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
-                uploadMessage.onReceiveValue(result);
-                uploadMessage = null;
+                valueCallback.onReceiveValue(result);
+                valueCallback = null;
             }
 
-            if(null == uploadMessage && null != uploadMessageArray){
+            if (null == valueCallback && null != valueCallbackArray) {
                 Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
-                uploadMessageArray.onReceiveValue(new Uri[]{result});
-                uploadMessageArray = null;
+                valueCallbackArray.onReceiveValue(new Uri[]{result});
+                valueCallbackArray = null;
             }
 
         }
