@@ -53,7 +53,6 @@ dependencies {
     api 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     //下拉上拉刷新组件
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
-    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'
     //aspectj
     api 'org.aspectj:aspectjrt:1.8.+'
     //jsbridge
