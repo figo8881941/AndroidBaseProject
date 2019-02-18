@@ -58,8 +58,9 @@
     <include
         android:id="@+id/no_data_view"
         layout="@layout/commonbusiness_common_error_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <include
