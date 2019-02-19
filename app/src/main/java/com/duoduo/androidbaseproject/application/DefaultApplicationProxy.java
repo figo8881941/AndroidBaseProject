@@ -28,7 +28,7 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
         // 初始化全局配置
         initGlobalBuildConfig();
         // 初始化默认的EventBus
-        initEventBust();
+        initEventBus();
         // 初始化Logger日志框架
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
@@ -44,7 +44,7 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
     /**
      * 初始化EventBus
      */
-    private void initEventBust() {
+    private void initEventBus() {
         //使用编译期生成的SubscriberInfoIndex初始化默认的EventBus
         EventBus.builder().addIndex(new MyEventBusIndex()).installDefaultEventBus();
     }
