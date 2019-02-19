@@ -99,4 +99,5 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':main')
     api project(':web')
+    api project(':weex')
 }

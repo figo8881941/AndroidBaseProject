@@ -1,1 +1,1 @@
-include ':app', ':commonbase', ':commonbusiness', ':main', ':web'
+include ':app', ':commonbase', ':commonbusiness', ':main', ':web', ':weex'
