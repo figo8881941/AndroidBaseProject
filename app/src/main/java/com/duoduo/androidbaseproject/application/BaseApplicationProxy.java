@@ -10,8 +10,11 @@ public abstract class BaseApplicationProxy {
 
     protected Application application;
 
-    public BaseApplicationProxy(Application application) {
+    protected boolean isMainProcess;
+
+    public BaseApplicationProxy(Application application, boolean isMainProcess) {
         this.application = application;
+        this.isMainProcess = isMainProcess;
     }
 
     public abstract void onCreate();

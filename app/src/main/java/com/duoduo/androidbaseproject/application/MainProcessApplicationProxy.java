@@ -8,8 +8,8 @@ import android.app.Application;
 
 public class MainProcessApplicationProxy extends DefaultApplicationProxy {
 
-    public MainProcessApplicationProxy(Application application) {
-        super(application);
+    public MainProcessApplicationProxy(Application application, boolean isMainProcess) {
+        super(application, isMainProcess);
     }
 
     @Override

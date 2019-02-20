@@ -28,9 +28,9 @@ public class ProjectApplication extends MultiDexApplication {
             String pkgname = application.getPackageName();
             if (processName.equals(pkgname)) {
                 //如果是主进程
-                return new MainProcessApplicationProxy(application);
+                return new MainProcessApplicationProxy(application, true);
             }
         }
-        return new DefaultApplicationProxy(application);
+        return new DefaultApplicationProxy(application, false);
     }
 }
