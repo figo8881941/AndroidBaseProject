@@ -3,6 +3,7 @@
 
     <!-- 下拉刷新 -->
     <color name="commonbusiness_common_pull_refresh_tips_textcolor">#69696f</color>
+    <color name="commonbusiness_common_pull_refresh_header_bg">#f6f6f6</color>
 
     <!-- 标题栏背景色 -->
     <color name="commonbusiness_common_actionbar_bg">#ffffff</color>

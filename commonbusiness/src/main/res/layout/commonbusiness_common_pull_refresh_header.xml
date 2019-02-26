@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:background="@color/commonbusiness_common_pull_refresh_header_bg">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/loading_img"
