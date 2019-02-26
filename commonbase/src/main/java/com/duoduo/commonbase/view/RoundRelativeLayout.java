@@ -43,8 +43,8 @@ public class RoundRelativeLayout extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundRelativeLayout);
-        float radius = a.getDimensionPixelSize(R.styleable.RoundRelativeLayout_layoutRadius, 25);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundRelativeLayoutStyleable);
+        float radius = a.getDimensionPixelSize(R.styleable.RoundRelativeLayoutStyleable_layoutRadius, 25);
         radiusArray = new float[]{radius, radius, radius, radius, radius, radius, radius, radius};
         a.recycle();
     }
