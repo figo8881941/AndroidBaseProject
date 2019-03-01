@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.home.view;
 
-import com.duoduo.commonbusiness.mvp.view.IBaseLoadingDialogView;
+import com.duoduo.commonbase.mvp.view.IBaseLoadingDialogView;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 

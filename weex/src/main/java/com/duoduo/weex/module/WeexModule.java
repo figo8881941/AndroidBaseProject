@@ -3,7 +3,7 @@ package com.duoduo.weex.module;
 import android.app.Application;
 import android.content.Context;
 
-import com.duoduo.commonbusiness.module.BaseModule;
+import com.duoduo.commonbase.module.BaseModule;
 
 /**
  * Weex Module

@@ -3,7 +3,7 @@ package com.duoduo.main.module;
 import android.app.Application;
 import android.content.Context;
 
-import com.duoduo.commonbusiness.module.BaseModule;
+import com.duoduo.commonbase.module.BaseModule;
 
 /**
  * Main Module

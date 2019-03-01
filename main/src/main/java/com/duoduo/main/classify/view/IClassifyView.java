@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.view;
 
-import com.duoduo.commonbusiness.mvp.view.IBaseView;
+import com.duoduo.commonbase.mvp.view.IBaseView;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 
 /**

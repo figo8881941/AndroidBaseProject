@@ -1,6 +1,6 @@
 package com.duoduo.main.main.view;
 
-import com.duoduo.commonbusiness.mvp.view.IBaseView;
+import com.duoduo.commonbase.mvp.view.IBaseView;
 import com.duoduo.main.main.data.MainTabEntity;
 
 /**

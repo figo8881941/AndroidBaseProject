@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.duoduo.commonbusiness.mvp.view.IBaseView;
+import com.duoduo.commonbase.mvp.view.IBaseView;
 
 /**
  * Fragment基类

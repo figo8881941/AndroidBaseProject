@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.event;
 
-import com.duoduo.commonbusiness.event.BaseEvent;
+import com.duoduo.commonbase.event.BaseEvent;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 
 /**

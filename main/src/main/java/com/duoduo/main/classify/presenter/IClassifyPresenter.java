@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.presenter;
 
-import com.duoduo.commonbusiness.mvp.presenter.IBasePresenter;
+import com.duoduo.commonbase.mvp.presenter.IBasePresenter;
 
 /**
  * 分类Presenter接口

@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.mvp.view;
+package com.duoduo.commonbase.mvp.view;
 
 /**
  * 带loading dialog的view接口

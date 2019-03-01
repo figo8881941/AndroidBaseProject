@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.duoduo.commonbusiness.mvp.view.IBaseView;
+import com.duoduo.commonbase.mvp.view.IBaseView;
 
 /**
  * activity基类

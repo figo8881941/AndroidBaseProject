@@ -10,7 +10,7 @@ import com.duoduo.commonbase.permission.annotation.NeedPermission;
 import com.duoduo.commonbase.permission.annotation.ShowRationable;
 import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
 import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
-import com.duoduo.commonbusiness.mvp.presenter.BasePresenter;
+import com.duoduo.commonbase.mvp.presenter.BasePresenter;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabEntity;

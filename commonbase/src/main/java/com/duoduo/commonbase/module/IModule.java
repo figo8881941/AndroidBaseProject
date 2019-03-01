@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.module;
+package com.duoduo.commonbase.module;
 
 import android.app.Application;
 

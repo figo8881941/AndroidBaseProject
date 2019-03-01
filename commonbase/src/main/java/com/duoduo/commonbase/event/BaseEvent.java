@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.event;
+package com.duoduo.commonbase.event;
 
 import java.util.HashMap;
 

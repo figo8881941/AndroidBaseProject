@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.mvp.view;
+package com.duoduo.commonbase.mvp.view;
 
 /**
  * View基础接口

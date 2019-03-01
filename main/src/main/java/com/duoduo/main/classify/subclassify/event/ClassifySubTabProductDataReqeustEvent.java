@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.subclassify.event;
 
-import com.duoduo.commonbusiness.event.BaseEvent;
+import com.duoduo.commonbase.event.BaseEvent;
 import com.duoduo.main.classify.subclassify.data.ClassifySubTabProductDataEntity;
 
 public class ClassifySubTabProductDataReqeustEvent extends BaseEvent<ClassifySubTabProductDataEntity, Exception> {

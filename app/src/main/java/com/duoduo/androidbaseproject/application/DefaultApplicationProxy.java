@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.duoduo.androidbaseproject.BuildConfig;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
-import com.duoduo.commonbusiness.module.IModule;
+import com.duoduo.commonbase.module.IModule;
 import com.duoduo.commonbusiness.weex.WeexImageAdapter;
 import com.duoduo.main.eventbus.MyEventBusIndex;
 import com.duoduo.main.module.MainModule;

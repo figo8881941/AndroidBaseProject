@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.duoduo.commonbusiness.dialog.CommonLoadingDialogHelper;
-import com.duoduo.commonbusiness.mvp.view.IBaseLoadingDialogView;
+import com.duoduo.commonbase.mvp.view.IBaseLoadingDialogView;
 
 /**
  * 带loading dialog的activity的基类

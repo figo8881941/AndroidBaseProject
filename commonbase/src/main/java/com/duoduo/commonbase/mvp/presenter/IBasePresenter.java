@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.mvp.presenter;
+package com.duoduo.commonbase.mvp.presenter;
 
 /**
  * Presenter基础接口

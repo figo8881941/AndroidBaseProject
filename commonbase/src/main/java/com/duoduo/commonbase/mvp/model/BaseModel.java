@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.mvp.model;
+package com.duoduo.commonbase.mvp.model;
 
 import android.content.Context;
 

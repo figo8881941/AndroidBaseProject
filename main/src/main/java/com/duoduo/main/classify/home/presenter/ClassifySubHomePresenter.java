@@ -2,7 +2,7 @@ package com.duoduo.main.classify.home.presenter;
 
 import android.content.Context;
 
-import com.duoduo.commonbusiness.mvp.presenter.BasePresenter;
+import com.duoduo.commonbase.mvp.presenter.BasePresenter;
 import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.base.data.ProductDataUtils;
 import com.duoduo.main.base.data.ProductInfoEntity;

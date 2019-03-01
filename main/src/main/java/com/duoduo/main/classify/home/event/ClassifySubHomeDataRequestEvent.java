@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.home.event;
 
-import com.duoduo.commonbusiness.event.BaseEvent;
+import com.duoduo.commonbase.event.BaseEvent;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 
 /**

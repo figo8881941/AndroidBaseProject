@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.subclassify.view;
 
-import com.duoduo.commonbusiness.mvp.view.IBaseLoadingDialogView;
+import com.duoduo.commonbase.mvp.view.IBaseLoadingDialogView;
 import com.duoduo.main.base.data.TopicTwoProductListEntity;
 
 import java.util.List;

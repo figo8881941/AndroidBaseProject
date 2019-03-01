@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.subclassify.model;
 
-import com.duoduo.commonbusiness.mvp.model.IBaseModel;
+import com.duoduo.commonbase.mvp.model.IBaseModel;
 
 /**
  * 分类子Tab model接口

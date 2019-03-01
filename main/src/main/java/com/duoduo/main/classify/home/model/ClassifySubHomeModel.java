@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.duoduo.commonbusiness.mvp.model.BaseModel;
+import com.duoduo.commonbase.mvp.model.BaseModel;
 import com.duoduo.main.classify.home.data.ClassifySubHomeEntity;
 import com.duoduo.main.classify.home.data.ClassifyTopicEntity;
 import com.duoduo.main.classify.home.event.ClassifySubHomeDataRequestEvent;

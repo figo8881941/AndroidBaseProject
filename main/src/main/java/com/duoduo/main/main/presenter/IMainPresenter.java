@@ -1,6 +1,6 @@
 package com.duoduo.main.main.presenter;
 
-import com.duoduo.commonbusiness.mvp.presenter.IBasePresenter;
+import com.duoduo.commonbase.mvp.presenter.IBasePresenter;
 
 /**
  * 主界面Presenter接口

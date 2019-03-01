@@ -1,10 +1,10 @@
-package com.duoduo.commonbusiness.mvp.presenter;
+package com.duoduo.commonbase.mvp.presenter;
 
 import android.content.Context;
 
 import com.duoduo.commonbase.permission.IContextHolder;
-import com.duoduo.commonbusiness.mvp.model.IBaseModel;
-import com.duoduo.commonbusiness.mvp.view.IBaseView;
+import com.duoduo.commonbase.mvp.model.IBaseModel;
+import com.duoduo.commonbase.mvp.view.IBaseView;
 
 /**
  * Presenter基类

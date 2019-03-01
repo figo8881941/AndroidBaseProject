@@ -1,6 +1,6 @@
 package com.duoduo.main.classify.home.model;
 
-import com.duoduo.commonbusiness.mvp.model.IBaseModel;
+import com.duoduo.commonbase.mvp.model.IBaseModel;
 
 /**
  * 分类首页Model接口
