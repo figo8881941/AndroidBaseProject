@@ -12,6 +12,7 @@ import com.duoduo.main.eventbus.MyEventBusIndex;
 import com.duoduo.main.module.MainModule;
 import com.duoduo.web.module.WebModule;
 import com.duoduo.weex.module.WeexModule;
+import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.taobao.weex.InitConfig;
@@ -40,6 +41,8 @@ public class DefaultApplicationProxy extends BaseApplicationProxy {
 
     @Override
     public void onCreate() {
+        // 初始化Stetho
+        Stetho.initializeWithDefaults(application);
         // 初始化全局配置
         initGlobalBuildConfig();
         // 初始化Logger日志框架
