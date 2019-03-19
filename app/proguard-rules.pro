@@ -122,3 +122,10 @@
 -keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 # If single-type injection is used, that is, no interface is defined to implement IProvider, the following rules need to be added to protect the implementation
 # -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+
+# Weex
+-keep class com.taobao.weex.bridge.** { *; }
+-keep class com.taobao.weex.layout.** { *; }
+-keep class com.taobao.weex.WXSDKEngine { *; }
+-keep class com.taobao.weex.base.SystemMessageHandler { *; }
+-dontwarn com.taobao.weex.bridge.**
