@@ -1,2 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.duoduo.weex" />
+    package="com.duoduo.weex">
+
+    <application android:allowBackup="true">
+
+        <!-- 通用Weex页面 -->
+        <activity android:name=".container.CommonWeexActivity"></activity>
+
+    </application>
+
+</manifest>

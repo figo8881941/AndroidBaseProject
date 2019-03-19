@@ -1,7 +1,6 @@
 package com.duoduo.main.classify;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -21,7 +20,7 @@ import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.router.path.IGlobalPath;
-import com.duoduo.commonbusiness.router.path.IWebPath;
+import com.duoduo.commonbusiness.router.path.IWeexPath;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.presenter.ClassifyPresenter;
@@ -29,10 +28,8 @@ import com.duoduo.main.classify.presenter.IClassifyPresenter;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.classify.view.IClassifyView;
-import com.duoduo.main.demo.FileProviderTestActivity;
 import com.duoduo.main.main.data.MainTabEntity;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -199,9 +196,17 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
 //                        .withBoolean("showTitle", true)
 //                        //.withBoolean("showToolbar", true)
 //                        .navigation();
+//                try {
+//                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
+//                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
+//                    ARouter.getInstance()
+//                            .build(Uri.parse(url))
+//                            .navigation();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
                 try {
-                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
-                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
+                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWeexPath.COMMON_WEEX_ACTIVITY;
                     ARouter.getInstance()
                             .build(Uri.parse(url))
                             .navigation();
