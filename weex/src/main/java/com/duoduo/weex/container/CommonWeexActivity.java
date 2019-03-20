@@ -54,6 +54,10 @@ public class CommonWeexActivity extends BaseLoadingDialogActivity implements IWX
     // 加载loading界面
     private CommonPageLoading pageLoading;
 
+    // Weex页面显示宽高
+    private int displayWidth;
+    private int displayHeight;
+
     // 网页加载超时时间
     private final long LOAD_TIME_OUT = 30 * 1000;
 
@@ -96,6 +100,7 @@ public class CommonWeexActivity extends BaseLoadingDialogActivity implements IWX
         initSDKInstance();
         initView();
         controlActionBarLayout();
+        calculateDiplayWidthHeight(getApplicationContext());
         handler = new Handler(Looper.getMainLooper());
         initTimeoutRunable();
         render();
@@ -151,12 +156,21 @@ public class CommonWeexActivity extends BaseLoadingDialogActivity implements IWX
         }
     }
 
+    private void calculateDiplayWidthHeight(Context context) {
+        displayWidth = DeviceUtils.getDisplayWidth(context);
+        displayHeight = DeviceUtils.getDisplayHeight(context);
+        if (!isFullScreen) {
+            int actionBarHeght = getResources().getDimensionPixelSize(R.dimen.commonbusiness_common_actionbar_height);
+            displayHeight = displayHeight - actionBarHeght;
+        }
+    }
+
     private void render() {
         if (isDestroy) {
             return;
         }
-        String pageName = "WeexApp";
-        String bundleUrl = "http://192.168.14.200:8081/dist/index.js";
+        //String pageName = "WeexApp";
+        //String bundleUrl = "http://192.168.14.200:8081/dist/index.js";
         //String pageName = "WeexApp";
         //String bundleUrl = "file://assets/dist/index.js";
         Map<String, Object> options = new HashMap<>();
@@ -167,8 +181,8 @@ public class CommonWeexActivity extends BaseLoadingDialogActivity implements IWX
                 bundleUrl,
                 options,
                 null,
-                DeviceUtils.getDisplayWidth(context),
-                DeviceUtils.getDisplayHeight(context),
+                displayWidth,
+                displayHeight,
                 WXRenderStrategy.APPEND_ASYNC);
         timeout = false;
         handler.removeCallbacks(timeoutRunnable);

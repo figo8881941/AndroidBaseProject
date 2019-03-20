@@ -30,6 +30,7 @@ import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.classify.view.IClassifyView;
 import com.duoduo.main.main.data.MainTabEntity;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -209,6 +210,10 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
                     String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWeexPath.COMMON_WEEX_ACTIVITY;
                     ARouter.getInstance()
                             .build(Uri.parse(url))
+                            .withString("title", "WeexHelloWord")
+                            .withString("pageName", "WeexPage")
+                            .withString("bundleUrl", "http://192.168.14.200:8081/dist/index.js")
+                            .withBoolean("isFullScreen", true)
                             .navigation();
                 } catch (Exception e) {
                     e.printStackTrace();
