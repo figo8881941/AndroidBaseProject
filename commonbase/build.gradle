@@ -64,7 +64,7 @@ dependencies {
         //ARouter
         api 'com.alibaba:arouter-api:1.4.1'
         //Weex
-        api 'com.taobao.android:weex_sdk:0.5.1@aar'
+        api 'com.taobao.android:weex_sdk:0.16.0'
         //stetho调试框架
         api 'com.facebook.stetho:stetho:1.5.0'
         api 'com.facebook.stetho:stetho-okhttp3:1.5.0'

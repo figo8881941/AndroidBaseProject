@@ -382,6 +382,45 @@ public class DeviceUtils {
     }
 
 
+    public static int sDisplayWidth = -1;
+
+    /**
+     * 获取设备宽度
+     *
+     * @param context
+     * @return
+     */
+    public static int getDisplayWidth(Context context) {
+        if (sDisplayWidth != -1) {
+            return sDisplayWidth;
+        }
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager wMgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wMgr.getDefaultDisplay().getMetrics(dm);
+        sDisplayWidth = dm.widthPixels;
+        return sDisplayWidth;
+    }
+
+    public static int sDisplayHeight = -1;
+
+    /**
+     * 获取设备高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getDisplayHeight(Context context) {
+        if (sDisplayHeight != -1) {
+            return sDisplayHeight;
+        }
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager wMgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wMgr.getDefaultDisplay().getMetrics(dm);
+        sDisplayHeight = dm.heightPixels;
+        return sDisplayHeight;
+    }
+
+
     private static int sStatusBarHeight = -1;
 
     /**

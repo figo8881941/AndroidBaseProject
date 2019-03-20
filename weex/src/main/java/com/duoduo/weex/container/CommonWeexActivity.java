@@ -1,17 +1,20 @@
 package com.duoduo.weex.container;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.duoduo.commonbase.utils.DeviceUtils;
 import com.duoduo.commonbusiness.activity.BaseLoadingDialogActivity;
 import com.duoduo.commonbusiness.router.path.IWeexPath;
 import com.duoduo.weex.R;
 import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Weex容器Activity
@@ -28,18 +31,20 @@ public class CommonWeexActivity extends BaseLoadingDialogActivity implements IWX
         setContentView(R.layout.weex_container_common_weex_activity);
         mWXSDKInstance = new WXSDKInstance(this);
         mWXSDKInstance.registerRenderListener(this);
-        /**
-         * bundleUrl source http://dotwe.org/vue/38e202c16bdfefbdb88a8754f975454c
-         */
-        //String pageName = "WXSample";
-        //String bundleUrl = "http://dotwe.org/raw/dist/38e202c16bdfefbdb88a8754f975454c.bundle.wx";
-        //String pageName = "WeexApp";
-        //String bundleUrl = "http://192.168.1.61:8081/dist/index.js";
         String pageName = "WeexApp";
-        String bundleUrl = "file://assets/dist/index.js";
-        mWXSDKInstance.renderByUrl(pageName, bundleUrl,
-                null, null,
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,
+        String bundleUrl = "http://192.168.1.61:8081/dist/index.js";
+        //String pageName = "WeexApp";
+        //String bundleUrl = "file://assets/dist/index.js";
+        Map<String, Object> options = new HashMap<>();
+        options.put(WXSDKInstance.BUNDLE_URL, bundleUrl);
+        Context context = getApplicationContext();
+        mWXSDKInstance.renderByUrl(
+                pageName,
+                bundleUrl,
+                options,
+                null,
+                DeviceUtils.getDisplayWidth(context),
+                DeviceUtils.getDisplayHeight(context),
                 WXRenderStrategy.APPEND_ASYNC);
     }
 

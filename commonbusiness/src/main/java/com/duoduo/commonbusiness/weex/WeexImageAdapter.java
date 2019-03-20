@@ -18,7 +18,7 @@ public class WeexImageAdapter implements IWXImgLoaderAdapter {
 
     @Override
     public void setImage(String url, ImageView view, WXImageQuality quality, WXImageStrategy strategy) {
-        Glide.with(view).applyDefaultRequestOptions(requestOptions).load(url);
+        Glide.with(view).applyDefaultRequestOptions(requestOptions).load(url).into(view);
     }
 
 }
