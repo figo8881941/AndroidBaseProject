@@ -3,6 +3,8 @@ package com.duoduo.commonbusiness.net.okhttp;
 import android.content.Context;
 import android.os.Environment;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +25,7 @@ public class OKHttpClientFactory {
             builder.connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)
+                    .addNetworkInterceptor(new StethoInterceptor())
                     .cache(new Cache(new File(cacheFilePath), 10 * 1024 * 1024));
             sOKHttpClient = builder.build();
         }
