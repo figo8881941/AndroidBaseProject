@@ -19,11 +19,11 @@ import org.json.JSONObject;
  */
 public class ClassifySubHomeModel extends BaseModel implements IClassifySubHomeModel {
 
-    private ClassifySubHomeNetModel classifySubHomeNetModel;
+    private ClassifySubHomeVolleyNetModel classifySubHomeNetModel;
 
     public ClassifySubHomeModel(Context context) {
         super(context);
-        classifySubHomeNetModel = new ClassifySubHomeNetModel(context);
+        classifySubHomeNetModel = new ClassifySubHomeVolleyNetModel(context);
     }
 
     /**

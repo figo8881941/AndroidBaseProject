@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.net.volley;
+package com.duoduo.commonbusiness.net;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -9,9 +9,9 @@ import com.android.volley.NetworkError;
 import com.android.volley.ParseError;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.duoduo.commonbase.utils.ThreadUtils;
 import com.duoduo.commonbusiness.R;
+import com.duoduo.commonbusiness.net.volley.CommonVolleyServerError;
 
 /**
  * 网络错误的处理类
@@ -59,10 +59,10 @@ public class CommonNetErrorHandler {
             return handle;
         }
         String message = defaultMessage;
-        if (exception != null && exception instanceof VolleyError) {
-            if (exception instanceof CommonServerError) {
-                CommonServerError commonServerError = (CommonServerError) exception;
-                message = commonServerError.getMessage();
+        if (exception != null) {
+            if (exception instanceof CommonVolleyServerError) {
+                CommonVolleyServerError commonVolleyServerError = (CommonVolleyServerError) exception;
+                message = commonVolleyServerError.getMessage();
             } else if (exception instanceof TimeoutError) {
                 message = context
                         .getString(R.string.common_business_network_error_timeout_tips);
@@ -79,8 +79,7 @@ public class CommonNetErrorHandler {
                 message = context
                         .getString(R.string.common_business_net_work_error);
             } else {
-                message = context
-                        .getString(R.string.common_business_net_work_error);
+                message = exception.getMessage();
             }
             handle = true;
         } else {

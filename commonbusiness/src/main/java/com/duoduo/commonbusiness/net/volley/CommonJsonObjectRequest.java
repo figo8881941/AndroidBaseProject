@@ -62,12 +62,10 @@ public class CommonJsonObjectRequest extends JsonObjectRequest {
             } else {
                 int errorCode = result.optInt("errorcode");
                 String msg = result.optString("msg");
-                CommonServerError commonServerError = new CommonServerError(
-                        "service error, result:" + result.toString());
-                commonServerError.setStatus(status);
-                commonServerError.setErrorCode(errorCode);
-                commonServerError.setMessage(msg);
-                super.deliverError(commonServerError);
+                CommonVolleyServerError commonVolleyServerError = new CommonVolleyServerError(msg);
+                commonVolleyServerError.setStatus(status);
+                commonVolleyServerError.setErrorCode(errorCode);
+                super.deliverError(commonVolleyServerError);
             }
         } catch (JSONException e) {
             e.printStackTrace();

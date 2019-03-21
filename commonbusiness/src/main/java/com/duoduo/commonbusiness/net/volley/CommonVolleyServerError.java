@@ -10,32 +10,31 @@ import com.android.volley.VolleyError;
  * @author wangzhuobin
  *
  */
-public class CommonServerError extends VolleyError {
+public class CommonVolleyServerError extends VolleyError {
 
 	/*
 	 * status=1:处理成功;
 	 */
 	private int status;
 	private int errorCode;
-	private String message;
 
-	public CommonServerError() {
+	public CommonVolleyServerError() {
 		super();
 	}
 
-	public CommonServerError(NetworkResponse response) {
+	public CommonVolleyServerError(NetworkResponse response) {
 		super(response);
 	}
 
-	public CommonServerError(String exceptionMessage, Throwable reason) {
+	public CommonVolleyServerError(String exceptionMessage, Throwable reason) {
 		super(exceptionMessage, reason);
 	}
 
-	public CommonServerError(String exceptionMessage) {
+	public CommonVolleyServerError(String exceptionMessage) {
 		super(exceptionMessage);
 	}
 
-	public CommonServerError(Throwable cause) {
+	public CommonVolleyServerError(Throwable cause) {
 		super(cause);
 	}
 
@@ -53,14 +52,6 @@ public class CommonServerError extends VolleyError {
 
 	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 }

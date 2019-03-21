@@ -52,11 +52,9 @@ public class CommonOKHttpCallback implements Callback {
             } else {
                 int errorCode = result.optInt("errorcode");
                 String msg = result.optString("msg");
-                CommonOKHttpException commonOKHttpException = new CommonOKHttpException(
-                        "service error, result:" + result.toString());
+                CommonOKHttpException commonOKHttpException = new CommonOKHttpException(msg);
                 commonOKHttpException.setStatus(status);
                 commonOKHttpException.setErrorCode(errorCode);
-                commonOKHttpException.setMessage(msg);
                 callback.onFailure(call, commonOKHttpException);
             }
         } catch (Exception e) {

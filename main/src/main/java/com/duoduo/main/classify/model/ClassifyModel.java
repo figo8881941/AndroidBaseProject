@@ -17,11 +17,11 @@ import org.json.JSONObject;
  */
 public class ClassifyModel extends BaseModel implements IClassifyModel {
 
-    private ClassifyNetModel classifyNetModel;
+    private ClassifyVolleyNetModel classifyNetModel;
 
     public ClassifyModel(Context context) {
         super(context);
-        classifyNetModel = new ClassifyNetModel(context);
+        classifyNetModel = new ClassifyVolleyNetModel(context);
     }
 
     /**

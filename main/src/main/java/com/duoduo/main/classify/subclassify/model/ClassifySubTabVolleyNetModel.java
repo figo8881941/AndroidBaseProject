@@ -4,17 +4,17 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.duoduo.commonbusiness.net.volley.BaseNetModel;
+import com.duoduo.commonbusiness.net.volley.BaseVolleyNetModel;
 import com.duoduo.commonbusiness.net.volley.CommonJsonObjectRequest;
 import com.duoduo.commonbusiness.net.CommonNetDataUtils;
 import com.duoduo.main.classify.subclassify.consts.IClassifySubTabConsts;
 
 import org.json.JSONObject;
 
-public class ClassifySubTabNetModel extends BaseNetModel {
+public class ClassifySubTabVolleyNetModel extends BaseVolleyNetModel {
 
 
-    public ClassifySubTabNetModel(Context context) {
+    public ClassifySubTabVolleyNetModel(Context context) {
         super(context);
     }
 

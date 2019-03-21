@@ -11,7 +11,7 @@ import com.duoduo.commonbase.permission.annotation.ShowRationable;
 import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
 import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
 import com.duoduo.commonbase.mvp.presenter.BasePresenter;
-import com.duoduo.commonbusiness.net.volley.CommonNetErrorHandler;
+import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.main.event.MainTabRequestEvent;

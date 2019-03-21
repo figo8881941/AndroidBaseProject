@@ -12,7 +12,6 @@ public class CommonOKHttpException extends IOException {
      */
     private int status;
     private int errorCode;
-    private String message;
 
     public CommonOKHttpException() {
     }
@@ -43,14 +42,6 @@ public class CommonOKHttpException extends IOException {
 
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
 }

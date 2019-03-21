@@ -10,12 +10,12 @@ import com.android.volley.RequestQueue;
  *
  * @author wangzhuobin
  */
-public abstract class BaseNetModel {
+public abstract class BaseVolleyNetModel {
 
     protected RequestQueue requestQueue;
     protected Context context;
 
-    protected BaseNetModel(Context context) {
+    protected BaseVolleyNetModel(Context context) {
         this.context = context.getApplicationContext();
         requestQueue = RequestQueueFactory.getRequeQueueRespondInAsyn(this.context);
     }

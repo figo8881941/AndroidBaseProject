@@ -19,11 +19,11 @@ import org.json.JSONObject;
  */
 public class ClassifySubTabModel extends BaseModel implements IClassifySubTabModel{
 
-    private ClassifySubTabNetModel netModel;
+    private ClassifySubTabVolleyNetModel netModel;
 
     public ClassifySubTabModel(Context context) {
         super(context);
-        netModel = new ClassifySubTabNetModel(this.context);
+        netModel = new ClassifySubTabVolleyNetModel(this.context);
     }
 
     /**
