@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.net;
+package com.duoduo.commonbusiness.net.volley;
 
 
 import com.android.volley.NetworkResponse;

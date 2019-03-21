@@ -5,8 +5,8 @@ import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.duoduo.commonbusiness.net.BaseNetModel;
-import com.duoduo.commonbusiness.net.CommonJsonObjectRequest;
+import com.duoduo.commonbusiness.net.volley.BaseNetModel;
+import com.duoduo.commonbusiness.net.volley.CommonJsonObjectRequest;
 import com.duoduo.commonbusiness.net.CommonNetDataUtils;
 import com.duoduo.main.classify.consts.IClassifyConsts;
 

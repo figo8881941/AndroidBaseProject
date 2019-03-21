@@ -3,7 +3,7 @@ package com.duoduo.main.classify.presenter;
 import android.content.Context;
 
 import com.duoduo.commonbase.mvp.presenter.BasePresenter;
-import com.duoduo.commonbusiness.net.CommonNetErrorHandler;
+import com.duoduo.commonbusiness.net.volley.CommonNetErrorHandler;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
 import com.duoduo.main.classify.event.ClassifySubTabDataRequestEvent;
 import com.duoduo.main.classify.model.ClassifyModel;
