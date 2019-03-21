@@ -4,12 +4,12 @@ import android.content.Context;
 
 import com.duoduo.commonbusiness.net.common.CommonNetDataUtils;
 import com.duoduo.commonbusiness.net.common.IRequestCallback;
-import com.duoduo.commonbusiness.net.volley.BaseVolleyNetModel;
+import com.duoduo.commonbusiness.net.okhttp.BaseOKHttpNetModel;
 import com.duoduo.main.classify.subclassify.consts.IClassifySubTabConsts;
 
 import org.json.JSONObject;
 
-public class ClassifySubTabNetModel extends BaseVolleyNetModel {
+public class ClassifySubTabNetModel extends BaseOKHttpNetModel {
 
 
     public ClassifySubTabNetModel(Context context) {
