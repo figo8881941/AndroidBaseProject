@@ -1,5 +1,7 @@
 package com.duoduo.commonbusiness.net.okhttp;
 
+import com.duoduo.commonbusiness.net.common.IRequestCallback;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -7,21 +9,20 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 /**
  * 通用回调处理
  */
-public class CommonOKHttpCallback implements Callback {
+public class CommonOKHttpJsonCallback implements Callback {
 
     /*
      * status=1:处理成功；
      */
     public static final int STATUS_SUCCESS = 1;
 
-    private Callback callback;
+    private IRequestCallback<JSONObject> callback;
 
-    public CommonOKHttpCallback(Callback callback) {
+    public CommonOKHttpJsonCallback(IRequestCallback<JSONObject> callback) {
         this.callback = callback;
     }
 
@@ -30,7 +31,7 @@ public class CommonOKHttpCallback implements Callback {
         if (callback == null) {
             return;
         }
-        callback.onFailure(call, e);
+        callback.onFailure(e);
     }
 
     @Override
@@ -45,21 +46,21 @@ public class CommonOKHttpCallback implements Callback {
             JSONObject result = responseJSONObject.getJSONObject("result");
             int status = result.optInt("status");
             if (status == STATUS_SUCCESS) {
-                Response newResponse = response.newBuilder()
-                        .body(ResponseBody.create(response.body().contentType(), responseString))
-                        .build();
-                callback.onResponse(call, newResponse);
+//                Response newResponse = response.newBuilder()
+//                        .body(ResponseBody.create(response.body().contentType(), responseString))
+//                        .build();
+                callback.onSuccess(responseJSONObject);
             } else {
                 int errorCode = result.optInt("errorcode");
                 String msg = result.optString("msg");
                 CommonOKHttpException commonOKHttpException = new CommonOKHttpException(msg);
                 commonOKHttpException.setStatus(status);
                 commonOKHttpException.setErrorCode(errorCode);
-                callback.onFailure(call, commonOKHttpException);
+                callback.onFailure(commonOKHttpException);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            callback.onFailure(call, new IOException("The response data is not the json data"));
+            callback.onFailure(new IOException("The response data is not the json data"));
         }
     }
 }

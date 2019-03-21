@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.duoduo.commonbase.utils.AppUtils;
 import com.duoduo.commonbase.utils.ThreadUtils;
-import com.duoduo.commonbusiness.net.CommonNetDataUtils;
+import com.duoduo.commonbusiness.net.common.CommonNetDataUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

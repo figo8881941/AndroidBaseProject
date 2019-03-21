@@ -4,10 +4,12 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.duoduo.commonbase.mvp.model.BaseModel;
+import com.duoduo.commonbusiness.net.common.IRequestCallback;
 import com.duoduo.main.main.data.MainTabEntity;
 import com.duoduo.main.main.event.MainTabRequestEvent;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -78,9 +80,9 @@ public class MainModel extends BaseModel implements IMainModel {
         eventBus.post(event);
 
         try {
-            mainNetModel.requestTabData(new Callback() {
+            mainNetModel.requestTabData(new IRequestCallback<JSONObject>() {
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(Exception e) {
                     //通知出错
                     event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_ERROR);
                     event.setArg4(e);
@@ -88,9 +90,9 @@ public class MainModel extends BaseModel implements IMainModel {
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onSuccess(JSONObject responseData) {
                     //通知请求完成
-                    String responseString = response.body().string();
+                    String responseString = responseData.toString();
                     event.setWhat(MainTabRequestEvent.EVENT_NAME_REQUEST_SUCCESS);
                     MainTabEntity mainTabEntity = JSON.parseObject(responseString, MainTabEntity.class);
                     event.setArg3(mainTabEntity);

@@ -14,7 +14,7 @@ import com.duoduo.commonbase.utils.DeviceUtils;
 import com.duoduo.commonbusiness.R;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
 import com.duoduo.commonbusiness.fragment.BaseLoadingDialogFragment;
-import com.duoduo.commonbusiness.net.CommonNetDataUtils;
+import com.duoduo.commonbusiness.net.common.CommonNetDataUtils;
 import com.duoduo.commonbusiness.view.CommonErrorView;
 import com.duoduo.commonbusiness.view.CommonPageLoading;
 import com.orhanobut.logger.Logger;

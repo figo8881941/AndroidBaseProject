@@ -37,7 +37,7 @@ import com.duoduo.commonbase.utils.StatusBarUtils;
 import com.duoduo.commonbase.utils.ViewUtils;
 import com.duoduo.commonbusiness.activity.BaseLoadingDialogActivity;
 import com.duoduo.commonbusiness.config.GlobalBuildConfig;
-import com.duoduo.commonbusiness.net.CommonNetDataUtils;
+import com.duoduo.commonbusiness.net.common.CommonNetDataUtils;
 import com.duoduo.commonbusiness.router.path.IWebPath;
 import com.duoduo.commonbusiness.view.CommonActionBar;
 import com.duoduo.commonbusiness.view.CommonErrorView;

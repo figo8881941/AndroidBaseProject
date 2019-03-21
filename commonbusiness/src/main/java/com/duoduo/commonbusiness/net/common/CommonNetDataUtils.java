@@ -1,4 +1,4 @@
-package com.duoduo.commonbusiness.net;
+package com.duoduo.commonbusiness.net.common;
 
 import android.content.Context;
 import android.os.Build;
