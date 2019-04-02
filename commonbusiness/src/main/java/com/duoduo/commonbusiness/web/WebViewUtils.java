@@ -238,12 +238,15 @@ public class WebViewUtils {
      */
     public static void destroyWebView(WebView webView) {
         if (webView != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                ViewGroup parent = (ViewGroup) webView.getParent();
-                if (parent != null) {
-                    parent.removeView(webView);
-                }
+            ViewGroup parent = (ViewGroup) webView.getParent();
+            if (parent != null) {
+                parent.removeView(webView);
             }
+            webView.stopLoading();
+            // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
+            webView.getSettings().setJavaScriptEnabled(false);
+            webView.clearHistory();
+            webView.clearView();
             webView.removeAllViews();
             webView.destroy();
         }
@@ -251,6 +254,7 @@ public class WebViewUtils {
 
     /**
      * 执行js的方法
+     *
      * @param webView
      * @param jsString
      */
@@ -267,6 +271,7 @@ public class WebViewUtils {
 
     /**
      * 是不是本应用的url
+     *
      * @param url
      * @return
      */

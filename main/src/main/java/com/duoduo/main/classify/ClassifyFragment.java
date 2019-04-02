@@ -20,6 +20,7 @@ import com.duoduo.commonbase.utils.TextViewUtils;
 import com.duoduo.commonbase.view.PagerSlidingTabStrip;
 import com.duoduo.commonbusiness.fragment.BaseFragment;
 import com.duoduo.commonbusiness.router.path.IGlobalPath;
+import com.duoduo.commonbusiness.router.path.IWebPath;
 import com.duoduo.commonbusiness.router.path.IWeexPath;
 import com.duoduo.main.R;
 import com.duoduo.main.classify.data.ClassifySubTabEntity;
@@ -197,27 +198,27 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
 //                        .withBoolean("showTitle", true)
 //                        //.withBoolean("showToolbar", true)
 //                        .navigation();
-//                try {
-//                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
-//                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
-//                    ARouter.getInstance()
-//                            .build(Uri.parse(url))
-//                            .navigation();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
                 try {
-                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWeexPath.COMMON_WEEX_ACTIVITY;
+                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
+                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
                     ARouter.getInstance()
                             .build(Uri.parse(url))
-                            .withString("title", "WeexHelloWord")
-                            .withString("pageName", "WeexPage")
-                            .withString("bundleUrl", "http://192.168.14.200:8081/dist/index.js")
-                            .withBoolean("isFullScreen", true)
                             .navigation();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+//                try {
+//                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWeexPath.COMMON_WEEX_ACTIVITY;
+//                    ARouter.getInstance()
+//                            .build(Uri.parse(url))
+//                            .withString("title", "WeexHelloWord")
+//                            .withString("pageName", "WeexPage")
+//                            .withString("bundleUrl", "http://192.168.14.200:8081/dist/index.js")
+//                            .withBoolean("isFullScreen", true)
+//                            .navigation();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 //                try {
 //                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
 //                            "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://47.101.55.211:14444/frontend_service/common?funid=2033&appid=2&service=static_pages&isapp=1&prd_id=4000", "UTF-8");

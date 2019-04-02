@@ -874,11 +874,11 @@ public class CommonWebViewActivity extends BaseLoadingDialogActivity
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (contentWebView != null) {
             WebViewUtils.destroyWebView(contentWebView);
             contentWebView = null;
         }
+        super.onDestroy();
         if (webAppInterface != null) {
             webAppInterface.destory();
             webAppInterface = null;
