@@ -1,11 +1,17 @@
 package com.duoduo.main.classify;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -13,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.duoduo.commonbase.utils.StatusBarUtils;
@@ -29,6 +36,8 @@ import com.duoduo.main.classify.presenter.IClassifyPresenter;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.classify.view.IClassifyView;
+import com.duoduo.main.demo.ISayHelloInterface;
+import com.duoduo.main.demo.SayHelloBinderProxy;
 import com.duoduo.main.main.data.MainTabEntity;
 
 import java.net.URLEncoder;
@@ -190,6 +199,22 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
         carLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent("com.duoduo.demo.service.IPCService.Action");
+                intent.setPackage("com.duoduo.demo");
+                final Context context = v.getContext().getApplicationContext();
+                context.bindService(intent, new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        ISayHelloInterface binderProxy = SayHelloBinderProxy.asInterface(service);
+                        String result = binderProxy.sayHello("figo");
+                        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName name) {
+
+                    }
+                }, Context.BIND_AUTO_CREATE);
                 //ARouter.getInstance().build("/main/demo/fileProviderTest").navigation();
 //                ARouter.getInstance()
 //                        .build(IWebPath.COMMON_WEBVIEW_ACTIVITY)
@@ -198,15 +223,15 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
 //                        .withBoolean("showTitle", true)
 //                        //.withBoolean("showToolbar", true)
 //                        .navigation();
-                try {
-                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
-                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
-                    ARouter.getInstance()
-                            .build(Uri.parse(url))
-                            .navigation();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWebPath.COMMON_WEBVIEW_ACTIVITY +
+//                    "?showTitle=true&withHead=false&controlPageBack=true&usePost=false&htmlUrl=" + URLEncoder.encode("http://www.baidu.com", "UTF-8");
+//                    ARouter.getInstance()
+//                            .build(Uri.parse(url))
+//                            .navigation();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 //                try {
 //                    String url = IGlobalPath.GLOBAL_SCHEME_HOST + IWeexPath.COMMON_WEEX_ACTIVITY;
 //                    ARouter.getInstance()
