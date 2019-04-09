@@ -36,9 +36,13 @@ import com.duoduo.main.classify.presenter.IClassifyPresenter;
 import com.duoduo.main.classify.view.ClassifySubFragmentHelper;
 import com.duoduo.main.classify.view.ClassifySubFragmentPagerAdapter;
 import com.duoduo.main.classify.view.IClassifyView;
+import com.duoduo.main.demo.Book;
+import com.duoduo.main.demo.IBookAIDLInterface;
+import com.duoduo.main.demo.IBookListener;
 import com.duoduo.main.demo.ISayHelloInterface;
 import com.duoduo.main.demo.SayHelloBinderProxy;
 import com.duoduo.main.main.data.MainTabEntity;
+import com.orhanobut.logger.Logger;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -199,15 +203,41 @@ public class ClassifyFragment extends BaseFragment<MainTabEntity.TabListEntity> 
         carLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("com.duoduo.demo.service.IPCService.Action");
+                Intent intent = new Intent("com.duoduo.demo.service.BookIPCService.Action");
                 intent.setPackage("com.duoduo.demo");
                 final Context context = v.getContext().getApplicationContext();
                 context.bindService(intent, new ServiceConnection() {
                     @Override
                     public void onServiceConnected(ComponentName name, IBinder service) {
-                        ISayHelloInterface binderProxy = SayHelloBinderProxy.asInterface(service);
-                        String result = binderProxy.sayHello("figo");
-                        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+                        try {
+                            Logger.t("ipc").i("onServiceConnected");
+                            IBookAIDLInterface bookAIDLInterface = IBookAIDLInterface.Stub.asInterface(service);
+                            Book book = new Book();
+                            book.setId(123456l);
+                            book.setName("figo");
+                            String result = bookAIDLInterface.addBook(book, new IBookListener.Stub() {
+                                @Override
+                                public void addBookFinish(final Book book, final IBookListener listener) throws RemoteException {
+                                    Logger.t("ipc").i("addBookFinish -- " + book.getName());
+                                    new Thread(){
+                                        @Override
+                                        public void run() {
+                                            super.run();
+                                            try {
+                                                listener.addBookFinish(book, null);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+                                    }.start();
+                                    //listener.addBookFinish(book, null);
+                                }
+                            });
+                            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
