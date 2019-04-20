@@ -5,10 +5,9 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.Url;
 
 public interface IMainNetApi {
 
-    @POST
-    public Call<ResponseBody> requestTabData(@Url String url, @Body RequestBody body);
+    @POST("quMall/common?funid=30000&shandle=0&handle=0")
+    public Call<ResponseBody> requestTabData(@Body RequestBody body);
 }
