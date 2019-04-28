@@ -1,9 +1,11 @@
 package com.duoduo.main.base.data;
 
+import java.io.Serializable;
+
 /**
  * 网络请求结果数据单元
  */
-public class ResultEntity {
+public class ResultEntity implements Serializable {
 
     /**
      * status : 1

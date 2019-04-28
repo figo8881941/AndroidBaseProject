@@ -80,7 +80,7 @@ android {
 
             //buildconfig
             //配置BuildConfig.IS_DEBUG_MODE
-            buildConfigField("boolean", "IS_DEBUG_MODE", "false");
+            buildConfigField("boolean", "IS_DEBUG_MODE", "true");
         }
 
         debug {

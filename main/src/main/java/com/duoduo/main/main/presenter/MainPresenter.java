@@ -43,9 +43,9 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
      * 请求Tab数据，需要权限检查
      */
     @Override
-    @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}
-    , ignoreShowRationale = true, requestCode = 1000, once = true, continueWhenDenied = true)
-    @TimeTrace
+//    @NeedPermission(permissions = {Manifest.permission.READ_PHONE_STATE}
+//    , ignoreShowRationale = true, requestCode = 1000, once = true, continueWhenDenied = true)
+//    @TimeTrace
     public void requestTabData() {
         if (model != null) {
             model.requestTabData();

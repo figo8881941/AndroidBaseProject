@@ -2,12 +2,13 @@ package com.duoduo.main.main.data;
 
 import com.duoduo.main.base.data.ResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 首页Tab数据bean
  */
-public class MainTabEntity {
+public class MainTabEntity implements Serializable {
 
 
     /**
@@ -94,7 +95,7 @@ public class MainTabEntity {
         this.tabList = tabList;
     }
 
-    public static class TabListEntity {
+    public static class TabListEntity implements Serializable {
         /**
          * id : 1999
          * tabName : 首页
