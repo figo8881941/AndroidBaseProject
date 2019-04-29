@@ -11,6 +11,7 @@ import com.duoduo.commonbase.permission.annotation.ShowRationable;
 import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
 import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
 import com.duoduo.commonbase.mvp.presenter.BasePresenter;
+import com.duoduo.commonbase.proguard.annotation.KeepNotProguard;
 import com.duoduo.commonbusiness.net.common.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabEntity;
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 主界面Presenter
  */
+@KeepNotProguard
 public class MainPresenter extends BasePresenter<IMainView, IMainModel> implements IMainPresenter {
 
     public MainPresenter(Context context, IMainView view) {

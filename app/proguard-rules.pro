@@ -173,3 +173,12 @@
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.** { *; }
 -keepattributes Signature
+
+# KeepNotProguard注解
+-keep @com.duoduo.commonbase.proguard.annotation.KeepNotProguard class * {*;}
+-keep class * {
+    @com.duoduo.commonbase.proguard.annotation.KeepNotProguard <fields>;
+}
+-keepclassmembers class * {
+    @com.duoduo.commonbase.proguard.annotation.KeepNotProguard <methods>;
+}
