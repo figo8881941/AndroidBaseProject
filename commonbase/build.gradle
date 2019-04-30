@@ -1,4 +1,17 @@
 apply plugin: 'com.android.library'
+//添加
+apply plugin: 'com.novoda.bintray-release'
+
+//添加
+publish {
+    userOrg = 'duoduocompanay'//bintray用户名
+    repoName = 'duoduo'//要传到的maven的名字。你可能有多个maven，要传哪个写哪个。
+    groupId = 'com.duoduo'//jcenter上的路径
+    artifactId = 'commonbase'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Common base'//描述，不重要
+    website = ''//网站，不重要；尽量模拟github上的地址
+}
 
 android {
     compileSdkVersion 27
@@ -10,6 +23,10 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
     buildTypes {

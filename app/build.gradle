@@ -44,6 +44,10 @@ android {
         buildConfigField("String", "PRODUCT_ID", '"14000"');
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     //签名配置
     signingConfigs {
 
