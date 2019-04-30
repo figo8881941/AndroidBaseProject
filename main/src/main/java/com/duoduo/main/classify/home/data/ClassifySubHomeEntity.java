@@ -403,7 +403,7 @@ public class ClassifySubHomeEntity implements Serializable {
             this.productInfoList = productInfoList;
         }
 
-        public static class EntranceItemDtoListEntity {
+        public static class EntranceItemDtoListEntity implements Serializable {
 
             /**
              * id : 267030
