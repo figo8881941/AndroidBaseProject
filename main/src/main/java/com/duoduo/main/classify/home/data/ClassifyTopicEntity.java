@@ -3,12 +3,13 @@ package com.duoduo.main.classify.home.data;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.ResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 主题数据单元
  */
-public class ClassifyTopicEntity {
+public class ClassifyTopicEntity implements Serializable {
 
 
     /**

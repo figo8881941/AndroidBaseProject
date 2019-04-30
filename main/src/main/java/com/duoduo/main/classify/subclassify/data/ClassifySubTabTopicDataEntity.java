@@ -3,9 +3,10 @@ package com.duoduo.main.classify.subclassify.data;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.ResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ClassifySubTabTopicDataEntity {
+public class ClassifySubTabTopicDataEntity implements Serializable {
 
     /**
      * opStatus : 0

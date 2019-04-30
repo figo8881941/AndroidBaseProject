@@ -2,12 +2,13 @@ package com.duoduo.main.classify.data;
 
 import com.duoduo.main.base.data.ResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分类Tab数据单元
  */
-public class ClassifySubTabEntity {
+public class ClassifySubTabEntity implements Serializable {
 
 
     /**
@@ -44,7 +45,7 @@ public class ClassifySubTabEntity {
         this.categoryNewList = categoryNewList;
     }
 
-    public static class CategoryNewListEntity {
+    public static class CategoryNewListEntity implements Serializable {
         /**
          * id : 1
          * categoryName : 女装

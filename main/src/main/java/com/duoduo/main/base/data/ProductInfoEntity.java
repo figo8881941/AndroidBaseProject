@@ -1,11 +1,12 @@
 package com.duoduo.main.base.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 商品信息数据单元
  */
-public class ProductInfoEntity {
+public class ProductInfoEntity implements Serializable {
 
     /**
      * id : 126734

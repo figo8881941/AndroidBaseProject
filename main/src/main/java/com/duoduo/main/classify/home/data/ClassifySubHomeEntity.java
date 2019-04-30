@@ -3,12 +3,13 @@ package com.duoduo.main.classify.home.data;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.ResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分类首页数据Bean
  */
-public class ClassifySubHomeEntity {
+public class ClassifySubHomeEntity implements Serializable {
 
 
     /**
@@ -85,7 +86,7 @@ public class ClassifySubHomeEntity {
         this.moduleDtoList = moduleDtoList;
     }
 
-    public static class TopicModuleDtoEntity {
+    public static class TopicModuleDtoEntity implements Serializable {
         /**
          * moduleId : 520
          * title : 首页新版信息流
@@ -237,7 +238,7 @@ public class ClassifySubHomeEntity {
         }
     }
 
-    public static class ModuleDtoListEntity {
+    public static class ModuleDtoListEntity implements Serializable {
         /**
          * moduleId : 589
          * title :

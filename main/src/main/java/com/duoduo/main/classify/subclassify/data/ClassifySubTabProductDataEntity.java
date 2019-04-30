@@ -3,9 +3,10 @@ package com.duoduo.main.classify.subclassify.data;
 import com.duoduo.main.base.data.ProductInfoEntity;
 import com.duoduo.main.base.data.ResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ClassifySubTabProductDataEntity {
+public class ClassifySubTabProductDataEntity implements Serializable {
 
     /**
      * opStatus : 0
@@ -71,7 +72,7 @@ public class ClassifySubTabProductDataEntity {
         this.sortInfoList = sortInfoList;
     }
 
-    public static class SortInfoListEntity {
+    public static class SortInfoListEntity implements Serializable {
         /**
          * id : 1
          * sortName : 最新
