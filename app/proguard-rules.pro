@@ -80,7 +80,7 @@
 
 # v7混淆配置
 -dontwarn android.support.v7.**
--keep class android.support.7.** {*; }
+-keep class android.support.v7.** {*; }
 
 # AndPermission
 -dontwarn com.yanzhenjie.permission.**
