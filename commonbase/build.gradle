@@ -88,4 +88,5 @@ dependencies {
         api 'com.facebook.stetho:stetho-js-rhino:1.5.0'
         //Retrofit库
         api 'com.squareup.retrofit2:retrofit:2.5.0'
+        api 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
 }
