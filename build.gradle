@@ -32,6 +32,8 @@ allprojects {
         jcenter()
         //jsbridge、DSBridge
         maven { url "https://jitpack.io" }
+        //AnnotationPermission
+        maven { url "https://dl.bintray.com/duoduocompanay/duoduo" }
     }
 
     //发布JCenter，如果moudle中的工具上有中文注释，需要加上

@@ -2,14 +2,13 @@ package com.duoduo.commonbase.mvp.presenter;
 
 import android.content.Context;
 
-import com.duoduo.commonbase.permission.IContextHolder;
 import com.duoduo.commonbase.mvp.model.IBaseModel;
 import com.duoduo.commonbase.mvp.view.IBaseView;
 
 /**
  * Presenter基类
  */
-public abstract class BasePresenter<V extends IBaseView, M extends IBaseModel> implements IBasePresenter, IContextHolder {
+public abstract class BasePresenter<V extends IBaseView, M extends IBaseModel> implements IBasePresenter {
 
     protected Context context;
 
@@ -25,14 +24,10 @@ public abstract class BasePresenter<V extends IBaseView, M extends IBaseModel> i
 
     /**
      * 创建model的方法
+     *
      * @return
      */
     public abstract M createModel();
-
-    @Override
-    public Context getContext() {
-        return context;
-    }
 
     @Override
     public void destroy() {

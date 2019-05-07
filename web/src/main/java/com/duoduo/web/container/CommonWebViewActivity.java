@@ -29,7 +29,8 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.duoduo.commonbase.permission.annotation.NeedPermission;
+import com.duoduo.annotationpermission.library.annotation.AnnotationPermission;
+import com.duoduo.annotationpermission.library.annotation.NeedPermission;
 import com.duoduo.commonbase.utils.ActivityUtils;
 import com.duoduo.commonbase.utils.AppUtils;
 import com.duoduo.commonbase.utils.DeviceUtils;
@@ -66,6 +67,7 @@ import wendu.dsbridge.DWebView;
  * @author wangzhuobin
  */
 @Route(path = IWebPath.COMMON_WEBVIEW_ACTIVITY)
+@AnnotationPermission
 public class CommonWebViewActivity extends BaseLoadingDialogActivity
         implements IBaseWebViewContainer {
 

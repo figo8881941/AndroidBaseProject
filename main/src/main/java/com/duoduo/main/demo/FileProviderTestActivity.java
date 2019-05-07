@@ -15,7 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.duoduo.commonbase.permission.annotation.NeedPermission;
+import com.duoduo.annotationpermission.library.annotation.AnnotationPermission;
+import com.duoduo.annotationpermission.library.annotation.NeedPermission;
 import com.duoduo.commonbusiness.activity.BaseActivity;
 import com.duoduo.main.R;
 
@@ -25,6 +26,7 @@ import java.util.Date;
 import java.util.Locale;
 
 @Route(path = "/main/demo/fileProviderTest")
+@AnnotationPermission
 public class FileProviderTestActivity extends BaseActivity {
 
 

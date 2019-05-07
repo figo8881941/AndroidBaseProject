@@ -4,14 +4,14 @@ import android.Manifest;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.duoduo.commonbase.performance.time.annotation.TimeTrace;
-import com.duoduo.commonbase.permission.annotation.DeniedPermission;
-import com.duoduo.commonbase.permission.annotation.NeedPermission;
-import com.duoduo.commonbase.permission.annotation.ShowRationable;
-import com.duoduo.commonbase.permission.entity.DeniedPermissionEntity;
-import com.duoduo.commonbase.permission.entity.ShowRationaleEntity;
+import com.duoduo.annotationpermission.library.annotation.AnnotationPermission;
+import com.duoduo.annotationpermission.library.annotation.NeedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
+import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
+import com.duoduo.annotationpermission.library.entity.ShowRationaleEntity;
 import com.duoduo.commonbase.mvp.presenter.BasePresenter;
-import com.duoduo.commonbase.proguard.annotation.KeepNotProguard;
+import com.duoduo.commonbase.performance.time.annotation.TimeTrace;
 import com.duoduo.commonbusiness.net.common.CommonNetErrorHandler;
 import com.duoduo.main.R;
 import com.duoduo.main.main.data.MainTabEntity;
@@ -28,7 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 主界面Presenter
  */
-@KeepNotProguard
+@AnnotationPermission
 public class MainPresenter extends BasePresenter<IMainView, IMainModel> implements IMainPresenter {
 
     public MainPresenter(Context context, IMainView view) {
@@ -59,7 +59,7 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
      *
      * @param entity
      */
-    @DeniedPermission
+    @OnDeniedPermission
     private void handleDeniedPermission(DeniedPermissionEntity entity) {
         Toast.makeText(context, R.string.main_main_no_permission_tips, Toast.LENGTH_LONG).show();
     }
@@ -68,7 +68,7 @@ public class MainPresenter extends BasePresenter<IMainView, IMainModel> implemen
      * 处理需要展示权限说明对话框的方法
      * @param entity
      */
-    @ShowRationable
+    @OnShowRationable
     private void handleShowRationable(ShowRationaleEntity entity) {
         RequestExecutor requestExecutor = entity.getExecutor();
         requestExecutor.execute();
