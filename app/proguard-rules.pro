@@ -183,10 +183,12 @@
     @com.duoduo.commonbase.proguard.annotation.KeepNotProguard <methods>;
 }
 
-#AnnotationPermission
+#Keep AnnotationPermission
 -keep @com.duoduo.annotationpermission.library.annotation.AnnotationPermission class * {*;}
 -keepclassmembers class * {
     @com.duoduo.annotationpermission.library.annotation.NeedPermission <methods>;
+    @com.duoduo.annotationpermission.library.annotation.OnGrantedPermission <methods>;
     @com.duoduo.annotationpermission.library.annotation.OnDeniedPermission <methods>;
+    @com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission <methods>;
     @com.duoduo.annotationpermission.library.annotation.OnShowRationable <methods>;
 }
