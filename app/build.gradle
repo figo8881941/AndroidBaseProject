@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 //aspectj插件，必须在application module引入
 apply plugin: 'android-aspectjx'
 android {
-    compileSdkVersion 27
+    compileSdkVersion project.ANDROID_COMPILER_SDK_VERSION as Integer
     defaultConfig {
         applicationId "com.duoduo.androidbaseproject"
-        minSdkVersion 17
-        targetSdkVersion 27
+        minSdkVersion project.ANDROID_MIN_SDK_VERSION as Integer
+        targetSdkVersion project.ANDROID_TARGET_SDK_VERSION as Integer
         versionCode 42
         versionName "1.28"
 
